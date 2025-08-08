@@ -240,8 +240,9 @@ def process_opportunity_documents_robust(api_client, opp: Dict) -> str:
 
 
 def generate_human_readable_report(opp, opp_id, opp_title, final_decision, detailed_results):
-    """Generate a human-readable assessment report matching the SOS v4 format"""
+    """Generate a human-readable assessment report matching the SOS v4 format with pipeline title"""
     from datetime import datetime
+    import re
     
     # Extract key information
     agency_info = opp.get('agency', {})
@@ -255,44 +256,318 @@ def generate_human_readable_report(opp, opp_id, opp_title, final_decision, detai
     response_date = opp.get('response_date', 'Not specified')
     posted_date = opp.get('posted_date', 'Not specified')
     
-    # Get description
+    # Get full text for quote extraction
+    full_text = opp.get('full_analysis_text', opp.get('description_text', ''))
     description = opp.get('description_text', opp.get('description', 'No description available'))
     
-    # Analyze assessment details for specific categories
-    announcement_type = "RFQ/RFP - Commercial item solicitation (inferred from HigherGov data)"
-    work_summary = f"Supply/repair of {opp_title} - Aviation component or service"
-    sar_status = "No military SAR required"
-    small_business = "Unknown set-aside status"
-    sole_source = "Open competition"
-    tech_data = "TDP availability unknown"
-    traceability = "OEM traceability required (standard)"
-    certifications = "Standard aviation certifications required"
+    # Extract pipeline title components
+    def extract_part_numbers(text):
+        """Extract part numbers from text with improved patterns"""
+        pn_patterns = [
+            r'[Pp](?:art\s*)?[Nn](?:umber)?[:\s]*([A-Z0-9\-]{4,20})',  # P/N: or Part Number:
+            r'NSN[:\s]*(\d{4}-\d{2}-[A-Z0-9\-]{3,15})',  # NSN format
+            r'\b([A-Z0-9]{2,4}-[A-Z0-9\-]{4,15})\b',  # Standard format like 145-2134
+            r'[Mm]odel[:\s]*([A-Z0-9\-]{3,15})',  # Model number
+            r'\b([A-Z]{2,4}\d{2,8}[A-Z]?)\b'  # Format like KC46, F16A
+        ]
+        found_parts = []
+        text_lines = text.split('\n')
+        
+        for line in text_lines[:50]:  # Check first 50 lines for part numbers
+            line_clean = line.strip()
+            if len(line_clean) > 10:
+                for pattern in pn_patterns:
+                    matches = re.findall(pattern, line_clean, re.IGNORECASE)
+                    for match in matches:
+                        # Filter out obvious non-part numbers
+                        if (len(match) >= 4 and len(match) <= 20 and 
+                            not match.lower().startswith(('http', 'www', 'email')) and
+                            match not in found_parts):
+                            found_parts.append(match)
+                            if len(found_parts) >= 3:  # Limit to 3 part numbers
+                                return found_parts
+        
+        # If no specific part numbers found, look for the title itself
+        if not found_parts:
+            title_parts = re.findall(r'\b([A-Z0-9\-]{3,15})\b', opp_title)
+            if title_parts:
+                return title_parts[:2]
+        
+        return ["Various"] if not found_parts else found_parts
     
-    # Extract specific findings from detailed results
+    def extract_quantity(text):
+        """Extract quantity from text"""
+        qty_patterns = [
+            r'quantity[:\s]+(\d+)',
+            r'qty[:\s]+(\d+)',
+            r'(\d+)\s+each',
+            r'(\d+)\s+ea\b'
+        ]
+        for pattern in qty_patterns:
+            match = re.search(pattern, text, re.IGNORECASE)
+            if match:
+                return match.group(1)
+        return "NA"
+    
+    def extract_aircraft_platform(text):
+        """Extract aircraft platform from text"""
+        platforms = [
+            # Primary military platforms with civilian equivalents
+            'KC-46', 'P-8', 'C-40', 'C-32', 'VC-25', 'E-3', 'E-6', 'E-8', 'KC-135',
+            # Also check for common abbreviations without hyphens
+            'KC46', 'P8', 'C40', 'C32',
+            # Other common platforms
+            'C-130', 'F-16', 'F-15', 'F-22', 'F-35', 'B-1', 'B-2', 'B-52',
+            'C-17', 'UH-60', 'AH-64', 'CH-47', 
+            # Civilian platforms
+            'Boeing 737', 'Boeing 767', 'Boeing 747', 'Boeing 757', 'Airbus'
+        ]
+        
+        text_lower = text.lower()
+        
+        # Check for specific platform matches
+        for platform in platforms:
+            if platform.lower() in text_lower:
+                # Map some abbreviations to full names
+                if platform.lower() in ['p8', 'p-8']:
+                    return 'P-8 Poseidon'
+                elif platform.lower() in ['kc46', 'kc-46']:
+                    return 'KC-46 Pegasus'
+                elif platform.lower() in ['c40', 'c-40']:
+                    return 'C-40 Clipper'
+                else:
+                    return platform
+        
+        return "Support Equipment"
+    
+    def extract_description_action(title):
+        """Create action description from title"""
+        title_lower = title.lower()
+        if any(word in title_lower for word in ['repair', 'overhaul', 'refurbish']):
+            return "repair parts"
+        elif any(word in title_lower for word in ['purchase', 'buy', 'procure']):
+            return "purchase parts" 
+        elif any(word in title_lower for word in ['support', 'maintenance']):
+            return "support items"
+        else:
+            return "supply parts"
+    
+    # Build pipeline title
+    part_numbers = extract_part_numbers(full_text)
+    quantity = extract_quantity(full_text)
+    aircraft = extract_aircraft_platform(full_text)
+    action_desc = extract_description_action(opp_title)
+    
+    pipeline_title = f"PN: {', '.join(part_numbers)} | Qty: {quantity} | {opp_id} | {aircraft} | {action_desc}"
+    
+    # Extract quotes for each section with better search
+    def find_quote(search_terms, default_msg="No specific language found", section_name=""):
+        """Find relevant quotes from full text with better logic"""
+        best_quote = None
+        best_score = 0
+        
+        # Split text into meaningful sentences
+        sentences = []
+        for line in full_text.split('\n'):
+            line = line.strip()
+            if len(line) > 20 and not line.startswith('|'):  # Skip table formatting
+                # Split long lines into sentences
+                for sent in line.split('.'):
+                    sent = sent.strip()
+                    if len(sent) > 15:
+                        sentences.append(sent)
+        
+        # Score sentences by relevance
+        for sentence in sentences:
+            sentence_lower = sentence.lower()
+            score = 0
+            
+            # Score based on search terms
+            for term in search_terms:
+                if term.lower() in sentence_lower:
+                    score += 10
+            
+            # Additional scoring for meaningful content
+            if any(word in sentence_lower for word in ['shall', 'must', 'required', 'provided']):
+                score += 5
+            if any(word in sentence_lower for word in ['contractor', 'offeror', 'vendor']):
+                score += 3
+            if len(sentence) > 30 and len(sentence) < 150:  # Prefer medium-length sentences
+                score += 2
+                
+            if score > best_score and score > 5:  # Minimum relevance threshold
+                best_score = score
+                best_quote = sentence
+        
+        if best_quote and len(best_quote) > 20:  # Ensure meaningful quotes
+            # Trim excessively long quotes
+            if len(best_quote) > 120:
+                best_quote = best_quote[:120].strip()
+            return f'"{best_quote}..." (Document analysis)'
+        else:
+            return f'"{default_msg}"'
+    
+    # Extract quotes for each section with better search - but these will be overridden by filter findings
+    # Get actual announcement type from document metadata or content
+    def determine_announcement_type(opp_data, full_text):
+        """Determine the actual announcement type from opportunity data and document content"""
+        # Check opportunity metadata first
+        notice_type = opp_data.get('notice_type', '').lower()
+        solicitation_type = opp_data.get('solicitation_type', '').lower() 
+        description = opp_data.get('description_text', '').lower()
+        title = opp_data.get('title', '').lower()
+        
+        # Look for explicit notice type indicators
+        if any(term in notice_type for term in ['sources sought', 'source sought']):
+            return "Sources Sought Notice"
+        elif any(term in notice_type for term in ['pre-solicitation', 'presolicitation']):
+            return "Pre-Solicitation Notice"
+        elif any(term in notice_type for term in ['award', 'contract award']):
+            return "Award Notice"
+        elif any(term in notice_type for term in ['rfp', 'request for proposal']):
+            return "Request for Proposal (RFP)"
+        elif any(term in notice_type for term in ['rfq', 'request for quotation']):
+            return "Request for Quotation (RFQ)"
+        elif any(term in notice_type for term in ['ifi', 'invitation for bid']):
+            return "Invitation for Bid (IFB)"
+        elif any(term in notice_type for term in ['modification', 'amendment']):
+            return "Solicitation Modification/Amendment"
+        
+        # Check solicitation type field
+        if 'rfp' in solicitation_type or 'proposal' in solicitation_type:
+            return "Request for Proposal (RFP)"
+        elif 'rfq' in solicitation_type or 'quotation' in solicitation_type:
+            return "Request for Quotation (RFQ)"
+        elif 'ifb' in solicitation_type or 'bid' in solicitation_type:
+            return "Invitation for Bid (IFB)"
+        
+        # Check document content for announcement type indicators
+        content_check = (description + ' ' + title + ' ' + full_text[:1000]).lower()
+        
+        # Check for specific notice types in content
+        if 'commercial product procurement notice' in content_check:
+            return "Request for Quotation (RFQ) - Commercial"
+        elif any(term in content_check for term in ['sources sought', 'market research', 'capability statement']):
+            return "Sources Sought Notice"
+        elif any(term in content_check for term in ['request for proposal', 'rfp']):
+            return "Request for Proposal (RFP)"
+        elif any(term in content_check for term in ['request for quotation', 'rfq']):
+            return "Request for Quotation (RFQ)"
+        elif any(term in content_check for term in ['invitation for bid', 'ifb', 'sealed bid']):
+            return "Invitation for Bid (IFB)"
+        elif any(term in content_check for term in ['pre-solicitation', 'advance notice']):
+            return "Pre-Solicitation Notice"
+        elif any(term in content_check for term in ['contract award', 'award notice', 'awarded to']):
+            return "Award Notice"
+        elif any(term in content_check for term in ['modification', 'amendment', 'change order']):
+            return "Solicitation Modification/Amendment"
+        elif any(term in content_check for term in ['combined synopsis', 'synopsis/solicitation']):
+            return "Combined Synopsis/Solicitation"
+        
+        # Default fallback
+        return "Solicitation Notice (Type TBD)"
+    
+    actual_announcement_type = determine_announcement_type(opp, full_text)
+    announcement_quote = find_quote(['solicitation', 'synopsis', 'notice', 'rfq', 'rfp', 'request for'], 
+                                   f"Document indicates: {actual_announcement_type}", "announcement")
+    
+    # Set work summary and quote based on title analysis
+    if 'repair' in opp_title.lower() or 'modification' in opp_title.lower():
+        default_work_summary = f"Repair/modification of {opp_title} - Aviation component service"
+        work_quote = find_quote(['repair', 'modification', 'overhaul', 'rfi', 'ready for issue'], 
+                               "Contractor shall provide repair services", "work")
+    else:
+        default_work_summary = f"Supply/procurement of {opp_title} - Aviation component or service"
+        work_quote = find_quote(['supply', 'purchase', 'provide', 'deliver', 'furnish'], 
+                               description[:100] + "...", "work")
+    
+    # Check if TDP seems available
+    if any(term in full_text.lower() for term in ['repair manuals', 'drawings', 'specifications', 'tech publications']):
+        default_tech_data = "TDP appears available - repair manuals/drawings referenced"
+    else:
+        default_tech_data = "TDP availability unknown"
+    
+    # Default quotes - will be replaced by filter findings if blockers detected
+    sar_quote = find_quote(['source approval required', 'sar', 'approved source list', 'mil-std', 'military specification'], 
+                          "No source approval requirements found", "sar")
+    
+    setaside_quote = find_quote(['small business set-aside', 'set aside for small business', 'hubzone', 'sdvosb', 'not applicable'], 
+                               "Set-aside determination not specified", "setaside")
+    
+    solesource_quote = find_quote(['sole source', 'single source', 'intent to award', 'all responsible sources may submit'], 
+                                 "Open competition - all responsible sources", "solesource")
+    
+    tdp_quote = find_quote(['technical data', 'drawings', 'specifications', 'repair manuals', 'tech publications'], 
+                          "Technical data availability not clearly specified", "tdp")
+    
+    trace_quote = find_quote(['traceability', 'certificate of conformance', 'coc', 'pedigree', 'airworthy'], 
+                            "Standard traceability requirements apply", "traceability")
+    
+    cert_quote = find_quote(['certificate of conformance', 'airworthy', 'far 52.246', 'quality requirements'], 
+                           "Standard certifications required", "certifications")
+    
+    # Extract specific findings from detailed results and build assessments based on what filters actually found
     blocking_factors = []
     positive_indicators = []
     
+    # Start with defaults, but override based on actual filter findings
+    announcement_type = actual_announcement_type  # Use the actual announcement type we determined
+    work_summary = default_work_summary
+    sar_status = "No military SAR required"
+    small_business = "Unknown set-aside status"
+    sole_source = "Open competition"
+    tech_data = default_tech_data
+    traceability = "OEM traceability required (standard)"
+    certifications = "Standard aviation certifications required"
+    
+    # Process each filter result and update assessments with actual findings
     for result in detailed_results:
+        # Extract the actual quote that caused the decision
+        filter_quote = result.quote if hasattr(result, 'quote') and result.quote else "Filter analysis"
+        
         if result.decision == Decision.NO_GO:
-            if "SAR" in result.reason:
-                sar_status = f"Military SAR Present - {result.reason}"
+            if "SAR" in result.reason or "source approval" in result.reason.lower():
+                sar_status = f"Yes - Military SAR required. {result.reason}"
+                sar_quote = f'"{filter_quote[:120]}..." (Filter detected SAR requirement)'
                 blocking_factors.append(f"SAR BLOCKER: {result.reason}")
-            elif "sole source" in result.reason.lower():
+                
+            elif "sole source" in result.reason.lower() or "single source" in result.reason.lower():
                 sole_source = f"Sole source restriction - {result.reason}"
+                solesource_quote = f'"{filter_quote[:120]}..." (Filter detected sole source)'
                 blocking_factors.append(f"SOLE SOURCE BLOCKER: {result.reason}")
-            elif "security" in result.reason.lower():
+                
+            elif "security" in result.reason.lower() or "clearance" in result.reason.lower():
                 blocking_factors.append(f"SECURITY CLEARANCE BLOCKER: {result.reason}")
-            elif "OEM" in result.reason:
+                
+            elif "OEM" in result.reason or "original equipment" in result.reason.lower():
+                traceability = f"OEM restriction detected - {result.reason}"
+                trace_quote = f'"{filter_quote[:120]}..." (Filter detected OEM restriction)'
                 blocking_factors.append(f"OEM RESTRICTION BLOCKER: {result.reason}")
-            elif "tech" in result.reason.lower():
+                
+            elif "tech" in result.reason.lower() or "technical data" in result.reason.lower():
                 tech_data = f"Technical data not available - {result.reason}"
+                tdp_quote = f'"{filter_quote[:120]}..." (Filter detected TDP issue)'
                 blocking_factors.append(f"TECH DATA BLOCKER: {result.reason}")
+                
             elif "platform" in result.reason.lower():
                 blocking_factors.append(f"PLATFORM BLOCKER: {result.reason}")
+                
+            elif "set-aside" in result.reason.lower() or "small business" in result.reason.lower():
+                small_business = f"Set-aside restriction - {result.reason}"
+                setaside_quote = f'"{filter_quote[:120]}..." (Filter detected set-aside)'
+                blocking_factors.append(f"SET-ASIDE BLOCKER: {result.reason}")
+                
             else:
                 blocking_factors.append(f"OTHER BLOCKER: {result.reason}")
+                
         elif result.decision == Decision.NEEDS_ANALYSIS:
             positive_indicators.append(f"NEEDS ANALYSIS: {result.reason}")
+            
+        elif result.decision == Decision.PASS:
+            # For passed checks, we can note positive findings but don't override announcement type
+            if "aviation" in result.reason.lower() or "aircraft" in result.reason.lower():
+                positive_indicators.append(f"Aviation-related: {result.reason}")
+            # Don't override announcement_type for commercial findings - we already determined the actual type
     
     # Determine status
     if final_decision == Decision.GO:
@@ -305,14 +580,19 @@ def generate_human_readable_report(opp, opp_id, opp_title, final_decision, detai
         final_recommendation = "NO-GO"
         justification = f"This opportunity has blocking restrictions: {', '.join([bf.split(':')[0] for bf in blocking_factors[:2]])}"
     
-    # Build executive subject line
+    # Build executive subject line (using pipeline format for GO decisions)
     due_date = response_date if response_date != "Not specified" else "TBD"
-    subject_line = f"{opp_id} - {announcement_type.split('-')[0].strip()} - Due {due_date} - {opp_title[:30]}... - {final_recommendation}"
+    if final_decision == Decision.GO:
+        subject_line = pipeline_title  # Use pipeline title for GO decisions
+    else:
+        subject_line = f"{opp_id} - RFQ/RFP - Due {due_date} - {opp_title[:30]}... - {final_recommendation}"
     
     report = f"""================================================================================
 SOS OPPORTUNITY ASSESSMENT REPORT - Version 4 Format
 Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 ================================================================================
+
+{f"**PIPELINE TITLE:** {pipeline_title}" if final_decision == Decision.GO else ""}
 
 **SOLICITATION:** {opp_id}
 **TITLE:** {opp_title}
@@ -323,35 +603,35 @@ Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 A. **LISTED ANSWERS**
 
 1. **Announcement Type:**
-   * Government Quote: "Data extracted from HigherGov API - {opp_title}" (HigherGov)
+   * Government Quote: {announcement_quote}
    * Assessment: {announcement_type}
 
 2. **Work Summary (Aircraft/Components/Commercial Equivalent):**
-   * Government Quote: "{description[:200]}..." (Solicitation)
+   * Government Quote: {work_quote}
    * Assessment: {work_summary}
 
 3. **Source Approval Required (SAR) & OEM Traceability:**
-   * Government Quote: {"SAR-related content found in document analysis" if "SAR" in sar_status else "No SAR requirements identified in available data"} (Analysis)
+   * Government Quote: {sar_quote}
    * Assessment: {sar_status}
 
 4. **Small Business Set-Aside Status:**
-   * Government Quote: "Set-aside status not explicitly available in HigherGov data" (Data)
+   * Government Quote: {setaside_quote}
    * Assessment: {small_business}
 
 5. **Sole Source / Intent to Award:**
-   * Government Quote: {"Sole source language detected" if "sole source" in sole_source.lower() else "Open competition indicated"} (Analysis)
+   * Government Quote: {solesource_quote}
    * Assessment: {sole_source}
 
 6. **Technical Data Package (TDP) Availability:**
-   * Government Quote: "Technical data availability not specified in available information" (Data)
+   * Government Quote: {tdp_quote}
    * Assessment: {tech_data}
 
 7. **Part Traceability / Acceptability (OEM/Surplus/Refurbished):**
-   * Government Quote: "Standard aviation traceability requirements assumed" (Standard)
+   * Government Quote: {trace_quote}
    * Assessment: {traceability}
 
 8. **Key Certifications Required:**
-   * Government Quote: "Standard aviation certifications apply" (Standard)
+   * Government Quote: {cert_quote}
    * Assessment: {certifications}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -429,7 +709,7 @@ def main():
         search_params = {
             'api_key': api_client.api_key,
             'search_id': SAVED_SEARCH_ID,
-            'page_size': 100,  # Get 100 at a time
+            'page_size': 5,  # Get up to 5 opportunities to see what's available
             'source_type': 'sam',  # Federal opportunities
             'include_documents': True,  # IMPORTANT: Include document attachments
             'include_ai_summary': True  # Also include AI summaries if available

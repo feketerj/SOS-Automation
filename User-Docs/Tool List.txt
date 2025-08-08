@@ -1,0 +1,106 @@
+Tool List
+
+### **Document Purpose:** 
+
+This document serves solely to outline the available resources for building an application. It does not require or mandate the use of all listed items. Its goal is to inform the different models about the options for orchestrating processes to prevent context windows from becoming overloaded and to facilitate cross-process integration.
+
+---
+
+# SOS Automation Toolset & Options
+
+### 1. **Data Access & APIs**
+
+* **HigherGov API**
+
+  * Saved Search (`search_id`) polling for opportunities
+  * Opportunity metadata extraction (NAICS, PSC, set-aside, due dates, agency)
+  * Document endpoint for solicitation attachments (download URLs, text extracts)
+  * Contract, Awardee, Vehicle, NAICS, PSC, and related endpoints for enriched data
+  * Rate limits and document URL expiration (60 minutes)
+
+---
+
+### 2. **AI Agents & Platforms**
+
+* **Klaus (Anthropic Opus)**
+
+  * Deep document parsing and checklist logic ingestion
+  * Pattern recognition and scoring for no-go and go criteria
+  * Batch processing with minimized token windows
+  * Document ingestion and prompt-driven extraction
+  * Context-rich, human-like reasoning for nuanced decisions
+
+* **Gemini (Browser Automation)**
+
+  * Screen and UI automation for document retrieval
+  * OCR fallback and manual screen scraping for documents inaccessible via API
+  * Multi-agent coordination with other AI components
+  * Automate workflows involving web interfaces or manual steps
+
+* **Claude Projects**
+
+  * Holds templates, guides, checklists, and logic for reference and prompt generation
+  * Supports strategy and planning dialogue
+
+* **Copilot (VS Code)**
+
+  * Code generation, incremental development, and integration scripting
+  * Environment for building API clients, filters, orchestrations
+  * Model types include:ChatGPT 4.1, 4o, 04 mini | Claude Sonnet 4, 3.7, 3.5 | Gemini 2.5 Pro
+
+* **Google AI Studio**
+
+  * Optional UI for interactive scripting or workflow orchestration
+  * Supplementary to VS Code or Anthropic for isolated tasks
+  * Capable of seeing the user's entire screen (not just websites), allowing for direction and queries
+
+* **Firebase Studio**
+
+  * Free prompt-diven aplication builder where code maybe downloaded or copied
+  * Potential use cases: Initial builds, debugging, enhancements, etc.
+
+
+* **Copilot (Github)**
+
+  * Web hosted prompt-diven coding agent where code maybe downloaded or copied
+
+---
+
+### 3. **Orchestration & Workflow**
+
+* Modular layered pipeline:
+
+  * API polling → deterministic pre-filtering → document download → minimal context extraction → LLM-assisted analysis → output/report generation
+  * Multi-pass filtering: hard no-go first, then positive scoring
+  * Multi-agent synergy: code + LLM + UI automation
+
+* Batch processing strategy for volume management (\~900 saved search results)
+
+* GitHub as version control and deployment target
+
+* Secrets management (API keys) and environment setup
+
+---
+
+### 4. **Development & Deployment**
+
+* Local project folder (OneDrive path) for code, data, and docs
+* GitHub for source control and CI/CD pipeline integration
+* Incremental builds prioritized for API client → filters → LLM prompts → orchestration
+* Flexible context management by offloading large documents to Anthropic Opus
+
+---
+
+### 5. **Expansion & Flexibility**
+
+* Pattern analysis extensible to both hard no-go and positive go criteria
+* Embedding/RAG strategies optional for deeper semantic matching
+* Custom API extensions or alternate data sources feasible if needed
+* Manual override and CO contact messaging templates included for edge cases
+
+---
+
+This is your strategic operating picture for SOS automation. Keep it as a living reference for where you are, what you have, and what’s possible next.
+
+---
+

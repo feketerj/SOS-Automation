@@ -1,0 +1,36 @@
+
+#### User Notes for SOS Automation Build ####
+
+**Document Purpose:** These are merely my running notes and are not necessarily authoritative. They serve as a reference point and something to be considered as the build continues.
+
+---
+
+Date: 4 Aug 25
+
+
+---
+
+Current pathway where the app will be built:
+
+"C:\Users\feket\OneDrive\Desktop\excelsior\r_staff\r_3\Deployed_Code_Op_Locations\SOS-Automation"
+
+
+---
+
+
+SOS HigherGov API Key received 12 May 25
+
+9874995194174018881c567d92a2c4d2
+
+This is SOS's API they game me. It has not yet been used meaning I do not know if it is still good. If need be I can generate use the key from my own personal account.
+
+
+---
+
+
+Rob's personal HigherGov API key generated 24 Jul 25
+
+46be62b8aa8048cbabe51218c85dd0af
+
+
+---
