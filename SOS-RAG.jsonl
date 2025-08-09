@@ -1,0 +1,105 @@
+{"section":"Hard Stop - Source Approval Required","text":"IF \"source approval required\" AND military specification, OR AMC 3, AMC 4, AMC 5, AMSC C, AMSC D, AMSC P, AMSC R is found → NO-GO (Military SAR Present)"}
+{"section":"Hard Stop - Source Approval Required","text":"SOS cannot provide Military Source Approval Required (SAR) items. Typical SAR timelines (6-18 months) make it low-ROI for one-off buys."}
+{"section":"Hard Stop - Source Approval Required","text":"IF \"FAA source approval\" is found → PASS (SOS can meet FAA standards)"}
+{"section":"Hard Stop - Sole Source","text":"IF \"Sole source to [specific company]\" (and not Source One Spares) → NO-GO"}
+{"section":"Hard Stop - Sole Source","text":"IF \"intent to sole source\" → REQUIRES ANALYSIS (can be challenged by SOS)"}
+{"section":"Hard Stop - Technical Data","text":"IF \"drawings not available\" OR \"technical data not available\" OR \"OEM owns technical data\" OR \"proprietary technical data\" → NO-GO"}
+{"section":"Hard Stop - Technical Data","text":"SOS cannot manufacture without government-owned technical data."}
+{"section":"Hard Stop - Security Clearance","text":"IF \"Secret clearance required\" or similar (any security clearance) → NO-GO"}
+{"section":"Hard Stop - New Parts Only","text":"IF \"factory new only\" OR \"new manufacture only\" OR \"no refurbished\" OR \"no rebuilt\" OR \"no overhauled\" OR \"no used\" OR \"new condition only\" → NO-GO"}
+{"section":"Hard Stop - Certifications","text":"IF \"AS9100 required\" → NO-GO"}
+{"section":"Hard Stop - Certifications","text":"IF \"NADCAP required\" → NO-GO"}
+{"section":"Hard Stop - OEM Distribution","text":"IF \"OEM only\", \"authorized distributor required\", \"OEM distributor only\", \"factory authorized dealer\", OR AMSC B is found → NO-GO"}
+{"section":"Platform Viability - Boeing Military","text":"KC-46 Pegasus = Boeing 767 = High Parts Commonality = GO"}
+{"section":"Platform Viability - Boeing Military","text":"P-8 Poseidon = Boeing 737 = High Parts Commonality = GO"}
+{"section":"Platform Viability - Boeing Military","text":"C-40 Clipper = Boeing 737 BBJ = Very High Parts Commonality = GO"}
+{"section":"Platform Viability - Boeing Military","text":"C-17 Globemaster III = None - Pure Military = None Parts Commonality = NO-GO"}
+{"section":"Platform Viability - Transport Aircraft","text":"C-130 Hercules = L-100 (very limited civilian) = Low Parts Commonality = NO-GO unless specifically L-100"}
+{"section":"Platform Viability - Transport Aircraft","text":"C-12 Huron (all variants) = Beechcraft King Air 200/350 = Very High Parts Commonality = GO"}
+{"section":"Platform Viability - Military Helicopters","text":"UH-60 Black Hawk = Sikorsky S-70 = High Parts Commonality = GO"}
+{"section":"Platform Viability - Military Helicopters","text":"AH-64 Apache = None - Pure Military = None Parts Commonality = NO-GO"}
+{"section":"Platform Viability - Military Helicopters","text":"CH-47 Chinook = Model 234 (very limited civilian) = Very Low Parts Commonality = NO-GO unless specifically civilian"}
+{"section":"Platform Viability - Pure Military","text":"F-15, F-16, F-18, F-22, F-35 = Pure Military Fighter/Attack = NO-GO"}
+{"section":"Platform Viability - Pure Military","text":"B-1B Lancer, B-2 Spirit, B-52 Stratofortress, B-21 Raider = Pure Military Bomber = NO-GO"}
+{"section":"Platform Viability - Pure Civilian","text":"All Cessna models (172, 182, 206, 208 Caravan, Citations, etc.) = Pure Civilian = ALWAYS GO"}
+{"section":"Platform Viability - Pure Civilian","text":"All Bell civilian models (206, 407, 412, 429, etc.) = Pure Civilian Helicopter = ALWAYS GO"}
+{"section":"Platform Viability - SLED Market","text":"State & Local Government - ALL are GO - Pure civilian market - No military restrictions apply - All use civilian FAA standards"}
+{"section":"AMC/AMSC Matrix - AMC 1","text":"AMC 1 = Fully competitive – data is in-hand and proven; item has already competed at least once = No SAR Required = Can SOS Bid: Yes"}
+{"section":"AMC/AMSC Matrix - AMC 3","text":"AMC 3 = Limited data – must buy from OEM unless an alternate wins Source Approval = Yes SAR Required = Can SOS Bid: Not until SAR approved"}
+{"section":"AMC/AMSC Matrix - AMC 4","text":"AMC 4 = Sole-source (unique design / IP) = Yes SAR Required (hard) = Can SOS Bid: No (unless teaming with OEM)"}
+{"section":"AMC/AMSC Matrix - AMSC B","text":"AMSC B = Item on Source-Control drawing – OEM list governs = Yes SAR Required = Can SOS Bid: Only if OEM lists SOS"}
+{"section":"AMC/AMSC Matrix - AMSC G","text":"AMSC G = Gov't owns complete data with unlimited rights = No SAR Required = Can SOS Bid: Yes"}
+{"section":"AMC/AMSC Matrix - AMSC Z","text":"AMSC Z = Commercial off-the-shelf (COTS) = No SAR Required = Can SOS Bid: Yes"}
+{"section":"AMC/AMSC Matrix Quick Rule","text":"If the letter is G or Z: bid freely; data is open or item is COTS."}
+{"section":"AMC/AMSC Matrix Quick Rule","text":"Any '3/4/5' number or 'P/R/D' letter: assume SAR or teaming with the OEM is mandatory."}
+{"section":"Pipeline Title Format","text":"Required Format: PN: [Part Numbers] | Qty: [Quantity] | [Announcement Number] | [Aircraft] | [Description]"}
+{"section":"Pipeline Title Format","text":"Part Numbers: Find in solicitation, max 3. If more than 3, use \"Various\"."}
+{"section":"Pipeline Title Format","text":"Quantity: Extract exact number. If not specified, use \"NA\" or \"Unk\"."}
+{"section":"Pipeline Title Format","text":"Aircraft: Use specific model if mentioned. If not, use \"Support Equipment,\" \"NA/Unk,\" or \"Mixed Fleet\"."}
+{"section":"Pipeline Title Format","text":"Description: 2-4 words max, action verb + item (e.g., \"overhaul pumps,\" \"purchase gear,\" \"repair engines\")."}
+{"section":"CO Contact Trigger","text":"An email to the CO will be generated and the opportunity flagged as a \"STOP: NO-GO + CO Contact\" if the solicitation explicitly states any of the following requirements: \"OEM direct traceability only\", \"authorized distributor required\", \"OEM distributor only\", \"factory authorized dealer\""}
+{"section":"CO Contact Strategy","text":"If NO-GO due to source approval (Military SAR) or OEM-only requirements, document as \"NO-GO - SAR Present (CO Contact Made)\" or \"NO-GO - OEM Distributor Required (CO Contact Made).\""}
+{"section":"CO Contact Strategy","text":"Contact the Contracting Officer (CO) with a message about SOS's specialization in FAA-certified refurbished and surplus parts, expressing interest if non-OEM sourcing becomes acceptable in future modifications or recompetes. This plants seeds for future business development."}
+{"section":"External RFQ - Government Indicators","text":"IF email contains: Domain ending in .mil OR .gov → Government = YES"}
+{"section":"External RFQ - Government Indicators","text":"IF email contains: \"DoD\" OR \"USAF\" OR \"NAVAIR\" OR \"DLA\" OR \"GSA\" OR \"NAVSUP\" → Government = YES"}
+{"section":"External RFQ - Government Indicators","text":"IF email contains: Contract format matching [A-Z][0-9]{5}-[0-9]{2}-[A-Z]-[0-9]{4} → Government = YES"}
+{"section":"External RFQ - Government Indicators","text":"IF email contains: \"DO-A1\" OR \"DX\" priority rating → Government = YES"}
+{"section":"External RFQ - Government Indicators","text":"IF email contains: \"no resale\" OR \"direct installation\" OR \"we are the end user\" → Government = YES"}
+{"section":"External RFQ - Condition Codes","text":"Search for \"NE\" OR \"NEW\" → Condition = NE"}
+{"section":"External RFQ - Condition Codes","text":"Search for \"OH\" OR \"OVERHAULED\" → Condition = OH"}
+{"section":"External RFQ - Condition Codes","text":"Search for \"SV\" OR \"SERVICEABLE\" → Condition = SV"}
+{"section":"External RFQ - Condition Codes","text":"Search for \"AR\" OR \"AS REMOVED\" → Condition = AR"}
+{"section":"External RFQ - Condition Codes","text":"Search for \"NS\" OR \"NEW SURPLUS\" → Condition = NS"}
+{"section":"Decision Matrix Rule","text":"ANY hard NO-GO = NO-GO (Stop immediately, report which check failed)"}
+{"section":"Decision Matrix Rule","text":"ANY \"REQUIRES ANALYSIS\" + No hard stops = REQUIRES ANALYSIS (List all unclear items)"}
+{"section":"Decision Matrix Rule","text":"ALL PASS = GO (Proceed to comprehensive assessment)"}
+{"section":"Critical Rule - Hard Stops","text":"Hard stops OVERRIDE all positive indicators. If a hard stop is identified, the opportunity is a NO-GO regardless of any other favorable conditions."}
+{"section":"Critical Rule - Quotes","text":"Quote the government's exact language - Never paraphrase or summarize."}
+{"section":"Critical Rule - Page Numbers","text":"Include page/section numbers for every quote."}
+{"section":"Critical Rule - Missing Information","text":"If information not found, state \"No [topic] language found in document\"."}
+{"section":"Critical Rule - Check Order","text":"Follow checks in exact order - Stop at first NO-GO."}
+{"section":"Critical Rule - Doubt","text":"When in doubt, default to \"NEEDS FURTHER ANALYSIS\"."}
+{"section":"Preliminary Gate - Aviation","text":"Search for ANY of these terms: aircraft, helicopter, rotorcraft, airplane, Boeing, Airbus, Bell, Sikorsky, Lockheed, Northrop, C-130, KC-46, P-8, F-16, UH-60, CH-47, engine, avionics, landing gear, hydraulic, propeller, ground support equipment, GSE, AGE, aerospace, PSC 15XX/16XX/17XX, NAICS 3364XX"}
+{"section":"Preliminary Gate - Current Opportunity","text":"Search for: \"Response due\", \"Closing date\", \"Proposal due\", \"Deadline\", \"Offers due\""}
+{"section":"SOS Capabilities - Certifications Held","text":"SOS HAS: ISO 9001:2015, AS9120B, FAA certifications, ASA Accreditation (FAA AC 00-56)."}
+{"section":"SOS Capabilities - Certifications NOT Held","text":"SOS lacks AS9100 (manufacturing) and NADCAP certifications."}
+{"section":"SOS Capabilities - Parts Types","text":"SOS specializes in refurbished, surplus, and USM parts."}
+{"section":"SOS Capabilities - ITAR","text":"SOS supports ITAR compliance for exports where required and is CAPABLE of handling ITAR compliance with planning."}
+{"section":"SOS Context - Registration","text":"Unique Entity Identifier (UEI): RTP4E5UBJ3B7"}
+{"section":"SOS Context - Registration","text":"Commercial and Government Entity (CAGE) Code: 95QA6"}
+{"section":"SOS Context - Small Business","text":"SOS qualifies as Small Business under most NAICS codes."}
+{"section":"SOS Context - KC-46 Experience","text":"Two USAF KC-46 Aerial Tanker Program contracts totaling $2.37 billion over five years."}
+{"section":"Dual-Use Engine Logic","text":"CFM56 = Boeing 737, KC-135R, E-3/E-6 = GO"}
+{"section":"Dual-Use Engine Logic","text":"CF6/F103 = Boeing 767, KC-10, C-5M = GO"}
+{"section":"Dual-Use Engine Logic","text":"F117/PW2000 = Boeing 757, C-32 = GO"}
+{"section":"Dual-Use Engine Logic","text":"PW4000 = Boeing 777, KC-46, C-17 = GO"}
+{"section":"Dual-Use Engine Logic","text":"PT6 = King Air, Caravan, PC-12 = GO"}
+{"section":"Military-Only Engine Logic","text":"F100/F110 = F-15, F-16 only = NO-GO"}
+{"section":"Military-Only Engine Logic","text":"F119 = F-22 only = NO-GO"}
+{"section":"Military-Only Engine Logic","text":"F135 = F-35 only = NO-GO"}
+{"section":"Military-Only Engine Logic","text":"F404/F414 = F/A-18 only = NO-GO"}
+{"section":"Coast Guard Exception","text":"Coast Guard/DHS/CBP Aircraft - ALL are GO - All use civilian FAA standards and procurement rules"}
+{"section":"Foreign Military Sales","text":"FMS opportunities often have relaxed source requirements - May allow commercial standard parts even for military aircraft - Generally a POSITIVE indicator"}
+{"section":"Platform Identification Critical Rule","text":"DO NOT INFER platform relationships. Use ONLY the explicit mappings below. If a platform is not listed, mark as \"NEEDS FURTHER ANALYSIS\" rather than guessing."}
+{"section":"SAR Language Pattern","text":"Explicit requirement for engineering or Government source approval – Language such as \"requires engineering source approval,\" \"requires Government source approval prior to award,\" or \"requires engineering source approval by the design control activity\" appears consistently across Navy, DLA and Army solicitations"}
+{"section":"SAR Language Pattern","text":"Designation of approved sources – Many solicitations name specific OEMs or suppliers as the only approved sources (e.g., Northrop Grumman, Mercury Mission Systems). Offers from any other source are not acceptable unless the vendor completes the source-approval process"}
+{"section":"SAR Language Pattern","text":"Mandatory submission of Source Approval Request packages – Non-approved vendors are instructed to submit a Source Approval Request (SAR) or to provide information from a Source Approval Brochure. These packages must be submitted with the proposal; proposals lacking complete source-approval data are deemed ineligible"}
+{"section":"Traceability Requirements","text":"IF \"FAA Form 8130-3\" or \"full traceability required\" + FAA → Go (SOS provides this)"}
+{"section":"Traceability Requirements","text":"IF \"OEM direct traceability only\" or \"authorized distributor required\" or \"OEM distributor only\" or \"factory authorized dealer\" → NO-GO + CO Contact"}
+{"section":"Delivery Timeline Analysis","text":"30+ days ARO → EXCELLENT (SOS standard capability)"}
+{"section":"Delivery Timeline Analysis","text":"15-30 days → GOOD (achievable)"}
+{"section":"Delivery Timeline Analysis","text":"7-14 days → EVALUATE (depends on parts)"}
+{"section":"Delivery Timeline Analysis","text":"<7 days → CHALLENGING (only for in-stock items)"}
+{"section":"Delivery Timeline Analysis","text":"\"AOG support\" → STRENGTH (SOS has 24/7 capability)"}
+{"section":"Contract Value Tiers","text":"Under $100K → Quick win potential"}
+{"section":"Contract Value Tiers","text":"$100K - $1M → Standard opportunity"}
+{"section":"Contract Value Tiers","text":"$1M - $10M → Strategic priority"}
+{"section":"Contract Value Tiers","text":"Over $10M → Executive review required"}
+{"section":"Teaming Decision Logic","text":"When to Pursue as PRIME: value <$5M, SOS fulfills 75%+, standard items"}
+{"section":"Teaming Decision Logic","text":"When to Pursue as SUBCONTRACTOR: large IDIQ, complex integration, risk mitigation, past performance gaps"}
+{"section":"Teaming Decision Logic","text":"When to PARTNER/TEAM: geographic coverage, specialized certifications like AS9100/NADCAP, volume exceeds capacity"}
+{"section":"Implementation Note","text":"This framework is platform-agnostic - Works with any AI model or manual review."}
+{"section":"Implementation Note","text":"Quotes are mandatory - No exceptions, no paraphrasing."}
+{"section":"Implementation Note","text":"Order matters - Always check in sequence, stop at first hard NO-GO."}
+{"section":"Implementation Note","text":"Page numbers required - Helps verify and locate information quickly."}
+{"section":"Implementation Note","text":"Hard stops override everything - No positive indicator matters if a hard stop is present."}
