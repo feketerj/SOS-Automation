@@ -1,0 +1,68 @@
+{
+  "status": "WORKS",
+  "timestamp": "2025-08-20T02:46:13.235Z",
+  "document": {
+    "fileName": "sample.txt",
+    "fileType": ".txt",
+    "processed": "2025-08-20T02:46:13.234Z"
+  },
+  "assessment": {
+    "rulesApplied": 6,
+    "ruleResults": [
+      {
+        "ruleId": "rule_001",
+        "ruleName": "Source Approval Required (SAR)",
+        "passed": false,
+        "weight": "critical"
+      },
+      {
+        "ruleId": "rule_002",
+        "ruleName": "Commercial Item Check",
+        "passed": true,
+        "weight": "high"
+      },
+      {
+        "ruleId": "rule_003",
+        "ruleName": "Set-Aside Detection",
+        "passed": false,
+        "weight": "medium"
+      },
+      {
+        "ruleId": "rule_004",
+        "ruleName": "OEM Restriction",
+        "passed": false,
+        "weight": "critical"
+      },
+      {
+        "ruleId": "rule_005",
+        "ruleName": "Technical Data Package",
+        "passed": true,
+        "weight": "high"
+      },
+      {
+        "ruleId": "rule_006",
+        "ruleName": "Contract Value Assessment",
+        "passed": true,
+        "weight": "low"
+      }
+    ],
+    "criticalIssues": 2,
+    "opportunities": 2
+  },
+  "recommendation": "No-Go",
+  "rationale": "Critical issues detected: Source Approval Required (SAR), OEM Restriction. This opportunity has restrictions that prevent pursuit.",
+  "confidence": 0,
+  "nextSteps": [
+    "Archive opportunity for reference",
+    "Document reasons for no-go",
+    "Monitor for potential changes"
+  ],
+  "export": {
+    "sessionId": "test-1755657973231",
+    "fileName": "test-1755657973231_2025-08-20T02-46-13-236Z.json",
+    "exportPath": "C:\\Users\\feket\\OneDrive\\Desktop\\excelsior\\r_staff\\r_3\\Deployed_Code_Op_Locations\\SOS-Assessment-Automation-Tool\\export\\decisions\\test-1755657973231_2025-08-20T02-46-13-236Z.json",
+    "exportedAt": "2025-08-20T02:46:13.237Z",
+    "format": "json",
+    "version": "1.0.0"
+  }
+}

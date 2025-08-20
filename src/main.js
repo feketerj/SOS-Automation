@@ -7,11 +7,19 @@
  * 
  * Architecture: /architecture.md
  * Configuration: /src/config/default.json
+ * 
+ * CLI Usage: node src/main.js --file "<path>" --session "<id>"
  */
 
 const fs = require('fs').promises;
 const path = require('path');
 const { spawn } = require('child_process');
+
+// Import pipeline modules
+const DocumentReader = require('./ingestion/reader');
+const ProcessingPipeline = require('./processing/pipeline');
+const DecisionWriter = require('./export/writer');
+const SessionManager = require('./core/session');
 
 // v4.2 compliance constants
 const TRUST_LEVEL_MIN = 25;
@@ -209,17 +217,162 @@ class SOSAssessmentTool {
     }
 }
 
-// Execute if run directly
-if (require.main === module) {
-    const app = new SOSAssessmentTool();
-    app.run().then(result => {
-        if (result === BINARY_PROOF.DOESNT_WORK) {
-            process.exit(1);
+/**
+ * Parse command line arguments
+ */
+function parseArgs() {
+    const args = process.argv.slice(2);
+    const params = {};
+    
+    for (let i = 0; i < args.length; i++) {
+        if (args[i] === '--file' && args[i + 1]) {
+            params.file = args[i + 1];
+            i++;
+        } else if (args[i] === '--session' && args[i + 1]) {
+            params.session = args[i + 1];
+            i++;
         }
-    }).catch(error => {
-        console.error('Unexpected error:', error);
-        process.exit(1);
-    });
+    }
+    
+    return params;
 }
 
-module.exports = SOSAssessmentTool;
+/**
+ * CLI orchestration flow
+ */
+async function runCLI() {
+    const args = parseArgs();
+    
+    // Validate required arguments
+    if (!args.file) {
+        console.error('Error: --file argument required');
+        console.error('Usage: node src/main.js --file "<path>" --session "<id>"');
+        process.exit(1);
+    }
+    
+    // Initialize session
+    const sessionManager = new SessionManager();
+    const sessionId = sessionManager.createSession(args.session);
+    
+    console.log('='.repeat(60));
+    console.log('SOS Assessment Automation Tool - CLI Mode');
+    console.log(`Session: ${sessionId}`);
+    console.log(`Trust Level: ${sessionManager.trustLevel}%`);
+    console.log('='.repeat(60));
+    
+    try {
+        // Step 1: Read document
+        console.log('\n[1/3] Reading document...');
+        sessionManager.recordTrace('Data Attach', `Reading file: ${args.file}`);
+        
+        const reader = new DocumentReader();
+        const document = await reader.read(args.file);
+        
+        if (document.status === 'DOESN\'T WORK') {
+            throw new Error(`Document read failed: ${document.error}`);
+        }
+        
+        console.log(`✓ Document read: ${document.metadata.fileName}`);
+        
+        // Step 2: Process through pipeline
+        console.log('\n[2/3] Processing through assessment pipeline...');
+        sessionManager.recordProcessingTrace('pipeline-start', {
+            fileName: document.metadata.fileName,
+            fileType: document.metadata.fileType
+        });
+        
+        const pipeline = new ProcessingPipeline();
+        const decision = await pipeline.process(document);
+        
+        sessionManager.recordProcessingTrace('pipeline-complete', {
+            recommendation: decision.recommendation,
+            confidence: decision.confidence
+        });
+        
+        console.log(`✓ Assessment complete: ${decision.recommendation} (${decision.confidence}% confidence)`);
+        
+        // Step 3: Export decision
+        console.log('\n[3/3] Exporting decision...');
+        sessionManager.recordTrace('Export Ready', 'Writing decision to file');
+        
+        const writer = new DecisionWriter();
+        const exportResult = await writer.write(decision, sessionId);
+        
+        if (exportResult.status === 'DOESN\'T WORK') {
+            throw new Error(`Export failed: ${exportResult.error}`);
+        }
+        
+        console.log(`✓ Decision exported: ${exportResult.fileName}`);
+        
+        // Complete session
+        sessionManager.completeSession();
+        await sessionManager.saveTraces();
+        
+        // Output final JSON result
+        const result = {
+            status: BINARY_PROOF.WORKS,
+            sessionId,
+            file: args.file,
+            decision: {
+                recommendation: decision.recommendation,
+                rationale: decision.rationale,
+                confidence: decision.confidence
+            },
+            export: {
+                path: exportResult.path,
+                fileName: exportResult.fileName
+            },
+            traces: sessionManager.traces.map(t => t.point)
+        };
+        
+        console.log('\n' + '='.repeat(60));
+        console.log('RESULT:');
+        console.log(JSON.stringify(result, null, 2));
+        console.log('='.repeat(60));
+        
+        return result;
+        
+    } catch (error) {
+        sessionManager.recordTrace('Error', error.message);
+        await sessionManager.saveTraces();
+        
+        const result = {
+            status: BINARY_PROOF.DOESNT_WORK,
+            sessionId,
+            error: error.message
+        };
+        
+        console.error('\n' + '='.repeat(60));
+        console.error('ERROR:');
+        console.error(JSON.stringify(result, null, 2));
+        console.error('='.repeat(60));
+        
+        process.exit(1);
+    }
+}
+
+// Execute if run directly
+if (require.main === module) {
+    // Check if CLI mode (has --file argument)
+    if (process.argv.includes('--file')) {
+        runCLI().then(() => {
+            process.exit(0);
+        }).catch(error => {
+            console.error('Fatal error:', error);
+            process.exit(1);
+        });
+    } else {
+        // Original interactive mode
+        const app = new SOSAssessmentTool();
+        app.run().then(result => {
+            if (result === BINARY_PROOF.DOESNT_WORK) {
+                process.exit(1);
+            }
+        }).catch(error => {
+            console.error('Unexpected error:', error);
+            process.exit(1);
+        });
+    }
+}
+
+module.exports = { SOSAssessmentTool, runCLI };
