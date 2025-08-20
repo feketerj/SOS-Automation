@@ -1,0 +1,99 @@
+Gotcha — then here’s **exactly what I’d put in your hands right now** so you can run the four‑at‑a‑time batch in your Perplexity Space and get *every single signal* you’ve told me you care about — SAR, sole source vs intent, only known source, OEM & approved distributor nuance, traceability, aviation vs non‑aviation, currency, plus all the identifiers — **in one unified pass**.  
+
+And I’m going to embed the **pattern library right in the prompt** so the model has hard anchors for detection instead of “winging it.” That’s what will make your outputs consistent across pages/runs.  
+
+***
+
+## **Unified All‑Signals Extraction Prompt (With Pattern Anchors)**
+
+**System:**  
+You are a federal contracting opportunity extraction and classification assistant.  
+Use the HigherGov API key, Search ID, and related docs in the knowledge base.  
+Process each opportunity in this batch (up to 4 at a time).  
+Match against the embedded pattern library before making a classification.  
+Return **only valid JSON** in the schema below.  
+If a field is absent, use `null` (for strings) or `[]` (for arrays).  
+Never fabricate values. Always include the triggering clause/phrase in `pattern_source`.
+
+***
+
+**Pattern Anchors:**
+
+- **SAR triggers:** `"source approval required"`, `"engineering source approval"`, `"approved source only"`, `"NAVY SOURCE APPROVAL"`, `"SAR package"`.  
+- **Sole Source triggers:** `"SOLE SOURCE"`, `"soliciting only from"`, `"determined to be available from one source"`, `"proprietary to"`, `"only approved source"`.  
+- **Intent to Award:** `"intent to award"`, `"notice of intent"`.  
+- **Only Known Source:** `"only known source"`, `"sole approved source"`, `"proprietary to"`.  
+- **OEM:** `"Original Equipment Manufacturer"`, plus vendor name matches from known OEM list (`Boeing`, `Raytheon`, `Lockheed Martin`, etc.).  
+- **OEM‑Approved Distributor:** `"OEM‑approved distributor"`, `"authorized distributor"`, `"approved supplier"`, `"distribution authorization"`.  
+- **Traceability:** `"traceable to OEM"`, `"traceability"`, `"chain of custody"`.  
+- **Aviation Platforms:** known airframe codes/names (`F‑16`, `C‑130`, `B‑52`, `E‑2D`, `Apache`, `Black Hawk`, `C‑17`, `KC‑46`, etc.).  
+- **Excluded Platforms:** `"motorcycle"`, `"HMMWV"`, `"truck"`, `"ship"`, `"boat"`, `"submarine"`, `"rail"`.  
+- **Risk Clauses:** `"Critical Safety Item"`, `"CSI"`, `"DFARS"`, `"FAR"`, `"ITAR"`, `"Export controlled"`.  
+- **Currency:** Use posted/open/closing dates to determine `"current"` vs `"expired"` vs `"canceled"`.
+
+***
+
+**User:**  
+For each opportunity/document in this batch, extract:
+
+- **SAR fields**: `sar_language` (sentences), `is_sar` (true/false)  
+- **Sole source fields**: `announcement_type` ("sole_source", "intent_to_award", "other"), `is_sole_source`, `is_intent_to_award`, `only_known_source`  
+- **OEM fields**: `oem`, `oem_approved_distributor`, `traceability_statement`  
+- **Platform fields**: `is_aviation_related`, `aviation_platform`, `excluded_platform`  
+- **Status fields**: `announcement_status`, `announcement_date`  
+- **Core identifiers**: `notice_id`, `agency`, `service`, `nsn`, `pn`, `qty`, `risk_clauses`  
+- **Trace field**: `pattern_source` — full phrase(s) that triggered each detection
+
+***
+
+**Strict Output Schema:**
+```json
+[
+  {
+    "notice_id": "",
+    "sar_language": [""],
+    "is_sar": false,
+    "announcement_type": "",
+    "only_known_source": "",
+    "is_intent_to_award": false,
+    "is_sole_source": false,
+    "oem": [""],
+    "oem_approved_distributor": [""],
+    "traceability_statement": [""],
+    "agency": "",
+    "service": "",
+    "nsn": [""],
+    "pn": [""],
+    "qty": [""],
+    "aviation_platform": [""],
+    "excluded_platform": [""],
+    "is_aviation_related": false,
+    "announcement_status": "",
+    "announcement_date": "",
+    "risk_clauses": [""],
+    "pattern_source": [""]
+  }
+]
+```
+
+***
+
+**Rules for the model:**
+- Always output an **array** of objects (1 object per opportunity/doc).  
+- Populate `pattern_source` with the matched snippet for **every field you fill in**.  
+- If both sole source and SAR are true, populate both — they are not mutually exclusive.  
+- If any excluded platform is found, `is_aviation_related` must be `false` even if an aviation platform is also mentioned.  
+- For `announcement_status`, compare current date to any provided close date or status phrase.  
+- Never conflate `"intent_to_award"` with `"sole_source"` — `is_sole_source` only true when actual sole source.  
+
+***
+
+💡 **How to use:**  
+Drop this into your Space's instruction block. When it runs on 4 at a time, you’ll get **every classification & field covered in one pass** — zero chaining, zero missed nuance.
+
+***
+
+If you want, I can also spin you a **Python helper** that will page through the HigherGov API in 4‑record chunks, feed this exact prompt to Perplexity, and dump the merged JSON to disk.  
+That way you can burn through all 1,100 in a few minutes without clicking “Continue” 300 times.  
+
+Do you want me to write that helper next?

@@ -1,0 +1,247 @@
+# HigherGov API GPT User & Reference Guide
+
+This GPT connects directly to the HigherGov API. It can query any supported endpoint—contracts, grants, opportunities, awardees, agencies, people, vehicles, NAICS/PSC codes, documents, and more.
+
+## What This GPT Can Do
+
+- Query any HigherGov API endpoint: contracts, grants, opportunities, awardees, people, vehicles, NAICS/PSC codes, documents.
+- Filter by any documented field: search_id, NAICS, PSC, CAGE, UEI, award IDs, agency keys, dates, keywords, and more.
+- Accept and use a searchID directly from the HigherGov website.
+- Drill into individual records using IDs or keys.
+- Retrieve document download links (for solicitations and attachments).
+- Batch or checklist mode: You can provide a list of IDs and get each result.
+- Combine any supported query parameters.
+- API key is always included automatically.
+
+## Limitations
+
+- Read-only access: No creating, editing, or deleting data.
+- Only GET endpoints are supported.
+- The GPT returns document download URLs but cannot download files for you.
+- Download URLs for documents expire in 60 minutes.
+- Data is as current as HigherGov’s update schedule (typically every 20 minutes to daily).
+- If you exceed your API quota (10,000 records/month), queries may fail until your quota resets.
+- Invalid or misspelled parameters will result in an API error.
+
+## Usage Instructions
+
+### Querying Endpoints
+
+- Example:  
+  "Show all opportunities for NAICS code 541330 posted in the last month."
+- Example:  
+  "Get contract details for award_id ABC12345."
+- Example:  
+  "List all grant programs with the word education in the title."
+- Example:  
+  "Call the 'opportunity' endpoint using this search_id: [paste searchID]."
+- For documents:  
+  "Get all documents for document_path: [paste value]."
+
+### Using search_id
+
+- Go to HigherGov.com, run a search.
+- Copy the searchID from the URL (the string after searchID=).
+- Request results for that search_id using the opportunity, contract, or grant endpoint.
+
+### Filtering
+
+- You may combine fields: award_id, awardee_key, NAICS, PSC, UEI, dates, agency_key, etc.
+- Use page_number and page_size to control pagination.
+
+### Checklist/Batch
+
+- Provide a list of IDs; the GPT will loop through them and return a summary or details for each.
+
+## Best Practices
+
+- Use search_id for best and most accurate results when querying opportunities, contracts, or grants.
+- Narrow queries with additional filters such as date range or source_type.
+- Use pagination for large result sets.
+- Check your API usage if queries stop working unexpectedly.
+- Always verify the returned parameter values are correct for your use case.
+
+## Security
+
+- Your API key is built in. Do not share this GPT with others unless you intend to share access.
+- All results and usage are governed by your organization's HigherGov subscription and HigherGov terms of service.
+
+## Additional Resources
+
+- HigherGov API Documentation: https://www.highergov.com/api-external/docs/
+- Contact HigherGov Support: contact@highergov.com
+
+This document may be updated as API features expand.
+
+---
+
+---
+description: Getting started with the powerful HigherGov API
+---
+
+# API
+
+### Access, Limits, and Pricing
+
+All HigherGov subscriptions include access to the API and 10,000 records per month through the API.  If you require more data, please [contact us](mailto:contact@highergov.com) with your use case for pricing.  &#x20;
+
+### Endpoints
+
+A list of available endpoints and fields is available in the OAS [documentation](https://www.highergov.com/api-external/docs/).  The OAS Documentation can also generate sample API calls by pressing the Try It Out button under each endpoint, selecting the desired Parameters, and pressing Execute.
+
+{% hint style="info" %}
+**We also offer APIs customized to your needs.  Please** [**contact** ](mailto:contact@highergov.com)**us if you are interested in learning more.** &#x20;
+{% endhint %}
+
+### Creating Keys
+
+API keys can be managed when signed in by selecting the gear icon in the upper right and selecting API or by clicking [here](https://www.highergov.com/api-management/).  Only an account administrator will have access to create keys.  To create an API key, select the Generate Key button.  Note that the full key will only be available on this screen once so make sure to copy and securely save the key.
+
+<figure><img src="https://1554509061-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FRBQTVfbZC9vumHCn1Rm8%2Fuploads%2F2L65zQvnRHmK207Rop8K%2Fimage.png?alt=media&#x26;token=95b54d1b-be5a-481e-a040-f0f39dd7a456" alt=""><figcaption></figcaption></figure>
+
+### Using the search\_id Parameter
+
+For the Opportunity, Federal Contract, and Federal Grant endpoints, HigherGov provides a search\_id parameter that allows a HigherGov search to be easily converted into an API call.  The search\_id parameter does not accept all search fields, please see the endpoint documentation for a list of supported fields.
+
+#### Example&#x20;
+
+If you have the below search in [Federal Contract Opportunities](https://www.highergov.com/contract-opportunity/?searchID=2F6PPA1a7NAQ4C1OUh7XB):
+
+<figure><img src="https://1554509061-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FRBQTVfbZC9vumHCn1Rm8%2Fuploads%2F1uJqRMVZpTlWfiypUjbR%2Fimage.png?alt=media&#x26;token=e64947a7-be92-4155-9105-83c231e866b3" alt=""><figcaption></figcaption></figure>
+
+You can take the searchID listed in the URL:
+
+https://www.highergov.com/contract-opportunity/?searchID=<mark style="background-color:red;">2F6PPA1a7NAQ4C1OUh7XB</mark>
+
+and use that in your API call as the search\_id parameter:
+
+https://www.highergov.com/api-external/opportunity/?api\_key=your-api-key-here\&search\_id=<mark style="background-color:red;">2F6PPA1a7NAQ4C1OUh7XB</mark>\&captured\_date=2024-05-01\&page\_size=10\&source\_type=sam
+
+#### Best Results
+
+For best results with the search\_id filter in the Opportunity endpoint, we recommend also using the source\_type and captured\_date filters to limit your call to the most relevant data source(s) and most recent dates. &#x20;
+
+### Downloading Opportunity Files
+
+To download opportunity files, first make a call to the Opportunity endpoint.  In the results, there will be a field called document\_path that will provide a path to call to the Document endpoint.  Making this call to the Document endpoint will return information on all of the documents related to the opportunity including a set of download\_url paths that can be used to download files. &#x20;
+
+Please note that the provided download\_url will expire after 60 minutes, and if files are not downloaded within that timeframe, a new call will need to be made to the Document endpoint.&#x20;
+
+### Data Refresh Rate
+
+Data is generally updated shortly after the underlying data source. Some examples are shown below.
+
+| Endpoint             | Data Update Frequency |
+| -------------------- | --------------------- |
+| **Opportunity**      | 20 Minutes            |
+| **Federal Contract** | Daily                 |
+| **Federal Grant**    | Daily                 |
+| **Awardee**          | Daily                 |
+
+### Code Examples
+
+Below are a few code snippets to get started accessing the API.
+
+{% tabs %}
+{% tab title="Python" %}
+<pre><code><strong>import requests
+</strong>import json
+
+# Define the Endpoint and Key
+endpoint = 'https://www.highergov.com/api-external/contract/'
+api_key = 'your-api-key-here'
+
+#Define Parameters
+params = {
+    'api_key': api_key,
+    'last_modified_date': '2023-07-06',
+    'search_id': 'z9zi90apiU_Zyl3T2CUZa',    
+    'page_number': '1',
+}
+
+#Call API
+response = requests.get(endpoint, params=params)
+
+#Convert Response to JSON
+data = response.json()
+#print(json.dumps(data, indent=4))  # Print the JSON
+
+#Loop through results
+for result in data.get('results'):
+    contract_award_id = result.get('award_id')
+    ...
+</code></pre>
+{% endtab %}
+
+{% tab title="Javascript" %}
+```
+// Define the Endpoint and Key
+const endpoint = 'https://www.highergov.com/api-external/contract/';
+const api_key = 'your-api-key-here';
+
+// Define Parameters
+let params = {
+    'api_key': api_key, 
+    'last_modified_date': '2023-07-06',
+    'search_id': 'z9zi90apiU_Zyl3T2CUZa',        
+    'page_number': '1',
+};
+
+// Convert parameters to URL query string
+let query = Object.keys(params).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`).join('&');
+
+// Call API
+fetch(`${endpoint}?${query}`)
+    .then(response => response.json()) // Parse response as JSON
+    .then(data => {
+        // Loop through results
+        data.results.forEach(result => {
+            let contract_award_id = result.award_id;
+            console.log(contract_award_id);
+        });  
+    }); 
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```
+<?php
+
+// Define the endpoint and parameters
+$endpoint = 'https://www.highergov.com/api-external/contract/';
+$api_key = 'your-api-key-here';
+
+$params = http_build_query([
+    'api_key' => $api_key,
+    'last_modified_date' => '2023-07-06',
+   'search_id' => 'z9zi90apiU_Zyl3T2CUZa',    
+    'page_number' => '1',
+]);
+
+// Initialize cURL
+$ch = curl_init();
+
+// Set the options
+curl_setopt($ch, CURLOPT_URL, $endpoint.'?'.$params);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+
+// Execute the cURL session
+$response = curl_exec($ch);
+
+// Close the cURL session
+curl_close($ch);
+
+// Convert the response into an associative array
+$data = json_decode($response, true);
+
+// Loop through each item in the 'results' array
+foreach ($data['results'] as $result) {
+    $contract_award_id = $result['award_id'];
+}
+```
+{% endtab %}
+{% endtabs %}
+
+---
+

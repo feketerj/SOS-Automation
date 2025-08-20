@@ -1,0 +1,8 @@
+PROMPT-HigherGov-Follow-Up
+
+Answer the following:
+
+1) What is the item(s)?
+2) Briefly describe the item(s), include any language used by the government.
+3) What aircraft (if any) does this announcement apply to? Infer if not named directly.
+4) Infer if the government "open to" other sources, but will likely be awarded to the OEM or OEM-approved source. 

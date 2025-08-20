@@ -1,0 +1,362 @@
+{
+  "category": "common_commercial_commercial-off-the-shelf_patterns",
+  "pattern_groups": [
+    {
+      "group_name": "far_part_12_indicators",
+      "regex_patterns": [
+        "(?i)far\\s*(?:part|subpart)?\\s*12(?:\\.\\d+)?",
+        "(?i)part\\s*12\\s*(?:acquisition|commercial)",
+        "(?i)federal\\s+acquisition\\s+regulation\\s*(?:\\()?far(?:\\))?\\s*(?:part|subpart)?\\s*12",
+        "(?i)12\\.6\\s*(?:streamlined|procedures)",
+        "(?i)far\\s*subpart\\s*12\\.\\d+",
+        "(?i)acquisition\\s+of\\s+commercial\\s+(?:items|products|services)",
+        "(?i)policies\\s+contained\\s+in\\s+(?:far\\s+)?part\\s*12",
+        "(?i)using\\s+(?:the\\s+)?policies\\s+(?:contained\\s+)?in\\s+far\\s+part\\s+12",
+        "(?i)accordance\\s+with\\s+(?:the\\s+)?format\\s+in\\s+far\\s+(?:subpart\\s+)?12",
+        "(?i)streamlined\\s+procedures\\s+for\\s+(?:evaluation|commercial)",
+        "(?i)fac\\s*20\\d{2}[-\\s]\\d{2}.*?far\\s*(?:subpart\\s*)?12"
+      ],
+      "exact_phrases": [
+        "FAR Part 12",
+        "FAR Subpart 12.6",
+        "Part 12, Acquisition of Commercial Items",
+        "FAR Part 12 - Acquisition of Commercial Products and Commercial Services",
+        "policies contained in FAR Part 12",
+        "Streamlined Procedures for Evaluation and Solicitation",
+        "FAR 12 applies"
+      ],
+      "partial_triggers": [
+        "Part 12",
+        "Subpart 12",
+        "FAR 12",
+        "12.6",
+        "commercial acquisition"
+      ],
+      "context_patterns": [
+        {
+          "before": "using|accordance with|prepared in|pursuant to|under",
+          "trigger": "FAR.*?12",
+          "after": "acquisition|commercial|streamlined|procedures"
+        }
+      ],
+      "agency_specific": {
+        "navy": [
+          "NAVSUP WSS Commercial Item",
+          "Commercial Item Identification Brochure"
+        ],
+        "army": [
+          "Commercial Product Procurement Notice",
+          "Commercial Item Procurement Notice"
+        ],
+        "dla": [
+          "Commercial Asset Visibility (CAV)",
+          "WEB-BASED COMMERCIAL ASSET VISIBILITY"
+        ]
+      },
+      "negative_patterns": [
+        "(?i)not\\s+using\\s+(?:the\\s+)?policies\\s+(?:contained\\s+)?in\\s+far\\s+part\\s+12",
+        "(?i)government\\s+is\\s+not\\s+using.*?far\\s+part\\s+12",
+        "(?i)does\\s+not\\s+intend\\s+to\\s+acquire.*?commercial",
+        "(?i)not\\s+a\\s+commercial\\s+(?:item|product|service)",
+        "(?i)material\\s+is\\s+not\\s+commercial"
+      ],
+      "compound_patterns": [
+        "(?i)far\\s+part\\s+12.*?commercial\\s+(?:items?|products?|services?)",
+        "(?i)commercial\\s+(?:items?|products?).*?far\\s+(?:part\\s+)?12"
+      ],
+      "scoring_weights": {
+        "strong_positive": 10,
+        "moderate_positive": 5,
+        "weak_positive": 2,
+        "negative": -10
+      }
+    },
+    {
+      "group_name": "commercial_item_terminology",
+      "regex_patterns": [
+        "(?i)commercial\\s+(?:item|product|service|supply|material|component|part|article|good|commodity|asset)s?",
+        "(?i)commercial\\s+(?:supplier|vendor|source|contractor|manufacturer)",
+        "(?i)commercially\\s+available\\s+(?:item|product|component|part|material)s?",
+        "(?i)commercial\\s+(?:requirement|solution|acquisition|purchase|contract|procurement)",
+        "(?i)(?:identify|satisfy).*?commercial\\s+item",
+        "(?i)commercial\\s+item\\s+(?:identification|determination|analysis)",
+        "(?i)commercial\\s+(?:and|or)\\s+(?:commercial|government)\\s+entity",
+        "(?i)acquisition\\s+of\\s+commercial\\s+(?:items?|products?|services?)"
+      ],
+      "exact_phrases": [
+        "commercial item",
+        "commercial product",
+        "commercial service",
+        "commercial items",
+        "commercial products",
+        "commercial services",
+        "Commercial Item Identification",
+        "Commercial Product Procurement",
+        "commercial requirement",
+        "commercially available"
+      ],
+      "partial_triggers": [
+        "commercial",
+        "commercially",
+        "commercial-type"
+      ],
+      "context_patterns": [
+        {
+          "before": "acquire|procure|purchase|obtain|buy",
+          "trigger": "commercial",
+          "after": "item|product|service|supply"
+        }
+      ],
+      "agency_specific": {
+        "general": [
+          "COMMERCIAL PRODUCT PROCUREMENT NOTICE",
+          "COMMERCIAL ITEM PROCUREMENT NOTICE",
+          "Commercial Asset Visibility"
+        ]
+      },
+      "negative_patterns": [
+        "(?i)non[\\s-]?commercial",
+        "(?i)not\\s+(?:a\\s+)?commercial",
+        "(?i)military[\\s-]?unique",
+        "(?i)government[\\s-]?unique"
+      ],
+      "scoring_weights": {
+        "exact_match": 8,
+        "partial_match": 4,
+        "context_match": 6,
+        "negative_match": -8
+      }
+    },
+    {
+      "group_name": "cots_patterns",
+      "regex_patterns": [
+        "(?i)cots\\b",
+        "(?i)commercial[\\s-]?off[\\s-]?the[\\s-]?shelf",
+        "(?i)off[\\s-]?the[\\s-]?shelf\\s+(?:item|product|component|solution)",
+        "(?i)c\\.?o\\.?t\\.?s\\.?",
+        "(?i)commercial\\s+off\\s+shelf",
+        "(?i)commerical[\\s-]?off[\\s-]?the[\\s-]?shelf"
+      ],
+      "exact_phrases": [
+        "COTS",
+        "Commercial-Off-The-Shelf",
+        "commercial off the shelf",
+        "Commercial Off-The-Shelf",
+        "off-the-shelf",
+        "off the shelf"
+      ],
+      "partial_triggers": [
+        "COTS",
+        "off-the-shelf",
+        "off the shelf"
+      ],
+      "context_patterns": [
+        {
+          "before": "procure|acquire|purchase|use",
+          "trigger": "COTS|off[\\s-]?the[\\s-]?shelf",
+          "after": "item|product|solution|component"
+        }
+      ],
+      "agency_specific": {
+        "navy": [
+          "COTS items submitted",
+          "approve COTS items"
+        ],
+        "air_force": [
+          "COTS for the P8 aircraft"
+        ]
+      },
+      "compound_patterns": [
+        "(?i)cots\\s+(?:item|product|component|solution)",
+        "(?i)commercial\\s+off[\\s-]?the[\\s-]?shelf\\s+(?:item|product)"
+      ],
+      "scoring_weights": {
+        "direct_mention": 10,
+        "contextual_use": 7,
+        "partial_match": 4
+      }
+    },
+    {
+      "group_name": "non_developmental_items",
+      "regex_patterns": [
+        "(?i)non[\\s-]?developmental\\s+item",
+        "(?i)ndi\\b",
+        "(?i)previously[\\s-]?developed",
+        "(?i)existing\\s+commercial\\s+(?:item|product|technology)",
+        "(?i)already[\\s-]?developed",
+        "(?i)non[\\s-]?developmental"
+      ],
+      "exact_phrases": [
+        "non-developmental item",
+        "nondevelopmental item",
+        "NDI",
+        "previously developed",
+        "existing commercial"
+      ],
+      "partial_triggers": [
+        "non-developmental",
+        "nondevelopmental",
+        "NDI"
+      ],
+      "scoring_weights": {
+        "exact_match": 8,
+        "partial_match": 5
+      }
+    },
+    {
+      "group_name": "common_use_patterns",
+      "regex_patterns": [
+        "(?i)common[\\s-]?use\\s+item",
+        "(?i)commonly[\\s-]?available",
+        "(?i)readily[\\s-]?available\\s+(?:commercial|in\\s+the\\s+market)",
+        "(?i)standard\\s+commercial\\s+(?:item|product|part)",
+        "(?i)widely[\\s-]?available",
+        "(?i)general[\\s-]?purpose\\s+(?:item|product)"
+      ],
+      "exact_phrases": [
+        "common use item",
+        "commonly available",
+        "readily available",
+        "standard commercial",
+        "widely available"
+      ],
+      "partial_triggers": [
+        "common use",
+        "commonly",
+        "readily",
+        "standard commercial"
+      ],
+      "scoring_weights": {
+        "strong_indicator": 9,
+        "moderate_indicator": 5
+      }
+    },
+    {
+      "group_name": "simplified_acquisition",
+      "regex_patterns": [
+        "(?i)simplified\\s+acquisition\\s+procedures?",
+        "(?i)sap\\b",
+        "(?i)far\\s+(?:part\\s+)?13",
+        "(?i)streamlined\\s+procedures?",
+        "(?i)simplified\\s+acquisition\\s+threshold"
+      ],
+      "exact_phrases": [
+        "Simplified Acquisition Procedures",
+        "SAP",
+        "FAR Part 13",
+        "streamlined procedures",
+        "Simplified Acquisition Branch"
+      ],
+      "partial_triggers": [
+        "simplified acquisition",
+        "SAP",
+        "Part 13",
+        "streamlined"
+      ],
+      "context_patterns": [
+        {
+          "before": "using|accordance with|under",
+          "trigger": "simplified|streamlined",
+          "after": "acquisition|procedures"
+        }
+      ],
+      "scoring_weights": {
+        "primary_indicator": 7,
+        "supporting_indicator": 4
+      }
+    },
+    {
+      "group_name": "commercial_evaluation_criteria",
+      "regex_patterns": [
+        "(?i)evaluation[\\s-]+commercial\\s+(?:products?|services?)",
+        "(?i)commercial\\s+item\\s+determination",
+        "(?i)commercial\\s+(?:pricing|price\\s+analysis)",
+        "(?i)market\\s+research\\s+(?:for\\s+)?commercial",
+        "(?i)commercial\\s+(?:terms\\s+and\\s+conditions|t&c)"
+      ],
+      "exact_phrases": [
+        "EVALUATION--COMMERCIAL PRODUCTS AND COMMERCIAL SERVICES",
+        "commercial item determination",
+        "commercial pricing",
+        "market research",
+        "commercial terms and conditions"
+      ],
+      "scoring_weights": {
+        "strong_commercial": 8,
+        "moderate_commercial": 5
+      }
+    },
+    {
+      "group_name": "exclusion_indicators",
+      "regex_patterns": [
+        "(?i)military[\\s-]?(?:unique|specific|specification)",
+        "(?i)defense[\\s-]?(?:unique|specific)",
+        "(?i)weapon[\\s-]?system[\\s-]?specific",
+        "(?i)classified\\s+(?:component|system|item)",
+        "(?i)government[\\s-]?(?:unique|furnished|specific)",
+        "(?i)proprietary\\s+(?:to\\s+the\\s+)?(?:military|government)"
+      ],
+      "exact_phrases": [
+        "military unique",
+        "defense unique",
+        "weapon system specific",
+        "classified component",
+        "government unique"
+      ],
+      "scoring_weights": {
+        "strong_exclusion": -10,
+        "moderate_exclusion": -5
+      }
+    },
+    {
+      "group_name": "contract_type_indicators",
+      "regex_patterns": [
+        "(?i)firm[\\s-]?fixed[\\s-]?price\\s+(?:contract\\s+)?(?:for\\s+)?commercial",
+        "(?i)commercial\\s+(?:contract|contracting)\\s+(?:vehicle|method)",
+        "(?i)commercial\\s+supplier\\s+agreements?",
+        "(?i)commercial\\s+(?:purchase\\s+)?order"
+      ],
+      "exact_phrases": [
+        "firm fixed price commercial",
+        "commercial contract",
+        "commercial supplier agreement",
+        "commercial purchase order"
+      ],
+      "scoring_weights": {
+        "contract_type_match": 6
+      }
+    },
+    {
+      "group_name": "code_combinations",
+      "code_triggers": {
+        "naics_commercial": [
+          "334511",
+          "334290", 
+          "336413",
+          "423450"
+        ],
+        "fsc_commercial": [
+          "5805",
+          "5810",
+          "5820",
+          "5895",
+          "7010",
+          "7025"
+        ],
+        "clause_indicators": [
+          "52.212-1",
+          "52.212-2",
+          "52.212-3",
+          "52.212-4",
+          "52.212-5",
+          "252.212-7001"
+        ]
+      },
+      "scoring_weights": {
+        "naics_match": 5,
+        "fsc_match": 4,
+        "clause_match": 9
+      }
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+﻿Notice ID,Solicitation ID,Solicitation Title,Description Text,Agency Name,Posted Timestamp,Posted Date,Response Timestamp,Response Deadline,Response Timezone,Opportunity Type,Set Aside Code,NAICS,NAICS Title,PSC,PSC Description,Primary Contact Title,Primary Contact Name,Primary Contact Email,Primary Contact Phone,Primary Contact Fax,Secondary Contact Title,Secondary Contact Name,Secondary Contact Email,Secondary Contact Phone,Secondary Contact Fax,Place of Performance Street Address,Place of Performance Street Address2,Place of Performance City,Place of Performance State,Place of Performance Zip,Place of Performance Country Code,Place of Performance Country,Related Opportunity Id,Award Date,Award Amount,Award Number,Delivery Order Number,Award Justification,Awardee Name,Awardee UEI,Awardee CAGE Code,Awardee Line Item,FPDS Code,FPDS Org ID,SAM Organization Name,Parent Opportunity ID,Modified By,Created By,Modified Timestamp,Created Timestamp,Site Page,Source Website
+47df6dee6d8c5a699ffd73d091d9e6a0-re,RFQ1768565,DHS  USCG  Parametric Ship Hull Modeling in Rhino,"The General Services Administration (GSA), on behalf of the Department of Homeland Security (DHS), is conducting market research to identify potential contractors capable of providing specialized engineering technical support services. The primary goal is to enhance the capabilities of the Salvage Engineering Response Team (SERT), a unit within the U.S. Coast Guard (USCG) that provides critical naval architecture support during marine casualties. SERT's mission involves creating computerized ship hull models to evaluate stability and structural integrity using limited information available during such emergencies.
+
+The work being requested involves developing a parametric hull model creation tool using Rhinoceros, a 3D computer-aided design software widely used for its robust modeling capabilities. This tool aims to streamline the process of generating accurate ship models by leveraging Rhinoceros' built-in functionalities, including its Python script editor and Grasshopper algorithm editor. The contractor will be tasked with automating a rapid hull design and fairing methodology, enabling SERT to quickly produce reliable models from basic ship drawings and dimensions during time-sensitive salvage operations.
+
+The scope of this task order includes developing, testing, and documenting this modeling tool without relying on third-party plug-ins unless they are pre-approved by the USCG. The contractor will be required to produce models for common commercial ship types, validate these models against actual hydrostatic properties, and document the entire process in a technical paper detailing methodologies, assumptions, and limitations. This initiative will significantly enhance SERT's response time and accuracy in evaluating marine casualties by providing a robust tool for generating parametric hull models with minimal user intervention.
+
+In executing this contract on a Time and Materials basis, the selected contractor will follow specific tasks outlined in the Performance Work Statement (PWS). These tasks include developing sample hulls using simplified methodologies within Rhinoceros, validating their characteristics against international guidelines for stability instruments, and building an intuitive user interface for inputting essential ship data. By fulfilling these requirements, the contractor will play a pivotal role in strengthening USCG's operational readiness during maritime emergencies.",Federal Acquisition Service,2025-07-15 00:00:00+00:00,2025-07-15,2025-07-25 17:00:00+00:00,2025-07-25,,Sources Sought,,541330,Engineering Services,,,,,,,,,,,,,FEDERAL ACQUISITION SERVICE,,Boston,MA,02222,,,,,,,,,,,,,,,,47df6dee6d8c5a699ffd73d091d9e6a0-re,,,,,https://www.highergov.com/contract-opportunity/r-RFQ1768565-re,https://www.ebuy.gsa.gov/ebuy/seller/prepare-quote/RFQ1768565?contractNumber=
+1592b29244d748ebbfbd4c3d37fdd584,W91ZLK-20-Q-0014,Purchase of Airbus A321 fuselage,"Synopsis:
+
+This is a combined synopsis and solicitation for commercial items prepared in accordance with the format in FAR Subpart 12.6-Streamlined Procedures for Evaluation and Solicitation for Commercial Items, as supplemented with additional information included in this notice. This announcement constitutes the only solicitation. Quotes are being requested and a written solicitation will not be issued. Incorporated provisions and clauses are those in effect through Federal Acquisition Circular (FAC) 2020-05 effective 30 Mar 2020.The synopsis/ solicitation number is W91ZLK-20-Q-0014 for the purchase of one (1) pressurizable Airbus A321-(any sub series) narrow-body aircraft in passenger configuration. This procurement is being conducted using the Simplified Acquisition Procedures authorized in FAR Part 13.5, Simplified Procedures for Certain Commercial Items. This requirement is a Total Set-aside to Small Business Concerns represented by NAICS Code: 336411. The Government contemplates an award of a Firm-Fixed Price (FFP) type contract and will be evaluated on the basis of Lowest Priced Technically Acceptable (LPTA) offer.
+
+Description of Requirements: This is a Brand name requirement. This solicitation will cover the purchase and delivery of One (1) Airbus brand A321 commercial narrow-body aircraft fuselage in passenger configuration for the US Army Aberdeen Test Center (ATC) at Aberdeen Proving Ground, MD.
+
+For complete details please refer to the attached Statement of Work (SOW).
+
+
+
+Proposals shall be submitted in two (2) separate volumes:
+
+Volume I:  PRICE Proposal- Please submit detailed price proposal in accordance with the Statement of Work.
+
+Volume II: TECHNICAL Proposal- Technical acceptability will be based on a proposal that meets all the requirements stated in the Statement of Work (SOW). Technical proposal shall be rated as Acceptable, or Unacceptable.
+
+
+
+Proposal Format:
+
+Volume I: Detailed Price Proposal 
+
+
+
+The Price Volume shall clearly identify the proposed firm fixed price unit prices.
+
+Offeror&#39;s cost/price proposals will be evaluated based on the applicable criteria in FAR 15.404-1 based on competition and other factors. Offerors are encouraged to submit any other price or financial information that may be helpful in the understanding and evaluation of the Price Proposal; however, superfluous or elaborate documents are discouraged. Pricing information shall be addressed ONLY in the Price Proposal (Volume I) and shall be separated from any technical information being provided. All submissions shall be made in U.S. dollars.
+
+Partial quotes will not be evaluated.
+
+
+
+Volume II: Technical Proposal: Technical acceptability will be based on a proposal that meets all the requirements and specifications stated in the Statement of Work and will be evaluated based on the following factors.
+
+
+	The Airbus A321 (any series) narrow-body aircraft offered is in a common commercial passenger configuration with no purchase contingencies.
+	Proposed aircraft has full, pressurizable fuselage identified with no record of extensive damage or repairs.
+	Airbus A321 have all items intact in accordance with Statement of Work sections 3A(2) I-XV.
+	Specified delivery method to Aberdeen Proving Ground is by air to PAAF within 180 days of contract award.
+	The aircraft being offered shall include all passenger cabin interior furnishing (galleys, lavatories, walls, partitions, doors, overhead bins, seats, ceilings, etc.) and cargo compartment interior components (liners, container loading/restraint systems, fire suppression systems, etc.) and be in a flight-worthy condition.
+	Technical proposal contains discussion about post-delivery tear-down procedure. Upon final delivery post-teardown, the aircraft must be capable of maintaining a minimum differential of 8.0 psi as compared to outside air pressure.
+	Overall proposal meet all other requirements as stated in the Statement of Work.
+
+
+
+
+EVALUATION &amp; BASIS FOR AWARD
+
+Basis for Award: The Government intends to award one Firm-Fixed Price contract to the Lowest Priced, Technically Acceptable (LPTA) proposal, in accordance with FAR 15.101-2. To receive consideration for award, Contractor shall achieve technically acceptable rating on all technical factors.
+
+Contracts shall be awarded in the following order of priority when two or more low bids are equal in all respects:
+
+
+	  Small business Developmental Program 8(a) active participant.
+	  Small business socioeconomic contracting programs participants.
+	  Other Small business concerns.
+
+
+Rejection of Offers: In accordance with FAR 52.212-1 (g) The Government may reject any or all offers if such action is in the public interest; accept other than the lowest offer; and waive informalities and minor irregularities in offers received. Examples include, but are not limited to, the following:
+
+
+	Offers that provide only a statement indicating its capability to comply with the RFQ terms without support and elaboration as specified in volume instructions stated in this combined synopsis/solicitation; or
+	Offers that reflect an inherent lack of technical competence or a failure to comprehend the complexity and risks required to perform the requirements. This may include submission of a proposal which is abnormally high or low in Price or unattainable in terms of technical or schedule commitments: or
+	Offers that do not meet all the stated material requirements of this combined synopsis/solicitation; or
+	Offers that propose exceptions to the attachments, exhibits, enclosures, or other combined synopsis/solicitation terms and conditions.
+
+
+Award without Discussions: In accordance with FAR 52.212-l (g), the Government intends to evaluate proposals and award a contract without discussions with Offerors (except clarifications as described in FAR 15.306(a)). Therefore, the Offeror&#39;s initial proposal shall contain the Offeror&#39;s best terms from a price and technical standpoint. The Government reserves the right to conduct discussions if the Contracting Officer later determines them to be necessary.
+
+Determination of Responsibility: In accordance with FAR 9.103, contracts will be placed only with Contractors that the Contracting Officer determines to be responsible. Prospective offerors, in order to qualify as sources for this acquisition must be able to demonstrate that they meet standards of responsibility set forth in FAR 9.104. No award shall be made to an Offeror who has been determined non-responsible by the Contracting Officer.
+
+
+
+Instructions to Offerors:
+
+
+	The provision at FAR 52.212-2 - Evaluation -- Commercial Items, applies to this acquisition.
+	The contract shall be awarded to the Lowest Priced Technically Acceptable (LPTA) offeror.
+	The technical evaluation will be a determination based on information furnished by the vendor in the submitted proposal.
+	The Government is not responsible for locating or securing any information which is not identified in the offer. The Government reserves the right to make an award without discussions.
+	By submitting a quote the Contractor agrees to the notations identified in the Statement of Work.
+	All quotations from responsible sources will be fully considered. Vendors who are not registered in the System for Award Management (SAM), www.sam.gov, database prior to award will not be considered. Vendors may register with SAM online at the website link provided.
+
+
+
+	For questions concerning this solicitation, contact Rex M. Valdez, Contract Specialist, via email at rex.m.valdez2.civ@mail.mil.  All questions must be received by June 4, 2020 at 4:00 p.m. Eastern Time.
+
+
+
+	All quotations must be signed, dated, and submitted via email to rex.m.valdez2.civ@mail.mil by June 11, 2020 at 4:00 p.m. Eastern Time. (Preferred method) or via U.S. Mail at:
+
+
+US Army Contracting Command- Aberdeen Proving Ground,
+
+Tenant Contracting Division
+
+ATTN: Rex M, Valdez, C2-101
+
+6565 Surveillance Loop, 3rd Flr. Room C3-101
+
+Aberdeen Proving Ground, MD 21005
+
+
+	The Government reserves the right to cancel the referenced solicitation if deemed to be in its best interest.
+
+
+This solicitation incorporates one or more solicitation provisions by reference, with the same force and effect as if they were given in full text. Upon request, the Contracting Officer will make their full text available. The offeror is cautioned that the listed provisions may include blocks that must be completed by the offeror and submitted with its quotation or offer. In lieu of submitting the full text of those provisions, the offeror may identify the provision by paragraph identifier and provide the appropriate information with its quotation or offer. Also, the full text of a solicitation provision may be accessed electronically at the following address: http://farsite.hill.af.mil
+
+The following clauses and provisions are incorporated by reference:
+
+FAR 52.204-7 System for Award Management
+
+FAR 52.209-2 Prohibition on Contracting with Inverted Domestic Corporations&mdash;Rep NOV 2015
+
+FAR 52.209-10 &ndash; Prohibition on Contracting With Inverted Domestic Corporations.
+
+FAR 52.212-1 Instructions to Offerors -- Commercial Items.
+
+FAR 52.212-2, Evaluation- Commercial Items
+
+FAR 52.212-3, Offeror Representations and Certifications - Commercial Items
+
+FAR 52.212-4 Contract Terms and Conditions--Commercial Items  
+
+FAR 52.212-5 -- Contract Terms and Conditions Required to Implement Statutes or Executive Orders -- Commercial Items.
+
+FAR 52.219-28, Post-Award Small Business Program Representation
+
+FAR 52.222-3, Convict Labor
+
+FAR 52.222-19, Child Labor- Cooperation with Authorities and Remedies
+
+FAR 52.222-21, Prohibition of Segregated Facilities
+
+FAR 52.222-26, Equal Opportunity
+
+FAR 52.222-50 Combating Trafficking in Persons
+
+FAR 52.223-18 Encouraging Contractor Policies To Ban Text Messaging While Driving
+
+FAR 52.225-13, Restrictions on Certain Foreign Purchases
+
+FAR 52.225-25, Prohibition on Contracting with Entities Engaging in Certain Activities or Transactions Relating to Iran-Representation and Certifications
+
+FAR 52.232-33 Payment by Electronic Funds Transfer-- System for Award Management.
+
+FAR 52.232-39, Unenforceability of Unauthorized Obligations
+
+FAR 52.233-1 Disputes.
+
+FAR 52.233-3, Protest After Award
+
+FAR 52.233-4, Applicable Law for Breach of Contract Claim
+
+FAR 52.243-1, Changes- Fixed Price
+
+FAR 52.246-2 -- Inspection of Supplies -- Fixed-Price
+
+FAR 52.247-34 F.O.B. Destination
+
+DFARS 252.203-7000 Requirements Relating to Compensation of Former DoD Officials.
+
+DFARS 252.203-7002 Requirement to Inform Employees of Whistleblower Rights.
+
+DFARS 252.204-7003 Control of Government Personnel Work Product.
+
+DFARS 252.204-7012, Safeguarding of Unclassified Controlled Technical Information.
+
+DFARS 252.204-7015, Disclosure of Information to Litigation Support Contractors.
+
+DFARS 252-211-7003, Item Identification and Valuation
+
+DFARS 252-215-7007, Notice of Intent to Re-solicit
+
+DFARS 252.223-7008, Prohibition of Hexavalent Chromium
+
+DFARS 252.225-7048, Export-Controlled Items
+
+DFARS 252.232-7003  Electronic Submission of Payment Requests and Receiving Reports.
+
+DFARS 252.232-7006, Wide Area Workflow Payment Instructions.
+
+DFARS 252.232-7010 Levies on Contract Payments.
+
+DFARS 252.243-7001 Pricing of Contract Modifications.
+
+DFARS 252.244-7000 Subcontracts for Commercial Items
+
+DFARS 252.247-7023, Transportation of Supplies by Sea
+
+
+
+
+",ACC Aberdeen Proving Ground,2020-05-08 17:28:35.843000+00:00,2020-05-08,2020-06-11 20:00:00+00:00,2020-06-11,America/New_York,Synopsis Solicitation,SBA,336411,Aircraft Manufacturing ,1560,Airframe Structural Components,,Rex M. Valdez,rex.m.valdez2.civ@army.mil,,,,,,,,,,Aberdeen Proving Ground,MD,21005,USA,UNITED STATES,,,,,,,,,,,2100,W91ZLK,W6QK ACC-APG DIR,46167ceda1be47eca7fb7cb42097c83a,PI33_DR_IAE_51681,rex.m.valdez2.civ@mail.mil,2020-06-27 03:55:42.899000+00:00,2020-05-08 17:23:57.723000+00:00,https://www.highergov.com/contract-opportunity/W91ZLK-20-Q-0014-Combined_Synopsis_Solicitation-7c83a,https://sam.gov/opp/1592b29244d748ebbfbd4c3d37fdd584/view
+2b9fdf157b89e12665809d30e05ec250,REF02FY19,Remote Tunnel Mapping,"Units lack the ability to map and categorize dense urban and subterranean environments, but must do so before committing solders to operate in confided or subterranean environments. Candidate system parameters:
+&bull; The system shall be able to operate in GPS denied environment (Threshold (T) = Objective (O)) with a starting point provided by GPS (T) or starting point defined by other methods or not required (O)&bull; The system shall produce a 2D (T) or 3D (O) map.&bull; The system shall produce the map with separate computer for viewing at a later time (T) conducting with on board processing for immediate viewing (O).&bull; The system shall use active (T) passive (O) system for mapping.&bull; The system shall be mounted on common commercially available UGV/UAS system (T) or dismounted for use as man-portable system (O)&bull; The mapping system shall be compatible with Android Tactical Assault Kit (ATAK) (T) or able to function with any commercially available radio or end user device. (O)",MICC Fort Belvoir,2019-04-15 20:32:43+00:00,2019-04-15,2019-04-16 04:59:00+00:00,2019-04-16,,Sources Sought,,336411,Aircraft Manufacturing ,16,Aerospace Craft Components And Accessories,contract specialist,Shalonda Scott,shalonda.l.scott-boyd.civ@mail.mil,7037043831,,,,,,,"10236 Burbeck Road
+",,FORT BELVOIR,VA,22060,USA,,,,,,,,,,,,2100,W91QV1,W6QM MICC-FT BELVOIR,2b9fdf157b89e12665809d30e05ec250,PI33_DR_IAE_51681,shalonda.l.scott-boyd.civ@mail.mil,2019-05-15 08:35:11+00:00,2019-04-15 20:32:43+00:00,https://www.highergov.com/contract-opportunity/REF02FY19-Sources_Sought-ec250,https://sam.gov/opp/2b9fdf157b89e12665809d30e05ec250/view

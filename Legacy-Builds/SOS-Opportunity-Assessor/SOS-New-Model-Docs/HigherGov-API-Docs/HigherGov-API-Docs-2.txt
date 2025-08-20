@@ -1,0 +1,972 @@
+---
+description: Getting started with the powerful HigherGov API
+---
+
+# API
+
+### Access, Limits, and Pricing
+
+All HigherGov subscriptions include access to the API and 10,000 records per month through the API.  If you require more data, please [contact us](mailto:contact@highergov.com) with your use case for pricing.  &#x20;
+
+### Endpoints
+
+A list of available endpoints and fields is available in the OAS [documentation](https://www.highergov.com/api-external/docs/).  The OAS Documentation can also generate sample API calls by pressing the Try It Out button under each endpoint, selecting the desired Parameters, and pressing Execute.
+
+{% hint style="info" %}
+**We also offer APIs customized to your needs.  Please** [**contact** ](mailto:contact@highergov.com)**us if you are interested in learning more.** &#x20;
+{% endhint %}
+
+### Creating Keys
+
+API keys can be managed when signed in by selecting the gear icon in the upper right and selecting API or by clicking [here](https://www.highergov.com/api-management/).  Only an account administrator will have access to create keys.  To create an API key, select the Generate Key button.  Note that the full key will only be available on this screen once so make sure to copy and securely save the key.
+
+<figure><img src="https://1554509061-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FRBQTVfbZC9vumHCn1Rm8%2Fuploads%2F2L65zQvnRHmK207Rop8K%2Fimage.png?alt=media&#x26;token=95b54d1b-be5a-481e-a040-f0f39dd7a456" alt=""><figcaption></figcaption></figure>
+
+### Using the search\_id Parameter
+
+For the Opportunity, Federal Contract, and Federal Grant endpoints, HigherGov provides a search\_id parameter that allows a HigherGov search to be easily converted into an API call.  The search\_id parameter does not accept all search fields, please see the endpoint documentation for a list of supported fields.
+
+#### Example&#x20;
+
+If you have the below search in [Federal Contract Opportunities](https://www.highergov.com/contract-opportunity/?searchID=2F6PPA1a7NAQ4C1OUh7XB):
+
+<figure><img src="https://1554509061-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FRBQTVfbZC9vumHCn1Rm8%2Fuploads%2F1uJqRMVZpTlWfiypUjbR%2Fimage.png?alt=media&#x26;token=e64947a7-be92-4155-9105-83c231e866b3" alt=""><figcaption></figcaption></figure>
+
+You can take the searchID listed in the URL:
+
+https://www.highergov.com/contract-opportunity/?searchID=<mark style="background-color:red;">2F6PPA1a7NAQ4C1OUh7XB</mark>
+
+and use that in your API call as the search\_id parameter:
+
+https://www.highergov.com/api-external/opportunity/?api\_key=your-api-key-here\&search\_id=<mark style="background-color:red;">2F6PPA1a7NAQ4C1OUh7XB</mark>\&captured\_date=2024-05-01\&page\_size=10\&source\_type=sam
+
+#### Best Results
+
+For best results with the search\_id filter in the Opportunity endpoint, we recommend also using the source\_type and captured\_date filters to limit your call to the most relevant data source(s) and most recent dates. &#x20;
+
+### Downloading Opportunity Files
+
+To download opportunity files, first make a call to the Opportunity endpoint.  In the results, there will be a field called document\_path that will provide a path to call to the Document endpoint.  Making this call to the Document endpoint will return information on all of the documents related to the opportunity including a set of download\_url paths that can be used to download files. &#x20;
+
+Please note that the provided download\_url will expire after 60 minutes, and if files are not downloaded within that timeframe, a new call will need to be made to the Document endpoint.&#x20;
+
+### Data Refresh Rate
+
+Data is generally updated shortly after the underlying data source. Some examples are shown below.
+
+| Endpoint             | Data Update Frequency |
+| -------------------- | --------------------- |
+| **Opportunity**      | 20 Minutes            |
+| **Federal Contract** | Daily                 |
+| **Federal Grant**    | Daily                 |
+| **Awardee**          | Daily                 |
+
+### Code Examples
+
+Below are a few code snippets to get started accessing the API.
+
+{% tabs %}
+{% tab title="Python" %}
+<pre><code><strong>import requests
+</strong>import json
+
+# Define the Endpoint and Key
+endpoint = 'https://www.highergov.com/api-external/contract/'
+api_key = 'your-api-key-here'
+
+#Define Parameters
+params = {
+    'api_key': api_key,
+    'last_modified_date': '2023-07-06',
+    'search_id': 'z9zi90apiU_Zyl3T2CUZa',    
+    'page_number': '1',
+}
+
+#Call API
+response = requests.get(endpoint, params=params)
+
+#Convert Response to JSON
+data = response.json()
+#print(json.dumps(data, indent=4))  # Print the JSON
+
+#Loop through results
+for result in data.get('results'):
+    contract_award_id = result.get('award_id')
+    ...
+</code></pre>
+{% endtab %}
+
+{% tab title="Javascript" %}
+```
+// Define the Endpoint and Key
+const endpoint = 'https://www.highergov.com/api-external/contract/';
+const api_key = 'your-api-key-here';
+
+// Define Parameters
+let params = {
+    'api_key': api_key, 
+    'last_modified_date': '2023-07-06',
+    'search_id': 'z9zi90apiU_Zyl3T2CUZa',        
+    'page_number': '1',
+};
+
+// Convert parameters to URL query string
+let query = Object.keys(params).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`).join('&');
+
+// Call API
+fetch(`${endpoint}?${query}`)
+    .then(response => response.json()) // Parse response as JSON
+    .then(data => {
+        // Loop through results
+        data.results.forEach(result => {
+            let contract_award_id = result.award_id;
+            console.log(contract_award_id);
+        });  
+    }); 
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```
+<?php
+
+// Define the endpoint and parameters
+$endpoint = 'https://www.highergov.com/api-external/contract/';
+$api_key = 'your-api-key-here';
+
+$params = http_build_query([
+    'api_key' => $api_key,
+    'last_modified_date' => '2023-07-06',
+   'search_id' => 'z9zi90apiU_Zyl3T2CUZa',    
+    'page_number' => '1',
+]);
+
+// Initialize cURL
+$ch = curl_init();
+
+// Set the options
+curl_setopt($ch, CURLOPT_URL, $endpoint.'?'.$params);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+
+// Execute the cURL session
+$response = curl_exec($ch);
+
+// Close the cURL session
+curl_close($ch);
+
+// Convert the response into an associative array
+$data = json_decode($response, true);
+
+// Loop through each item in the 'results' array
+foreach ($data['results'] as $result) {
+    $contract_award_id = $result['award_id'];
+}
+```
+{% endtab %}
+{% endtabs %}
+
+
+---
+
+HigherGov API
+
+v1.2 
+OAS 3.0
+/api-external/schema/
+
+Overview
+The HigherGov API provides access to comprehensive Federal and State and Local opportunity, contract and grant award, awardee, people, and other reference data. The documentation below allows you to create sample calls without an API key by selecting the Try It Out button under each endpoint, selecting your desired Parameters, and pressing Execute. Code snippets and other details are available in the help guide.
+
+Access
+To generate an API Key, select the gear icon in the upper right hand page of your HigherGov account when logged-in and select the API option. Only account admins can create API keys.
+
+Support
+For questions and requests, please email us at contact@highergov.com.
+
+
+Update Frequency
+See each endpoint for a description of update frequency and timing.
+
+
+Usage Limits
+All subscriptions include base usage of 10,000 records per month. If your needs exceed this number of records, please contact us with your use case and expected number of records.
+
+Agency
+
+
+GET
+/api-external/agency/
+
+Awardee
+
+
+GET
+/api-external/awardee/
+
+Awardee Mentor Protege
+
+
+GET
+/api-external/awardee-mp/
+
+Awardee Partnership
+
+
+GET
+/api-external/awardee-partnership/
+
+Federal Contract
+
+
+GET
+/api-external/contract/
+
+Document
+
+
+GET
+/api-external/document/
+
+Federal Grant
+
+
+GET
+/api-external/grant/
+
+Grant Program
+
+
+GET
+/api-external/grant-program/
+
+Federal IDV
+
+
+GET
+/api-external/idv/
+
+NAICS
+
+
+GET
+/api-external/naics/
+
+NSN
+
+
+GET
+/api-external/nsn/
+
+Opportunity
+
+
+GET
+/api-external/opportunity/
+
+People
+
+
+GET
+/api-external/people/
+
+PSC
+
+
+GET
+/api-external/psc/
+
+Federal Subcontract
+
+
+GET
+/api-external/subcontract/
+
+Federal Subgrant
+
+
+GET
+/api-external/subgrant/
+
+Vehicle
+
+
+GET
+/api-external/vehicle/
+
+
+Schemas
+Agency{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+agency_key*	[...]
+agency_name*	[...]
+agency_abbreviation*	[...]
+agency_type*	[...]
+defense_flag*	[...]
+level_1*	[...]
+level_2*	[...]
+level_3*	[...]
+level_4*	[...]
+level_5*	[...]
+level_6*	[...]
+level_7*	[...]
+path*	[...]
+}
+AgencySimple{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+agency_key*	[...]
+agency_name*	[...]
+agency_abbreviation*	[...]
+agency_type*	[...]
+path*	[...]
+}
+Assistance{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+cfda_program_number*	[...]
+active	[...]
+program_title*	[...]
+popular_program_title*	[...]
+primary_agency*	AgencySimple{...}
+date_modified*	[...]
+date_posted*	[...]
+cfda_objective*	[...]
+type_of_assistance*	[...]
+applicant_eligibility*	[...]
+beneficiary_eligibility*	[...]
+path*	[...]
+}
+Awardee{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+awardee_key*	[...]
+awardee_key_parent*	AwardeeSimple{...}
+parent_flag*	[...]
+clean_name*	[...]
+legal_business_name*	[...]
+dba_name*	[...]
+entity_division_name*	[...]
+entity_division_number*	[...]
+uei*	[...]
+cage_code*	[...]
+purpose_of_registration*	[...]
+initial_registration_date*	[...]
+registration_expiration_date*	[...]
+registration_last_update_date*	[...]
+registration_activation_date*	[...]
+year_founded*	[...]
+employee_count*	[...]
+physical_address_line_1*	[...]
+physical_address_line_2*	[...]
+physical_address_city*	[...]
+physical_address_province_or_state*	[...]
+physical_address_zip_postal_code*	[...]
+physical_address_zip_code_4*	[...]
+physical_address_country_code*	[...]
+govt_bus_poc_first_name*	[...]
+govt_bus_poc_last_name*	[...]
+govt_bus_poc_title*	[...]
+govt_bus_poc_st_add_1*	[...]
+govt_bus_poc_st_add_2*	[...]
+govt_bus_poc_city*	[...]
+govt_bus_poc_zip_postal_code*	[...]
+govt_bus_state_or_province*	[...]
+govt_bus_poc_country_code*	[...]
+website*	[...]
+primary_naics*	{...}
+naics_codes*	[...]
+psc_codes*	[...]
+bus_type_info*	[...]
+path*	[...]
+}
+AwardeeMP{
+awardee_key_protege*	AwardeeSimple{...}
+awardee_key_mentor*	AwardeeSimple{...}
+awardee_key_protege_parent*	AwardeeSimple{...}
+awardee_key_mentor_parent*	AwardeeSimple{...}
+active_flag*	[...]
+primary_naics*	{...}
+}
+AwardeePartnership{
+awardee_key_prime*	AwardeeSimple{...}
+awardee_key_sub*	AwardeeSimple{...}
+awardee_key_prime_parent*	AwardeeSimple{...}
+awardee_key_sub_parent*	AwardeeSimple{...}
+number_of_awards*	[...]
+total_awards*	[...]
+most_recent_date*	[...]
+relationship_type*	[...]
+}
+AwardeeSimple{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+awardee_key*	[...]
+clean_name*	[...]
+uei*	[...]
+cage_code*	[...]
+path*	[...]
+}
+Federal Contract{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+award_id*	[...]
+parent_award_id*	[...]
+latest_transaction_key*	[...]
+last_modified_date*	[...]
+latest_action_date*	[...]
+latest_action_date_fiscal_year*	[...]
+awardee*	{...}
+nullable: true
+awardee_parent*	{...}
+nullable: true
+awarding_agency*	AgencySimple{...}
+funding_agency*	AgencySimple{...}
+vehicle*	{...}
+nullable: true
+federal_supply_schedule_award_id*	[...]
+parent_award_type*	[...]
+period_of_performance_start_date*	[...]
+period_of_performance_current_end_date*	[...]
+period_of_performance_potential_end_date*	[...]
+total_dollars_obligated*	[...]
+current_total_value_of_award*	[...]
+potential_total_value_of_award*	[...]
+award_type*	[...]
+award_description_original*	[...]
+alt_description*	[...]
+solicitation_identifier*	[...]
+related_opportunity_title*	[...]
+psc_code*	{...}
+naics_code*	{...}
+primary_place_of_performance_zip*	[...]
+primary_place_of_performance_county_name*	[...]
+primary_place_of_performance_city_name*	[...]
+primary_place_of_performance_state_code*	[...]
+primary_place_of_performance_state_name*	[...]
+primary_place_of_performance_country_name*	[...]
+type_of_agreement*	[...]
+type_of_contract_pricing_description*	[...]
+national_interest_action*	[...]
+defense_program*	[...]
+other_statutory_authority*	[...]
+dod_claimant_program_code*	[...]
+subcontracting_plan*	[...]
+research*	[...]
+type_of_set_aside*	[...]
+number_of_offers_received*	[...]
+extent_competed*	[...]
+solicitation_procedures*	[...]
+evaluated_preference*	[...]
+clinger_cohen_act_planning*	[...]
+fair_opportunity_limited_sources*	[...]
+other_than_full_and_open_competition*	[...]
+created_by*	{...}
+nullable: true
+last_modified_by*	{...}
+nullable: true
+approved_by*	{...}
+nullable: true
+path*	[...]
+}
+Federal Grant{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+award_id*	[...]
+awardee_key*	{...}
+nullable: true
+awardee_key_parent*	{...}
+nullable: true
+assistance_type_code*	[...]
+latest_transaction_key*	[...]
+last_modified_date*	[...]
+latest_action_date*	[...]
+latest_action_date_fiscal_year*	[...]
+period_of_performance_start_date*	[...]
+period_of_performance_current_end_date*	[...]
+total_obligated_amount*	[...]
+federal_action_obligation*	[...]
+non_federal_funding_amount*	[...]
+solicitation_identifier*	[...]
+primary_place_of_performance_zip*	[...]
+primary_place_of_performance_county_name*	[...]
+primary_place_of_performance_city_name*	[...]
+primary_place_of_performance_state_code*	[...]
+primary_place_of_performance_state_name*	[...]
+primary_place_of_performance_country_name*	[...]
+award_description_original*	[...]
+grant_program*	Grant Program{...}
+awarding_agency*	AgencySimple{...}
+funding_agency*	AgencySimple{...}
+path*	[...]
+}
+Federal IDV{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+award_id*	[...]
+parent_award_id*	[...]
+latest_transaction_key*	[...]
+last_modified_date*	[...]
+latest_action_date*	[...]
+latest_action_date_fiscal_year*	[...]
+awardee_key*	{...}
+nullable: true
+awardee_key_parent*	{...}
+nullable: true
+awarding_agency*	AgencySimple{...}
+funding_agency*	AgencySimple{...}
+vehicle*	{...}
+nullable: true
+who_can_use*	[...]
+federal_supply_schedule_award_id*	[...]
+parent_award_type*	[...]
+period_of_performance_start_date*	[...]
+ordering_period_end_date*	[...]
+potential_total_value_of_award*	[...]
+award_type*	[...]
+award_description_original*	[...]
+alt_description*	[...]
+solicitation_identifier*	[...]
+related_opportunity_title*	[...]
+psc_code*	{...}
+naics_code*	{...}
+type_of_agreement*	[...]
+type_of_contract_pricing_description*	[...]
+national_interest_action*	[...]
+defense_program*	[...]
+other_statutory_authority*	[...]
+dod_claimant_program_code*	[...]
+subcontracting_plan*	[...]
+contracting_officers_determination_of_business_size_code*	[...]
+cost_or_pricing_data*	[...]
+competitive_procedures*	[...]
+fair_opportunity_limited_sources*	[...]
+other_than_full_and_open_competition*	[...]
+clinger_cohen_act_planning*	[...]
+research*	[...]
+type_of_set_aside*	[...]
+number_of_offers_received*	[...]
+extent_competed*	[...]
+solicitation_procedures*	[...]
+evaluated_preference*	[...]
+status_code*	[...]
+closed_status*	[...]
+created_by*	{...}
+nullable: true
+last_modified_by*	{...}
+nullable: true
+approved_by*	{...}
+nullable: true
+path*	[...]
+}
+Federal Subcontract{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+sub_awardee*	{...}
+nullable: true
+sub_awardee_parent*	{...}
+nullable: true
+subaward_id*	[...]
+subaward_action_date*	[...]
+subaward_action_date_fiscal_year*	[...]
+subaward_amount_total*	[...]
+subaward_description*	[...]
+prime_contract_award_id*	Federal Contract{...}
+prime_idv_award_id*	[...]
+last_modified_date*	[...]
+path*	[...]
+}
+Federal Subgrant{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+sub_awardee*	{...}
+nullable: true
+sub_awardee_parent*	{...}
+nullable: true
+subaward_id*	[...]
+subaward_action_date*	[...]
+subaward_action_date_fiscal_year*	[...]
+subaward_amount_total*	[...]
+subaward_description*	[...]
+prime_grant_award_id*	Federal Grant{...}
+last_modified_date*	[...]
+path*	[...]
+}
+FileTracker{
+file_name	[...]
+file_type	[...]
+file_size	File Size (bytes)[...]
+posted_date	[...]
+text_extract*	[...]
+summary	[...]
+download_url*	[...]
+}
+Grant Program{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+cfda_program_number*	[...]
+active	[...]
+program_title*	[...]
+popular_program_title*	[...]
+}
+LookupComboOpportunityType{
+description	[...]
+}
+NAICS{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+naics_code*	[...]
+naics_description*	[...]
+naics_description_long*	[...]
+active*	[...]
+path*	[...]
+}
+NAICSSimple{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+naics_code*	[...]
+naics_description*	[...]
+active*	[...]
+path*	[...]
+}
+NSN{
+nsn*	[...]
+niin	[...]
+fsc	PSC[...]
+nomenclature	[...]
+opp_count	[...]
+part_numbers	[...]
+end_item_name	[...]
+amc	[...]
+amsc	[...]
+ui	[...]
+distributor_use*	[...]
+last_price*	[...]
+unit_price*	[...]
+suppliers*	[...]
+awards*	[...]
+}
+Naics{
+naics_code	NAICS[...]
+}
+Opportunity{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+opp_cat*	[...]
+title*	[...]
+description_text*	[...]
+ai_summary*	[...]
+source_id*	[...]
+source_id_version*	[...]
+captured_date*	[...]
+posted_date*	[...]
+due_date*	[...]
+agency*	AgencySimple{...}
+naics_code*	{...}
+psc_code*	{...}
+opp_type*	{...}
+primary_contact_email*	PeopleSimple{...}
+secondary_contact_email*	PeopleSimple{...}
+set_aside*	[...]
+nsn*	[...]
+val_est_low*	[...]
+val_est_high*	[...]
+pop_country*	[...]
+pop_state*	[...]
+pop_city*	[...]
+pop_zip*	[...]
+opp_key	[...]
+version_key	[...]
+source_type*	[...]
+dibbs_status*	[...]
+path*	[...]
+source_path	[...]
+document_path*	[...]
+}
+PSC{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+psc_code*	[...]
+psc_name*	[...]
+psc_description*	[...]
+active*	[...]
+path*	[...]
+}
+PaginatedAgencyList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedAssistanceList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedAwardeeList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedAwardeeMPList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedAwardeePartnershipList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedFederal ContractList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedFederal GrantList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedFederal IDVList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedFederal SubcontractList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedFederal SubgrantList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedFileTrackerList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedNAICSList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedNSNList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedOpportunityList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedPSCList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedPeopleList{
+results	[...]
+meta	{...}
+links	{...}
+}
+PaginatedVehicleList{
+results	[...]
+meta	{...}
+links	{...}
+}
+People{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+last_seen*	[...]
+contact_first_name	First Name[...]
+contact_last_name	Last Name[...]
+contact_name*	[...]
+contact_title*	[...]
+contact_email*	[...]
+contact_phone*	[...]
+contact_ext*	[...]
+contact_fax*	[...]
+agency*	AgencySimple{...}
+contact_type*	[...]
+path*	[...]
+}
+PeopleSimple{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+contact_title*	[...]
+contact_name*	[...]
+contact_first_name*	[...]
+contact_last_name*	[...]
+contact_email*	[...]
+contact_phone*	[...]
+}
+Psc{
+psc_code	PSC[...]
+}
+Vehicle{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+vehicle_key*	[...]
+vehicle_name*	[...]
+vehicle_description*	[...]
+shared_ceiling*	[...]
+vehicle_type*	[...]
+naics_code*	{...}
+psc_code*	{...}
+type_of_set_aside*	[...]
+who_can_use*	[...]
+award_date*	[...]
+last_date_to_order*	[...]
+associated_solicitation*	[...]
+primary_sponsor_agency*	{...}
+nullable: true
+predecessor_vehicle*	[...]
+successor_vehicle*	[...]
+path*	[...]
+}
+VehicleSimple{
+description:	
+A type of ModelSerializer that uses hyperlinked relationships instead of primary key relationships. Specifically:
+
+A 'url' field is included instead of the 'id' field.
+Relationships to other instances are hyperlinks, instead of primary keys.
+Included Mixins:
+
+A mixin class to enable sparse fieldsets is included
+A mixin class to enable validation of included resources is included
+vehicle_key*	[...]
+vehicle_name*	[...]
+vehicle_description*	[...]
+path*	[...]
+}
+

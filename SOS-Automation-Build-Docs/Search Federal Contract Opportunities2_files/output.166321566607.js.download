@@ -1,0 +1,541 @@
+function toggleIncExl(id){elem=document.getElementById(id)
+cur_text=elem.innerHTML
+if(cur_text=='Exclude'){elem.innerHTML='Include'
+elem.classList.add('btn-primary')
+elem.classList.remove('btn-danger')}else{elem.innerHTML='Exclude'
+elem.classList.add('btn-danger')
+elem.classList.remove('btn-primary')}
+refresh_search()}
+var date1_min_vue=new Vue({data:{date:null,refresh:true,attrs:[{key:'today',highlight:{color:'purple',fillMode:'outline',},dates:new Date(),},],},methods:{min_date_input(){if(!!this.date){if(!search_params.hasOwnProperty('date1')){search_params.date1={};}
+search_params.date1.min={}
+search_params.date1.min=dayjs(this.date).format('YYYY-MM-DD')}else{if(search_params.hasOwnProperty('date1')){if(search_params.date1.hasOwnProperty('min')){delete search_params.date1.min;}}}
+if(this.refresh==true){refresh_search()}
+this.refresh=true},},mounted(){if(search_params.hasOwnProperty('date1')){if(search_params.date1.hasOwnProperty('min')){this.refresh=false
+this.date=dayjs(search_params.date1.min).format('YYYY/MM/DD')}}},}).$mount('#date1_min_app')
+var date1_max_vue=new Vue({data:{date:null,refresh:true,attrs:[{key:'today',highlight:{color:'purple',fillMode:'outline',},dates:new Date(),},],},methods:{max_date_input(){if(!!this.date){if(!search_params.hasOwnProperty('date1')){search_params.date1={};}
+search_params.date1.max={}
+search_params.date1.max=dayjs(this.date).format('YYYY-MM-DD')}else{if(search_params.hasOwnProperty('date1')){if(search_params.date1.hasOwnProperty('max')){delete search_params.date1.max;}}}
+if(this.refresh==true){refresh_search()}
+this.refresh=true},},mounted(){if(search_params.hasOwnProperty('date1')){if(search_params.date1.hasOwnProperty('max')){this.refresh=false
+this.date=dayjs(search_params.date1.max).format('YYYY/MM/DD')}}},}).$mount('#date1_max_app')
+var date2_min_vue=new Vue({data:{date:null,refresh:true,attrs:[{key:'today',highlight:{color:'purple',fillMode:'outline',},dates:new Date(),},],},methods:{min_date_input(){if(!!this.date){if(!search_params.hasOwnProperty('date2')){search_params.date2={};}
+search_params.date2.min={}
+search_params.date2.min=dayjs(this.date).format('YYYY-MM-DD')}else{if(search_params.hasOwnProperty('date2')){if(search_params.date2.hasOwnProperty('min')){delete search_params.date2.min;}}}
+if(this.refresh==true){refresh_search()}
+this.refresh=true},},mounted(){if(search_params.hasOwnProperty('date2')){if(search_params.date2.hasOwnProperty('min')){this.refresh=false
+this.date=dayjs(search_params.date2.min).format('YYYY/MM/DD')}}},}).$mount('#date2_min_app')
+var date2_max_vue=new Vue({data:{date:null,refresh:true,attrs:[{key:'today',highlight:{color:'purple',fillMode:'outline',},dates:new Date(),},],},methods:{max_date_input(){if(!!this.date){if(!search_params.hasOwnProperty('date2')){search_params.date2={};}
+search_params.date2.max={}
+search_params.date2.max=dayjs(this.date).format('YYYY-MM-DD')}else{if(search_params.hasOwnProperty('date2')){if(search_params.date2.hasOwnProperty('max')){delete search_params.date2.max;}}}
+if(this.refresh==true){refresh_search()}
+this.refresh=true},},mounted(){if(search_params.hasOwnProperty('date2')){if(search_params.date2.hasOwnProperty('max')){this.refresh=false
+this.date=dayjs(search_params.date2.max).format('YYYY/MM/DD')}}},}).$mount('#date2_max_app')
+var date3_min_vue=new Vue({data:{date:null,refresh:true,attrs:[{key:'today',highlight:{color:'purple',fillMode:'outline',},dates:new Date(),},],},methods:{min_date_input(){if(!!this.date){if(!search_params.hasOwnProperty('date3')){search_params.date3={};}
+search_params.date3.min={}
+search_params.date3.min=dayjs(this.date).format('YYYY-MM-DD')}else{if(search_params.hasOwnProperty('date3')){if(search_params.date3.hasOwnProperty('min')){delete search_params.date3.min;}}}
+if(this.refresh==true){refresh_search()}
+this.refresh=true},},mounted(){if(search_params.hasOwnProperty('date3')){if(search_params.date3.hasOwnProperty('min')){this.refresh=false
+this.date=dayjs(search_params.date3.min).format('YYYY/MM/DD')}}},}).$mount('#date3_min_app')
+var date3_max_vue=new Vue({data:{date:null,refresh:true,attrs:[{key:'today',highlight:{color:'purple',fillMode:'outline',},dates:new Date(),},],},methods:{max_date_input(){if(!!this.date){if(!search_params.hasOwnProperty('date3')){search_params.date3={};}
+search_params.date3.max={}
+search_params.date3.max=dayjs(this.date).format('YYYY-MM-DD')}else{if(search_params.hasOwnProperty('date3')){if(search_params.date3.hasOwnProperty('max')){delete search_params.date3.max;}}}
+if(this.refresh==true){refresh_search()}
+this.refresh=true},},mounted(){if(search_params.hasOwnProperty('date3')){if(search_params.date3.hasOwnProperty('max')){this.refresh=false
+this.date=dayjs(search_params.date3.max).format('YYYY/MM/DD')}}},}).$mount('#date3_max_app')
+var date4_min_vue=new Vue({data:{date:null,refresh:true,attrs:[{key:'today',highlight:{color:'purple',fillMode:'outline',},dates:new Date(),},],},methods:{min_date_input(){if(!!this.date){if(!search_params.hasOwnProperty('date4')){search_params.date4={};}
+search_params.date4.min={}
+search_params.date4.min=dayjs(this.date).format('YYYY-MM-DD')}else{if(search_params.hasOwnProperty('date4')){if(search_params.date4.hasOwnProperty('min')){delete search_params.date4.min;}}}
+if(this.refresh==true){refresh_search()}
+this.refresh=true},},mounted(){if(search_params.hasOwnProperty('date4')){if(search_params.date4.hasOwnProperty('min')){this.refresh=false
+this.date=dayjs(search_params.date4.min).format('YYYY/MM/DD')}}},}).$mount('#date4_min_app')
+var date4_max_vue=new Vue({data:{date:null,refresh:true,attrs:[{key:'today',highlight:{color:'purple',fillMode:'outline',},dates:new Date(),},],},methods:{max_date_input(){if(!!this.date){if(!search_params.hasOwnProperty('date4')){search_params.date4={};}
+search_params.date4.max={}
+search_params.date4.max=dayjs(this.date).format('YYYY-MM-DD')}else{if(search_params.hasOwnProperty('date4')){if(search_params.date4.hasOwnProperty('max')){delete search_params.date4.max;}}}
+if(this.refresh==true){refresh_search()}
+this.refresh=true},},mounted(){if(search_params.hasOwnProperty('date4')){if(search_params.date4.hasOwnProperty('max')){this.refresh=false
+this.date=dayjs(search_params.date4.max).format('YYYY/MM/DD')}}},}).$mount('#date4_max_app')
+var date5_min_vue=new Vue({data:{date:null,refresh:true,attrs:[{key:'today',highlight:{color:'purple',fillMode:'outline',},dates:new Date(),},],},methods:{min_date_input(){if(!!this.date){if(!search_params.hasOwnProperty('date5')){search_params.date5={};}
+search_params.date5.min={}
+search_params.date5.min=dayjs(this.date).format('YYYY-MM-DD')}else{if(search_params.hasOwnProperty('date5')){if(search_params.date5.hasOwnProperty('min')){delete search_params.date5.min;}}}
+if(this.refresh==true){refresh_search()}
+this.refresh=true},},mounted(){if(search_params.hasOwnProperty('date5')){if(search_params.date5.hasOwnProperty('min')){this.refresh=false
+this.date=dayjs(search_params.date5.min).format('YYYY/MM/DD')}}},}).$mount('#date5_min_app')
+var date5_max_vue=new Vue({data:{date:null,refresh:true,attrs:[{key:'today',highlight:{color:'purple',fillMode:'outline',},dates:new Date(),},],},methods:{max_date_input(){if(!!this.date){if(!search_params.hasOwnProperty('date5')){search_params.date5={};}
+search_params.date5.max={}
+search_params.date5.max=dayjs(this.date).format('YYYY-MM-DD')}else{if(search_params.hasOwnProperty('date5')){if(search_params.date5.hasOwnProperty('max')){delete search_params.date5.max;}}}
+if(this.refresh==true){refresh_search()}
+this.refresh=true},},mounted(){if(search_params.hasOwnProperty('date5')){if(search_params.date5.hasOwnProperty('max')){this.refresh=false
+this.date=dayjs(search_params.date5.max).format('YYYY/MM/DD')}}},}).$mount('#date5_max_app')
+var assistance_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Block Grant","key":"02"},{"display":"Formula Grant","key":"03"},{"display":"Project Grant","key":"04"},{"display":"Cooperative Agreement","key":"05"},{"display":"Other","key":"11"}],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.assistance_type={}
+search_params.assistance_type.code=add_param}else{delete search_params.assistance_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('assistance_type')){this.value=search_params.assistance_type.code}},}).$mount('#assistance_type_app')
+var contractor_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.contractors={}
+search_params.contractors.code=add_param}else{delete search_params.contractors}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchcontractor/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('contractors')){this.options=search_params.contractors.code
+this.value=search_params.contractors.code}},}).$mount('#contractor_app')
+var contractor_recc_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.contractor_recc={}
+search_params.contractor_recc.code=add_param}else{delete search_params.contractor_recc}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchcontractor/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('contractor_recc')){this.options=search_params.contractor_recc.code
+this.value=search_params.contractor_recc.code}},}).$mount('#contractor_recc_app')
+var contractor_match_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.contractor_match={}
+search_params.contractor_match.code=add_param}else{delete search_params.contractor_match}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchcontractormatch/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('contractor_match')){this.options=search_params.contractor_match.code
+this.value=search_params.contractor_match.code}},}).$mount('#contractor_match_app')
+var investor_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.investors={}
+search_params.investors.code=add_param}else{delete search_params.investors}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchinvestor/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('investors')){this.options=search_params.investors.code
+this.value=search_params.investors.code}},}).$mount('#investor_app')
+var advisor_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.advisors={}
+search_params.advisors.code=add_param}else{delete search_params.advisors}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchadvisor/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('advisors')){this.options=search_params.advisors.code
+this.value=search_params.advisors.code}},}).$mount('#advisor_app')
+var awarding_agency_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.awarding_agency={}
+search_params.awarding_agency.code=add_param}else{delete search_params.awarding_agency}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchagency/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('awarding_agency')){this.options=search_params.awarding_agency.code
+this.value=search_params.awarding_agency.code}},}).$mount('#awarding_agency_app')
+var funding_agency_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.funding_agency={}
+search_params.funding_agency.code=add_param}else{delete search_params.funding_agency}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchagency/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('funding_agency')){this.options=search_params.funding_agency.code
+this.value=search_params.funding_agency.code}},}).$mount('#funding_agency_app')
+var awarding_agency_sl_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.awarding_agency={}
+search_params.awarding_agency.code=add_param}else{delete search_params.awarding_agency}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchagencysl/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('awarding_agency')){this.options=search_params.awarding_agency.code
+this.value=search_params.awarding_agency.code}},}).$mount('#awarding_agency_sl_app')
+var cage_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.cage={}
+search_params.cage.code=add_param}else{delete search_params.cage}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchcage/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('cage')){this.options=search_params.cage.code
+this.value=search_params.cage.code}},}).$mount('#cage_app')
+var grant_program_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.grant_program={}
+search_params.grant_program.code=add_param}else{delete search_params.grant_program}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchgrantprogram/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('grant_program')){this.options=search_params.grant_program.code
+this.value=search_params.grant_program.code}},}).$mount('#grant_program_app')
+var dod_program_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.dod_program={}
+search_params.dod_program.code=add_param}else{delete search_params.dod_program}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchdodprogram/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('dod_program')){this.options=search_params.dod_program.code
+this.value=search_params.dod_program.code}},}).$mount('#dod_program_app')
+var grant_award_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.grant_award={}
+search_params.grant_award.code=add_param}else{delete search_params.grant_award}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchfedgrant/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('grant_award')){this.options=search_params.grant_award.code
+this.value=search_params.grant_award.code}},}).$mount('#grant_award')
+var subgrant_award_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.subgrant_award={}
+search_params.subgrant_award.code=add_param}else{delete search_params.subgrant_award}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchfedsubgrant/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('subgrant_award')){this.options=search_params.subgrant_award.code
+this.value=search_params.subgrant_award.code}},}).$mount('#subgrant_award')
+var award_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.award={}
+search_params.award.code=add_param}else{delete search_params.award}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchfedaward/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('award')){this.options=search_params.award.code
+this.value=search_params.award.code}},}).$mount('#award')
+var place_of_performance_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.place_of_performance={}
+search_params.place_of_performance.code=add_param}else{delete search_params.place_of_performance}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchgeo/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('place_of_performance')){this.options=search_params.place_of_performance.code
+this.value=search_params.place_of_performance.code}},}).$mount('#place_of_performance_app')
+var place_of_performance_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.place_of_performance={}
+search_params.place_of_performance.code=add_param}else{delete search_params.place_of_performance}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchgeocountry/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('place_of_performance')){this.options=search_params.place_of_performance.code
+this.value=search_params.place_of_performance.code}},}).$mount('#place_of_performance_country_app')
+var headquarters_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.headquarters={}
+search_params.headquarters.code=add_param}else{delete search_params.headquarters}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchgeo/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('headquarters')){this.options=search_params.headquarters.code
+this.value=search_params.headquarters.code}},}).$mount('#headquarters_app')
+var pricing_title_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.pricing_title={}
+search_params.pricing_title.code=add_param}else{delete search_params.pricing_title}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchtitle/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('pricing_title')){this.options=search_params.pricing_title.code
+this.value=search_params.pricing_title.code}},}).$mount('#pricing_title_app')
+var education_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"None","key":"None"},{"display":"High School","key":"High School"},{"display":"Associates","key":"Associates"},{"display":"Bachelors","key":"Bachelors"},{"display":"Masters","key":"Masters"},{"display":"PhD","key":"PhD"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.education={}
+search_params.education.code=add_param}else{delete search_params.education}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('education')){this.value=search_params.education.code}},}).$mount('#education_app')
+var pricing_source_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"GSA Schedule","key":"GSA Schedule"},{"display":"8(a) STARS III","key":"8(a) STARS III"},{"display":"FAA eFAST","key":"FAA eFAST"},{"display":"Alliant II","key":"Alliant II"},{"display":"VETS 2","key":"VETS 2"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.pricing_source={}
+search_params.pricing_source.code=add_param}else{delete search_params.pricing_source}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('pricing_source')){this.value=search_params.pricing_source.code}},}).$mount('#pricing_source_app')
+var worksite_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Contractor Site","key":"Contractor"},{"display":"Customer Site","key":"Customer"},{"display":"Both","key":"Both"},{"display":"Not Specified","key":"Not Specified"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.worksite={}
+search_params.worksite.code=add_param}else{delete search_params.worksite}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('worksite')){this.value=search_params.worksite.code}},}).$mount('#worksite_app')
+var state_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Mid-Atlantic',group_values:[{"display":"Delaware","key":"DE"},{"display":"Maryland","key":"MD"},{"display":"Pennsylvania","key":"PA"},{"display":"Virginia","key":"VA"},{"display":"Washington D.C.","key":"DC"},{"display":"West Virginia","key":"WV"},]},{group:'Midwest',group_values:[{"display":"Illinois","key":"IL"},{"display":"Indiana","key":"IN"},{"display":"Iowa","key":"IA"},{"display":"Michigan","key":"MI"},{"display":"Minnesota","key":"MN"},{"display":"Nebraska","key":"NE"},{"display":"North Dakota","key":"ND"},{"display":"Ohio","key":"OH"},{"display":"South Dakota","key":"SD"},{"display":"Wisconsin","key":"WI"},]},{group:'Mountain Plains',group_values:[{"display":"Colorado","key":"CO"},{"display":"Kansas","key":"KS"},{"display":"Missouri","key":"MO"},{"display":"Montana","key":"MT"},{"display":"Utah","key":"UT"},{"display":"Wyoming","key":"WY"},]},{group:'New England',group_values:[{"display":"Connecticut","key":"CT"},{"display":"Maine","key":"ME"},{"display":"Massachusetts","key":"MA"},{"display":"New Hampshire","key":"NH"},{"display":"Rhode Island","key":"RI"},{"display":"Vermont","key":"VT"},]},{group:'New York / New Jersey',group_values:[{"display":"New Jersey","key":"NJ"},{"display":"New York","key":"NY"},{"display":"Puerto Rico","key":"PR"},{"display":"U.S. Virgin Islands","key":"VI"},]},{group:'Southeast',group_values:[{"display":"Alabama","key":"AL"},{"display":"Georgia","key":"GA"},{"display":"Florida","key":"FL"},{"display":"Kentucky","key":"KY"},{"display":"Mississippi","key":"MS"},{"display":"North Carolina","key":"NC"},{"display":"South Carolina","key":"SC"},{"display":"Tennessee","key":"TN"},]},{group:'Southwest',group_values:[{"display":"Arkansas","key":"AR"},{"display":"Louisiana","key":"LA"},{"display":"New Mexico","key":"NM"},{"display":"Oklahoma","key":"OK"},{"display":"Texas","key":"TX"},]},{group:'Western',group_values:[{"display":"Alaska","key":"AK"},{"display":"Arizona","key":"AZ"},{"display":"California","key":"CA"},{"display":"Guam","key":"GU"},{"display":"Hawaii","key":"HI"},{"display":"Idaho","key":"ID"},{"display":"Nevada","key":"NV"},{"display":"Oregon","key":"OR"},{"display":"Washington","key":"WA"},]},],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.state={}
+search_params.state.code=add_param}else{delete search_params.state}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('state')){this.value=search_params.state.code}},}).$mount('#state_app')
+var applicant_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"State governments","key":"00"},{"display":"County governments","key":"01"},{"display":"City or township governments","key":"02"},{"display":"Special district governments","key":"04"},{"display":"Independent school districts","key":"05"},{"display":"Public institutions of higher education","key":"06"},{"display":"Native American tribal governments","key":"07"},{"display":"Public/Indian housing authorities","key":"08"},{"display":"Native American tribal organizations (not Federally recognized)","key":"11"},{"display":"501(c)(3) Nonprofits","key":"12"},{"display":"Nonprofits (other than 501(c)(3))","key":"13"},{"display":"Private institutions of higher education","key":"20"},{"display":"Individuals","key":"21"},{"display":"Large businesses","key":"22"},{"display":"Small businesses","key":"23"},{"display":"Others","key":"25"},{"display":"Unrestricted","key":"99"}],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.applicant_type={}
+search_params.applicant_type.code=add_param}else{delete search_params.applicant_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('applicant_type')){this.value=search_params.applicant_type.code}},}).$mount('#applicant_type_app')
+var person_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){search_params.person={}
+add_param=[]
+add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key2}","display":"${v.display}"}`))
+search_params.person.code=add_param
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchperson/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('person')){this.options=search_params.person.code
+this.value=search_params.person.code}},}).$mount('#person_app')
+var person_sl_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){search_params.person={}
+add_param=[]
+add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+search_params.person.code=add_param
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchpersonsl/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('person')){this.options=search_params.person.code
+this.value=search_params.person.code}},}).$mount('#person_sl_app')
+var funding_category_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Affordable Care Act","key":"ACA"},{"display":"Agriculture","key":"AG"},{"display":"Arts","key":"AR"},{"display":"Business and Commerce","key":"BC"},{"display":"Community Development","key":"CD"},{"display":"Consumer Protection","key":"CP"},{"display":"Disaster Prevention and Relief","key":"DPR"},{"display":"Education","key":"ED"},{"display":"Employment, Labor and Training","key":"ELT"},{"display":"Energy","key":"EN"},{"display":"Environment","key":"ENV"},{"display":"Food and Nutrition","key":"FN"},{"display":"Health","key":"HL"},{"display":"Housing","key":"HO"},{"display":"Humanities","key":"HU"},{"display":"Income Security and Social Services","key":"ISS"},{"display":"Information and Statistics","key":"IS"},{"display":"Law, Justice and Legal Services","key":"LJL"},{"display":"Natural Resources","key":"NR"},{"display":"Opportunity Zone Benefits","key":"OZ"},{"display":"Other","key":"O"},{"display":"Recovery Act","key":"RA"},{"display":"Regional Development","key":"RD"},{"display":"Science and Technology and other Research and Development","key":"ST"},{"display":"Transportation","key":"T"}],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.funding_category={}
+search_params.funding_category.code=add_param}else{delete search_params.funding_category}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('funding_category')){this.value=search_params.funding_category.code}},}).$mount('#funding_category_app')
+var funding_instrument_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Procurement Contract","key":"PC"},{"display":"Other","key":"O"},{"display":"Grant","key":"G"},{"display":"Cooperative Agreement","key":"CA"}],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.funding_instrument={}
+search_params.funding_instrument.code=add_param}else{delete search_params.funding_instrument}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('funding_instrument')){this.value=search_params.funding_instrument.code}},}).$mount('#funding_instrument_app')
+var vehicle_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"IDIQ","key":"IDIQ"},{"display":"IDIQ Pool","key":"IDIQ Pool"},{"display":"BOA","key":"BOA"},{"display":"BPA","key":"BPA"},{"display":"GSA Schedule","key":"GSA Schedule"},{"display":"GSA Schedule SIN","key":"GSA Schedule SIN"},{"display":"GSA MAS SIN","key":"GSA MAS SIN"},{"display":"GWAC","key":"GWAC"},{"display":"GWAC Subarea","key":"GWAC Subarea"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.vehicle_type={}
+search_params.vehicle_type.code=add_param}else{delete search_params.vehicle_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('vehicle_type')){this.value=search_params.vehicle_type.code}},}).$mount('#vehicle_type_app')
+var vehicle_opp_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"2GIT Products","key":5539},,{"display":"711th Human Performance","key":4111},{"display":"8(a) STARS","key":6001},,{"display":'Alliant II (Unrestricted)',"key":1015},{"display":"CIO-SP3","key":1008},{"display":"CIO-SP3 SB","key":1006},{"display":"HCaTS ","key":1018},{"display":"HCaTS 8(a)","key":1979},{"display":"HCaTS SB","key":5543},{"display":"ITES","key":1130},{"display":"Multiple Award Schedule","key":1050},{"display":"OASIS","key":1000},{"display":"OASIS SB","key":1005},{"display":"OASIS 8A","key":5544},{"display":"OASIS+ 8(a)","key":7915},{"display":"OASIS+ HUBZone","key":7910},{"display":"OASIS+ SDVOSB","key":7911},{"display":"OASIS+ Small Business","key":7917},{"display":"OASIS+ Unrestricted","key":7916},{"display":"OASIS+ WOSB","key":7912},{"display":"RS3","key":2731},{"display":"SBEAS","key":1199},{"display":"SeaPort","key":1002},{"display":"SEWP","key":1009},{"display":"VETS 2","key":1007}],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.vehicle={}
+search_params.vehicle.code=add_param}else{delete search_params.vehicle}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('vehicle')){this.value=search_params.vehicle.code}},}).$mount('#vehicle_opp_app')
+var fed_opportunity_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","key3":"${v.key3}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.fed_opportunity={}
+search_params.fed_opportunity.code=add_param}else{delete search_params.fed_opportunity}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchfedopportunity/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('fed_opportunity')){this.options=search_params.fed_opportunity.code
+this.value=search_params.fed_opportunity.code}},}).$mount('#fed_opportunity_app')
+var grant_opportunity_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.grant_opportunity={}
+search_params.grant_opportunity.code=add_param}else{delete search_params.grant_opportunity}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchfedgrantopportunity/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('grant_opportunity')){this.options=search_params.grant_opportunity.code
+this.value=search_params.grant_opportunity.code}},}).$mount('#grant_opportunity_app')
+var sled_opportunity_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","key3":"${v.key3}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.sled_opportunity={}
+search_params.sled_opportunity.code=add_param}else{delete search_params.sled_opportunity}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchsledopportunity/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('sled_opportunity')){this.options=search_params.sled_opportunity.code
+this.value=search_params.sled_opportunity.code}},}).$mount('#sled_opportunity_app')
+var idv_award_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.idv_award={}
+search_params.idv_award.code=add_param}else{delete search_params.idv_award}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchfedidv/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('idv_award')){this.options=search_params.idv_award.code
+this.value=search_params.idv_award.code}},}).$mount('#idv_award_app')
+var vehicle_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.vehicle={}
+search_params.vehicle.code=add_param}else{delete search_params.vehicle}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchvehicle/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('vehicle')){this.options=search_params.vehicle.code
+this.value=search_params.vehicle.code}},}).$mount('#vehicle_app')
+var vehicle_access_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.vehicle_access={}
+search_params.vehicle_access.code=add_param}else{delete search_params.vehicle_access}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchvehicle/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('vehicle_access')){this.options=search_params.vehicle_access.code
+this.value=search_params.vehicle_access.code}},}).$mount('#vehicle_access_app')
+var naics_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.naics={}
+search_params.naics.code=add_param}else{delete search_params.naics}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchnaics/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('naics')){this.options=search_params.naics.code
+this.value=search_params.naics.code}},}).$mount('#naics_app')
+var psc_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.psc={}
+search_params.psc.code=add_param}else{delete search_params.psc}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchpsc/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('psc')){this.options=search_params.psc.code
+this.value=search_params.psc.code}},}).$mount('#psc_app')
+var psc_reg_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.psc_reg={}
+search_params.psc_reg.code=add_param}else{delete search_params.psc_reg}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchpsc/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('psc_reg')){this.options=search_params.psc_reg.code
+this.value=search_params.psc_reg.code}},}).$mount('#psc_reg_app')
+function signal_handler(){controller.abort()
+delete controller
+controller=new AbortController()
+let signal=controller.signal
+return signal}
+var nsn_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.nsn={}
+search_params.nsn.code=add_param}else{delete search_params.nsn}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchnsn/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('nsn')){this.options=search_params.nsn.code
+this.value=search_params.nsn.code}},}).$mount('#nsn_app')
+var idv_award_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"FSS","key":"C"},{"display":"BOA","key":"D"},{"display":"GWAC","key":"A"},{"display":"IDC","key":"B"},{"display":"BPA","key":"E"},{"display":"OTA IDV","key":"O"},{"display":"None Listed","key":null}],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.idv_award_type={}
+search_params.idv_award_type.code=add_param}else{delete search_params.idv_award_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('idv_award_type')){this.value=search_params.idv_award_type.code}},}).$mount('#idv_award_type_app')
+var award_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"BPA Call","key":"A"},{"display":"Delivery Order","key":"C"},{"display":"Definitive Contract","key":"D"},{"display":"Purchase Order","key":"B"},{"display":"Cooperative Agreement","key":"F"},{"display":"Funded Space Act Agreement","key":"S"},{"display":"Other Transaction Order","key":"O"},{"display":"Intragovernmental","key":"I"},{"display":"Other Transaction Agreement","key":"R"},{"display":"Grant For Research","key":"G"},{"display":"Training Grant","key":"T"},{"display":"None Listed","key":null}],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.award_type={}
+search_params.award_type.code=add_param}else{delete search_params.award_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('award_type')){this.value=search_params.award_type.code}},}).$mount('#award_type_app')
+var extent_competed_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Full And Open Competition","key":"A"},{"display":"Full And Open Competition After Exclusion Of Sources","key":"D"},{"display":"Competed","key":"H"},{"display":"Competed Under SAP","key":"F"},{"display":"Competitive Delivery Order","key":"CDO"},{"display":"Follow On To Competed Action","key":"E"},{"display":"Non-Competitive Delivery Order","key":"NDO"},{"display":"Not Available For Competition","key":"B"},{"display":"Not Competed","key":"C"},{"display":"Not Competed Under SAP","key":"G"},{"display":"None Listed","key":null}],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.extent_competed={}
+search_params.extent_competed.code=add_param}else{delete search_params.extent_competed}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('extent_competed')){this.value=search_params.extent_competed.code}},}).$mount('#extent_competed_app')
+var mult_sing_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Single","key":"S"},{"display":"Multiple","key":"M"}],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.mult_sing={}
+search_params.mult_sing.code=add_param}else{delete search_params.mult_sing}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('mult_sing')){this.value=search_params.mult_sing.code}},}).$mount('#mult_sing_app')
+var nia_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Ukraine Mission Support","key":"O22U"},{"display":"Hurricane Ida 2021","key":"H21I"},{"display":"Operation Allies Refuge / Welcome","key":"O21R"},{"display":"COVID-19 2020","key":"P20C"},{"display":"Hurricane Laura 2020","key":"H20L"},{"display":"Hurricane Michael 2019","key":"H19M"},{"display":"Hurricane Dorian 2019","key":"H19D"},{"display":"Hurricane Florence 2018","key":"H18F"},{"display":"Hurricane Harvey 2017","key":"H17H"},{"display":"Hurricane Irma 2017","key":"H17I"},{"display":"Hurricane Maria 2017","key":"H17M"},{"display":"Operations In Iraq And Syria","key":"O14S"},{"display":"Operation Freedom's Sentinel (OFS)","key":"O15F"},{"display":"Hurricane Sandy 2013","key":"H13S"},{"display":"Oklahoma Tornado And Storm 2013","key":"T13O"},{"display":"Operation United Assistance (OUA) - Ebola Outbreak West Africa","key":"O14E"},{"display":"Hurricane Isaac 2012","key":"H12I"},{"display":"Pacific Earthquake/Tsunami 2011","key":"Q11J"},{"display":"Hurricane Irene 2011","key":"H11I"},{"display":"Haiti Earthquake 2010","key":"Q10H"},{"display":"Hurricane Earl 2010","key":"H10E"},{"display":"Gulf Oil Spill 2010","key":"O10G"},{"display":"American Samoa Earthquake, Tsunami And Flooding 2009","key":"T10S"},{"display":"Hurricane Ike 2008","key":"H08I"},{"display":"Hurricane Gustav 2008","key":"H08G"},{"display":"Midwest Storms And Flooding 2008","key":"F081"},{"display":"Inauguration 2009","key":"I09P"},{"display":"Hurricane Hanna 2008","key":"H08H"},{"display":"California Wildfires 2008","key":"W081"},{"display":"Hurricane Ernesto 2006","key":"H06E"},{"display":"Hurricane Chris 2006","key":"H06C"},{"display":"Hurricane Katrina 2005","key":"H05K"},{"display":"Hurricane Ophelia 2005","key":"H05O"},{"display":"Hurricane Rita 2005","key":"H05R"},{"display":"Hurricane Wilma 2005","key":"H05W"},{"display":"Operation Enduring Freedom (OEF)","key":"O12F"},{"display":"Default Value Of B/S","key":"BSDF"},{"display":"None","key":"NONE"},{"display":"None Listed","key":null}],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.nia={}
+search_params.nia.code=add_param}else{delete search_params.nia}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('nia')){this.value=search_params.nia.code}},}).$mount('#nia_app')
+var pricing_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Time & Materials","key":"Y"},{"display":"Fixed Price","key":"J"},{"display":"Fixed Price Award Fee","key":"M"},{"display":"Fixed Price Incentive","key":"L"},{"display":"Fixed Price Level Of Effort","key":"B"},{"display":"Fixed Price Redetermination","key":"A"},{"display":"Fixed Price With Economic Price Adjustment","key":"K"},{"display":"Cost Plus Fixed Fee","key":"U"},{"display":"Cost Plus Award Fee","key":"R"},{"display":"Cost Plus Incentive Fee","key":"V"},{"display":"Cost No Fee","key":"S"},{"display":"Cost Sharing","key":"T"},{"display":"Combination","key":"2"},{"display":"Labor Hours","key":"Z"},{"display":"Order Dependent (IDV Only)","key":"1"},{"display":"Other","key":"1"},{"display":"None Listed","key":null}],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.pricing_type={}
+search_params.pricing_type.code=add_param}else{delete search_params.pricing_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('pricing_type')){this.value=search_params.pricing_type.code}},}).$mount('#pricing_type_app')
+var research_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Small Business Innovation Research Program (SBIR) Phase I","key":"SR1"},{"display":"Small Business Innovation Research Program (SBIR) Phase II","key":"SR2"},{"display":"Small Business Innovation Research Program (SBIR) Phase III","key":"SR3"},{"display":"Small Technology Transfer Research Program (STTR) Phase I","key":"ST1"},{"display":"Small Technology Transfer Research Program (STTR) Phase II","key":"ST2"},{"display":"Small Technology Transfer Research Program (STTR) Phase III","key":"ST3"},]},{group:'None',group_values:[{"display":"None Listed","key":null}]},],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.research_type={}
+search_params.research_type.code=add_param}else{delete search_params.research_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('research_type')){this.value=search_params.research_type.code}},}).$mount('#research_type_app')
+var set_aside_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Full & Open',group_values:[{"display":"No Set Aside Used (NONE)","key":"NONE"},{"display":"None Listed","key":null}]},{group:'Small Business',group_values:[{"display":"Small Business Set Aside - Total (SBA)","key":"SBA"},{"display":"Small Business Set Aside - Partial (SBP)","key":"SBP"},{"display":"Emerging Small Business Set Aside (ESB)","key":"ESB"},{"display":"Reserved For Small Business (RSB)","key":"RSB"},{"display":"Very Small Business (VSB)","key":"VSB"},]},{group:'Veteran',group_values:[{"display":"Service Disabled Veteran Owned Small Business Set-Aside (SDVOSBC)","key":"SDVOSBC"},{"display":"SDVOSB Sole Source (SDVOSBS)","key":"SDVOSBS"},{"display":"Veteran Set Aside (VSA)","key":"VSA"},{"display":"Veteran Sole Source (VSS)","key":"VSS"},]},{group:'HUBZone',group_values:[{"display":"HUBZone Set-Aside (HZC)","key":"HZC"},{"display":"HUBZone Sole Source  (HZS)","key":"HZS"},]},{group:'8A',group_values:[{"display":"8(A) Competed (8A)","key":"8A"},{"display":"8(A) Sole Source","key":"8AN"},{"display":"8(A) With HUBZone Preference (HS3)","key":"HS3"},]},{group:'Indian',group_values:[{"display":"Buy Indian (BI)","key":"BI"},{"display":"Indian Economic Enterprise (IEE)","key":"IEE"},{"display":"Indian Small Business Economic Enterprise (ISBEE)","key":"ISBEE"},]},{group:'Women-Owned',group_values:[{"display":"Women Owned Small Business (WOSB)","key":"WOSB"},{"display":"Women Owned Small Business Sole Source (WOSBSS)","key":"WOSBSS"},{"display":"Economically Disadvantaged Women Owned Small Business (EDWOSB)","key":"EDWOSB"},{"display":"Economically Disadvantaged Women Owned Small Business Sole Source (EDWOSBSS)","key":"EDWOSBSS"},]},{group:'HBCU',group_values:[{"display":"HBCU Or MI Set-Aside -- Partial (HMP)","key":"HMP"},{"display":"HBCU Or MI Set-Aside -- Total (HMT)","key":"HMT"},]},],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.set_aside_type={}
+search_params.set_aside_type.code=add_param}else{delete search_params.set_aside_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('set_aside_type')){this.value=search_params.set_aside_type.code}},}).$mount('#set_aside_type_app')
+var sl_agency_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group_values:[{"display":"Admin/HR/Finance","key":"Admin/HR/Finance"},{"display":"Airport Authority","key":"Airport Authority"},{"display":"Correctional Facility","key":"Correctional Facility"},{"display":"County","key":"County"},{"display":"Court System","key":"Court System"},{"display":"Cultural","key":"Cultural"},{"display":"Developmental Authority","key":"Developmental Authority"},{"display":"Fire","key":"Fire"},{"display":"Health Department","key":"Health Department"},{"display":"Higher Education","key":"Higher Education"},{"display":"Hospital","key":"Hospital"},{"display":"K-12 Education","key":"K-12 Education"},{"display":"Library","key":"Library"},{"display":"Military","key":"Military"},{"display":"Municipality","key":"Municipality"},{"display":"Other Public Safety","key":"Other Public Safety"},{"display":"Parks","key":"Parks"},{"display":"Police","key":"Police"},{"display":"Port","key":"Port"},{"display":"Public Utility","key":"Public Utility"},{"display":"Toll Authority","key":"Toll Authority"},{"display":"Transportation","key":"Transportation"},]}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.sl_agency_type={}
+search_params.sl_agency_type.code=add_param}else{delete search_params.sl_agency_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('sl_agency_type')){this.value=search_params.sl_agency_type.code}},}).$mount('#sl_agency_type_app')
+var amc_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Code 1 - Suitable for competitive acquisition, subsequent time","key":"1"},{"display":"Code 2 - Suitable for competitive acquisition first time","key":"2"},{"display":"Code 3 - Acquire directly from OEM, subsequent time, ","key":"3"},{"display":"Code 4 - Acquire directly from OEM, first time","key":"4"},{"display":"Code 5 - Acquire directly from a sole source contractor (Non-OEM)","key":"5"},]},],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.amc={}
+search_params.amc.code=add_param}else{delete search_params.amc}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('amc')){this.value=search_params.amc.code}},}).$mount('#amc_app')
+var amsc_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"A - Government’s rights to data is questionable","key":"A"},{"display":"B - Acquisition restricted to specified source(s)","key":"B"},{"display":"C - Requires engineering source approval","key":"C"},{"display":"D - Data needed not physically available","key":"D"},{"display":"G - Government has unlimited rights to data","key":"G"},{"display":"H - Insufficient/legible data for other sources","key":"H"},{"display":"K - Requires class 1A castings","key":"K"},{"display":"L - Annual buy value falls below screening threshold","key":"L"},{"display":"M - Master/coordinated tooling required","key":"M"},{"display":"N - Requires special test/inspection facilities","key":"N"},{"display":"P - Rights to data cannot be purchased","key":"P"},{"display":"Q - Inadequate/lacks rights to data","key":"Q"},{"display":"R - Data/rights not owned by Government","key":"R"},{"display":"S - Procurement limited due to security classification","key":"S"},{"display":"T - Acquisition controlled by QPL procedures","key":"T"},{"display":"U - Breakout cost exceeds projected savings","key":"U"},{"display":"V - High-reliability part","key":"V"},{"display":"Y - Design is unstable","key":"Y"},{"display":"Z - Commercial/off-the-shelf item","key":"Z"}]},],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.amsc={}
+search_params.amsc.code=add_param}else{delete search_params.amsc}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('amsc')){this.value=search_params.amsc.code}},}).$mount('#amsc_app')
+var action_type_terminated_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Terminated by DOGE","key":"doge"},{"display":"Officially Terminated in 2025","key":"2025-official"},{"display":"Termination For Default (Complete Or Partial)","key":"E"},{"display":"Termination For Convenience (Complete Or Partial)","key":"F"},{"display":"Termination For Cause","key":"X"},{"display":"Legal Contract Cancellation","key":"N"},{"display":"Stop Work Order Issued","key":"SW"},]},],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.action_type_terminated={}
+search_params.action_type_terminated.code=add_param}else{delete search_params.action_type_terminated}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('action_type_terminated')){this.value=search_params.action_type_terminated.code}},}).$mount('#action_type_terminated_app')
+var ps_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Product","key":"P"},{"display":"Service","key":"S"},]},],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.ps={}
+search_params.ps.code=add_param}else{delete search_params.ps}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('ps')){this.value=search_params.ps.code}},}).$mount('#ps_app')
+var distribution_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Low","key":"Low"},{"display":"Moderate","key":"Medium"},{"display":"High","key":"High"},]},],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.distribution={}
+search_params.distribution.code=add_param}else{delete search_params.distribution}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('distribution')){this.value=search_params.distribution.code}},}).$mount('#distribution_app')
+var action_type_terminated_grant_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Terminated by DOGE","key":"doge"},]},],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.action_type_terminated_grant={}
+search_params.action_type_terminated_grant.code=add_param}else{delete search_params.action_type_terminated_grant}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('action_type_terminated_grant')){this.value=search_params.action_type_terminated_grant.code}},}).$mount('#action_type_terminated_grant_app')
+var contractor_prime_sub_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.contractor_prime_sub={}
+search_params.contractor_prime_sub.code=add_param}else{delete search_params.contractor_prime_sub}
+refresh_search()},asyncFind(query){this.isLoading=true
+signal=signal_handler()
+axios.get('/api/searchcontractor/?format=json&search='+query,{signal:signal}).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('contractor_prime_sub')){this.options=search_params.contractor_prime_sub.code
+this.value=search_params.contractor_prime_sub.code}},}).$mount('#contractor_prime_sub_app')
+var subaward_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.subaward={}
+search_params.subaward.code=add_param}else{delete search_params.subaward}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchfedsubaward/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('subaward')){this.options=search_params.subaward.code
+this.value=search_params.subaward.code}},}).$mount('#subaward')
+var format_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Document","key":"D"},{"display":"Spreadsheet","key":"S"},{"display":"Presentation","key":"P"},{"display":"Text","key":"T"},{"display":"Audio / Video","key":"A"},{"display":"Compressed File","key":"Z"},{"display":"Image","key":"I"},{"display":"Drawing","key":"D"},{"display":"Other","key":"O"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.format={}
+search_params.format.code=add_param}else{delete search_params.format}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('format')){this.value=search_params.format.code}},}).$mount('#format_app')
+var value_range_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"<$10K","key":"<10K"},{"display":"$10K-250K","key":"10K-250K"},{"display":"$250K-1M","key":"250K-1M"},{"display":"$1M-10M","key":"1M-10M"},{"display":">$10M","key":">10M"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.value_range={}
+search_params.value_range.code=add_param}else{delete search_params.value_range}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('value_range')){this.value=search_params.value_range.code}},}).$mount('#value_range_app')
+var source_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Contract Opportunity","key":1},{"display":"Grant Opportunity","key":2},{"display":"DIBBS Opportunity","key":5},{"display":"Federal Schedule","key":3},{"display":"Protest","key":4},{"display":"GAO Report","key":7},{"display":"CBO Report","key":8},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.source={}
+search_params.source.code=add_param}else{delete search_params.source}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('source')){this.value=search_params.source.code}},}).$mount('#source_app')
+var legislative_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Clinger Cohen Act","key":'c'},{"display":"Construction Wage Requirements (Davis Beacon Act)","key":'w'},{"display":"Labor Standards Code (Service Contract Act)","key":'l'},{"display":"Materials Supplies Articles","key":'m'},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.legislative={}
+search_params.legislative.code=add_param}else{delete search_params.legislative}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('legislative')){this.value=search_params.legislative.code}},}).$mount('#legislative_app')
+var set_aside_sam_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Full & Open',group_values:[{"display":"None","key":null},]},{group:'Small Business',group_values:[{"display":"Small Business (SBA)","key":"SBA"},{"display":"Partial Small Business (SBP)","key":"SBP"},{"display":"Emerging Small Business (ESB)","key":"ESB"},{"display":"VSB (VSB)","key":"VSB"},]},{group:'Veteran',group_values:[{"display":"Service Disabled Veteran Owned Small Business (SDVOSBC)","key":"SDVOSBC"},{"display":"Service Disabled Veteran Owned Small Business Sole Source (SDVOSBS)","key":"SDVOSBS"},{"display":"Veteran-Owned Small Business Sole Source (VA-only) (VSS)","key":"VSS"},]},{group:'HUBZone',group_values:[{"display":"HUBZone (HZC)","key":"HZC"},{"display":"Local Area Set-Aside (LAS)","key":"LAS"},{"display":"Historically Underutilized Business (HZS)","key":"HZS"},]},{group:'8A',group_values:[{"display":"8(a) (8A)","key":"8A"},{"display":"8(a) Sole Source (8AN)","key":"8AN"},{"display":"Small Disadvantaged Business (SDB)","key":"SDB"},]},{group:'Indian',group_values:[{"display":"Indian Small Business Economic Enterprise (DOI-only) (ISBEE)","key":"ISBEE"},{"display":"Indian Economic Enterprise (DOI-only) (IEE)","key":"IEE"},{"display":"Buy Indian Set-Aside (HHS-only) (BICiv)","key":"BICiv"},]},{group:'Women-Owned',group_values:[{"display":"Women-Owned Small Business (WOSB)","key":"WOSB"},{"display":"Economically Disadvantaged WOSB (EDWOSB)","key":"EDWOSB"},{"display":"Women-Owned Small Business Sole Source (WOSBSS)","key":"WOSBSS"},{"display":"Economically Disadvantaged WOSB Sole Source (EDWOSBSS)","key":"EDWOSBSS"},]},{group:'Other',group_values:[{"display":"Historically Black College/University (HMT)","key":"HMT"},]},],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.set_aside_sam={}
+search_params.set_aside_sam.code=add_param}else{delete search_params.set_aside_sam}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('set_aside_sam')){this.value=search_params.set_aside_sam.code}},}).$mount('#set_aside_sam_app')
+var sam_opp_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Opportunity',group_values:[{"display":"Synopsis Solicitation","key":"k"},{"display":"Solicitation","key":"o"},{"display":"Presolicitation","key":"p"},{"display":"Sources Sought","key":"r"},{"display":"SBIR / STTR Topic","key":"sbir"},]},{group:'Forecast',group_values:[{"display":"New","key":"New"},{"display":"Recompete","key":"Recompete"},{"display":"Exercise of Option / Follow-on","key":"Exercise of Option / Follow-on"},{"display":"TBD","key":"TBD"},]},{group:'Notice / Justification',group_values:[{"display":"Special Notice","key":"s"},{"display":"Award Notice","key":"a"},{"display":"Justification","key":"u"},{"display":"Justification and Approval","key":"j"},{"display":"Fair Opportunity Limited Sources Justification","key":"l"},]},{group:'Other',group_values:[{"display":"Modification Amendment or Cancel","key":"m"},{"display":"Sale of Surplus Property","key":"g"},{"display":"Foreign Government Standard","key":"f"},{"display":"Intent to Bundle Requirements","key":"i"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.sam_opp_type={}
+search_params.sam_opp_type.code=add_param}else{delete search_params.sam_opp_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('sam_opp_type')){this.value=search_params.sam_opp_type.code}},}).$mount('#sam_opp_type_app')
+var pipeline_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.pipeline={}
+search_params.pipeline.code=add_param}else{delete search_params.pipeline}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchpipeline/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('pipeline')){this.options=search_params.pipeline.code
+this.value=search_params.pipeline.code}},}).$mount('#pipeline_app')
+var owner_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.owner={}
+search_params.owner.code=add_param}else{delete search_params.owner}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchowner/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('owner')){this.options=search_params.owner.code
+this.value=search_params.owner.code}},}).$mount('#owner_app')
+var pursuit_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.pursuit={}
+search_params.pursuit.code=add_param}else{delete search_params.pursuit}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchpursuit/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('pursuit')){this.options=search_params.pursuit.code
+this.value=search_params.pursuit.code}},}).$mount('#pursuit_app')
+var pipeline_stage_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.pipeline_stage={}
+search_params.pipeline_stage.code=add_param}else{delete search_params.pipeline_stage}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchpipelinestage/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('pipeline_stage')){this.options=search_params.pipeline_stage.code
+this.value=search_params.pipeline_stage.code}},}).$mount('#pipeline_stage_app')
+var tag_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.tag={}
+search_params.tag.code=add_param}else{delete search_params.tag}
+refresh_search()},asyncFind(query){this.isLoading=true
+axios.get('/api/searchtag/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('tag')){this.options=search_params.tag.code
+this.value=search_params.tag.code}},}).$mount('#tag_app')
+var forecast_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"New","key":"New"},{"display":"Recompete","key":"Recompete"},{"display":"Exercise of Option / Follow-on","key":"Exercise of Option / Follow-on"},{"display":"TBD","key":"TBD"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.forecast_type={}
+search_params.forecast_type.code=add_param}else{delete search_params.forecast_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('forecast_type')){this.value=search_params.forecast_type.code}},}).$mount('#forecast_type_app')
+var prime_sub_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Prime","key":"Prime"},{"display":"Sub","key":"Sub"},{"display":"JV","key":"JV"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.prime_sub={}
+search_params.prime_sub.code=add_param}else{delete search_params.prime_sub}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('prime_sub')){this.value=search_params.prime_sub.code}},}).$mount('#prime_sub_app')
+var pursuit_source_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"SAM.GOV","key":"SAM.GOV"},{"display":"GRANTS.GOV","key":"GRANTS.GOV"},{"display":"SBIR.GOV","key":"SBIR.GOV"},{"display":"DIBBS","key":"DIBBS"},{"display":"Forecast","key":"Forecast"},{"display":"SLED","key":"SLED"},{"display":"Proprietary","key":"Proprietary"},{"display":"Other","key":"Other"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.pursuit_source={}
+search_params.pursuit_source.code=add_param}else{delete search_params.pursuit_source}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('pursuit_source')){this.value=search_params.pursuit_source.code}},}).$mount('#pursuit_source_app')
+var pursuit_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"New Business","key":"New Business"},{"display":"Follow-on","key":"Follow-on"},{"display":"Recompete","key":"Recompete"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.pursuit_type={}
+search_params.pursuit_type.code=add_param}else{delete search_params.pursuit_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('pursuit_type')){this.value=search_params.pursuit_type.code}},}).$mount('#pursuit_type_app')
+var nsg_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.nsg={}
+search_params.nsg.code=add_param}else{delete search_params.nsg}
+refresh_search()},customLabel({key,display}){return`${key} — ${display}`},asyncFind(query){this.isLoading=true
+axios.get('/api/searchnsg/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('nsg')){this.options=search_params.nsg.code
+this.value=search_params.nsg.code}},}).$mount('#nsg_app')
+var psc_code_parent_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.psc_code_parent={}
+search_params.psc_code_parent.code=add_param}else{delete search_params.psc_code_parent}
+refresh_search()},customLabel({key,display}){return`${key} — ${display}`},asyncFind(query){this.isLoading=true
+axios.get('/api/searchpscparent/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('psc_code_parent')){this.options=search_params.psc_code_parent.code
+this.value=search_params.psc_code_parent.code}},}).$mount('#psc_code_parent')
+var naics_code_parent_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.naics_code_parent={}
+search_params.naics_code_parent.code=add_param}else{delete search_params.naics_code_parent}
+refresh_search()},customLabel({key,display}){return`${key} — ${display}`},asyncFind(query){this.isLoading=true
+axios.get('/api/searchnaicsparent/?format=json&search='+query).then(response=>{this.options=response.data
+this.isLoading=false})},},mounted(){if(search_params.hasOwnProperty('naics_code_parent')){this.options=search_params.naics_code_parent.code
+this.value=search_params.naics_code_parent.code}},}).$mount('#naics_code_parent')
+function debounce(func,wait){let timeout;return function(...args){clearTimeout(timeout);timeout=setTimeout(()=>{func.apply(this,args);},wait);};}
+var bus_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Minority Owned',group_values:[{"display":"Minority Owned Business","key":"23"},{"display":"American Indian Owned","key":"OW"},{"display":"Asian-Pacific American Owned","key":"FR"},{"display":"Black American Owned","key":"OY"},{"display":"Hispanic American Owned","key":"PI"},{"display":"Native American Owned","key":"NB"},{"display":"Subcontinent Asian (Asian-Indian) American Owned","key":"QZ"},{"display":"Small Disadvantaged Business (Self-Certified)","key":"27"},]},{group:'Women Owned',group_values:[{"display":"Woman Owned Business","key":"A2"},{"display":"Woman Owned Small Business","key":"8W"},{"display":"Joint Venture Women Owned Small Business","key":"8C"},{"display":"Joint Venture Economically Disadvantaged Women Small Owned Business","key":"8D"},{"display":"Economically Disadvantaged Women Small Owned Business","key":"8E"},]},{group:'Veteran Owned',group_values:[{"display":"Service Disabled Veteran Owned Business","key":"QF"},{"display":"Veteran Owned Business","key":"A5"},]},{group:'Native American Entity',group_values:[{"display":"Tribal Government","key":"3I"},{"display":"Indian Tribe (Federally Recognized)","key":"XY"},{"display":"Tribally Owned Firm","key":"1B"},{"display":"Native Hawaiian Organization Owned Firm","key":"8U"},{"display":"Alaskan Native Corporation Owned Firm","key":"05"},{"display":"Indian Economic Enterprise","key":"1E"},{"display":"Indian Small Business Economic Enterprise","key":"1S"},]},{group:'For-Profit Ownership',group_values:[{"display":"For Profit Organization","key":"2X"},{"display":"Subchapter S Corporation","key":"XS"},{"display":"Limited Liability Company","key":"LJ"},{"display":"Publicly Traded","key":"Pub"},{"display":"Employee Owned","key":"ESOP"},{"display":"Joint Venture","key":"JV"},{"display":"Private Equity Owned","key":"PE"},]},{group:'Non-Profit Ownership',group_values:[{"display":"Non-Profit Organization","key":"A8"},{"display":"Other Not For Profit Organization","key":"2U"},{"display":"Foundation","key":"BZ"},{"display":"Community Development Corporation ","key":"H2"},{"display":"Community Development Corporation Owned Firm","key":"HK"},{"display":"AbilityOne Non Profit Agency","key":"A7"},]},{group:'Federal Government',group_values:[{"display":"U.S. Federal Government","key":"2R"},{"display":"Federal Agency","key":"NG"},{"display":"Federally Funded Research and Development Center","key":"QW"},]},{group:'Local Government',group_values:[{"display":"U.S. State Government","key":"2F"},{"display":"City","key":"C8"},{"display":"Inter-municipal","key":"ZR"},{"display":"County","key":"C7"},{"display":"U.S. Local Government","key":"12"},{"display":"Local Government Owned","key":"MG"},]},{group:'Other Government',group_values:[{"display":"Transit Authority","key":"TW"},{"display":"Port Authority","key":"T4"},{"display":"Municipality","key":"C6"},{"display":"School District","key":"H6"},{"display":"Township","key":"FO"},{"display":"Interstate Entity","key":"86"},{"display":"Airport Authority","key":"TR"},{"display":"Council of Governments","key":"UD"},{"display":"Housing Authorities Public/Tribal","key":"8B"},{"display":"Planning Commission","key":"KM"},]},{group:'Higher Learning',group_values:[{"display":"Educational Institution","key":"M8"},{"display":"Private University or College","key":"1R"},{"display":"1994 Land Grant College","key":"G8"},{"display":"1890 Land Grant College","key":"G7"},{"display":"1862 Land Grant College","key":"G6"},{"display":"Historically Black College or University","key":"HB"},{"display":"Native Hawaiian Servicing Institution","key":"G5"},{"display":"Hispanic Servicing Institution","key":"GW"},{"display":"Alaskan Native Servicing Institution","key":"G3"},{"display":"Minority Institution","key":"1A"},{"display":"Tribal College","key":"HS"},{"display":"Veterinary College","key":"QU"},{"display":"State Controlled Institution of Higher Learning","key":"OH"},{"display":"School of Forestry","key":"ZW"},]},{group:'Other',group_values:[{"display":"Foreign Owned","key":"20"},{"display":"Veterinary Hospital","key":"FY"},{"display":"Hospital","key":"80"},{"display":"Manufacturer of Goods","key":"MF"},{"display":"Domestic Shelter","key":"6D"},{"display":"Small Agricultural Cooperative","key":"1D"},],}],isLoading:false,},methods:{toggleSelected:debounce(function(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`));if(add_param.length>0){search_params.bus_type={}
+search_params.bus_type.code=add_param}else{delete search_params.bus_type}
+refresh_search();},1100),},mounted(){if(search_params.hasOwnProperty('bus_type')){this.value=search_params.bus_type.code}},}).$mount('#bus_type_app')
+var certs_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'SBA Certifications',group_values:[{"display":"8(a) (SBA Certified)","key":"8(a)"},{"display":"8(a) JV (SBA Certified)","key":"8a_jv"},{"display":"Economically Disadvantaged Women-Owned Small Business (EDWOSB) (SBA Certified)","key":"edwosb"},{"display":"HUBZone (HZC) (SBA Certified)","key":"hubzone"},{"display":"Service Disabled Veteran Owned Business (SDVOSB) (SBA Certified)","key":"sdvosb"},{"display":"Women-Owned Small Business (WOSB) (SBA Certified)","key":"wosb"},{"display":"Veteran Owned Business (VOB) (SBA Certified)","key":"vosb"},{"display":"Veteran Owned JV (SBA Certified)","key":"sdvosb_jv"},]},{group:'Other Certifications',group_values:[{"display":"Small Disadvantaged Business (Self-Certified)","key":"27"},{"display":"HUBZone Joint Venture (Self-Certified)","key":"JX"},{"display":"DOT Certified Disadvantaged Business Enterprise (DBE)","key":"HQ"},]},],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.certs={}
+search_params.certs.code=add_param}else{delete search_params.certs}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('certs')){this.value=search_params.certs.code}},}).$mount('#certs_app')
+var transaction_flag_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"IT Services","key":"it_serv_flag"},{"display":"Other Civil Services","key":"other_civ_serv_flag"},{"display":"Other Defense Services","key":"other_def_serv_flag"},{"display":"Defense Products","key":"def_prod_flag"},{"display":"Aero Services","key":"aero_serv_flag"},{"display":"Aero Products","key":"aero_prod_flag"},{"display":"Health","key":"health_flag"},{"display":"Intel","key":"intel_flag"},{"display":"Cybersecurity","key":"cyber_flag"},{"display":"Space","key":"space_flag"},{"display":"Federal Customers","key":"federal_flag"},{"display":"S&L Customers","key":"sl_flag"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.transaction_flag={}
+search_params.transaction_flag.code=add_param}else{delete search_params.transaction_flag}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('transaction_flag')){this.value=search_params.transaction_flag.code}},}).$mount('#transaction_flag_app')
+var buyer_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Private","key":"Private"},{"display":"Private (PE-Backed)","key":"Private (PE-Backed)"},{"display":"Private (Native)","key":"Private (Native)"},{"display":"Private Equity","key":"Private Equity"},{"display":"Public","key":"Public"},{"display":"Public (SPAC)","key":"Public (SPAC)"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.buyer_type={}
+search_params.buyer_type.code=add_param}else{delete search_params.buyer_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('buyer_type')){this.value=search_params.buyer_type.code}},}).$mount('#buyer_type_app')
+var employee_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"<50","key":"<50"},{"display":"50-99","key":"50-99"},{"display":"100-499","key":"100-499"},{"display":"500-999","key":"500-999"},{"display":"1000-4999","key":"1000-4999"},{"display":">5000","key":">5000"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.employee={}
+search_params.employee.code=add_param}else{delete search_params.employee}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('employee')){this.value=search_params.employee.code}},}).$mount('#employee_app')
+var quality_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"ISO 9001","key":"ISO 9001"},{"display":"AS9003","key":"AS9003"},{"display":"ISO 9001:2015","key":"ISO 9001:2015"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.quality={}
+search_params.quality.code=add_param}else{delete search_params.quality}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('quality')){this.value=search_params.quality.code}},}).$mount('#quality_app')
+var budget_type_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Construction","key":"CONSTRUCT"},{"display":"O&M","key":"OM"},{"display":"Personnel","key":"PERSONNEL"},{"display":"Procurement","key":"PROC"},{"display":"RDT&E","key":"RDTE"},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.budget_type={}
+search_params.budget_type.code=add_param}else{delete search_params.budget_type}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('budget_type')){this.value=search_params.budget_type.code}},}).$mount('#budget_type_app')
+var budget_agency_vue=new Vue({delimiters:['{','}'],components:{Multiselect:VueMultiselect.default},data:{value:[],options:[{group:'Select All',group_values:[{"display":"Defense Acquisition University","key":3159},{"display":"Defense Advanced Research Projects Agency","key":337},{"display":"Defense Contract Audit Agency","key":353},{"display":"Defense Contract Management Agency","key":342},{"display":"Defense Counterintelligence and Security Agency","key":345},{"display":"Defense Finance and Accounting Service","key":356},{"display":"Defense Health Agency","key":336},{"display":"Defense Human Resources Activity","key":347},{"display":"Defense Information Systems Agency","key":341},{"display":"Defense Intelligence Agency","key":335},{"display":"Defense Legal Services Agency","key":3160},{"display":"Defense Logistics Agency","key":334},{"display":"Defense POW/MIA Accounting Agency","key":1059},{"display":"Defense Security Cooperation Agency","key":359},{"display":"Defense Technical Information Center","key":367},{"display":"Defense Threat Reduction Agency","key":344},{"display":"Department of Defense","key":101},{"display":"Department of the Air Force","key":332},{"display":"Department of the Army","key":331},{"display":"Department of the Navy","key":330},{"display":"DOD Education Activity","key":348},{"display":"Missile Defense Agency","key":340},{"display":"National Geospatial-Intelligence Agency","key":339},{"display":"National Security Agency","key":346},{"display":"Office of Local Defense Community Cooperation","key":2049},{"display":"Office of the Secretary of Defense","key":355},{"display":"Space Development Agency","key":349},{"display":"U.S. Special Operations Command","key":333},{"display":"Washington Headquarters Services","key":338},],}],isLoading:false,},methods:{toggleSelected(value){add_param=this.value.map(v=>JSON.parse(`{"key":"${v.key}","display":"${v.display}"}`))
+if(add_param.length>0){search_params.awarding_agency={}
+search_params.awarding_agency.code=add_param}else{delete search_params.awarding_agency}
+refresh_search()},},mounted(){if(search_params.hasOwnProperty('awarding_agency')){this.value=search_params.awarding_agency.code}},}).$mount('#budget_agency_app');

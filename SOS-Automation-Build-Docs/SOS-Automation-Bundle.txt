@@ -1,0 +1,253 @@
+SOS-Automation-Bundle
+
+---
+
+# Add these files verbatim
+
+### 1) `.env.example` (repo inner root: `SchemaStream/SchemaStream/.env.example`)
+
+```dotenv
+# Server
+PORT=5000
+HOST=127.0.0.1
+
+# Python venv path (Windows)
+PYTHON_PATH=../.venv/Scripts/python.exe
+
+# Default input data folder (relative to inner project root)
+INPUT_DATA_DIR=./inputdata
+```
+
+---
+
+### 2) `README.md` (inner root: `SchemaStream/SchemaStream/README.md`)
+
+````markdown
+# Model Output Consensus Tool
+
+End-to-end stack:
+- **Python**: `python/processor_merged.py` reads model outputs and prints JSON.
+- **Node/Express**: API calls Python and validates shape with Zod.
+- **React (Vite)**: UI renders consensus (High / Moderate / Low).
+
+## Quick Start (Windows + VS Code)
+
+1. **Python venv**
+   ```powershell
+   cd <outer-repo-root>
+   python -m venv .venv
+   .\.venv\Scripts\Activate.ps1
+   pip install -r requirements.txt
+````
+
+2. **Node deps**
+
+   ```powershell
+   cd SchemaStream\SchemaStream
+   npm install
+   ```
+
+3. **Environment**
+
+   ```powershell
+   copy .env.example .env
+   # adjust PYTHON_PATH if needed
+   ```
+
+4. **Dev server (API+dev)**
+
+   ```powershell
+   npm run dev
+   # In another terminal:
+   curl.exe --max-time 3 http://127.0.0.1:5000/health
+   ```
+
+5. **Live processor test**
+
+   ```powershell
+   curl.exe --max-time 5 -X POST http://127.0.0.1:5000/api/sessions/test/process ^
+     -H "Content-Type: application/json" ^
+     -d "{\"promptText\":\"Test prompt\"}"
+   ```
+
+6. **UI**
+   Open [http://127.0.0.1:5000/consensus](http://127.0.0.1:5000/consensus)
+
+## Production (single port)
+
+```powershell
+npm run build
+npm run start
+# health
+curl.exe --max-time 3 http://127.0.0.1:5000/health
+```
+
+## VS Code One-Clicks
+
+* **Terminal → Run Task**:
+
+  * Start Dev Server (persistent)
+  * Smoke Test (health + process)
+  * Kill Port 5000
+  * Python: CLI sanity
+
+## Battle Rhythm
+
+* One paste block at a time.
+* Keep server in **Terminal 1** (persistent).
+* Run checks from **Terminal 2**.
+* If dev flakes, switch to **Production** (build + start).
+* If port busy: run **Kill Port 5000** task, then restart.
+
+## Troubleshooting
+
+* **No /health**:
+
+  * Verify server logs show “serving on …”
+  * `netstat -ano | findstr :5000` → kill PID(s), restart.
+* **/process 502**:
+
+  * Check Python stderr (visible in server logs).
+  * Validate JSON shape (Zod 502 issues tell you the field).
+* **Windows paths**:
+
+  * Confirm `.env` `PYTHON_PATH` and `INPUT_DATA_DIR` exist.
+
+## Project Structure
+
+```
+SchemaStream/SchemaStream/
+  client/                 # Vite/React
+  server/
+    index.ts              # Express entry (has /health)
+    routes.ts             # /api/sessions/:id/process (calls Python)
+    src/schema/processor.ts # Zod schema for ProcessorOutput
+    python-processor.ts   # Bridge to Python (timeout/stderr/JSON parse)
+  python/
+    processor_merged.py   # Consensus engine
+  inputdata/              # Sample model outputs
+  .env.example
+  README.md
+```
+
+````
+
+---
+
+### 3) VS Code tasks — `/.vscode/tasks.json` (inner root: `SchemaStream/SchemaStream/.vscode/tasks.json`)
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Dev Server (persistent)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "${workspaceFolder}" },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Smoke Test (health + process)",
+      "type": "shell",
+      "command": "powershell -ExecutionPolicy Bypass -File scripts\\smoke.ps1",
+      "options": { "cwd": "${workspaceFolder}" }
+    },
+    {
+      "label": "Kill Port 5000",
+      "type": "shell",
+      "command": "powershell -Command \"netstat -ano | findstr :5000 | foreach { ($_ -split '\\s+')[4] } | Select-Object -Unique | foreach { if ($_ -match '^[0-9]+$') { taskkill /PID $_ /F } }\"",
+      "options": { "cwd": "${workspaceFolder}" }
+    },
+    {
+      "label": "Python: CLI sanity",
+      "type": "shell",
+      "command": "..\\.venv\\Scripts\\python.exe python\\processor_merged.py inputdata \"Test prompt\" s1 | powershell -Command \"$in = Get-Content -Raw -Encoding UTF8 -; $in.Substring(0, [Math]::Min($in.Length, 400))\"",
+      "options": { "cwd": "${workspaceFolder}" }
+    }
+  ]
+}
+````
+
+---
+
+### 4) Smoke script — `scripts/smoke.ps1` (inner root: `SchemaStream/SchemaStream/scripts/smoke.ps1`)
+
+```powershell
+$ErrorActionPreference = "Stop"
+$ProgressPreference = "SilentlyContinue"
+
+Write-Host "== HEALTH ==" -ForegroundColor Cyan
+try {
+  $h = Invoke-WebRequest http://127.0.0.1:5000/health -UseBasicParsing -TimeoutSec 5
+  $h.Content.Substring(0, [Math]::Min(200, $h.Content.Length)) | Write-Host
+} catch {
+  Write-Host "HEALTH ERROR: $($_.Exception.Message)" -ForegroundColor Red
+}
+
+Write-Host "`n== PROCESS ==" -ForegroundColor Cyan
+try {
+  $body = '{"promptText":"Test prompt"}'
+  $p = Invoke-WebRequest -Method POST http://127.0.0.1:5000/api/sessions/test/process -UseBasicParsing -TimeoutSec 15 -ContentType "application/json" -Body $body
+  $c = $p.Content
+  $c.Substring(0, [Math]::Min(200, $c.Length)) | Write-Host
+} catch {
+  Write-Host "PROCESS ERROR: $($_.Exception.Message)" -ForegroundColor Red
+}
+```
+
+---
+
+### 5) Package.json script additions (inner root: `SchemaStream/SchemaStream/package.json`)
+
+Add these (if not present):
+
+```json
+{
+  "scripts": {
+    "smoke": "powershell -ExecutionPolicy Bypass -File scripts/smoke.ps1"
+  }
+}
+```
+
+---
+
+# Optional (nice-to-have)
+
+### 6) `OPERATIONS.md` (inner root)
+
+````markdown
+# Operations Playbook
+
+## Battle Rhythm
+1. Terminal 1: `npm run dev` (keep open)
+2. Terminal 2: health → process → UI
+3. If stuck: Kill Port 5000 task → restart Terminal 1
+4. If dev flaky: `npm run build && npm run start`
+
+## Health / Process (manual)
+```powershell
+curl.exe --max-time 3 http://127.0.0.1:5000/health
+curl.exe --max-time 5 -X POST http://127.0.0.1:5000/api/sessions/test/process -H "Content-Type: application/json" -d "{\"promptText\":\"Test prompt\"}"
+````
+
+## Reset Rules
+
+* If a prompt stalls >60s, stop and re-run the task (don’t “continue” blindly).
+* If VS Code prompts to “Keep or Undo” index.ts edits during troubleshooting, **Keep**.
+* Always confirm `/health` before `/process`. If `/health` fails, fix server first.
+
+```
+
+---
+
+# How to use this right now
+
+1) Create the files above (paths matter).  
+2) In VS Code → **Terminal → Run Task → Start Dev Server (persistent)**.  
+3) Run **Terminal → Run Task → Smoke Test (health + process)**.  
+4) If it fails, run **Kill Port 5000**, then re-run the dev server and smoke test.  
+5) When green, open http://127.0.0.1:5000/consensus.
+
+If you want, I can prep a **commit message** and a short **PR description** so you can drop this as a single change and move on.
+```

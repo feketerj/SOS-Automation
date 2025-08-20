@@ -1,0 +1,19 @@
+Objective: Export the official government documentation for each saved search.
+
+1) Start here click on this saved search opportunities page. 
+2) Click into in to the first one.  
+3) Find the docs tab at the top of the screen, click it. 
+4) This will jump the page down to the Documents section, e.g. Posted documents for Presolicitation [solicitation numer]  
+5) Click "Download All" located to the left (as viewed by the user) of the "Explore" button.
+
+**Note:** If there is no Docs tab at the top, exit back to the main saved search page and repeat. Do not export anything else other than the docs.
+**Do not** download anything other than documents 
+
+6) Repeat sequentially, from top to bottom until completed.
+
+7) Output the following for each opportunity accessed: 
+Announcement: [official solicitation number]
+Type: [RFQ, RFP, SSN, etc.]
+Aircraft: [aircraft type, MDS, or N/A]
+Doc Export: [Yes or No]
+URL: [HigherGov URL for each announcement]

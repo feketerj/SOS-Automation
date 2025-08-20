@@ -1,0 +1,28 @@
+### SAR Language
+- Patterns: "source approval required", "engineering source approval", "SAR package", "approved source only"
+- Source Snippets: "source approval required", "engineering source approval", "SAR package", "approved source only"
+
+### Sole Source Language
+- Patterns: "sole source", "only known source", "proprietary to", "soliciting only from", "determined to be available from one source"
+- Source Snippets: "sole source", "only known source", "proprietary to", "soliciting only from", "determined to be available from one source"
+
+### Intent to Award Language
+- Patterns: "intent to award", "notice of intent"
+- Source Snippets: "intent to award", "notice of intent"
+
+### OEM Language
+- Patterns: "Boeing", "Raytheon", "Lockheed Martin"
+- Source Snippets: "Boeing", "Raytheon", "Lockheed Martin"
+
+### OEM Approved Distributor Language
+- Patterns: "OEM-approved distributor", "authorized distributor"
+- Source Snippets: "OEM-approved distributor", "authorized distributor"
+
+### Traceability Statement Language
+- Patterns: "traceable to OEM", "chain of custody", "traceability"
+- Source Snippets: "traceable to OEM", "chain of custody", "traceability"
+
+### Risk Clauses Language
+- Patterns: "Critical Safety Item", "CSI", "DFARS", "FAR", "ITAR", "Export controlled"
+- Source Snippets: "Critical Safety Item", "CSI", "DFARS", "FAR", "ITAR", "Export controlled"
+

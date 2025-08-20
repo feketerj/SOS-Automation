@@ -1,0 +1,332 @@
+---
+
+### **Source One Spares – Comprehensive Opportunity Assessment Checklist**
+
+**Instructions for AI:** For each criterion, you **MUST** include exact text excerpts from the announcement (with page numbers/identifiers) and your assessment based on SOS's capabilities and defined rules. Each criterion is scored from 1 to 3.
+
+**Scoring System:**
+* **1 (No-Go):** Does not meet requirements or conflicts significantly with SOS capabilities.
+* **2 (Unknown):** Insufficient clarity, ambiguous information, or requires further review by a human.
+* **3 (Go):** Fully aligns with requirements and SOS capabilities.
+
+---
+
+**1. Primary Review Summary:**
+* **Announcement Number:** [Extract text, cite]
+* **Issuing Agency:** [Extract text, cite]
+* **Contract Type:** [Extract text, cite]
+* **Estimated Budget/Value:** [Extract text, cite]
+* **Key Dates:** [Extract text, cite]
+* **Response Time:** [Extract text, cite]
+* **Small Business Set-Aside Designation:** [Extract text, cite]
+* **Small Business Definition (if provided):** [Extract text, cite]
+
+**2. Lead Time to Respond:**
+* **Today's Date:** [Current Date: July 16, 2025]
+* **Due Date:** [Exact due date from document, cite]
+* **Days Remaining:** [Calculated number of days]
+
+**3. Government Program Line of Effort Category:**
+* **Government Quote:** [Exact text from announcement justifying classification, cite]
+* **Assessment:** [Identify applicable category: Prime Contractor Opportunity, Subcontractor Opportunity, Manufacturing Opportunity, Managed Repairs Opportunity, Partnership or Sub-supplier Opportunity. [cite_start]SOS's lines of effort include bidding directly, acting as a subcontractor, manufacturing where government owns technical data, and managing repairs/supplying spares or partnership opportunities as a sub-supplier for MRO. [cite: 105, 106, 107, 108, 109, 110]]
+
+---
+
+### **Comprehensive 51-Point Checklist Assessment**
+
+**Solicitation Basics**
+
+1.  **Announcement Type:**
+    * **Government Quote:** [Exact text regarding type, cite: 669]
+    * **Assessment:** [Type: Sources Sought, Pre-Solicitation, RFI, RFQ, or RFP. [cite_start]Briefly explain. [cite: 669]]
+    * **Score:** [1/2/3]
+
+2.  **Work Summary:**
+    * **Government Quote:** [Specific sections describing required work, including aircraft type, components, and commercial equivalent if applicable, cite: 670]
+    * **Assessment:** [1-3 sentence summary. [cite_start]SOS maintains a vast stock of both new and refurbished parts for nearly every aircraft type in operation today. [cite: 78, 998]]
+    * **Score:** [1/2/3]
+
+3.  **Source Approval Requirements:**
+    * **Government Quote:** [Exact language about source approval, cite: 671]
+    * **Assessment:** ["Yes – FAA," "Yes – Military," or "No." [cite_start]If Military SAR is required, SOS cannot meet military-specific SARs. [cite: 671]]
+    * **Score:** [1/2/3]
+
+4.  **Small Business Set-Aside Status:**
+    * **Government Quote:** [Language indicating small business set-aside status, cite: 672]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+5.  **Sole Source Status:**
+    * **Government Quote:** [Specific sole source/intent language, cite: 673]
+    * **Assessment:** ["Yes," "No," or "Intent."]
+    * **Score:** [1/2/3]
+
+**Technical Requirements**
+
+6.  **Technical Data Package (TDP) Availability:**
+    * **Government Quote:** [Language regarding TDP availability, cite: 674]
+    * **Assessment:** ["Yes," "No," or "Not Applicable – FAA Standards Apply" (if commercial). [cite_start]If military/mixed-use and "No," this is a barrier for SOS as access to restricted technical data or drawings is required and SOS may lack necessary certification (e.g., DD2345). [cite: 674, 809, 1062]]
+    * **Score:** [1/2/3]
+
+7.  **TDP Retrieval Timeline:**
+    * **Government Quote:** [Language about TDP retrieval timeline, cite: 675]
+    * **Assessment:** ["Not Applicable" if commercial. Otherwise, assess feasibility of timeline.]
+    * **Score:** [1/2/3]
+
+8.  **OEM/Factory Traceability Requirements:**
+    * **Government Quote:** [Traceability requirements, cite: 676]
+    * **Assessment:** ["Yes" or "No." FAA commercial parts may require OEM traceability in some cases. [cite_start]All SOS components are fully traceable and tagged by leading FAA-certified repair facilities. [cite: 677, 757, 1010]]
+    * **Score:** [1/2/3]
+
+9.  **Surplus Parts Allowance:**
+    * **Government Quote:** [Language about surplus part acceptability, cite: 678]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+10. **Refurbished Parts Allowance:**
+    * **Government Quote:** [Language about refurbished part acceptability, cite: 679]
+    * **Assessment:** ["Yes" or "No." [cite_start]SOS specializes in "just-in-time" delivery of refurbished components. [cite: 71, 741]]
+    * **Score:** [1/2/3]
+
+11. **Certification Requirements:**
+    * **Government Quote:** [Certification requirements (ISO 9001, AS9100, etc.), cite: 680]
+    * **Assessment:** ["Yes" or "No." [cite_start]SOS holds ASA Accreditation under FAA advisory circular 00-56, ISO 9001:2015, and AS9120B Certification. [cite: 99, 100, 101, 759, 1011, 1012]]
+    * **Score:** [1/2/3]
+
+**Opportunity Type & Scope**
+
+12. **Opportunity Category:**
+    * **Government Quote:** [Language defining opportunity type, cite: 681]
+    * **Assessment:** [Manufacturing, Managed Repair, MRO, or Contracted Logistics Support.]
+    * **Score:** [1/2/3]
+
+13. **Support Scope:**
+    * **Government Quote:** [Language describing support scope, cite: 682]
+    * **Assessment:** [Spares, Repairs, Lifecycle Support, or Combination.]
+    * **Score:** [1/2/3]
+
+14. **Support Location Requirements:**
+    * **Government Quote:** [Language about support location requirements, cite: 683]
+    * **Assessment:** [In-field or Facility-based.]
+    * **Score:** [1/2/3]
+
+15. **Contract Duration:**
+    * **Government Quote:** [Language about contract duration/sustainment, cite: 684]
+    * **Assessment:** [Short-term, Long-term, or Sustainment-focused.]
+    * **Score:** [1/2/3]
+
+**Partnership & Subcontracting**
+
+16. **Partnership Opportunities:**
+    * **Government Quote:** [Language about partnership/sub-supplier opportunities, cite: 685]
+    * **Assessment:** ["Yes" or "No." If yes, identify potential primes based on quoted past awards.]
+    * **Score:** [1/2/3]
+
+17. **Subcontractor Role Requirements:**
+    * **Government Quote:** [Subcontractor role requirements, cite: 686]
+    * **Assessment:** [Required, Optional, or Restricted.]
+    * **Score:** [1/2/3]
+
+18. **Subcontracting Plan:**
+    * **Government Quote:** [Language regarding subcontracting plan requirements, cite: 687]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+19. **Previous Incumbents/Competitors:**
+    * **Government Quote:** [Information about listed awardees or historical contracts, cite: 688]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+20. **Supplier Registration Requirements:**
+    * **Government Quote:** [Language about sub-supplier registration/partnering, cite: 689]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+**Geographic & Timeline Considerations**
+
+21. **Geographic Scope:**
+    * **Government Quote:** [Geographic scope requirements, cite: 690]
+    * **Assessment:** [Domestic, Overseas, or Both.]
+    * **Score:** [1/2/3]
+
+22. **Delivery Timeline:**
+    * **Government Quote:** [Delivery timeline requirements, cite: 691]
+    * **Assessment:** ["Yes" or "No" if timeline aligns with SOS capabilities.]
+    * **Score:** [1/2/3]
+
+23. **Data Management Requirements:**
+    * **Government Quote:** [Language about data management/configuration control, cite: 692]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+24. **Performance Metrics:**
+    * **Government Quote:** [Language about KPIs or performance metrics, cite: 693]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+**Strategic Alignment**
+
+25. **SOS Strategic Alignment:**
+    * **Government Quote:** [Language about scope/requirements relevant to SOS strategic goals, cite: 694]
+    * **Assessment:** ["Yes" or "No" based on deal size, scope, or other factors.]
+    * **Score:** [1/2/3]
+
+26. **Funding Alignment:**
+    * **Government Quote:** [Funding levels/contract values, cite: 695]
+    * **Assessment:** ["Yes" or "No" if aligns with SOS's targets.]
+    * **Score:** [1/2/3]
+
+**Evaluation & Submission Requirements**
+
+27. **Evaluation Criteria:**
+    * **Government Quote:** [All evaluation criteria and weighting information, cite: 696]
+    * **Assessment:** [Summarize key factors (e.g., technical, cost, past performance) and weighting if provided.]
+    * **Score:** [1/2/3]
+
+28. **Scoring Criteria:**
+    * **Government Quote:** [Scoring criteria/thresholds, cite: 697]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+29. **Mandatory Clauses:**
+    * **Government Quote:** [Specific FAR/DFAR clauses or similar requirements, cite: 698]
+    * **Assessment:** ["Yes" or "No" if any specific FAR/DFAR clauses are listed.]
+    * **Score:** [1/2/3]
+
+30. **Unique Terms/Conditions:**
+    * **Government Quote:** [Any unique or unusual terms/conditions, cite: 699]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+31. **Past Performance Requirements:**
+    * **Government Quote:** [Past performance submission requirements, cite: 700]
+    * **Assessment:** ["Yes" or "No" if submission of references or CPARs is needed.]
+    * **Score:** [1/2/3]
+
+32. **Cost/Price Breakdown Requirements:**
+    * **Government Quote:** [Cost/price submission requirements, cite: 701]
+    * **Assessment:** ["Yes" or "No" if detailed cost elements or pricing are requested.]
+    * **Score:** [1/2/3]
+
+**Compliance Requirements**
+
+33. **Compliance Certifications:**
+    * **Government Quote:** [Compliance requirements (ITAR, ISO, cybersecurity, etc.), cite: 702]
+    * **Assessment:** ["Yes" or "No." [cite_start]SOS holds ISO 9001:2015 and AS9120B Certification. [cite: 101, 759, 1012]]
+    * **Score:** [1/2/3]
+
+34. **Question Deadline:**
+    * **Government Quote:** [Deadline for submitting questions/clarifications, cite: 703]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+35. **Performance Metrics/Penalties:**
+    * **Government Quote:** [Performance metrics and associated penalties, cite: 704]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+36. **Bonding/Financial Requirements:**
+    * **Government Quote:** [Bonding or financial guarantee requirements, cite: 705]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+37. **Submission Format:**
+    * **Government Quote:** [Formatting/document structure guidelines, cite: 706]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+**Period of Performance & Personnel**
+
+38. **Period of Performance:**
+    * **Government Quote:** [Language specifying performance period and start date, cite: 707]
+    * **Assessment:** ["Yes" or "No" if specified, and briefly explain duration/start date.]
+    * **Score:** [1/2/3]
+
+39. **Key Personnel Requirements:**
+    * **Government Quote:** [Key personnel qualifications or certification requirements, cite: 708]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+**Small Business & Security Considerations**
+
+40. **Small Business Subcontracting:**
+    * **Government Quote:** [Language about small business subcontracting preferences, cite: 709]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+41. **Security Clearance Requirements:**
+    * **Government Quote:** [Security clearance requirements, cite: 710]
+    * **Assessment:** ["Yes" or "No."]
+    * **Score:** [1/2/3]
+
+42. **Export License Requirements:**
+    * **Government Quote:** [Export license requirements, cite: 711]
+    * **Assessment:** ["Yes" or "No." Briefly explain if shipment requires ITAR compliance or other export licenses.]
+    * **Score:** [1/2/3]
+
+43. **Third-Party Shipping:**
+    * **Government Quote:** [Language about government-provided shipping, cite: 712]
+    * **Assessment:** ["Yes" or "No." Briefly explain if third-party meets ITAR and export requirements.]
+    * **Score:** [1/2/3]
+
+44. **Export/Import Compliance:**
+    * **Government Quote:** [Export/import compliance requirements, cite: 713]
+    * **Assessment:** ["Yes" or "No." Briefly explain if SOS must manage these requirements.]
+    * **Score:** [1/2/3]
+
+**Facility & Security Access**
+
+45. **Restricted Area Performance:**
+    * **Government Quote:** [Requirements for performance in restricted areas/military bases, cite: 714]
+    * **Assessment:** ["Yes" or "No." Briefly explain.]
+    * **Score:** [1/2/3]
+
+46. **Government Escorts:**
+    * **Government Quote:** [Language about escort provisions, cite: 715]
+    * **Assessment:** ["Yes" or "No." Briefly explain if SOS must arrange escorts.]
+    * **Score:** [1/2/3]
+
+47. **Security/Access Requirements:**
+    * **Government Quote:** [Special credentials/permission requirements, cite: 716]
+    * **Assessment:** ["Yes" or "No." Briefly explain.]
+    * **Score:** [1/2/3]
+
+**Additional Requirements**
+
+48. **Environmental/Sustainability Requirements:**
+    * **Government Quote:** [Environmental/sustainability requirements, cite: 717]
+    * **Assessment:** ["Yes" or "No." Briefly explain if green practices or standards are required.]
+    * **Score:** [1/2/3]
+
+49. **Reporting Requirements:**
+    * **Government Quote:** [Periodic/final report requirements, cite: 718]
+    * **Assessment:** ["Yes" or "No." Briefly explain.]
+    * **Score:** [1/2/3]
+
+50. **Non-Compliance Penalties:**
+    * **Government Quote:** [Penalties for non-compliance/delays, cite: 719]
+    * **Assessment:** ["Yes" or "No." Briefly explain.]
+    * **Score:** [1/2/3]
+
+51. **Proprietary Data Concerns:**
+    * **Government Quote:** [Language about proprietary data protection, cite: 720]
+    * **Assessment:** ["Yes" or "No." Briefly explain.]
+    * **Score:** [1/2/3]
+
+---
+
+### **Overall Score and Recommendation**
+
+* **Total Go Score:** [Sum of scores where criterion = 3]
+* **Total Unknown Score:** [Sum of scores where criterion = 2]
+* **Total No-Go Score:** [Sum of scores where criterion = 1]
+* **Maximum Possible Score:** 153 (51 criteria x 3 points/criterion)
+* **Overall Percentage Score:** ([Total Go Score] / [Maximum Possible Score]) * 100
+
+* **Final Recommendation:** [Go / No-Go / Needs Further Review]
+* **Justification:** [Provide a concise, clear justification based on the total score and specific high-impact criteria. If "Needs Further Review" or "No-Go," explicitly list key limitations, assumptions, and required follow-ups for "Unknown" criteria.]
+    * **Recommendation Thresholds:**
+        * [cite_start]80% or higher: Go [cite: 65, 740, 790, 881, 993, 1043]
+        * [cite_start]65-79%: Needs Further Review [cite: 64, 740, 790, 881, 993, 1043]
+        * [cite_start]Below 65%: No-Go [cite: 67, 740, 791, 882, 993, 1044]
+        * [cite_start]If any single critical "Show-Stopper" criterion (e.g., Source Approval (Military), restricted Technical Data Ownership, eligibility restrictions, new parts only if SOS cannot provide) is a "No-Go" (score 1), the overall recommendation should be "No-Go" regardless of the total score. [cite: 789, 794, 880, 884, 991, 994, 1042, 1048]

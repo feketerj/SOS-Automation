@@ -1,0 +1,3 @@
+PROMPT-Summary-Comp-Gem-Chrome-v1
+
+Provide a comprehensive bottom line up front (BLUF) and comprehensive details in bullet format from the provided text.

@@ -1,0 +1,15 @@
+﻿# Node / Python / OS common
+node_modules/
+dist/
+build/
+*.log
+.env
+.env.*
+.DS_Store
+Thumbs.db
+
+# v4.2 operational logs (kept, but optional to ignore in VCS)
+ops/trust-tracking/
+ops/manual-paste-log/
+ops/terminal-monitoring/
+qa/session-traces/

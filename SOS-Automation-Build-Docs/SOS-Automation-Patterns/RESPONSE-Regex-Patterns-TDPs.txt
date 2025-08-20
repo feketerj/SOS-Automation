@@ -1,0 +1,535 @@
+{
+  "category": "tdp_patterns",
+  "pattern_groups": [
+    {
+      "group_name": "tdp_not_available",
+      "regex_patterns": [
+        "t[e|a]chnical\\s*data\\s*package[s]?\\s*(?:is\\s*)?not\\s*availabl",
+        "TDP[s]?\\s*(?:is\\s*)?not\\s*availabl",
+        "drawing[s]?\\s*(?:and\\s*)?(?:technical\\s*)?data\\s*(?:are\\s*)?not\\s*availabl",
+        "no\\s*t[e|a]chnical\\s*data\\s*(?:package)?\\s*availabl",
+        "t[e|a]chnical\\s*data\\s*unavailabl",
+        "drawing[s]?\\s*unavailabl",
+        "data\\s*package[s]?\\s*unavailabl",
+        "lack[s]?\\s*(?:of\\s*)?(?:a\\s*)?(?:sufficient\\s*)?TDP",
+        "without\\s*t[e|a]chnical\\s*data",
+        "absent\\s*(?:of\\s*)?t[e|a]chnical\\s*data"
+      ],
+      "exact_phrases": [
+        "technical data package not available",
+        "TDP not available",
+        "drawings and technical data are not available",
+        "technical data not available",
+        "Drawings and technical data are not available",
+        "no technical data package available",
+        "government does not have technical data",
+        "technical data unavailable",
+        "lacks sufficient TDP",
+        "TDP is not available"
+      ],
+      "partial_triggers": [
+        "TDP not avail",
+        "tech data not",
+        "drawings not avail",
+        "no TDP",
+        "no tech data",
+        "data unavail"
+      ],
+      "context_patterns": [
+        {
+          "before": ["government", "agency", "DoD"],
+          "trigger": "does not have",
+          "after": ["technical data", "TDP", "drawings"]
+        },
+        {
+          "before": ["technical data"],
+          "trigger": "not",
+          "after": ["available", "provided", "furnished"]
+        }
+      ],
+      "agency_specific": {
+        "DLA": [
+          "DLA does not have technical data",
+          "DLA lacks TDP"
+        ],
+        "NAVSUP": [
+          "NAVSUP does not possess technical data",
+          "Navy lacks TDP"
+        ]
+      },
+      "negative_patterns": [
+        "TDP available",
+        "technical data available upon award",
+        "government will provide TDP",
+        "TDP furnished after contract"
+      ],
+      "code_triggers": {
+        "AMSC_codes": ["AMSC D", "AMSC K", "AMSC L"]
+      },
+      "compound_patterns": [
+        ["technical", "AND", "data", "AND", "not", "AND", "available"],
+        ["TDP", "AND", "unavailable"],
+        ["no", "AND", "drawings", "AND", "available"]
+      ],
+      "scoring_weights": {
+        "explicit_match": 10,
+        "regex_match": 9,
+        "partial_match": 6,
+        "context_match": 7,
+        "code_match": 9
+      }
+    },
+    {
+      "group_name": "tdp_inadequate",
+      "regex_patterns": [
+        "t[e|a]chnical\\s*data\\s*(?:has\\s*)?not\\s*been\\s*determin[e|ed]\\s*adequat",
+        "inadequat[e]?\\s*t[e|a]chnical\\s*data",
+        "insufficient\\s*t[e|a]chnical\\s*data",
+        "incomplet[e]?\\s*TDP",
+        "partial\\s*t[e|a]chnical\\s*data",
+        "limited\\s*t[e|a]chnical\\s*data",
+        "TDP\\s*(?:is\\s*)?incomplet"
+      ],
+      "exact_phrases": [
+        "technical data available has not been determined adequate",
+        "inadequate technical data",
+        "insufficient technical data package",
+        "incomplete TDP",
+        "partial technical data only",
+        "limited technical data available",
+        "TDP incomplete",
+        "data not adequate to support acquisition via full and open competition"
+      ],
+      "partial_triggers": [
+        "inadequate TDP",
+        "insufficient data",
+        "incomplete tech",
+        "partial TDP"
+      ],
+      "context_patterns": [
+        {
+          "before": ["technical data"],
+          "trigger": "not adequate",
+          "after": ["for competition", "to support", "for manufacturing"]
+        }
+      ],
+      "agency_specific": {},
+      "negative_patterns": [
+        "adequate technical data",
+        "complete TDP",
+        "sufficient technical data"
+      ],
+      "code_triggers": {},
+      "compound_patterns": [
+        ["technical", "AND", "data", "AND", "inadequate"],
+        ["TDP", "AND", "incomplete"]
+      ],
+      "scoring_weights": {
+        "explicit_match": 9,
+        "regex_match": 8,
+        "partial_match": 5,
+        "context_match": 7
+      }
+    },
+    {
+      "group_name": "proprietary_data",
+      "regex_patterns": [
+        "proprietary\\s*t[e|a]chnical\\s*data",
+        "proprietary\\s*(?:and\\s*)?confidential",
+        "OEM\\s*own[s]?\\s*(?:the\\s*)?t[e|a]chnical\\s*data",
+        "OEM\\s*proprietary",
+        "manufactur[e|er]\\s*own[s]?\\s*data",
+        "data\\s*right[s]?\\s*(?:are\\s*)?restrict[e|ed]",
+        "restrict[e|ed]\\s*data\\s*right[s]?",
+        "contractor\\s*proprietary",
+        "vendor\\s*proprietary"
+      ],
+      "exact_phrases": [
+        "proprietary technical data",
+        "proprietary and confidential",
+        "OEM owns technical data",
+        "OEM owns the data",
+        "manufacturer owns data rights",
+        "restricted data rights",
+        "contractor proprietary data",
+        "vendor proprietary information",
+        "data rights are restricted",
+        "limited rights data"
+      ],
+      "partial_triggers": [
+        "proprietary data",
+        "OEM owns",
+        "restricted rights",
+        "vendor propriet"
+      ],
+      "context_patterns": [
+        {
+          "before": ["technical data is"],
+          "trigger": "proprietary",
+          "after": ["to", "and", "information"]
+        },
+        {
+          "before": ["OEM", "manufacturer", "contractor"],
+          "trigger": "owns",
+          "after": ["data", "technical", "rights"]
+        }
+      ],
+      "agency_specific": {},
+      "negative_patterns": [
+        "government owns data",
+        "unlimited rights",
+        "government purpose rights",
+        "non-proprietary"
+      ],
+      "code_triggers": {
+        "AMSC_codes": ["AMSC H", "AMSC P", "AMSC Q"]
+      },
+      "compound_patterns": [
+        ["proprietary", "AND", "technical", "AND", "data"],
+        ["OEM", "AND", "owns", "AND", "data"]
+      ],
+      "scoring_weights": {
+        "explicit_match": 10,
+        "regex_match": 9,
+        "ownership_language": 9,
+        "code_match": 8
+      }
+    },
+    {
+      "group_name": "government_owned_tdp",
+      "regex_patterns": [
+        "government\\s*own[s]?\\s*(?:the\\s*)?t[e|a]chnical\\s*data",
+        "government\\s*(?:has\\s*)?unlimited\\s*right[s]?",
+        "government[\\-\\s]furnish[e|ed]\\s*(?:technical\\s*)?data",
+        "GF[E|I|P]\\s*t[e|a]chnical\\s*data",
+        "complete\\s*(?:and\\s*)?unrestricted\\s*TDP",
+        "t[e|a]chnical\\s*data\\s*(?:will\\s*be\\s*)?(?:is\\s*)?availabl[e]?\\s*(?:upon\\s*)?(?:at\\s*)?award",
+        "full\\s*TDP\\s*availabl"
+      ],
+      "exact_phrases": [
+        "government owns technical data",
+        "government has unlimited rights",
+        "government-furnished technical data",
+        "GFI technical data",
+        "GFE technical data",
+        "complete and unrestricted TDP",
+        "technical data available upon award",
+        "technical data will be provided",
+        "full TDP available",
+        "government purpose rights",
+        "unlimited rights to the complete technical data package"
+      ],
+      "partial_triggers": [
+        "government owns",
+        "unlimited rights",
+        "GFI data",
+        "GFE data",
+        "data upon award"
+      ],
+      "context_patterns": [
+        {
+          "before": ["government"],
+          "trigger": "owns",
+          "after": ["technical", "TDP", "data", "complete"]
+        },
+        {
+          "before": ["technical data"],
+          "trigger": "available",
+          "after": ["upon award", "at contract", "to contractor"]
+        }
+      ],
+      "agency_specific": {},
+      "negative_patterns": [
+        "government does not own",
+        "no government rights",
+        "limited rights",
+        "restricted rights"
+      ],
+      "code_triggers": {
+        "AMC_codes": ["AMC 1", "AMC 2"],
+        "AMSC_codes": ["AMSC G", "AMSC A"]
+      },
+      "compound_patterns": [
+        ["government", "AND", "unlimited", "AND", "rights"],
+        ["technical", "AND", "data", "AND", "available", "AND", "award"]
+      ],
+      "scoring_weights": {
+        "explicit_match": -10,
+        "unlimited_rights": -10,
+        "available_upon_award": -8,
+        "code_match": -9
+      }
+    },
+    {
+      "group_name": "limited_rights",
+      "regex_patterns": [
+        "limit[e|ed]\\s*right[s]?\\s*(?:to\\s*)?(?:technical\\s*)?data",
+        "limit[e|ed]\\s*government\\s*right[s]?",
+        "government\\s*purpose\\s*right[s]?",
+        "restrict[e|ed]\\s*use\\s*(?:of\\s*)?data",
+        "partial\\s*data\\s*right[s]?",
+        "some\\s*drawing[s]?\\s*availabl"
+      ],
+      "exact_phrases": [
+        "limited rights data",
+        "limited government rights",
+        "government purpose rights only",
+        "restricted use of data",
+        "partial data rights",
+        "some drawings available",
+        "limited technical data available"
+      ],
+      "partial_triggers": [
+        "limited rights",
+        "partial rights",
+        "some drawings"
+      ],
+      "context_patterns": [
+        {
+          "before": ["government has"],
+          "trigger": "limited",
+          "after": ["rights", "data rights", "access"]
+        }
+      ],
+      "agency_specific": {},
+      "negative_patterns": [],
+      "code_triggers": {
+        "AMSC_codes": ["AMSC F", "AMSC J"]
+      },
+      "compound_patterns": [
+        ["limited", "AND", "rights", "AND", "data"]
+      ],
+      "scoring_weights": {
+        "explicit_match": 5,
+        "requires_review": true
+      }
+    },
+    {
+      "group_name": "reverse_engineering_opportunity",
+      "regex_patterns": [
+        "sampl[e|es]?\\s*availabl[e]?\\s*for\\s*reverse\\s*engineer",
+        "reverse\\s*engineer[ing]?\\s*(?:is\\s*)?(?:opportunity\\s*)?(?:allowed\\s*)?(?:permitted)?",
+        "RPPOB\\s*program",
+        "Replenishment\\s*Parts\\s*Purchase\\s*or\\s*Borrow",
+        "part[s]?\\s*(?:available\\s*)?for\\s*reverse\\s*engineer",
+        "seeking\\s*(?:new\\s*)?sourc[e|es]?\\s*(?:to\\s*)?(?:for\\s*)?reverse\\s*engineer"
+      ],
+      "exact_phrases": [
+        "samples available for reverse engineering",
+        "reverse engineering opportunity",
+        "RPPOB program",
+        "Replenishment Parts Purchase or Borrow",
+        "parts available for reverse engineering",
+        "government is so interested in finding more suppliers for this item that they are making samples available",
+        "sample available for companies to reverse engineer",
+        "seeking sources to reverse engineer"
+      ],
+      "partial_triggers": [
+        "reverse engineer",
+        "RPPOB",
+        "samples for reverse",
+        "reverse eng"
+      ],
+      "context_patterns": [
+        {
+          "before": ["samples", "parts", "item"],
+          "trigger": "available",
+          "after": ["for reverse", "to reverse", "reverse engineering"]
+        }
+      ],
+      "agency_specific": {
+        "DLA": [
+          "DLA RPPOB program",
+          "DLA reverse engineering initiative"
+        ]
+      },
+      "negative_patterns": [
+        "no reverse engineering",
+        "reverse engineering prohibited",
+        "cannot reverse engineer"
+      ],
+      "code_triggers": {},
+      "compound_patterns": [
+        ["samples", "AND", "available", "AND", "reverse"],
+        ["RPPOB", "OR", "reverse", "AND", "engineering"]
+      ],
+      "scoring_weights": {
+        "explicit_match": -8,
+        "strategic_opportunity": true,
+        "override_no_go": true
+      }
+    },
+    {
+      "group_name": "drawing_availability",
+      "regex_patterns": [
+        "drawing[s]?\\s*(?:are\\s*)?(?:not\\s*)?availabl",
+        "engineering\\s*drawing[s]?\\s*(?:not\\s*)?(?:un)?availabl",
+        "no\\s*drawing[s]?\\s*(?:will\\s*be\\s*)?(?:provided\\s*)?(?:furnished)?",
+        "contractor\\s*will\\s*(?:not\\s*)?receiv[e]?\\s*drawing",
+        "drawing[s]?\\s*(?:will\\s*be\\s*)?(?:are\\s*)?furnish[e|ed]",
+        "spec[s|ification]?\\s*(?:and\\s*)?drawing[s]?"
+      ],
+      "exact_phrases": [
+        "drawings not available",
+        "engineering drawings not available",
+        "no drawings will be provided",
+        "contractor will not receive drawings",
+        "drawings will be furnished",
+        "specs and drawings available",
+        "drawings available upon request",
+        "drawings unavailable"
+      ],
+      "partial_triggers": [
+        "drawings not",
+        "no drawings",
+        "drawings unavail",
+        "drawings furnish"
+      ],
+      "context_patterns": [
+        {
+          "before": ["contractor", "vendor", "supplier"],
+          "trigger": "will not receive",
+          "after": ["drawings", "technical", "data"]
+        }
+      ],
+      "agency_specific": {},
+      "negative_patterns": [
+        "drawings available",
+        "drawings provided",
+        "drawings furnished"
+      ],
+      "code_triggers": {},
+      "compound_patterns": [
+        ["drawings", "AND", "not", "AND", "available"],
+        ["no", "AND", "drawings", "AND", "provided"]
+      ],
+      "scoring_weights": {
+        "explicit_match": 9,
+        "not_available": 9,
+        "will_be_furnished": -8
+      }
+    },
+    {
+      "group_name": "cost_to_acquire_data",
+      "regex_patterns": [
+        "cost\\s*to\\s*acquir[e]?\\s*(?:the\\s*)?(?:technical\\s*)?data\\s*(?:is\\s*)?(?:deemed\\s*)?uneconomical",
+        "data\\s*(?:cannot\\s*be\\s*)?obtain[e|ed]\\s*economically",
+        "uneconomical\\s*to\\s*(?:acquire\\s*)?(?:obtain\\s*)?data",
+        "prohibitive\\s*cost\\s*(?:for\\s*)?(?:of\\s*)?data"
+      ],
+      "exact_phrases": [
+        "cost to acquire data deemed uneconomical",
+        "data cannot be obtained economically",
+        "uneconomical to obtain data",
+        "prohibitive cost of data acquisition",
+        "the data needed to acquire this part competitively is not available and cannot be obtained economically"
+      ],
+      "partial_triggers": [
+        "uneconomical data",
+        "cost prohibitive",
+        "cannot obtain economically"
+      ],
+      "context_patterns": [
+        {
+          "before": ["data"],
+          "trigger": "cannot be obtained",
+          "after": ["economically", "cost-effectively"]
+        }
+      ],
+      "agency_specific": {},
+      "negative_patterns": [],
+      "code_triggers": {
+        "AMSC_codes": ["AMSC D", "AMSC N"]
+      },
+      "compound_patterns": [
+        ["data", "AND", "uneconomical", "AND", "obtain"]
+      ],
+      "scoring_weights": {
+        "explicit_match": 9,
+        "economic_barrier": 9
+      }
+    },
+    {
+      "group_name": "tdp_version_control",
+      "regex_patterns": [
+        "TDP\\s*VER(?:SION)?\\s*[0-9]+",
+        "TDP\\s*Rev(?:ision)?\\s*[A-Z0-9]+",
+        "drawing\\s*revision\\s*[A-Z0-9]+",
+        "latest\\s*TDP\\s*revision",
+        "current\\s*TDP\\s*version",
+        "updated\\s*TDP\\s*(?:as\\s*of)?"
+      ],
+      "exact_phrases": [
+        "TDP VER 001",
+        "TDP VER 002",
+        "TDP VER 003",
+        "TDP VER 004",
+        "TDP VERSION",
+        "TDP Revision",
+        "latest TDP revision",
+        "current TDP version"
+      ],
+      "partial_triggers": [
+        "TDP VER",
+        "TDP Rev",
+        "drawing rev"
+      ],
+      "context_patterns": [
+        {
+          "before": ["per", "IAW", "according to"],
+          "trigger": "TDP",
+          "after": ["VER", "VERSION", "Rev", "Revision"]
+        }
+      ],
+      "agency_specific": {},
+      "negative_patterns": [],
+      "code_triggers": {},
+      "compound_patterns": [],
+      "scoring_weights": {
+        "version_present": 3,
+        "neutral_indicator": true
+      }
+    },
+    {
+      "group_name": "source_control_drawing",
+      "regex_patterns": [
+        "sourc[e]?\\s*control(?:led)?\\s*drawing",
+        "SCD\\s*(?:required\\s*)?(?:governs)?",
+        "specified\\s*on\\s*(?:a\\s*)?sourc[e]?\\s*control\\s*drawing",
+        "manufactur[ing]?\\s*sourc[e]?\\s*specified\\s*on\\s*(?:a\\s*)?(?:source\\s*)?control\\s*drawing"
+      ],
+      "exact_phrases": [
+        "source control drawing",
+        "source controlled drawing",
+        "SCD governs",
+        "specified on a source control drawing",
+        "manufacturing source specified on a source control drawing",
+        "must be acquired from a manufacturing source specified on a source control drawing"
+      ],
+      "partial_triggers": [
+        "source control",
+        "SCD",
+        "control drawing"
+      ],
+      "context_patterns": [
+        {
+          "before": ["per", "IAW", "according to"],
+          "trigger": "source control",
+          "after": ["drawing", "SCD"]
+        }
+      ],
+      "agency_specific": {},
+      "negative_patterns": [],
+      "code_triggers": {
+        "AMSC_codes": ["AMSC B"]
+      },
+      "compound_patterns": [
+        ["source", "AND", "control", "AND", "drawing"]
+      ],
+      "scoring_weights": {
+        "explicit_match": 8,
+        "restricted_source": 8
+      }
+    }
+  ]
+}

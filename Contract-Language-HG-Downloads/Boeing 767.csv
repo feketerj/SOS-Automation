@@ -1,0 +1,973 @@
+﻿Notice ID,Solicitation ID,Solicitation Title,Description Text,Agency Name,Posted Timestamp,Posted Date,Response Timestamp,Response Deadline,Response Timezone,Opportunity Type,Set Aside Code,NAICS,NAICS Title,PSC,PSC Description,Primary Contact Title,Primary Contact Name,Primary Contact Email,Primary Contact Phone,Primary Contact Fax,Secondary Contact Title,Secondary Contact Name,Secondary Contact Email,Secondary Contact Phone,Secondary Contact Fax,Place of Performance Street Address,Place of Performance Street Address2,Place of Performance City,Place of Performance State,Place of Performance Zip,Place of Performance Country Code,Place of Performance Country,Related Opportunity Id,Award Date,Award Amount,Award Number,Delivery Order Number,Award Justification,Awardee Name,Awardee UEI,Awardee CAGE Code,Awardee Line Item,FPDS Code,FPDS Org ID,SAM Organization Name,Parent Opportunity ID,Modified By,Created By,Modified Timestamp,Created Timestamp,Site Page,Source Website
+1ba3d05c14a24163aa3d2c3cd1c098b5,KC46CDASLandingGear,KC-46 CDAS Landing Gear Spares,"This Request for Information (RFI) is being conducted to determine if any Contractor has the capability to provide spare landing gears for the KC-46A aircraft in support of the commodities depot activation. This RFI is only applicable to contractors that have been awarded a Commodities Depot Activation Support (CDAS) contract , FA8609-22-R-B003. Responses provided by contractors without a CDAS award will not be opened. Please see the attached RFI and respond in accordance with the RFI and this post.
+",AFLCMC Wright Patterson AFB,2024-08-02 19:28:38.052000+00:00,2024-08-02,2024-08-19 19:00:00+00:00,2024-08-19,America/New_York,Sources Sought,,336413,Other Aircraft Parts and Auxiliary Equipment Manufacturing ,,,,Luke Waterman,Luke.waterman@us.af.mil,,,,Justin Rector,Justin.rector.1@us.af.mil,,,,,,,,,,,,,,,,,,,,5700,FA8609,FA8609 AFLCMC WKK,1ba3d05c14a24163aa3d2c3cd1c098b5,luke.waterman@us.af.mil,luke.waterman@us.af.mil,2024-09-04 03:55:41.892000+00:00,2024-08-02 19:10:56.461000+00:00,https://www.highergov.com/contract-opportunity/KC46CDASLandingGear-Sources_Sought-098b5,https://sam.gov/opp/1ba3d05c14a24163aa3d2c3cd1c098b5/view
+10f9af8ab3174a8db32e9a4bbc553a29,,REQUEST FOR INFORMATION (RFI) KC-46 Landing Gear PBL,"The 424th KC-46 Landing Gear Supply Chain Management Squadron (424 SCMS), Air Force Life Cycle Management Center (AFLCMC) KC-46 Program Office, Enterprise Hill Commodity Council (EHCC) and Defense Logistics Agency (DLA) are seeking information towards developing a Performance Based Support strategy to provide overhaul and remanufacture support for KC-46 Landing Gear and field level replaceable subcomponents. The scope of this initiative comprises KC-46 Landing Gear end items and subcomponents, which will include the NIINs listed in Attachment 1. The KC-46 Landing Gear acquisition team plans to utilize Key Performance Indicators to measure and incentivize awardee&rsquo;s performance to meet critical goals in support of the warfighter mission.
+
+The Air Force intends to engage a Performance Based Logistics (PBL) provider to enter into a partnership to facilitate the overhaul and remanufacture of the parts listed in Attachment 1. The contract is anticipated to be a Fixed Price, outcome-based support approach.
+
+See attachment &lt;KC-46 PBL RFI (RD 1)&gt;; &lt;KC-46 PBL RFI Attach 1 Landing Gear NSN List  (RD 1)&gt;; &lt;KC-46 PBL RFI Attach 2 PDM Schedule  (RD 1)).
+",Defense Logistics Agency,2024-05-09 21:57:42.468000+00:00,2024-05-09,2024-07-12 06:00:00+00:00,2024-07-12,America/Denver,Special Notice,,336413,Other Aircraft Parts and Auxiliary Equipment Manufacturing ,1620,Aircraft Landing Gear Components,,Brad Baggiano,Bradley.baggiano@dla.mil,,,,Austin Gardner,Austin.gardner@us.af.mil,,,,,,,,USA,UNITED STATES,,,,,,,,,,,97AS,DLA AVIATION,DLA AVIATION,76b17649aafc449d84b4309dda0718b9,bradley.baggiano@dla.mil,bradley.baggiano@dla.mil,2024-07-28 03:55:49.477000+00:00,2024-05-09 21:53:36.985000+00:00,https://www.highergov.com/contract-opportunity/REQUEST-FOR-INFORMATION-RFI-KC-46-Landing-Gear-PBL-Special_Notice-718b9,https://sam.gov/opp/10f9af8ab3174a8db32e9a4bbc553a29/view
+17ee3216838444a2bff8552ffce4324b,FA8609_2023_3,KC-46A Landing Gear Overhaul,"This Request for Information (RFI) is being conducted to determine if any Contractor has the capability to provide landing gear overhauls for the KC-46A aircraft. Please see the attached RFI and respond in accordance with the RFI and this post.
+",AFLCMC Wright Patterson AFB,2023-08-17 19:23:04.533000+00:00,2023-08-17,2023-09-18 19:00:00+00:00,2023-09-18,America/New_York,Sources Sought,,336411,Aircraft Manufacturing ,1620,Aircraft Landing Gear Components,,David Smith,david.smith.383@us.af.mil,,,,Luke Waterman,Luke.waterman@us.af.mil,,,,,,,,,,,,,,,,,,,,5700,FA8609,FA8609 AFLCMC WKK,17ee3216838444a2bff8552ffce4324b,luke.waterman@us.af.mil,luke.waterman@us.af.mil,2023-10-04 03:55:42.606000+00:00,2023-08-17 19:12:44.207000+00:00,https://www.highergov.com/contract-opportunity/FA8609_2023_3-Sources_Sought-4324b,https://sam.gov/opp/17ee3216838444a2bff8552ffce4324b/view
+cf961975a0da4a9bba4725e51a812f07,SPRPA122R009URFIIndustryDay,Request for Information - KC46 Commercial Consumables Performance Based Contract,"NDUSTRY DAY
+
+
+
+DATE:                   Wednesday, October 5, 2022
+
+TIME:                   8:00am &ndash; 12:00pm Eastern Time
+
+LOCATION:
+
+Zoom.gov presentation (slideshow will be provided to attendees).  Interested parties should contact Megan.Kelly@dla.mil.  Link will be provided via update to this announcement. Please provide your preferred email for the Zoom.gov link.
+
+DESCRIPTION:
+
+The present Industry Day is for the anticipated KC-46 Commercial Consumables follow-on Performance Based Logistics supply chain contract.  The government intends to award a firm-fixed price competitive contract. DLA may consider multiple awards based on the best value evaluation.
+
+The KC-46 is a commercial derivative of the Boeing 767 aircraft.  KC-46 is a Federal Aviation Administration (FAA) certified aircraft.  All parts provided must be FAA approved for installation on the KC-46 aircraft.
+
+See previous RFI/Sources Sought Notice which includes Draft RFP:
+
+https://sam.gov/opp/92f74d6a9f1441e88ad14a1c64bff165/view
+
+PURPOSE:
+
+The purpose of this Industry Day is to provide an open forum for potential offerors to discuss the upcoming solicitation with the appropriate government representatives.  The focus is on the clarity of the requirement and encouraging competitive proposals. The presentation will include an overview of the supply chain and description of the requirement as well as the supply solution going forward.  Anticipated contract structure and metrics will also be presented.
+
+ATTENDEES:
+
+All industry partners interested in this program are invited to attend.  We do request pre-registration.  Participants interested in the Industry Day should provide the following information to Megan.Kelly@dla.mil and Irena.Cepele@dla.mil by October 3, 2022. 
+
+               Registration Information:
+
+
+	Business Name
+	Full Name and Title of Attendees
+	Contact Information (email and phone)
+	Request for One-on-One Session (if desired)*
+
+
+ONE ON ONE SESSIONS*
+
+The government anticipates holding one-on-one sessions with industry partners following this Industry Day session. 
+
+Participants can sign up for either a zoom.gov or in-person option for these sessions.
+
+Zoom meetings will be held on October 5 after the Industry Day Presentation with individual links to be provided to each industry attendee. 
+
+In-person meetings will be held at the Naval Support Activity Philadelphia (700 Robbins Avenue, Philadelphia, PA 19111) on October 19 and October 20.
+
+Please provide your company&rsquo;s desired option (zoom.gov or in-person) as well as proposed timing for either.  Slots will be filled on a &ldquo;first come&rdquo; basis, your company will be offered the first available slot closest to the requested time.
+
+If your company is requesting a One-on-One Session for those interested in a prime contractor role please provide the following information in addition to the registration information above:
+
+
+	Large/Small Business
+	Names and titles of all One-on-One session attendees
+
+",DLA Aviation,2022-09-26 13:18:46.369000+00:00,2022-09-26,2022-10-05 12:00:00+00:00,2022-10-05,America/New_York,Special Notice,,336413,Other Aircraft Parts and Auxiliary Equipment Manufacturing ,1560,Airframe Structural Components,,Megan Kelly,Megan.Kelly@dla.mil,2673580800,,,Irena Cepele,irena.cepele@dla.mil,2157373762,,,,,,,,,9853451cfd3a432f80e5169ddbf155f1,,,,,,,,,,97AS,SPRPA1,"DLA AVIATION AT PHILADELPHIA, PA",cf961975a0da4a9bba4725e51a812f07,megan.kelly@dla.mil,megan.kelly@dla.mil,2022-09-26 13:18:46.374000+00:00,2022-09-26 12:53:33.164000+00:00,https://www.highergov.com/contract-opportunity/SPRPA122R009URFIIndustryDay-Special_Notice-12f07,https://sam.gov/opp/cf961975a0da4a9bba4725e51a812f07/view
+93ef032d0b8b48c4b0df26982ad4495a,,Request for Information for  KC-46 Non-Stock Listed/Part Number Support,"REQUEST FOR INFORMATION
+
+KC-46 Non-Stock Listed/Part Number Support
+
+DISCLAIMER:
+
+THIS REQUEST FOR INFORMATION IS ISSUED SOLELY FOR INFORMATIONAL AND PLANNING PURPOSES.  IT DOES NOT CONSTITUTE A SOLICITATION (REQUEST FOR PROPOSAL, OR REQUEST FOR QUOTATION) OR A PROMISE TO ISSUE A SOLICITATION IN THE FUTURE.
+
+Details are provided in attached documentation.
+
+
+",Air Force Sustainment Center,2022-09-21 15:26:51.110000+00:00,2022-09-21,2022-10-21 21:00:00+00:00,2022-10-21,America/Chicago,Special Notice,,336413,Other Aircraft Parts and Auxiliary Equipment Manufacturing ,,,,Patricia A Johnson ,patricia.johnson.27@us.af.mil,,,,Jacqueline K West,jacqueline.west@us.af.mil,4057362431,,,,Tinker AFB,OK,73145,USA,,,,,,,,,,,,5700,FA8118,FA8118  AFSC PZABB,93ef032d0b8b48c4b0df26982ad4495a,patricia.johnson.27@us.af.mil,patricia.johnson.27@us.af.mil,2022-11-06 03:56:12.542000+00:00,2022-09-20 21:01:49.941000+00:00,https://www.highergov.com/contract-opportunity/Request-for-Information-for-KC-46-Non-Stock-Listed-Part-Number-Support-Special_Notice-4495a,https://sam.gov/opp/93ef032d0b8b48c4b0df26982ad4495a/view
+92f74d6a9f1441e88ad14a1c64bff165,SPRPA122R009U,Request for Information - KC46 Commercial Consumables Performance Based Contract,"The following Request for Information/Sources Sought Notice (RFI/SSN) is in regard to the KC-46 Commercial Consumables follow-on Performance Based Logistics contract which the government intends to award as a firm-fixed price competitive procurement.  KC-46 is a commercial derivative of the Boeing 767 aircraft.  KC-46 is a Federal Aviation Administration (FAA) certified aircraft.  As such, all parts provided must be FAA approved for installation on the KC-46 aircraft.
+
+ 
+
+The purpose of this RFI/SSN is to determine potentials sources for this consumables requirement and to request industry feedback on the included draft Request for Proposal (RFP) to follow to assist in the development and defining of the requirement.
+
+
+
+Particular input is requested in the following areas:
+
+
+	Failure rates and methods of forecasting for the consumable items on the attached list.
+	Identify which part numbers on the attached list are typically sold as part of the next higher assembly.
+	Delivery turnaround in support of consumable parts in the present marketplace
+	Period of Performance and the pricing / payment structure of long-term agreements for commercial consumable items in the commercial marketplace.
+	Estimated time to complete Phase I &ndash; Start-up.
+	Experience managing U.S. government Performance Based (PB) contracts. Include methodology utilized in sharing data between company and government data systems.
+	Explain how your company will incorporate small business participation in your proposal.
+	Experience using Parts Manufacturer Approval (PMA) parts to satisfy customer requirements.
+
+
+
+
+While this this RFI/SSN exclusively concerns consumable material, there is the possibility that, in the future, this effort may be expanded to include depot repairable items.  As such, respondents are welcome to also provide input on any of the above seven areas as they relate specifically to depot repairable items.
+
+
+
+Please submit all your questions and comments concerning this RFI/SSN by 31 August 2022 to the following individuals.
+
+Megan Kelly at Megan.Kelly@dla.mil
+
+Irena Cepele at irena.cepele@dla.mil
+
+Michael Taylor at michael.taylor.ctr@dla.mil
+
+
+
+The Government intends to hold an Industry Day at the Naval Support Activity base located at 700 Robbins Avenue, Philadelphia, PA 19111.  Parties interested in attending should define if their interest is that of a prime or a sub-contractor as well as what their goals and expected outcomes for the individual meetings would be
+
+The following Request for Information/Sources Sought Notice (RFI/SSN) is in regard to the KC-46 Commercial Consumables follow-on Performance Based Logistics contract which the government intends to award as a firm-fixed price competitive procurement.  KC-46 is a commercial derivative of the Boeing 767 aircraft.  KC-46 is a Federal Aviation Administration (FAA) certified aircraft.  As such, all parts provided must be FAA approved for installation on the KC-46 aircraft.
+
+ 
+
+The purpose of this RFI/SSN is to determine potentials sources for this consumables requirement and to request industry feedback on the included draft Request for Proposal (RFP) to follow to assist in the development and defining of the requirement.
+
+
+
+Particular input is requested in the following areas:
+
+
+	Failure rates and methods of forecasting for the consumable items on the attached list.
+	Identify which part numbers on the attached list are typically sold as part of the next higher assembly.
+	Delivery turnaround in support of consumable parts in the present marketplace
+	Period of Performance and the pricing / payment structure of long-term agreements for commercial consumable items in the commercial marketplace.
+	Estimated time to complete Phase I &ndash; Start-up.
+	Experience managing U.S. government Performance Based (PB) contracts. Include methodology utilized in sharing data between company and government data systems.
+	Explain how your company will incorporate small business participation in your proposal.
+	Experience using Parts Manufacturer Approval (PMA) parts to satisfy customer requirements.
+
+
+
+
+While this this RFI/SSN exclusively concerns consumable material, there is the possibility that, in the future, this effort may be expanded to include depot repairable items.  As such, respondents are welcome to also provide input on any of the above seven areas as they relate specifically to depot repairable items.
+
+
+
+Please submit all your questions and comments concerning this RFI/SSN by 31 August 2022 to the following individuals.
+
+Megan Kelly at Megan.Kelly@dla.mil
+
+Irena Cepele at irena.cepele@dla.mil
+
+Michael Taylor at michael.taylor.ctr@dla.mil
+
+
+
+The Government intends to hold an Industry Day at the Naval Support Activity base located at 700 Robbins Avenue, Philadelphia, PA 19111.  Parties interested in attending should define if their interest is that of a prime or a sub-contractor as well as what their goals and expected outcomes for the individual meetings would be
+",DLA Aviation,2022-08-04 11:43:22.354000+00:00,2022-08-04,2022-08-31 21:00:00+00:00,2022-08-31,America/New_York,Sources Sought,,336413,Other Aircraft Parts and Auxiliary Equipment Manufacturing ,1510,"Aircraft, Fixed Wing",,MEGAN KELLY,MEGAN.KELLY@DLA.MIL,2673580800,,,Irena Cepele,irena.cepele@dla.mil,2157373762,,,,,,,,,,,,,,,,,,,97AS,SPRPA1,"DLA AVIATION AT PHILADELPHIA, PA",92f74d6a9f1441e88ad14a1c64bff165,megan.kelly@dla.mil,megan.kelly@dla.mil,2022-08-04 11:43:22.358000+00:00,2022-08-04 11:34:05.799000+00:00,https://www.highergov.com/contract-opportunity/SPRPA122R009U-Sources_Sought-ff165,https://sam.gov/opp/92f74d6a9f1441e88ad14a1c64bff165/view
+9853451cfd3a432f80e5169ddbf155f1,SPRPA122R009URFI,Request for Information - KC46 Commercial Consumables Performance Based Contract,"The following Request for Information/Sources Sought Notice (RFI/SSN) is in regard to the KC-46 Commercial Consumables follow-on Performance Based Logistics contract which the government intends to award as a firm-fixed price competitive procurement.  KC-46 is a commercial derivative of the Boeing 767 aircraft.  KC-46 is a Federal Aviation Administration (FAA) certified aircraft.  As such, all parts provided must be FAA approved for installation on the KC-46 aircraft.
+
+ 
+
+The purpose of this RFI/SSN is to determine potentials sources for this consumables requirement and to request industry feedback on the included draft Request for Proposal (RFP) to follow to assist in the development and defining of the requirement.
+
+
+
+Particular input is requested in the following areas:
+
+
+	Failure rates and methods of forecasting for the consumable items on the attached list.
+	Identify which part numbers on the attached list are typically sold as part of the next higher assembly.
+	Delivery turnaround in support of consumable parts in the present marketplace
+	Period of Performance and the pricing / payment structure of long-term agreements for commercial consumable items in the commercial marketplace.
+	Estimated time to complete Phase I &ndash; Start-up.
+	Experience managing U.S. government Performance Based (PB) contracts. Include methodology utilized in sharing data between company and government data systems.
+	Explain how your company will incorporate small business participation in your proposal.
+	Experience using Parts Manufacturer Approval (PMA) parts to satisfy customer requirements.
+
+
+
+
+While this this RFI/SSN exclusively concerns consumable material, there is the possibility that, in the future, this effort may be expanded to include depot repairable items.  As such, respondents are welcome to also provide input on any of the above seven areas as they relate specifically to depot repairable items.
+
+
+
+Please submit all your questions and comments concerning this RFI/SSN by 31 August 2022 to the following individuals.
+
+Megan Kelly at Megan.Kelly@dla.mil
+
+Irena Cepele at irena.cepele@dla.mil
+
+Michael Taylor at michael.taylor.ctr@dla.mil
+
+
+
+The Government intends to hold an Industry Day at the Naval Support Activity base located at 700 Robbins Avenue, Philadelphia, PA 19111.  Parties interested in attending should define if their interest is that of a prime or a sub-contractor as well as what their goals and expected outcomes for the individual meetings would be. 
+",DLA Aviation,2022-08-03 21:51:51.157000+00:00,2022-08-03,2022-08-31 21:00:00+00:00,2022-08-31,America/New_York,Sources Sought,,336413,Other Aircraft Parts and Auxiliary Equipment Manufacturing ,1560,Airframe Structural Components,,Megan Kelly,Megan.Kelly@dla.mil,2673580800,,,Irena Cepele,irena.cepele@dla.mil,2157373762,,,,,,,,,,,,,,,,,,,97AS,SPRPA1,"DLA AVIATION AT PHILADELPHIA, PA",9853451cfd3a432f80e5169ddbf155f1,megan.kelly@dla.mil,megan.kelly@dla.mil,2022-08-03 21:51:51.160000+00:00,2022-08-03 21:37:19.230000+00:00,https://www.highergov.com/contract-opportunity/SPRPA122R009URFI-Sources_Sought-155f1,https://sam.gov/opp/9853451cfd3a432f80e5169ddbf155f1/view
+5950b6fc50cb4302b5461c8efe946b67,80AFRC22SS004,Purchase of a DC-8 Replacement Aircraft,"NASA&rsquo;s Science Mission Directorate (SMD) Airborne Sciences Program (ASP) is conducting market research, for planning purposes only, regarding interested small businesses, preferably small disadvantaged businesses, who are capable of providing a replacement to the NASA DC-8 aircraft.  Vendors may provide information related to multiple aircraft to include:
+
+
+	Boeing 767 series
+	Boeing 777 series
+	Airbus A330 series
+
+
+Responses must provide the following information:
+
+     1) Company name, mailing address, and point of contact (name, telephone number and e-mail address).
+
+     2) Company&rsquo;s size standard based on NAICS Code 336411.  Small business concerns are defined as 1500 employees or less. 
+
+     3) For each aircraft identified by the vendor, provide the following:
+
+          a. Make and model of the aircraft, to include a full report and aircraft logs (tail number, age of aircraft, flying status, flight hours, landings, dates of last inspection, dates of next inspection, location, etc.)
+
+          b. Engine status and history.  Are engines leased or owned by the current operator?  If leased, what motors will be included with delivery of aircraft?
+
+          c. Damage history to the aircraft.
+
+          d. Summary of required ground support equipment, to include any aircraft specific or unique support equipment.
+
+          e. Current airworthiness status.
+
+          f. Aircraft specifications, to include any aircraft modifications.
+
+          g. Photographs of the aircraft.
+
+          h. Estimated price of the aircraft.
+
+           i.  Any other additional data related to the aircraft to assist the Government in developing the requirement for planning purposes.
+
+    4) Offeror&rsquo;s capability to fully complete all necessary FAA paperwork to register and transfer aircraft to NASA.
+
+The Government does not intend to award a contract on the basis of this RFI or to otherwise pay for the solicited information.  This RFI is for planning purposes only and shall not be considered as a request for proposal or as an obligation on the part of the Government to acquire any products or services.  The provided information may be utilized by the Government in developing the requirement.  Any proprietary information that is submitted may be used in establishing the requirement but specific information labeled as Confidential will be safeguarded as proprietary. 
+
+Potential respondents to the RFI shall submit a &ldquo;Notification of intent to submit a response to the RFI&rdquo; to the below identified Points of Contact (POCs).  The notification shall identify the respondent&rsquo;s contact information.  Upon receipt of a notification of intent to submit, the respondent will receive a link for response submittal.
+
+POCs:
+
+
+	Angela Stinchfield, Contracting Officer, at angela.t.stinchfield@nasa.gov
+	James Williams, Contracting Officer, at james.g.williams-1@nasa.gov
+
+
+Responses must be submitted no later than 2:00 PM Pacific Time, 12 April 2022.
+",Armstrong Flight Research Center,2022-03-15 00:26:01.200000+00:00,2022-03-15,2022-04-12 21:00:00+00:00,2022-04-12,America/Los_Angeles,Sources Sought,,336411,Aircraft Manufacturing ,1510,"Aircraft, Fixed Wing",,Angela Stinchfield,angela.t.stinchfield@nasa.gov,6612765029,,,James G Williams,james.g.williams-1@nasa.gov,6612762501,,,,,,,,,,,,,,,,,,,8000,DFRC0,NASA ARMSTRONG FLIGHT RESEARCH CNTR,5950b6fc50cb4302b5461c8efe946b67,james.g.williams-1@nasa.gov,james.g.williams-1@nasa.gov,2022-04-28 03:55:56.221000+00:00,2022-03-14 23:59:51.016000+00:00,https://www.highergov.com/contract-opportunity/80AFRC22SS004-Sources_Sought-46b67,https://sam.gov/opp/5950b6fc50cb4302b5461c8efe946b67/view
+5e72beb5561243a7b05fc67a58bcc3e6,70T05020Q7NOTD342,Simulator Consolidation Phase III," (i) This acquisition is being conducted as a simplified acquisition pursuant to the authority of Federal Acquisition Regulation (FAR) Subpart 13.5.
+
+
+(ii) In accordance with FAR 4.1102, quoters are required to be registered in SAM at the time a quotation is submitted.
+
+
+
+(iii) The solicitation number is 70T05020Q7NOTD342 The solicitation is issued as a request for quotation (RFQ).
+
+
+
+(iv) The solicitation document and incorporated provisions and clauses are those in effect through Federal Acquisition Circular 2020-08.
+
+
+
+(v) The associated NAICS code is 336413 with a small business size standard of $1,250 employees
+
+(vi) Description of requirements for the items to be acquired: Dismantle, transport and re-install Aircraft Cabin Training Simulators (ACTS). See attached Statement of Work for specific.
+
+(vii) Delivery, acceptance, and FOB point is at the TSA Training Center in Atlantic City, NJ.
+
+(viii) The provision at 52.212-1, Instructions to Offerors -- Commercial (JUN 2020) applies to this acquisition. There are no addenda to the provision.
+
+(ix) Contact Delisa Corbett for information regarding the solicitation. All quotes must be submitted via email to Ms. Delisa Corbett at Delisa.Corbett@tsa.dhs.gov no later than September 9, 2020 at 3:00 pm Eastern Standard Time.
+
+
+
+SECTION B &ndash;SERVICES AND PRICES
+
+
+
+The contractor shall provide relocating and redesigning the existing Aircraft Cabin Training Simulators (ACTS) to accommodate a new Aircraft Cabin Training Simulator (ACTS) configuration. Work to include all parts, labor and material for a turn-key installation.
+
+
+
+The contractor shall complete the pricing table based on anticipated invoice milestones.
+
+
+
+CLIN
+
+ITEM DESCRIPTION
+
+UNIT
+
+QUANTITY
+
+TOTAL
+
+00001
+
+Design, manufacture, and install new ACTS Platform- Phase III
+
+JB
+
+1
+
+
+
+
+
+00002
+
+Remove and transport Platform V ACTS from TSA Field Office located in Miami, Florida
+
+JB
+
+1
+
+
+
+00003
+
+Remove and transport Platform V ACTS from TSA Field Offices located in  Houston Texas
+
+JB
+
+1
+
+
+
+00004
+
+Installation of CCTV system- Phase III
+
+JB
+
+1
+
+
+
+00005
+
+Installation of Rubber Flooring- Phase III
+
+JB
+
+1
+
+
+
+Optional CLIN 00006
+
+Remove and transport Platform V ACTS from TSA Field Offices located in  Las Vegas Nevada- Phase IV
+
+JB
+
+1
+
+
+
+Optional CLIN 00007
+
+Design, manufacture, and install new ACTS Platform- Phase IV
+
+JB
+
+1
+
+
+
+Optional CLIN 00008
+
+Installation of CCTV SYSTEM- Phase IV
+
+JB
+
+1
+
+
+
+Optional CLIN 00009
+
+Installation of Rubber Flooring- Phase IV
+
+JB
+
+1
+
+
+
+Total
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SECTION C- STATEMENT OF WORK
+
+AIRCRAFT CABIN TRAINING SIMULATOR RELOCATION PHASE III
+
+
+
+PART 1 &ndash; SCOPE OF WORK:
+
+GENERAL:
+
+The work to be performed under this contract and in accordance with this Statement of Work shall consist of redesigning, relocating, and modifying the existing Aircraft Cabin Training Simulators (ACTS) to accommodate a new Aircraft Cabin Training Simulator (ACTS) configuration. Work to include all parts, labor and material for a turn-key installation.
+
+ATTACHMENTS:
+
+Concept Plans
+
+HOURS OF WORK:
+
+All work shall be completed during normal working hours. Normal working hours are defined as Monday through Friday, 8:00 A.M. to 5:30 P.M., except Federal Holidays. Before starting the project, the Contractor shall submit an installation schedule for the Contracting Officer&rsquo;s Representative (COR) for approval. Prior to, or during, the project the COR reserves the right to adjust the installation schedule for the convenience of the government.
+
+   LOCATION:
+
+Services shall be rendered at the Transportation Security Administration Training Center, located on the William J. Hughes FAA Technical Center complex, Building 360.
+
+SUPPLIES: Supplies can be stored prior to installation in the immediate area around the project site, location set by COTR.
+
+QUALITY ASSURANCE: Installer Qualifications: At least 5 years&rsquo; successful experience in commercial aircraft simulator installations similar in size and type to the requirements of the project.
+
+WORK MANAGEMENT PLAN: The Contractor shall submit a Work Management Plan, prior to beginning any work, for approval. Plan to detail how the Contractor intends to perform the work required in the contract, including but not limited to area protection, area security, safety and application schedule.
+
+WORK AREA ACCESS: Government escorts are required while within the confines of the William J. Hughes Technical Center and all other TSA offices. Each morning of scheduled work, a government representative will meet you at the main entrance, or in the case of work performed at the TSATC, in the parking lot of the WJHTC Security Operations Center. Temporary badges and vehicle passes will be provided i/a/w local security regulations and the Contractor and his\her vehicles will be escorted to the work site as required.
+
+SAFETY: All Contractor operations shall be conducted and performed in accordance with Department of Labor, OSHA requirements found in 29 CFR 1910 (1910.146 and 1910.147) and 29 CFR 1926. The Contractor shall ensure that all work is performed in accordance with project identified national standards, instructions, pamphlets, and handbooks, and with the edition in effect on the date of this solicitation of the US Armory Corps of Engineers (USACE) Safety Manual 385-1-1. Contractor to utilize all safety barricades, cones, caution tape, etc. Job sites are subject to inspections by the Department of Labor, FAMS Inspector and the Federal Aviation Administration. In the event of conflicts between the OSHA standards and these requirements, the most stringent shall apply. Resolution of Department of Labor citations for violations of OSHA standards is a Contractor responsibility and shall provide for no basis of a claim against the Government. All installations shall meet the requirements of the International Building Code (IBC), as a minimum.
+
+GOVERNMENT PROPERTY: The Contractor shall use reasonable care to avoid damaging existing buildings, equipment, and vegetation on the Government installation. If the Contractor fails to use reasonable care and causes damage to any of the property, the Contractor shall replace or repair the damage at no expense to the Government. If the Contractor fails or refuses to make such repair or replacement, the Contractor shall be liable for the cost, which may be deducted from the contract price.
+
+SITE MAINTENANCE &amp; CLEANUP: Work area shall be maintained in a neat, clean, and safe condition and shall, at a minimum, be cleaned at the end of each shift. All areas in or adjacent to the site shall remain free of project generated trash and debris at all times. Disposal shall be outside the limits of Government property. Disposal shall be by sanitary landfill or other approved methods and shall conform to all local, state, and federal guidelines, criteria, and regulations. Upon completion of the work, the Contractor shall leave the work site in a clean, neat condition satisfactory to the COR. Contractor to provide own dumpsters. Coordinate delivery with COR. The contractor shall install and maintain a time lapse surveillance camera capable recording high resolution (10mp or better) images every 15 minutes from 0600 &ndash; 1800 Monday through Friday to record the modifications and construction of the simulators. The camera, media, and the footage recorded shall remain in place and become Government property at the conclusion of the project.
+
+
+
+WARRANTY: The Contractor shall identify all items being installed that are guaranteed or under warranty for more than a one-year period, and provide validated copies of the manufacturer&rsquo;s warranty. All warranty information shall be filed by the Contractor in the Government&rsquo;s name. All warranties shall be identified by product with a listing of the name and address of the company and the expiration date of the guarantee or warranty.
+
+DELIVERY, STORAGE &amp; PARKING: All equipment and material delivered and stored shall be protected from the weather, humidity and temperature variation, dirt, dust, and any other contaminants. The Contractor may store equipment and material only in areas designated by the Contracting Officer&rsquo;s Representative. All project storage areas shall be kept free of debris and kept in a neat, clean, and safe condition. Contractor shall not be required to provide their own portable toilets and shall be allowed to use Government lavatory facilities, if desired.
+
+SUBMITTALS: The Contractor shall provide submittals in the form of concept layout sketches, a work management plan describing the sequence of operations, a project schedule for major milestones, and a safety management statement to be provided with proposal. No proposals will be technically evaluated without the required submittals.
+
+Concept Layout Sketches &ndash; concept sketches shall show the interior seating configuration of all new ACTS contemplated under this contract, as well as exterior views of the ACTS (isometric and elevations). Sufficient drawings and views within the drawings will be provided to give the Government a clear understanding of what the finished product shall look like, inclusive of cabin configuration, modifications surrounding the ACTS and any branding changes.
+
+Work Management Plan &ndash; A work management plan shall describe in sufficient detail the flow of work including the number of personnel working, their location and any activities or responsibilities the Government has which are necessary for the Contractor to perform the associated tasks under this contract.
+
+Sample Project Schedule &ndash; A sample project schedule shall be included that illustrates major milestones and ties them to the &ldquo;Notice to Proceed&rdquo; (NTP) date as given by the Contracting Officer (CO). The dates given can be relative to the NTP date or the Contractor may select an arbitrary date in the future and build a schedule on that date. For example, the Contractor may produce a schedule illustrating that a kickoff meeting shall be held 5 days&rsquo; post NTP, or it may illustrate that the NTP was given on an arbitrary date like 1/1/2020 and that a kickoff meeting shall be held on 1/5/2020. The sample project schedule is a rough order of magnitude for the timing of major deliverables and their relationship to the NTP and any schedule is arbitrary until a contract is awarded, therefore the Contractor is not expected to spend excess time deconflicting arbitrary schedule dates that fall on weekends or holidays for this deliverable.
+
+Safety Management Statement &ndash; a general acknowledgement of the requirement to work safely and follow the safety guidelines referenced in the documents mentioned herein along with acknowledgement of the Contractor&rsquo;s responsibility to make all of their employees and subcontractors aware of the safety guidelines referenced herein and instruct all personnel working on this contract that safety is paramount and everyone&rsquo;s responsibility.
+
+
+
+PART 2. - DELIVERABLES
+
+The Contractor shall not be permitted to perform any work on site without approved submittals. In addition to the submittals above, once a contract has been awarded and a period of performance has been agreed upon, the Contractor shall produce the following deliverables:
+
+Project Schedule &ndash; The sample project schedule generated in the aforementioned section shall be modified to include any additional information requested by the Government or information that the Contractor thinks has value and the schedule shall be modified to include the period of performance dates as agreed upon during contract negotiations with the Contract Officer. The Contractor and the Government shall use this schedule to take a multitude of actions related to this contract and not related to this contract, so accuracy of the schedule is important. Therefore, care should be taken to ensure the schedule is as accurate as possible and to incorporate holidays, weekends, labor burdens from other contracts when constructing the schedule. The Contractor shall submit the updated project schedule as a deliverable to the CO and the COTR electronically by email in PDF format no later than 10 business days after the NTP is given.
+
+VERIFICATION OF DIMENSIONS &amp; CONDITIONS: It is the Contractor&rsquo;s responsibility to visit all premises where work is being performed to become thoroughly familiar with the details of the work and the working conditions. The Contractor shall field verify all dimensions and quantities and advise the COR of any discrepancies within 20 workings days after the NTP is given.
+
+CONTRACTOR PROVIDED MATERIALS: The Contractor shall provide all equipment, materials and labor necessary to complete a turn-key installation.
+
+
+
+PART 3. - EXECUTION
+
+GENERAL:
+
+All work shall be provided as stated in this STATEMENT OF WORK, and as shown on project documents, in accordance with manufacturer&rsquo;s recommendation, unless otherwise specified. All dimensions and quantities shown are for information only, as previously mentioned, the Contractor shall field verify all dimensions, quantities and site conditions. This project entails the modification to the existing Aircraft Cabin Training Simulator (ACTS) in Building 360 and the relocation and modification of other ACTS throughout the Country. All work shall be prepared and installed according to manufacturer&rsquo;s recommendations and in accordance with industry best practices and all safety guidelines.
+
+
+
+Definitions:
+
+TSATC - Transportation Security Administration Training Center located on the Federal Aviation Administration&rsquo;s William J. Hughes Technical Center in Egg Harbor Township, New Jersey. The TSATC is comprised of 13 buildings, however only the Multipurpose Training Building, commonly known as Building 360, has Aircraft Cabin Training Simulators (ACTS) in it.
+
+Building 360 &ndash; this is the Building number assigned by the FAA to the Transportation Security Administration Training Center (TSATC) Multipurpose Training Building, which houses all of the aircraft simulators. This is also the common name of the building amongst staff and Contractors. The building is a clear-span-purlin-type pre-engineered 30,000sqft building, approximately half of which is completely open. This open area referred is commonly referred to as the &ldquo;High Bay Area&rdquo; which houses all of the Aircraft Cabin Training simulators.
+
+High Bay Area &ndash; Common name for a 15,000sqft room within Building 360 which houses all of the Aircraft Cabin Training Simulators (ACTS).
+
+ACTS &ndash; Aircraft Cabin Training Simulator, general term for aircraft simulator
+
+Platform I &ndash; an ACTS that simulates a 767 aircraft with the addition of a staircase mid-ship that leads to an upper deck. Although the staircase and upper deck was not typical on real 767 aircraft, this ACTS design allowed TSA to simulate both 767 and 747 configurations within the same footprint. The design of Platform I used substantial structure steel members to support the Platform II ACTS above it. This ACTS is approximately 99ft in length.
+
+Platform II &ndash; an ACTS that simulates a 747 upper deck. The Platform II was originally installed on top of the Platform I to form a single ACTS that could be used as a 747 trainer, a 767 trainer, or both simultaneously. This ACTS is approximately 70ft in length.
+
+Platform V - an ACTS that simulates a 767 aircraft cabin only. There is no flight deck in this simulator. This ACTS did not have the robust features that other ACTS at the TSATC have and was designed and constructed for field use throughout the country. There are roughly 14 Platform V ACTS in use throughout the country and all were designed and built similarly. This ACTS is approximately 51ft in length.
+
+ACY &ndash; is the airport identifier for the Atlantic City International Airport. The TSATC is located adjacent to the Atlantic City International Airport and therefor the term ACY is sometimes used to describe the TSATC as other TSA locations are often described by the airport identifier they are located closest to.
+
+Instructor Operating Station (IOS) &ndash; This is the console where the simulators are controlled from. Each IOS contains a touchscreen device where the functions of the simulator can be operated, as well as control buttons, a master key-switch and a DVR.
+
+DVR &ndash; Digital Video Recorder, a device that records video from camera inputs and saves the video to a hard drive in a format that can be searched by time, date, or motion and exported in standardized video formats if necessary.
+
+CO- Contracting Officer. An individual warranted and authorized by the head of a Federal agency to enter into a contract with an entity.
+
+COR - Contracting Officer&rsquo;s Representative. Ensure that Contractors meet the commitment of their contracts. They ensure proper development of requirements and assist Contracting Officers in managing their contracts
+
+Execution of Work:
+
+Phase III
+
+The Contractor shall be responsible for all labor, material and equipment necessary to relocate two (2) existing Boeing 767 Cabin Trainers (Platform V) located at separate Transportation Security Administration Field Offices to the Transportation Security Administration Training Center (TASTC) and reassemble these ACTS as one continuous unit underneath an existing mezzanine.  The two Transportation Security Administration Field Offices where the Platform V ACTS shall be harvested from are Houston, TX and Las Vegas, NV. This work shall include, amongst others;
+
+
+
+The Contractor shall remove two (2) Platform V ACTS from TSA Field Offices located in Houston, TX and Miami, Florida and transport them back to the TSATC at the Atlantic City International Airport. (CLIN 00002 AND CLIN 00003
+
+Prior to the commencement of the decommissioning of any ACTS, the Contractor shall document the pre-work condition of the ACTS. The Contractor shall utilize the existing maintenance checklist to confirm the operation of all major components and systems and document any issues with components and forward that list to the COTR for action no later than 5 business days after inspection.
+
+In addition to completing the maintenance checklist, the Contractor shall take high quality digital pictures (10mb or better) of the ACTS using care to document every visible exterior side of the ACTS, the interior of the ACTS as viewed from every corner of every passenger class cabin, the interior of every lavatory, the interior of the electrical cabinet and the Instructor Operating Station (IOS). The Contractor shall also document by picture any item that is noted on the maintenance checklist as an issue of concern and also any visible blemishes or other areas of damage or concern within the ACTS. The purpose of the documentation shall be to protect the Government and the Contractor&rsquo;s interests. Any damage not documented by BOTH the maintenance inspections sheet AND by picture prior to ACTS disassembly and transport shall be assumed to have been caused by the Contractors willful actions or negligence and be repaired or replaced at the government&rsquo;s discretion.
+
+No restorative services are required in the area where the current ACTS are installed. For instance, when the ACTS is removed by the Contractor if there is a wall that is not painted behind the ACTS or the ceiling grid stops where the ACTS was installed, the Contractor is not required to finish the space. However, any areas willfully or unintentionally damaged by the Contractor must be restored by the Contractor at no additional expense to the Government.
+
+The Contractor is required to clean the space where the ACTS was installed to broom- swept condition. For the purposes of this contract, broom swept condition shall be defined as:
+
+Removal of all material, tool, equipment, debris, trash, supplies, etc.
+
+Broom or Vacuum the floors
+
+Wipe down all surfaces which may have gotten dusty or dirty in the work area
+
+Clean any sinks, tubs &amp; toilets used to dispose of material or clean tools
+
+Dispose of all trash and personal property not contractually stipulated to be left behind or expressly allowed by the COTR
+
+Repair any move-out damage (marks, scratches or holes) on the walls, floors, doors, and ceilings
+
+The Contractor is responsible for all labor and equipment to remove the ACTS from the Field Office inclusive of any specialty labor and equipment such as cranes, forklifts, window removal and reinstallation, etc.
+
+The Contractor is responsible to crate, pack, and protect all materials disassembled for shipping via the Contractor&rsquo;s shipping method.
+
+The Contractor shall transport the Platform V ACTS to the TSATC.
+
+There are no forklifts available for use at any TSA facility. The Contractor shall provide all load handling equipment.
+
+The Contractor shall be responsible for any damages, including loss, during transportation and shall repair or replace at the COTR&rsquo;s discretion any components that are necessary to complete the installation in a turn-key manner.
+
+The Contractor shall take the necessary step to ensure that all materials and components are stored safely, securely and in weather-tight containers until needed. There is only so much storage space inside Building 360 for this project and the management of that space and the usage of temporary exterior storage or trailer leasing is the responsibility of the Contractor.
+
+The Contractor shall design and install a new aircraft simulator layout using the largest amount of components possible from the two (2) Platform V ACTS that were removed from the field offices. The new configuration shall be referred to as a &ldquo;Platform X&rdquo; (CLIN 00001)
+
+The new configuration shall utilize the two 51ft simulators to make a single new 100ft long simulator.
+
+The Contractor shall eliminate door sections and galley furniture from the new ACTS as necessary to replicate an actual aircraft configuration as closely as possible. Any surplus material shall be shown to the COTR and the Contractor must obtain COTR approval prior to disposal.
+
+The Contractor shall ensure that the systems present in the Platform V simulators work seamlessly in the new Platform VII. All smoke machines, lighting, doors, flight attendant stations, speakers, etc shall operate as one system in the new configuration from one Instructor Operating Station (IOS).
+
+The new design shall include two passenger classes or cabins, a coach cabin and a business class cabin.
+
+The Business class cabin shall be the same size as the Business class cabin in the current Platform V ACTS utilizing the same seats from the existing Platform V ACTS in the same pitch as they are currently installed.
+
+The remaining space shall be dedicated to the coach cabin, utilizing as many of the existing coach seats as necessary to fill in the remaining space while maintaining the current seat pitch in Platform V ACTS.
+
+The Contractor is required to complete a turn-key installation in the configuration desired. If the contractor requires more business class or economy class seats that what was harvested form the two Platform V simulators removed from the Field Offices, additional seats may be obtained from the Transportation Security Administration Field Office in Boston, MA. The Contractor shall include in their price the cost for all labor, material, and transportation fees required to relocate the seats to the TSATC, including but not limited to, the seats, crating, and package additional seats along with the transportation costs are the sole cost of the Contractor.
+
+The Contractor shall upgrade all lighting throughout ALL ACTS Platforms to LED lighting.
+
+The Contractor shall replace the Closed Circuit Television (CCTV) System and the Digital Video Recorder (DVR) to a high definition unit utilizing Power Over Ethernet (POE) RJ45 cameras and a recorder capable of recording in real-time on all cameras for 30 days continuously without running out of hard drive space or recording over previously recorded video. (CLIN 00004)
+
+The Contractor shall install new rolled rubber flooring throughout the new Platform VX2 Trainer to match the old product. The color shall be flat solid black in color and have no speckles or color flakes in the rubber floor. (CLIN 00005)
+
+The contractor shall procure and install sea box shipping container(s) and install them exterior to the building and place all excess material in them until a future requirement. Coordinate the location of the sea box with the COR.
+
+The Contractor shall ensure that the building fire suppression system is modified in accordance with all codes so that the resulting structures (ACTS, jet bridges, mezzanines) are adequately protected by the existing wet pipe sprinkler system.
+
+The Contractor shall coordinate all work on the sprinkler system with the COTR and provide at least 10 working day notice of an intent to modify, drain, or test the wet pipe sprinkler system.
+
+The Contractor is required to obtain a burn permit for all welding or hot work operations engaged under this, or any other section. Burn permits can be obtained from the COTR by notifying the COTR of the need no less than 3 days in advance of their need.
+
+The Contractor shall have to modify the existing electrical system to accommodate the new load added under this section of the Statement of Work.
+
+Electrical work can only be performed by a licensed electrician.
+
+Prior to the execution of any electrical work, the Government requires a submittal illustrating what changes shall be made along with the load calculations of the new equipment.
+
+It is noted that some of the work contemplated specifically in this section shall require use of a Mobile Elevated Work Platforms (MEWPs). The Contractor shall ensure that MEWPs are used properly by trained professionals and the Contractor shall ensure the proper usage of the associated fall protection items by all employees in accordance with OSHA and ANSI.
+
+
+
+
+
+Phase IV
+
+As an optional CLIN the Government may execute the following Phase IV upon the availability of funding. The Contractor shall be responsible for all labor, material and equipment necessary to relocate one (1) existing Boeing 767 Cabin Trainers (Platform V) located at the Transportation Security Administration Field Office in Las Vegas, Nevada to the Transportation Security Administration Training Center (TASTC) and reassemble this ACTS, and one previously transferred to the TSATC as one continuous unit underneath an existing mezzanine. This work shall include, amongst others;
+
+The Contractor shall remove a Platform V ACTS from TSA Field Offices located in Las Vegas, Nevada and transport it back to the TSATC at the Atlantic City International Airport. CLIN 00006
+
+Prior to the commencement of the decommissioning of any ACTS, the Contractor shall document the pre-work condition of the ACTS. The Contractor shall utilize the existing maintenance checklist to confirm the operation of all major components and systems and document any issues with components and forward that list to the COTR for action no later than 5 business days after inspection.
+
+In addition to completing the maintenance checklist, the Contractor shall take high quality digital pictures (10mb or better) of the ACTS using care to document every visible exterior side of the ACTS, the interior of the ACTS as viewed from every corner of every passenger class cabin, the interior of every lavatory, the interior of the electrical cabinet and the Instructor Operating Station (IOS). The Contractor shall also document by picture any item that is noted on the maintenance checklist as an issue of concern and also any visible blemishes or other areas of damage or concern within the ACTS. The purpose of the documentation shall be to protect the Government and the Contractor&rsquo;s interests. Any damage not documented by BOTH the maintenance inspections sheet AND by picture prior to ACTS disassembly and transport shall be assumed to have been caused by the Contractors willful actions or negligence and be repaired or replaced at the government&rsquo;s discretion.
+
+No restorative services are required in the area where the current ACTS are installed. For instance, when the ACTS is removed by the Contractor if there is a wall that is not painted behind the ACTS or the ceiling grid stops where the ACTS was installed, the Contractor is not required to finish the space. However, any areas willfully or unintentionally damaged by the Contractor must be restored by the Contractor at no additional expense to the Government.
+
+The Contractor is required to clean the space where the ACTS was installed to broom- swept condition. For the purposes of this contract, broom swept condition shall be defined as:
+
+Removal of all material, tool, equipment, debris, trash, supplies, etc.
+
+Broom or Vacuum the floors
+
+Wipe down all surfaces which may have gotten dusty or dirty in the work area
+
+Clean any sinks, tubs &amp; toilets used to dispose of material or clean tools
+
+Dispose of all trash and personal property not contractually stipulated to be left behind or expressly allowed by the COTR
+
+Repair any move-out damage (marks, scratches or holes) on the walls, floors, doors, and ceilings
+
+The Contractor is responsible for all labor and equipment to remove the ACTS from the Field Office inclusive of any specialty labor and equipment such as cranes, forklifts, window removal and reinstallation, etc.
+
+The Contractor is responsible to crate, pack, and protect all materials disassembled for shipping via the Contractor&rsquo;s shipping method.
+
+The Contractor shall transport the Platform V ACTS to the TSATC.
+
+There are no forklifts available for use at any TSA facility. The Contractor shall provide all load handling equipment.
+
+The Contractor shall be responsible for any damages, including loss, during transportation and shall repair or replace at the COTR&rsquo;s discretion any components that are necessary to complete the installation in a turn-key manner.
+
+The Contractor shall take the necessary step to ensure that all materials and components are stored safely, securely and in weather-tight containers until needed. There is only so much storage space inside Building 360 for this project and the management of that space and the usage of temporary exterior storage or trailer leasing is the responsibility of the Contractor.
+
+The Contractor shall design and install a new aircraft simulator layout using the largest amount of components possible from the two (2) Platform V ACTS that were removed from the field offices. The new configuration shall be referred to as a &ldquo;Platform X&rdquo; (CLIN 00007)
+
+The new configuration shall utilize the two 51ft simulators to make a single new 100ft long simulator.
+
+The Contractor shall eliminate door sections and galley furniture from the new ACTS as necessary to replicate an actual aircraft configuration as closely as possible. Any surplus material shall be shown to the COTR and the Contractor must obtain COTR approval prior to disposal.
+
+The Contractor shall ensure that the systems present in the Platform V simulators work seamlessly in the new Platform VII. All smoke machines, lighting, doors, flight attendant stations, speakers, etc shall operate as one system in the new configuration from one Instructor Operating Station (IOS).
+
+The new design shall include two passenger classes or cabins, a coach cabin and a business class cabin.
+
+The Business class cabin shall be the same size as the Business class cabin in the current Platform V ACTS utilizing the same seats from the existing Platform V ACTS in the same pitch as they are currently installed.
+
+The remaining space shall be dedicated to the coach cabin, utilizing as many of the existing coach seats as necessary to fill in the remaining space while maintaining the current seat pitch in Platform V ACTS.
+
+The Contractor is required to complete a turn-key installation in the configuration desired. If the contractor requires more business class or economy class seats that what was harvested form the two Platform V simulators removed from the Field Offices, additional seats may be obtained from the Transportation Security Administration Field Office in Boston, MA. The Contractor shall include in their price the cost for all labor, material, and transportation fees required to relocate the seats to the TSATC, including but not limited to, the seats, crating, and package additional seats along with the transportation costs are the sole cost of the Contractor.
+
+The Contractor shall upgrade all lighting throughout ALL ACTS Platforms to LED lighting.
+
+The Contractor shall replace the Close",Transportation Security Administration,2020-08-31 20:03:16.738000+00:00,2020-08-31,2020-09-09 19:00:00+00:00,2020-09-09,America/New_York,Synopsis Solicitation,SBA,336413,Other Aircraft Parts and Auxiliary Equipment Manufacturing ,H916,"Other Quality Control, Testing and Inspection Services: Aircraft Components and Accessories",,Delisa Y Corbett,delisa.corbett@tsa.dhs.gov,5712274025,,,,,,,,,,,,,,44ba44683c8a47e0b4197813e2a4c632,,,,,,,,,,7013,70T050,MISSION ESSENTIALS,5e72beb5561243a7b05fc67a58bcc3e6,PI33_DR_IAE_51681,delisa.corbett@tsa.dhs.gov,2020-09-25 03:56:40.224000+00:00,2020-08-31 19:51:43.842000+00:00,https://www.highergov.com/contract-opportunity/70T05020Q7NOTD342-Combined_Synopsis_Solicitation-cc3e6,https://sam.gov/opp/5e72beb5561243a7b05fc67a58bcc3e6/view
+44ba44683c8a47e0b4197813e2a4c632,70T05020I7NREM210,Simulator Consolidation Phase III,"The Transportation Security Administration (TSA) intends to contract using other than full and open competition for the dismantle, relocation and re-installation of two Boeing 767 Aircraft Cabin Training Simulators (ACTS) as well as the reconfiguration of a Platform V ACTS currently in place.  Accordingly, the TSA intends to award a purchase order to Newton Design LLC, 26015 E ADMIRAL PL CATOOSA, OKLAHOMA 74015-5743. This contract will address the requirements of TSA has existing Aircraft Cabin Training Simulators (ACTS) at the Transportation Security Administration Training Center (TSATC) and Field Offices throughout the country.
+
+This will require the removal of these highly specialized aircraft simulators from commercial office spaces throughout the country, transportation of the components back to the TSATC in Atlantic City, NJ and then the reassembly of the same into a rugged aircraft simulator that can withstand the rigors of dynamic law enforcement training. In addition,
+
+The proposed contract action is for supplies or services for which the Government intends to solicit and negotiate with only one source under the authority of FAR 6.302. Interested persons may identify their interest and capability to respond to the requirement or submit proposals. This notice of intent is not a request for competitive proposals. However, all proposals received five days after date of publication of this synopsis will be considered by the Government. The Government will notify parties of the outcome of any proposal submitted in response.  A determination by the Government not to compete this proposed contract based upon responses to this notice is solely within the discretion of the Government. Information received will normally be considered solely for the purpose of determining whether to conduct a competitive procurement.
+
+Interested vendors who may wish to seek subcontracting opportunities should contact the above named company directly.
+
+
+",Transportation Security Administration,2020-07-17 05:24:10.475000+00:00,2020-07-17,2020-07-27 19:00:00+00:00,2020-07-27,America/New_York,Special Notice,SBA,336413,Other Aircraft Parts and Auxiliary Equipment Manufacturing ,H916,"Other Quality Control, Testing and Inspection Services: Aircraft Components and Accessories",,Delisa Y Corbett,delisa.corbett@tsa.dhs.gov,5712274025,,,,,,,,,,,,,,,,,,,,,,,,7013,70T050,MISSION ESSENTIALS,44ba44683c8a47e0b4197813e2a4c632,PI33_DR_IAE_51681,delisa.corbett@tsa.dhs.gov,2020-08-12 03:55:40.434000+00:00,2020-07-17 05:19:44.979000+00:00,https://www.highergov.com/contract-opportunity/70T05020I7NREM210-Special_Notice-4c632,https://sam.gov/opp/44ba44683c8a47e0b4197813e2a4c632/view
+4b23a66aa2da40599c41524d21958c69,70T05020Q7NREM206,Aircraft Simulator Relocation," (i) This acquisition is being conducted as a simplified acquisition pursuant to the authority of Federal Acquisition Regulation (FAR) Subpart 13.5.
+(ii) In accordance with FAR 4.1102, quoters are required to be registered in SAM at the time a quotation is submitted.
+
+(iii) The solicitation number is70T05020Q7NREM206. The solicitation is issued as a request for quotation (RFQ).
+
+(iv) The solicitation document and incorporated provisions and clauses are those in effect through Federal Acquisition Circular 2020-06.
+
+(v) The associated NAICS code is 336413 with a small business size standard of $1,250 employees
+
+(vi) Description of requirements for the items to be acquired: Dismantle, transport and re-install Aircraft Cabin Training Simulators (ACTS). See attached Statement of Work for specific.
+
+(vii) Delivery, acceptance, and FOB point is at the TSA Training Center in Atlantic City, NJ.
+
+(viii) The provision at 52.212-1, Instructions to Offerors -- Commercial (MAR 2020) applies to this acquisition. There are no addenda to the provision.
+
+SECTION B &ndash;SERVICES AND PRICES
+
+The contractor shall provide relocating and redesigning the existing Aircraft Cabin Training Simulators (ACTS) to accommodate a new Aircraft Cabin Training Simulator (ACTS) configuration. Work to include all parts, labor and material for a turn-key installation.
+
+STATEMENT OF WORK AIRCRAFT CABIN TRAINING SIMULATOR RECONFIGURATION
+
+PART 1 &ndash; SCOPE OF WORK:
+
+GENERAL:The work to be performed under this contract and in accordance with this Statement of Work shall consist of modifying relocating and redesigning the existing Aircraft Cabin Training Simulators (ACTS) to accommodate a new Aircraft Cabin Training Simulator (ACTS) configuration. Work to include all parts, labor and material for a turn-key installation.
+
+ATTACHMENTS: Concept Plan, Concept Plan View A-A, Concept Plan View B-B
+
+HOURS OF WORK: All work shall be completed during normal working hours. Normal working hours are defined as Monday through Friday, 8:00 A.M. to 5:30 P.M., except Federal Holidays. Before starting the project, the Contractor shall submit an installation schedule for the Contracting Officer&rsquo;s Representative (COR) for approval. Prior to, or during, the project the COR reserves the right to adjust the installation schedule for the convenience of the government.
+
+LOCATION: Services shall be rendered at the Transportation Security Administration Training Center, located on the William J. Hughes FAA Technical Center complex, Building 360. There shall be some supportive work performed at TSA Field Offices located in Philadelphia, PA, San Francisco, CA, and Baltimore, MD.
+
+SUPPLIES:  Supplies can be stored prior to installation in the immediate area around the project site, location set by COTR.
+
+WORK MANAGEMENT PLAN: The Contractor shall submit a Work Management Plan, prior to beginning any work, for approval. Plan to detail how the Contractor intends to perform the work required in the contract, including but not limited to area protection, area security, safety and application schedule.
+
+WORK AREA ACCESS: Government escorts are required while within the confines of the William J. Hughes Technical Center and all other TSA offices. Each morning of scheduled work, a government representative will meet you at the main entrance, or in the case of work performed at the TSATC, in the parking lot of the WJHTC Security Operations Center. Temporary badges and vehicle passes will be provided i/a/w local security regulations and the Contractor and his\her vehicles will be escorted to the work site as required.
+
+SAFETY: All Contractor operations shall be conducted and performed in accordance with Department of Labor, OSHA requirements found in 29 CFR 1910 (1910.146 and 1910.147) and 29 CFR 1926. The Contractor shall ensure that all work is performed in accordance with project identified national standards, instructions, pamphlets, and handbooks, and with the edition in effect on the date of this solicitation of the US Armory Corps of Engineers (USACE) Safety Manual 385-1-1. Contractor to utilize all safety barricades, cones, caution tape, etc. Job sites are subject to inspections by the Department of Labor, FAMS Inspector and the Federal Aviation Administration. In the event of conflicts between the OSHA standards and these requirements, the most stringent shall apply. Resolution of Department of Labor citations for violations of OSHA standards is a Contractor responsibility and shall provide for no basis of a claim against the Government. All installations shall meet the requirements of the International Building Code (IBC), as a minimum.
+
+GOVERNMENT PROPERTY: The Contractor shall use reasonable care to avoid damaging existing buildings, equipment, and vegetation on the Government installation. If the Contractor fails to use reasonable care and causes damage to any of the property, the Contractor shall replace or repair the damage at no expense to the Government. If the Contractor fails or refuses to make such repair or replacement, the Contractor shall be liable for the cost, which may be deducted from the contract price.
+
+SITE MAINTENANCE &amp; CLEANUP: Work area shall be maintained in a neat, clean, and safe condition and shall, at a minimum, be cleaned at the end of each shift. All areas in or adjacent to the site shall remain free of project generated trash and debris at all times. Disposal shall be outside the limits of Government property. Disposal shall be by sanitary landfill or other approved methods and shall conform to all local, state, and federal guidelines, criteria, and regulations. Upon completion of the work, the Contractor shall leave the work site in a clean, neat condition satisfactory to the COR. Contractor to provide own dumpsters. Coordinate delivery with COR. The contractor shall install and maintain a time lapse surveillance camera capable recording high resolution (10mp or better) images every 15 minutes from 0600 &ndash; 1800 Monday through Friday to record the modifications and construction of the simulators. The camera, media, and the footage recorded shall remain in place and become Government property at the conclusion of the project.
+
+WARRANTY: The Contractor shall identify all items being installed that are guaranteed or under warranty for more than a one-year period, and provide validated copies of the manufacturer&rsquo;s warranty. All warranty information shall be filed by the Contractor in the Government&rsquo;s name. All warranties shall be identified by product with a listing of the name and address of the company and the expiration date of the guarantee or warranty.
+
+DELIVERY, STORAGE &amp; PARKING: All equipment and material delivered and stored shall be protected from the weather, humidity and temperature variation, dirt, dust, and any other contaminants. The Contractor may store equipment and material only in areas designated by the Contracting Officer&rsquo;s Representative. All project storage areas shall be kept free of debris and kept in a neat, clean, and safe condition. Contractor shall not be required to provide their own portable toilets and shall be allowed to use Government lavatory facilities, if desired.
+
+SUBMITTALS:  The Contractor shall provide submittals in the form of concept layout sketches, a work management plan describing the sequence of operations, a project schedule for major milestones, and a safety management statement to be provided with proposal. No proposals will be technically evaluated without the required submittals.
+
+Concept Layout Sketches &ndash; concept sketches shall show the interior seating configuration of all new ACTS contemplated under this contract, as well as exterior views of the ACTS (isometric and elevations). Sufficient drawings and views within the drawings will be provided to give the Government a clear understanding of what the finished product shall look like, inclusive of cabin configuration, modifications surrounding the ACTS and any branding changes.
+
+Work Management Plan &ndash; A work management plan shall describe in sufficient detail the flow of work including the number of personnel working, their location and any activities or responsibilities the Government has which are necessary for the Contractor to perform the associated tasks under this contract.
+
+Sample Project Schedule &ndash; A sample project schedule shall be included that illustrates major milestones and ties them to the &ldquo;Notice to Proceed&rdquo; (NTP) date as given by the Contracting Officer (CO). The dates given can be relative to the NTP date or the Contractor may select an arbitrary date in the future and build a schedule on that date. For example, the Contractor may produce a schedule illustrating that a kickoff meeting shall be held 5 days&rsquo; post NTP, or it may illustrate that the NTP was given on an arbitrary date like 1/1/2020 and that a kickoff meeting shall be held on 1/5/2020. The sample project schedule is a rough order of magnitude for the timing of major deliverables and their relationship to the NTP and any schedule is arbitrary until a contract is awarded, therefore the Contractor is not expected to spend excess time deconflicting arbitrary schedule dates that fall on weekends or holidays for this deliverable.
+
+Safety Management Statement &ndash; a general acknowledgement of the requirement to work safely and follow the safety guidelines referenced in the documents mentioned herein along with acknowledgement of the Contractor&rsquo;s responsibility to make all of their employees and subcontractors aware of the safety guidelines referenced herein and instruct all personnel working on this contract that safety is paramount and everyone&rsquo;s responsibility.
+
+PART 2. - DELIVERABLES
+
+The Contractor shall not be permitted to perform any work on site without approved submittals. In addition to the submittals above, once a contract has been awarded and a period of performance has been agreed upon, the Contractor shall produce the following deliverables:
+
+Project Schedule &ndash; The sample project schedule generated in the aforementioned section shall be modified to include any additional information requested by the Government or information that the Contractor thinks has value and the schedule shall be modified to include the period of performance dates as agreed upon during contract negotiations with the Contract Officer. The Contractor and the Government shall use this schedule to take a multitude of actions related to this contract and not related to this contract, so accuracy of the schedule is important. Therefore, care should be taken to ensure the schedule is as accurate as possible and to incorporate holidays, weekends, labor burdens from other contracts when constructing the schedule. The Contractor shall submit the updated project schedule as a deliverable to the CO and the COTR electronically by email in PDF format no later than 10 business days after the NTP is given.
+
+VERIFICATION OF DIMENSIONS &amp; CONDITIONS: It is the Contractor&rsquo;s responsibility to visit all premises where work is being performed to become thoroughly familiar with the details of the work and the working conditions. The Contractor shall field verify all dimensions and quantities and advise the COR of any discrepancies within 20 workings days after the NTP is given.
+
+CONTRACTOR PROVIDED MATERIALS: The Contractor shall provide all equipment, materials and labor necessary to complete a turn-key installation.
+
+PART 3. - EXECUTION
+
+GENERAL: All work shall be provided as stated in this STATEMENT OF WORK, and as shown on project documents, in accordance with manufacturer&rsquo;s recommendation, unless otherwise specified. All dimensions and quantities shown are for information only, as previously mentioned, the Contractor shall field verify all dimensions, quantities and site conditions. This project entails the modification to the existing Aircraft Cabin Training Simulator (ACTS) in Building 360 and the relocation and modification of other ACTS throughout the Country. All work shall be prepared and installed according to manufacturer&rsquo;s recommendations and in accordance with industry best practices and all safety guidelines.
+
+Definitions: TSATC - Transportation Security Administration Training Center located on the Federal Aviation Administration&rsquo;s William J. Hughes Technical Center in Egg Harbor Township, New Jersey. The TSATC is comprised of 13 buildings, however only the Multipurpose Training Building, commonly known as Building 360, has Aircraft Cabin Training Simulators (ACTS) in it.
+
+Building 360 &ndash; this is the Building number assigned by the FAA to the Transportation Security Administration Training Center (TSATC) Multipurpose Training Building, which houses all of the aircraft simulators. This is also the common name of the building amongst staff and Contractors. The building is a clear-span-purlin-type pre-engineered 30,000sqft building, approximately half of which is completely open. This open area referred is commonly referred to as the &ldquo;High Bay Area&rdquo; which houses all of the Aircraft Cabin Training simulators.
+
+High Bay Area &ndash; Common name for a 15,000sqft room within Building 360 which houses all of the Aircraft Cabin Training Simulators (ACTS).
+
+ACTS &ndash; Aircraft Cabin Training Simulator, general term for aircraft simulator
+
+Platform I &ndash; an ACTS that simulates a 767 aircraft with the addition of a staircase mid-ship that leads to an upper deck. Although the staircase and upper deck was not typical on real 767 aircraft, this ACTS design allowed TSA to simulate both 767 and 747 configurations within the same footprint. The design of Platform I used substantial structure steel members to support the Platform II ACTS above it. This ACTS is approximately 99ft in length.
+
+Platform II &ndash; an ACTS that simulates a 747 upper deck. The Platform II was originally installed on top of the Platform I to form a single ACTS that could be used as a 747 trainer, a 767 trainer, or both simultaneously. This ACTS is approximately 70ft in length.
+
+Platform V - an ACTS that simulates a 767 aircraft cabin only. There is no flight deck in this simulator. This ACTS did not have the robust features that other ACTS at the TSATC have and was designed and constructed for field use throughout the country. There are roughly 14 Platform V ACTS in use throughout the country and all were designed and built similarly. This ACTS is approximately 51ft in length.
+
+ACY &ndash; is the airport identifier for the Atlantic City International Airport. The TSATC is located adjacent to the Atlantic City International Airport and therefor the term ACY is sometimes used to describe the TSATC as other TSA locations are often described by the airport identifier they are located closest to.
+
+Instructor Operating Station (IOS) &ndash; This is the console where the simulators are controlled from. Each IOS contains a touchscreen device where the functions of the simulator can be operated, as well as control buttons, a master key-switch and a DVR.
+
+DVR &ndash; Digital Video Recorder, a device that records video from camera inputs and saves the video to a hard drive in a format that can be searched by time, date, or motion and exported in standardized video formats if necessary.
+
+CO- Contracting Officer. An individual warranted and authorized by the head of a Federal agency to enter into a contract with an entity.
+
+COR - Contracting Officer&rsquo;s Representative. Ensure that Contractors meet the commitment of their contracts. They ensure proper development of requirements and assist Contracting Officers in managing their contracts
+
+Execution of Work:
+
+Phase I- The Contractor shall be responsible for all labor, material and equipment necessary to make all preparations, physical and logical, to the existing Aircraft Cabin Training Simulators (ACTS) and the Facility (Building 360) to receive the other phases and aspects of this project as outlined elsewhere. This work shall include, amongst others;
+
+Removal and disposal of the Boeing 747 Aircraft Simulator (Platform II)
+
+Coordinate all use of the high bay door to deliver equipment or remove material with the COTR
+
+Coordinate the location of all dumpsters with the COTR as required
+
+Coordinate the location of all material laydown areas with the COTR as required
+
+It is noted that some of the work contemplated specifically in this section shall require use of a Mobile Elevated Work Platforms (MEWPs) and the associated fall protection shall be used by all employees in accordance with OSHA and ANSI.
+
+Removal and disposal of the staircase in the Boeing 767 Aircraft Simulator (Platform I)
+
+Design, manufacture, provide and install new ACTS partitions and aircraft-style furniture as required to close in the old staircase opening in the Boeing 767 Aircraft Simulator (Platform I). Style, finish and color to match existing.
+
+Contractor to obtain COTR approval of color and finish prior to delivery.
+
+Target Performance Objective: Successful completion shall be defined as the complete removal of the Platform II (Boeing 747 Upper deck Trainer) ACTS and adequate structure and material added to Platform I (Boeing 767 Trainer) ACTS so that training operations may continue now and in the future while other construction work is going on around and even on top of this trainer.
+
+Phase II- The Contractor shall be responsible for all labor, material and equipment necessary to relocate three (3) existing Boeing 767 Cabin Trainers (Platform V) located at three separate Transportation Security Administration Field Offices to the Transportation Security Administration Training Center (TASTC) and reassemble these ACTS as one continuous unit on top of the existing Boeing 767 Cabin Trainer and design a new mezzanine to access the newly installed ACTS in accordance with the concept sketch provided herein. The three Transportation Security Administration Field Offices where the Platform V ACTS shall be harvested from are Philadelphia, PA, San Francisco, CA, and Baltimore, MD. This work shall include, amongst others;The Contractor shall remove the existing Boeing 767 dual lane Slide Trainer (and any other equipment and walls necessary to perform the work) in the TSATC Building 360 High Bay Area to make room for the ACTS and the mezzanine that shall be relocated there in the future.
+
+The Contractor shall ensure that the slide trainer is not damaged and that all components can be reused as necessary.
+
+The COTR shall identify a location to store the slide trainer and any components that need to be stored until they can be reused.
+
+There is approximately 40&rsquo; of wall that must be removed, the double doors and frame should be salvaged and reused later in this Phase by the contractor.
+
+The Contractor shall design, provide and install a new Mezzanine
+
+The new mezzanine shall be attached to the Platform I structural steel and continue the full length of Platform I and as far North as possible to accommodate a future ACTS installation as prescribed in other Phases of this Statement of Work.
+
+The new mezzanine design shall be load rated sufficiently for the dynamic load when fully occupied by personnel using all of the new simulators contemplated under all phases of this Scope of Work and the future phases as reflected in the concept drawings, as well as the static load of the new ACTS and jet bridge themselves.
+
+The new mezzanine shall be white in color and match the existing structural steel surrounding Platform I.
+
+The new mezzanine shall include a mock jet bridge providing a hallway with entrances to the new simulators created under all phases of this Scope of Work.
+
+The new jet bridge shall have a similar fit and finish to the existing jet bridge in the high bay area of Building 360.
+
+The new jet bridge shall include lighting, circulation fans and ventilation and emergency exit/light combination signs.
+
+The new jet bridge shall meet applicable codes and standards, including two means of egress, one at either end.
+
+The new mezzanine shall have two egress staircases, one at either end.
+
+The new mezzanine shall include lighting underneath so that the area beneath the mezzanine is illuminated to the same light level of the surrounding areas using LED lights with the same color index.
+
+The new mezzanine shall meet all applicable codes, including OSHA, NFPA, ADA.
+
+The new mezzanine shall incorporate an area for the existing slide trainer to attach so that the slide trainer can be reused without the need for a separate stair tower and platform.
+
+The Contractor shall ensure that the proper slide trainer height is maintained, this may require a portion of the new mezzanine to be slightly higher than the rest of the mezzanine.
+
+The Contractor shall reuse the Slide Trainer components and attach them to the new mezzanine.
+
+The Contractor shall ensure that the new slide trainer setup is properly anchored as necessary and safe to use in a dynamic training environment.
+
+Additional padding, or padding of a thicker type than the padding that is currently in use, may be required. Any additional landing pads, or padding of adjacent walls or structural items, is the responsibility of the Contractor.
+
+The contractor shall erect a new supported wall partition from the North East corner of the existing Platform I ACTS due East to the existing wall partition. Wall partition size, type and finish shall match existing. The contractor shall install the frame and double-door salvaged from the wall partition that was removed earlier in this task to be reused.
+
+The Contractor shall remove three (3) Platform V ACTS from TSA Field Offices located in Philadelphia, PA, San Francisco, CA, and Baltimore, MD and transport them back to the TSATC.
+
+Prior to the commencement of the decommissioning of any ACTS, the Contractor shall document the pre-work condition of the ACTS. The Contractor shall utilize the existing maintenance checklist to confirm the operation of all major components and systems and document any issues with components and forward that list to the COTR for action no later than 5 business days after inspection. In addition to completing the maintenance checklist, the Contractor shall take high quality digital pictures (10mb or better) of the ACTS using care to document every visible exterior side of the ACTS, the interior of the ACTS as viewed from every corner of every passenger class cabin, the interior of every lavatory, the interior of the electrical cabinet and the Instructor Operating Station (IOS). The Contractor shall also document by picture any item that is noted on the maintenance checklist as an issue of concern and also any visible blemishes or other areas of damage or concern within the ACTS. The purpose of the documentation shall be to protect the Government and the Contractor&rsquo;s interests. Any damage not documented by BOTH the maintenance inspections sheet AND by picture prior to ACTS disassembly and transport shall be assumed to have been caused by the Contractors willful actions or negligence and be repaired or replaced at the government&rsquo;s discretion.
+
+No restorative services are required in the area where the current ACTS are installed. For instance, when the ACTS is removed by the Contractor if there is a wall that is not painted behind the ACTS or the ceiling grid stops where the ACTS was installed, the Contractor is not required to finish the space. However, any areas willfully or unintentionally damaged by the Contractor must be restored by the Contractor at no additional expense to the Government. The Contractor is required to clean the space where the ACTS was installed to broom- swept condition. For the purposes of this contract, broom swept condition shall be defined as:
+
+Removal of all material, tool, equipment, debris, trash, supplies, etc.
+
+Broom or Vacuum the floors
+
+Wipe down all surfaces which may have gotten dusty or dirty in the work area
+
+Clean any sinks, tubs &amp; toilets used to dispose of material or clean tools
+
+Dispose of all trash and personal property not contractually stipulated to be left behind or expressly allowed by the COTR
+
+Repair any move-out damage (marks, scratches or holes) on the walls, floors, doors, and ceilings
+
+The Contractor is responsible for all labor and equipment to remove the ACTS from the Field Office inclusive of any specialty labor and equipment such as cranes, forklifts, window removal and reinstallation, etc.
+
+The Contractor is responsible to crate, pack, and protect all materials disassembled for shipping via the Contractor&rsquo;s shipping method.
+
+The Contractor shall transport the Platform V ACTS to the TSATC.
+
+There are no forklifts available for use at any TSA facility. The Contractor shall provide all load handling equipment.
+
+The Contractor shall be responsible for any damages, including loss, during transportation and shall repair or replace at the COTR&rsquo;s discretion any components that are necessary to complete the installation in a turn-key manner.
+
+The Contractor shall take the necessary step to ensure that all materials and components are stored safely, securely and in weather-tight containers until needed. There is only so much storage space inside Building 360 for this project and the management of that space and the usage of temporary exterior storage or trailer leasing is the responsibility of the Contractor.
+
+The Contractor shall design and install a new aircraft simulator layout using the largest amount of components possible from the three (3) Platform V ACTS that were removed from the field offices. The new configuration shall be referred to as a &ldquo;Platform VII&rdquo;
+
+The new configuration shall utilize the two 51ft simulators to make a single new 100ft long simulator.
+
+The Contractor shall eliminate door sections and galley furniture from the new ACTS as necessary to replicate an actual aircraft configuration as closely as possible. Any surplus material shall be shown to the COTR and the Contractor must obtain COTR approval prior to disposal.
+
+The Contractor shall ensure that the systems present in the Platform V simulators work seamlessly in the new Platform VII. All smoke machines, lighting, doors, flight attendant stations, speakers, etc shall operate as one system in the new configuration from one Instructor Operating Station (IOS).
+
+The new design shall include three passenger classes or cabins, a coach cabin, a business class cabin and a POD seating cabin.
+
+The POD seating cabin shall utilize new POD seats that shall be designed and installed by the Contractor specifically for a dynamic law enforcement training environment. The POD seats shall replicate POD seating use in industry now, but be able to stand up to the rigors of abusive physical usage and simmunitions. The Contractor shall ensure that no less than 9 POD seats are installed in the POD cabin.
+
+The Business class cabin shall be the same size as the Business class cabin in the current Platform V ACTS utilizing the same seats from the existing Platform V ACTS in the same pitch as they are currently installed.
+
+The remaining space shall be dedicated to the coach cabin, utilizing as many of the existing coach seats as necessary to fill in the remaining space while maintaining the current seat pitch in Platform V ACTS. In the event additional seats are required, the Contractor shall notify the COTR in writing and the COTR shall respond within 10 business days and advise the Contractor which TSA Field Office additional seating can be obtained from. The labor to remove, crate, and package additional seats along with the transportation costs are the sole cost of the Contractor.
+
+The new Platform VII ACTS shall be installed on top of the existing Boeing 767 Cabin Trainer (Platform I) ACTS. The Contractor shall coordinate all work with the COTR to ensure that any impacts to the training schedule can be minimized.
+
+The Contractor shall upgrade all lighting throughout ALL ACTS Platforms to LED lighting.
+
+The Contractor shall replace the Closed Circuit Television (CCTV) System and the Digital Video Recorder (DVR) to a high definition unit utilizing Power Over Ethernet (POE) RJ45 cameras and a recorder capable of recording in real-time on all cameras for 30 days continuously without running out of hard drive space or recording over previously recorded video.
+
+The Contractor shall install new rolled rubber flooring throughout the new Platform VII Trainer to match the old product. The color shall be flat solid black in color and have no speckles or color flakes in the rubber floor.
+
+The contractor shall procure and install sea box shipping container(s) and install them exterior to the building and place all excess material in them until a future requirement. Coordinate the location of the sea box with the COR.
+
+The Contractor shall ensure that the building fire suppression system is modified in accordance with all codes so that the resulting structures (ACTS, jet bridges, mezzanines) are adequately protected by the existing wet pipe sprinkler system.
+
+The Contractor shall coordinate all work on the sprinkler system with the COTR and provide at least 10 working day notice of an intent to modify, drain, or test the wet pipe sprinkler system.
+
+The Contractor is required to obtain a burn permit for all welding or hot work operations engaged under this, or any other section. Burn permits can be obtained from the COTR by notifying the COTR of the need no less than 3 days in advance of their need.
+
+The Contractor shall have to modify the existing electrical system to accommodate the new load added under this section of the Statement of Work.
+
+Electrical work can only be performed by a licensed electrician.
+
+Prior to the execution of any electrical work, the Government requires a submittal illustrating what changes shall be made along with the load calculations of the new equipment.
+
+It is noted that some of the work contemplated specifically in this section shall require use of a Mobile Elevated Work Platforms (MEWPs). The Contractor shall ensure that MEWPs are used properly by trained professionals and the Contractor shall ensure the proper usage of the associated fall protection items by all employees in accordance with OSHA and ANSI.
+
+Target Performance Objective: Successful completion shall be defined as the installation of a fully functional 100&rsquo; long ACTS that was built using the largest amount of parts salvaged from three (3) Platform V ACTS located at Transportation Security Administration Field Offices in Philadelphia, PA, San Francisco, CA, and Baltimore, MD and relocated to the TSATC in Egg Harbor Township, NJ. Successful completion shall also be contingent upon the installation of a new mezzanine to access the new Platform VII ACTS that incorporates the existing Boeing 767 Slide Trainer and a new jet bridge, along with successful restorative work of any TSATC areas impacted by construction.
+
+WORKMANSHIP: All work shall be coordinated and scheduled with the Contracting Officer&rsquo;s Technical Representative (COTR) or his/her representatives. The COR, or his/her representatives, have the right to reject any unsatisfactory or unsuitable materials, or workmanship. All work shall be accomplished in accordance with the best practices of the trade. All work shall comply with applicable Federal, State and municipal health and safety requirements and building codes, where applicable. Where there is a conflict between applicable regulations, the most stringent shall apply. The Contractor shall provide all necessary safety equipment and ensure that such equipment and safety procedures are adequate for the job being performed and utilized properly.
+
+COMPLETION &amp; INSPECTION:  The Contractor shall ensure that all work is performed in accordance with the criteria herein and that all requirements contained in this and all other project documents are met.
+
+END OF STATEMENT OF Work
+
+
+",Transportation Security Administration,2020-05-11 09:35:39.124000+00:00,2020-05-11,2020-05-13 19:00:00+00:00,2020-05-13,America/New_York,Solicitation,SBA,336413,Other Aircraft Parts and Auxiliary Equipment Manufacturing ,H916,"Other Quality Control, Testing and Inspection Services: Aircraft Components and Accessories",,Delisa Y Corbett,delisa.corbett@tsa.dhs.gov,5712274025,,,,,,,,,Atlantic City,NJ,08405,USA,UNITED STATES,346a2520fab64ad58671d173d0b808fc,,,,,,,,,,7013,70T050,MISSION ESSENTIALS,4b23a66aa2da40599c41524d21958c69,PI33_DR_IAE_51681,delisa.corbett@tsa.dhs.gov,2020-05-29 03:55:41.068000+00:00,2020-05-11 08:54:39.691000+00:00,https://www.highergov.com/contract-opportunity/70T05020Q7NREM206-Solicitation-58c69,https://sam.gov/opp/4b23a66aa2da40599c41524d21958c69/view
+346a2520fab64ad58671d173d0b808fc,70T05020I7NREM206,Intent to Sole Source for Aircraft Simulator Relocation,"The Transportation Security Administration (TSA) intends to contract using other than full and open competition for the dismantle, relocation and re-installation of several Boeing 767 Aircraft Cabin Training Simulators (ACTS) as well as the reconfiguration of a Platform I ACTS currently in place.  Accordingly, the TSA intends to award a purchase order to Newton Design LLC, 26015 E ADMIRAL PL CATOOSA, OKLAHOMA 74015-5743. This contract will address the requirements of dismantling and relocation of existing Aircraft Cabin Training Simulators (ACTS) at the Transportation Security Administration Training Center (TSATC) and Field Offices throughout the country.
+
+This will require the removal of these highly specialized aircraft simulators from commercial office spaces throughout the country, transportation of the components back to the TSATC in Atlantic City, NJ and then the reassembly of the same into a rugged aircraft simulator that can withstand the rigors of dynamic law enforcement training. In addition, TSA seeks to consolidate the parts from 3 different 50&rsquo; aircraft simulators located in 3 different states to make 1 larger 100&rsquo; aircraft simulator at the TSATC.
+
+The proposed contract action is for supplies or services for which the Government intends to solicit and negotiate with only one source under the authority of FAR 6.302. Interested persons may identify their interest and capability to respond to the requirement or submit proposals. This notice of intent is not a request for competitive proposals. However, all proposals received five days after date of publication of this synopsis will be considered by the Government. The Government will notify parties of the outcome of any proposal submitted in response.  A determination by the Government not to compete this proposed contract based upon responses to this notice is solely within the discretion of the Government. Information received will normally be considered solely for the purpose of determining whether to conduct a competitive procurement.
+
+
+
+Interested vendors who may wish to seek subcontracting opportunities should contact the above named company directly.
+
+
+",Transportation Security Administration,2020-04-29 20:26:45.352000+00:00,2020-04-29,2020-05-01 13:00:00+00:00,2020-05-01,America/New_York,Special Notice,SBA,336413,Other Aircraft Parts and Auxiliary Equipment Manufacturing ,H916,"Other Quality Control, Testing and Inspection Services: Aircraft Components and Accessories",,Delisa Y Corbett,delisa.corbett@tsa.dhs.gov,5712274025,,,,,,,,,Atlantic City,NJ,08405,USA,UNITED STATES,,,,,,,,,,,7013,70T050,MISSION ESSENTIALS,346a2520fab64ad58671d173d0b808fc,PI33_DR_IAE_51681,delisa.corbett@tsa.dhs.gov,2020-05-17 03:55:40.938000+00:00,2020-04-29 20:13:23.488000+00:00,https://www.highergov.com/contract-opportunity/70T05020I7NREM206-Special_Notice-808fc,https://sam.gov/opp/346a2520fab64ad58671d173d0b808fc/view
+d94ba75cfde90c35b83fe2606573b6da,SPRPA116R023U,"Enterprise Tinker Commodity Council, Market Research, Request for Information (Sources Sought)","Classification Code: 336 - Transportation Equipment Manufacturing, 334 - Computer and Electronic Product Manufacturing, 332   Fabricated Metal Product Manufacturing North American Industry Classification System (NAICS) Code: 336412   Aircraft engine and engine parts (except carburetors, pistons, piston rings, valves) manufacturing , 336413 Other Aircraft Parts and Auxiliary Equipment Manufacturing, 334514 Totalizing Fluid Meter and Counting Device Manufacturing, 334511 Search, Detection, Navigation, Guidance, Aeronautical, Nautical System and Instrument Manufacturing, 332510 Hardware Manufacturing, 488190 Other Support for Air Transport, and 481190 Support Activities for Air Transport.  
+DISCLAIMERS: The Government does not intend to award a contract on the basis of this Sources Sought/Request For Information (SS/RFI).  As stated in Federal Acquisition Regulation (FAR) 15.201(e), responses to this notice are not offers, and shall not be accepted by the Government to form a binding contract.  As stated at FAR 52.215-3, RFI for Planning Purposes; the Government does not intend to award a contract on the basis of this SS/RFI or to otherwise pay for the information.Sources Sought/REQUEST FOR INFORMATION (SS/RFI):  This SS/RFI is issued as market research, solely for informational and planning purposes.  It does not constitute a solicitation (Request for Proposal or Request for Quotation) or promise to issue a solicitation in the future.  The information provided in response to this SS/RFI is for discussion purposes and any potential strategy that may be developed from these discussions would be the subject of a separate, future announcement.The information received in response to this SS/RFI may be utilized by the United States Air Force (USAF) in developing an acquisition strategy, and requirements documents (i.e.; Statement of Objectives, Performance Work Statement, or Purchase Description).  The USAF requires that only non-proprietary information be submitted in response to this SS/RFI.  The USAF shall not be liable for or suffer any consequential damages for the use of any proprietary information submitted.The Enterprise Tinker Commodity Council (ETCC) is a multi-functional team chartered to create innovative strategies to drive efficiencies and performance improvements to the USAF supply chain.  ETCC is directly responsible for developing logistics support strategies for USAF managed aircraft accessories, instruments, and engine components.
+PURPOSE:  This SS/RFI is intended to identify commercial industry capabilities available to potentially support Air Force requirements for supply support integration of KC-46 Depot Level Reparables (DLR) which are common to the commercial Boeing 767 airframe family.  Commercial Common items are defined as common to commercial 767, the KC-46A airframes, or other commercial airframes, commercially available, and with repairs adhering to FAA Part 145 certifications.  
+The ETCC is requesting industry input on commercial capabilities available to:
+1)     Establish by 2019 and maintain DLR end item availability (measured by Requisition Objective (RO), Rapid Order Response Time, Not Mission Capable Supply (NMCS)), etc) in support of worldwide operations and depot maintenance activities.
+2)     Enable technology insertion to improve Mean Time Between Failures (MTBF) and commercial configuration commonality to minimize diminishing sources challenges.
+3)     Enable the use of new and used commercial common components
+ The ETCC is interested in developing a strategy that will provide worldwide parts availability of commercial common DLR's for the KC-46.  The duration of this contract is TBD but would likely be a minimum of 5 years total, including options.  Offramps could be included for items which will be organically repaired after depot repair capability is established. Based on responses to this SS/RFI, it is anticipated that, at some future date, a solicitation or series of solicitations may be issued to pursue opportunities for contract award.  A pre-solicitation notice may be published in FedBizOpps prior to the release of any solicitation generated from the information gathered in response to this SS/RFI.  Not responding to this SS/RFI will not preclude participation in any future solicitation.
+SMALL BUSINESS PARTICIPATION:  The Government is interested in all businesses to include, Small Businesses, Small Disadvantage Business, 8(a)s, Service-Disabled Veteran-Owned, Small businesses, Hubzone Businesses, and Women-Owned Small Businesses.  The Government requests that interested parties respond to this notice as a prime or subcontractor as applicable and identify your small business status to the identified NAICS code.  Additionally, please provide any anticipated teaming arrangements, along with a description of similar services offered to the Government and to commercial customers for the past three years.  Any responses involving teaming agreements should delineate between the work that will be accomplished by the prime and the work accomplished by the teaming partners.  
+RESPONSES: Please provide the following information for your company:
+&bull;        Company name/Address
+&bull;        Cage Code 
+&bull;        DUNS Number
+&bull;        Point of Contact
+&bull;        Phone/fax Number
+&bull;        Email Address
+&bull;        Web Page URL
+&bull;        Size of Business relative to NAICS Code (Small Business Size Standard employees or less)
+&bull;        U.S. or Foreign Owned Entity
+&bull;        Please indicate whether your interest is as a prime contractor or as a subcontractorVendors are encouraged to provide feedback within the context of complete KC-46 DLR supply support or distinguish between aircraft and propulsion DLR system supply support.
+Please provide responses to the following:
+ 
+
+Describe potential initiatives to establish and maintain DLR end item availability as measured by RO, Order Response Time and NMCS and the logistical elements that could be affected.  (Logistics elements include:  Materiel Management, Distribution, Technical Data Management, Maintenance, Training, Cataloging, Configuration Management, Engineering Support, Obsolescence Management, Technology, Refreshment, In-Service Support Analysis, Repair Parts Management, Failure Reporting and Analysis, and Reliability Growth).  The government intends to maintain all supply chain management functions and forecasting.  The contractor will provide parts at an 85% minimum asset availability and requisition order objective level.
+Discuss experience working with OEMs to obtain parts and engineering support.
+Discuss potential initiatives to minimize diminishing sources challenges.
+Discuss experience working with open commercial common parts pools and FAA Part 145 repair stations.
+Discuss experience and/or potential initiatives maintaining parts and repairs conforming to the KC-46 design to maintain FAA air worthiness:
+Procure from Production Approval Holders (PAH) or Licensed Parts Manufacture Approval (PMA) suppliers and deliver with 8130-3 or CoC with specified information
+Procure from FAA certified repair stations and deliver with 8130-3 or CoC with specified information
+
+Responders should provide examples of past experience and demonstration of their past accomplishments. 
+If your firm has performed under a DoD or commercial contract, provide best practices, to include lessons learned.  For DoD contracts, please provide the DoD agency, contract number and contact information.  For commercial contracts, please provide similar contract information if possible.
+Briefly describe any potential constraint or boundary that you anticipate regarding responsibilities, if you were managing a DoD contract.
+
+Numbers of personnel involved their required skill levels, and the organizations' provision of training.SUBMISSION OF INFORMATION: Responses to this SS/RFI must be readable by Microsoft Office or Adobe software.  Responses to this RFI shall be unclassified and should not exceed 20 pages in length.  Prior to the response date, if necessary, potential respondents may request clarifications by email.  Significant ETCC responses to a potential respondent's request for clarification will be posted to FedBizOpps under this Sources Sought.  ETCC may provide feedback to respondents regarding their response to this SS/RFI.
+
+
+ All interested parties are invited to submit a response to this SS/RFI on or 15 August 2016, 3:00 PM, Central Daylight Time (CDT).  Please note: emails containing file types such as: .zip, .xlsx, .docx, or other macro-enabled extensions, may not be delivered to the intended recipient.  All responses and questions under this RFI must be transmitted electronically via e-mail to Ms. Amy Yeager at Amy.Yeager@dla.mil. ",DLA Aviation,2016-07-15 15:20:03+00:00,2016-07-15,2016-08-15 21:00:00+00:00,2016-08-15,,Sources Sought,,336412,Aircraft Engine and Engine Parts Manufacturing ,16,Aerospace Craft Components And Accessories,Contracting Officer,Amy Yeager,amy.yeager@dla.mil,215-737-5111,,,,,,,,,,,,,,,,,,,,,,,,,,DLA Aviation - Philadelphia Detachment,d94ba75cfde90c35b83fe2606573b6da,PI33_DR_IAE_51681,amy.yeager@dla.mil,2016-08-30 08:54:19+00:00,2016-07-14 21:40:15+00:00,https://www.highergov.com/contract-opportunity/SPRPA116R023U-Sources_Sought-3b6da,https://sam.gov/opp/d94ba75cfde90c35b83fe2606573b6da/view
