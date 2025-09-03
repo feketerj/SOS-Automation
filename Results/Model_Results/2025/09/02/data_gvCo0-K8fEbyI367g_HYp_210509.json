@@ -1,0 +1,590 @@
+{
+  "metadata": {
+    "search_id": "gvCo0-K8fEbyI367g_HYp",
+    "timestamp": "2025-09-02T21:05:40.626774",
+    "total_assessed": 10,
+    "model_used": true
+  },
+  "summary": {
+    "go": 0,
+    "no_go": 0,
+    "further": 10,
+    "contact": 0
+  },
+  "assessments": [
+    {
+      "opp_cat": "Federal Contract Opportunity",
+      "title": "15--PANEL,STRUCTURAL,AI",
+      "description_text": "CONTACT INFORMATION|4|N791.10|T1M|7712290443|kelly.a.gipson2.civ@us.navy.mil|\rCOMMERCIAL ITEM PROCUREMENT NOTICE - AWARD|4|||||\rITEM UNIQUE IDENTIFICATION AND VALUATION (JAN 2023)|19||||||||||||||||||||\rHIGHER-LEVEL CONTRACT QUALITY REQUIREMENT|8|||||||||\rWIDE AREA WORKFLOW PAYMENT INSTRUCTIONS (JAN 2023)|16|Invoice and receiving report||TBD|N00383|TBD|TBD|SEE SCHEDULE|TBD|||||||||\rNAVY USE OF ABILITYONE SUPPORT CONTRACTOR - RELEASE OF OFFEROR INFORMATION (3-18))|1||\rEQUAL OPPORTUITY FOR WORKERS WITH DISABILITIES (JUN 2020)|2|||\rBUY AMERICAN-FREE TRADE AGREEMENTS-BALANCE OF PAYMENTS PROGRAM-BASIC (FEB 2024)|11||||||||||||\rCONTRACT TERMS AND CONDITIONS REQUIRED TO IMPLEMENT STATUTES OR EXECUTIVEORDERS--COMMERCIAL PRODUCTS AND COMMERCIAL SERVICES (MAR 2025)(DEVIATION 2025-O|81||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||                           \rCUTIVE ORDERS--COMMERCIAL PRODUCTS AND COMMERCIAL SERVICES (MAR 2025)(DEVIATION|16|||||||||||||||||                                                                                                                                                                     \r|13||||||||||||||\rBUY AMERICAN-FREE TRADE AGREEMENTS-BALANCE OF PAYMENTS PROGRAM CERTIFICATE-BASIC (FEB 2024))|5||||||\rBUY AMERICAN--BALANCE OF PAYMENTS PROGRAM (FEB 2024)|1||\rROYALTY INFORMATION (APR 1984)|1||\rANNUAL REPRESENTATIONS AND CERTIFICATIONS (MAR 2025)(DEVIATION 2025-O0003 AND 2025-O0004))|12|336413|1250|||||||||||\rFACSIMILE PROPOSALS (OCT 1997)|1||\rNOTICE OF PRIORITY RATING FOR NATIONAL DEFENSE, EMERGENCY PREPAREDNESS, ANDENERGY PROGRAM USE (APR 2008))|2||x|\rALL CONTRACTUAL DOCUMENTS (I.E. CONTRACTS, PURCHASE ORDERS, TASK ORDERS       DELIVERY ORDERS AND MODIFICATIONS) RELATED TO THE INSTANT PROCUREMENT ARE     CONSIDERED TO BE \"ISSUED\" BY THE GOVERNMENT WHEN THE COPIES ARE EITHER        DEPOSITED IN THE MAIL,\rTRANSMITTED BY FACSIMILE, OR SENT BY OTHER ELECTRONIC  COMMERCE METHODS, SUCH AS EMAIL. THE GOVERNMENT'S ACCEPTANCE OF THE           CONTRACTOR'S PROPOSAL CONSTITUTES BILATERAL AGREEMENT TO \"ISSUE\" CONTRACTUAL  DOCUMENTS AS DETAILED HEREIN.\rEARLY AND INCREMENTAL DELIVERIES ACCEPTED AND PREFERRED.\r",
+      "ai_summary": "Background\n The contract is issued by the NAVSUP WSS (Naval Supply Systems Command Weapon Systems Support) under the authority pertaining to the acquisition of commercial items. The purpose of this contract is to procure structural panels for military applications, ensuring compliance with quality and safety standards.\n\nThe NAVSUP WSS aims to maintain operational readiness and support the mission of the U.S. Navy by acquiring necessary components efficiently.\n\nWork Details\n The contract includes the procurement of structural panels identified by NSN 1560-01-712-3296. The specific details are as follows:\n- Item No: 0001\n- Supplies/Services: PANEL, STRUCTURAL, AI\n- Quantity: 1 EA\n- Unit Price: TBD\n- Amount: TBD\n- Shelf Life: 0-00\n- Packaging requirements are specified under MIL-STD-2073.\n\nDelivery will be made to N00383-25-X-2426 with a shipping designation of W25G1U.\n\nPeriod of Performance\n Not explicitly stated in the provided data.\n\nPlace of Performance\n Delivery location is designated as N00383-25-X-2426.\n",
+      "source_id": "N0038325QT485",
+      "source_id_version": "12af1de2074e49aaa314294a2b1c4b9b",
+      "captured_date": "2025-08-26",
+      "posted_date": "2025-08-26",
+      "due_date": "2025-09-25",
+      "agency": {
+        "agency_key": 1034,
+        "agency_name": "Naval Supply Systems Command",
+        "agency_abbreviation": "NAVSUP",
+        "agency_type": "Federal",
+        "path": "https://www.highergov.com/agency/naval-supply-systems-command-navsup-1034/"
+      },
+      "naics_code": {
+        "naics_code": "336413"
+      },
+      "psc_code": {
+        "psc_code": "1560"
+      },
+      "opp_type": {
+        "description": "Solicitation"
+      },
+      "primary_contact_email": {
+        "contact_title": "Civ",
+        "contact_name": "Kelly A. Gipson",
+        "contact_first_name": "Kelly",
+        "contact_last_name": "A.",
+        "contact_email": "kelly.a.gipson2.civ@us.navy.mil",
+        "contact_phone": "2156974787"
+      },
+      "secondary_contact_email": null,
+      "set_aside": null,
+      "nsn": [
+        "1560017123296"
+      ],
+      "val_est_low": "500000",
+      "val_est_high": "1000000",
+      "pop_country": null,
+      "pop_state": null,
+      "pop_city": null,
+      "pop_zip": null,
+      "opp_key": "ec8fca39b8555a8fa940c9f25d7739c8",
+      "version_key": "ec8fca39b8555a8fa940c9f25d7739c8",
+      "source_type": "sam",
+      "dibbs_status": null,
+      "path": "https://www.highergov.com/contract-opportunity/15-panel-structural-ai-n0038325qt485-o-c4b9b",
+      "source_path": "https://sam.gov/opp/12af1de2074e49aaa314294a2b1c4b9b/view",
+      "document_path": "https://www.highergov.com/api-external/document/?api_key=9874995194174018881c567d92a2c4d2&page_size=10&related_key=12af1de2074e49aaa314294a2b1c4b9b",
+      "assessment": {
+        "decision": "FURTHER_ANALYSIS",
+        "reasoning": "Model returned mixed format - see full response",
+        "confidence": 75,
+        "source": "ag:d42144c7:20250902:sos-triage-agent:73e9cddd"
+      }
+    },
+    {
+      "opp_cat": "SLED Contract Opportunity",
+      "title": "Online Drinking Water Compliance Monitoring System",
+      "description_text": "The Department of Natural Resources is posting this Request for Proposal (eRFP) to establish a contract with a qualified supplier who will provide an Online Drinking Water Compliance Monitoring System as per the Scope of Work.\n\nPlease note that your company must be registered in Team Georgia Marketplace to fully view and respond to this bid.\u00a0 For more details on registering and bidding, please click on the Quick Reference Guide link at the top of this bid announcement on the Georgia Procurement Registry.\n\nAlso, it is extremely important that you fully read the eRFP Instructions posted with this bid.\n\nIf you experience any technical difficulties in responding to the bid or accessing any bid documents, please contact the Team Georgia Marketplace Help Desk at (404)657-6000.\n\nThe State of Georgia advises that prospective bidders periodically check the website for modifications to bid documents.\u00a0 The State of Georgia is not responsible for a prospective bidder\u00bfs misunderstanding of the bid solicitation or nonresponsive bid due to failure to check the website for updates or amendments to bid documents, and/or other information regarding the bid.",
+      "ai_summary": "Background\n The Environmental Protection Division (EPD) of the Georgia Department of Natural Resources is responsible for protecting Georgia's air, land, and water resources through state and federal environmental statutes. \nThis Request for Proposal (RFP) aims to replace the outdated Monthly Operating Reports System (MORS) with a Commercial-off-the-Shelf (COTS) Web-based system that includes a customer-facing portal for regulated communities to collect laboratory and operational data from public water supply systems.\n\nWork Details\n The contractor will provide an Online Drinking Water Compliance Monitoring System that includes: \n- A secure web-based application for data entry, receipt, and retention of information generated by plant operators. \n- Integration capabilities with the EPA\u2019s Safe Drinking Water Information System (SDWIS). \n- Features such as compliance tracking, notifications, reporting capabilities, data sharing/exchange, user management, and document management. \n- The system must support 14 agency users and 212 water system users across 106 facilities. \n- Data migration from the existing Oracle 12c database to the new system is required. \n- The solution must meet minimum-security standards of SOC 2 and ISO 27017.\n\nPeriod of Performance\n The contract will be performed until March 31, 2026.\n\nPlace of Performance\n The services will be performed in the State of Georgia.\n\nBidder Requirements\n Bidders must be registered in Team Georgia Marketplace. \nThey are required to comply with E-Verify requirements if providing services with total compensation of $2,500 or greater. \nThe contractor must also ensure compliance with laws regarding drug-free workplaces and confidentiality provisions consistent with the Georgia Open Records Act.\n",
+      "source_id": "46200 NATURAL 46200-DNR0000809",
+      "source_id_version": "46200 NATURAL 46200-DNR0000809-0",
+      "captured_date": "2025-08-26",
+      "posted_date": "2025-08-26",
+      "due_date": "2025-09-17",
+      "agency": {
+        "agency_key": 13196,
+        "agency_name": "Georgia Department of Natural Resources",
+        "agency_abbreviation": null,
+        "agency_type": "SLED",
+        "path": "https://www.highergov.com/agency/natural-resources-department-of-13196/"
+      },
+      "naics_code": {
+        "naics_code": "334516"
+      },
+      "psc_code": {
+        "psc_code": "AN13"
+      },
+      "opp_type": {
+        "description": "Solicitation"
+      },
+      "primary_contact_email": {
+        "contact_title": null,
+        "contact_name": "Rhonda Henslee",
+        "contact_first_name": "Rhonda",
+        "contact_last_name": "Henslee",
+        "contact_email": "rhondam@dnr.state.ga.us",
+        "contact_phone": "4044632062"
+      },
+      "secondary_contact_email": null,
+      "set_aside": null,
+      "nsn": null,
+      "val_est_low": "500000",
+      "val_est_high": "2000000",
+      "pop_country": "USA",
+      "pop_state": "GA",
+      "pop_city": null,
+      "pop_zip": null,
+      "opp_key": "3a597ebb6cb953e387d36c2f9662df66",
+      "version_key": "3a597ebb6cb953e387d36c2f9662df66",
+      "source_type": "sled",
+      "dibbs_status": null,
+      "path": "https://www.highergov.com/sl/contract-opportunity/ga-online-drinking-water-compliance-monitor-55161365",
+      "source_path": "https://ssl.doas.state.ga.us/gpr/eventDetails?eSourceNumber=46200-DNR0000809&sourceSystemType=ps",
+      "document_path": "https://www.highergov.com/api-external/document/?api_key=9874995194174018881c567d92a2c4d2&page_size=10&related_key=104-46200 NATURAL 46200-DNR0000809",
+      "assessment": {
+        "decision": "FURTHER_ANALYSIS",
+        "reasoning": "Model returned mixed format - see full response",
+        "confidence": 75,
+        "source": "ag:d42144c7:20250902:sos-triage-agent:73e9cddd"
+      }
+    },
+    {
+      "opp_cat": "Federal Contract Opportunity",
+      "title": "RFI - Biocontainment, Isolation, and Quarantine (BIQ) Shipboard Isolation System (SIS)",
+      "description_text": "Note:  This is a follow-on Request for Information (RFI) to two previous Sources Sought Announcements (links provided below) and is requesting more detailed information about readily available or commercial off the shelf (COTS) solutions for a hospital bed isolation system to support the Biocontainment, Isolation, and Quarantine (BIQ) Shipboard Isolation System (SIS) program.\n\n\n\thttps://sam.gov/opp/d2ddfa1fb4694c4eb83a33ba50085882/view, posted 11 SEP 2023 through 31 OCT 2023\n\thttps://sam.gov/opp/9d48079a6e6f41819578ab491a4c06f1/view, posted 06 AUG 2024 through 08 NOV 2024\n\n\n\n\nSynopsis: The purpose of this RFI is to obtain detailed information to assist the Joint Project Manager for Chemical, Biological, Radiological, and Nuclear Protection (JPM CBRN Protection) in identifying readily available or COTS systems for the BIQ SIS program.  The system will temporarily enclose and isolate an infectious patient confined to a hospital bed on a U.S. Navy ship to control and prevent the spread of biological threats (biothreats).\n\n\n\nThe U.S. Government requests that responses be submitted via email ONLY to Brian Liska at brian.liska@usmc.mil no later than 10 SEP 2025 by 5:00 p.m. EST.\n\n\n\nBackground: To address the goals and objectives of the Chemical and Biological Defense Program (CBDP) Enhanced Biodefense and Pandemic Preparedness Narrative and the National Biodefense Strategy and Implementation Plan, JPM CBRN Protection is in need of a system to temporarily isolate an infectious patient confined to a hospital bed on a U.S. Navy ship. This RFI is issued to determine what solutions are available, and to obtain details about these systems to determine if they may be suitable for military use.\n\n\n\nDescription: This isolation system must be able to be erected quickly to temporarily isolate an infectious patient confined to a hospital bed in a shipboard environment.  The system must include an air filtration system to generate a negative pressure inside the enclosure, produce sufficient air changes inside the enclosure, and filter exhaust air from the enclosure.  Other features such as, but not limited to, inlet air filters, glove ports, pass-thru interfaces, and windows are needed for healthcare workers to provide care to the patient.\n\n\n\nPrograms: This RFI is in support of the SIS program, which is one of the three BIQ programs managed by JPM CBRN Protection.  Requirements for the system are currently being developed.\n\n\n\nGovernment Furnished Property: None\n\n\n\nResponses: Interested parties are invited to submit a response to this RFI.\n\n\n\nThis RFI is issued solely for information and planning purposes and to identify potential readily available or COTS solutions. THIS IS NOT A SOLICITATION. No contract will be awarded from this RFI. This RFI does not constitute a Request for Proposal (RFP) or a promise to issue an RFP in the future. It is subject to change and is not binding on the U.S. Government. Further, unsolicited proposals will not be accepted. Funding is not available at this time. The U.S. Government has not made a commitment to procure any of the items/services discussed, and release of this RFI should not be construed as such a commitment or as authorization to incur cost for which reimbursement would be required or sought. Response to this RFI is voluntary and no reimbursement will be made for any costs associated with providing information in response to this and any follow-on information requests. All submissions become U.S. Government property and will not be returned.\n\n\n\nNot responding to this RFI does not preclude participation in any future RFP(s) if any is(are) issued.\n\n\n\nInterested parties may identify their interest by submitting a white paper regarding this RFI to JPM CBRN Protection via e-mail ONLY to Brian Liska at brian.liska@usmc.mil no later than 10 SEP 2025 by 5:00 p.m. EST.  Please include the following information in the white paper:\n\n\n\tPlease provide system description(s) and image(s).\n\tWhat is the size and weight of the system?\n\tWhat is the cost and delivery lead time for 1 system up to 10 systems?\n\tWhat is the location of the manufacturing facility?  Are any system components/parts sourced outside of the United States and if so, where?\n\tWhat is the shelf life and recommended storage conditions of the system?\n\tIs the system a prototype, commercial off the shelf, or government off the shelf?\n\tWhat negative pressure (in inches of water column/gauge) is maintained inside the enclosure (i.e., the enclosed patient isolation area)?\n\tHow many air changes per hour are maintained inside the enclosure?\n\tWhat media is used to filter the inlet and exhaust air (e.g., HEPA, ULPA, MERV-14)?\n\tWhat is the power source for the system (e.g., rechargeable battery, non-rechargeable battery, 120 VAC, 240VAC)?  If there is more than one power source, then please list all of them.  Please provide battery model numbers.  How many hours can the system continuously operate using each power source?\n\tWhat EMI testing has been performed on the system (e.g., MIL-STD-461, MIL-STD-464)?\n\tWhat features are incorporated in the system to prevent liquids (e.g., blood, urine, vomit) from leaking out of the enclosure (e.g., leakproof zipper, absorbent pad)?  Additionally, what volume of liquid can be contained within the enclosure?\n\tHas the system been tested for compatibility with any decontaminants (e.g., Calla 1452, 9% calcium hypochlorite and seawater solution, Joint General-Purpose Decontaminant)?\n\tWhat is the minimum and maximum temperature and relative humidity that the system can be operated in?\n\tHas the system been tested in any adverse environmental conditions (e.g., sand, fungus, salt spray/fog, rain)?\n\tWhat material testing has been performed (e.g., tear strength, puncture resistance)?\n\tIs PFAS contained in any component used in the system?\n\tAre storage containers provided to protect the system from corrosion due to exposure to salt-laden air/water when it is stowed?  What is the size and weight of the system when it is being stowed?\n\tHas any shock and/or vibration testing been performed on the system?  If yes, then please indicate which standards were used (e.g., MIL-STD-810H, MIL-DTL-901E, MIL-STD-167-1A).\n\tIs there a way to secure the hospital bed within the system?\n\tHow many people are required and how long does it take to setup the system?  How many people are required to operate the system?\n\n\n\n\nNOTE:  Specification sheets, reports, and/or manuals may be included with the white paper.\n\n\n\nThe U.S. Government will not pay for any information or administrative cost incurred in response to this RFI. All costs associated with responding to this RFI will be solely at the expense of the interested party.\n\n\nQuestions: Any questions for clarification may be emailed to Brian Liska at brian.liska@usmc.mil no later than five business days before 10 SEP 2025. Please allow three business days for a response. Verbal questions will NOT be accepted. Questions shall NOT contain proprietary or classified information. An unattributed list of questions and answers will be published at the same web location of this RFI.\n",
+      "ai_summary": null,
+      "source_id": "RFIBiocontainmentIsolationAndQuarantine(BIQ)ShipboardIsolationSystem(SIS)",
+      "source_id_version": "8749687ffaa3404da9de9f420a2fda28",
+      "captured_date": "2025-08-26",
+      "posted_date": "2025-08-26",
+      "due_date": "2025-09-10",
+      "agency": {
+        "agency_key": 2731,
+        "agency_name": "ACC Aberdeen Proving Ground",
+        "agency_abbreviation": "APG",
+        "agency_type": "Federal",
+        "path": "https://www.highergov.com/agency/acc-aberdeen-proving-ground-apg-2731/"
+      },
+      "naics_code": {
+        "naics_code": "541330"
+      },
+      "psc_code": {
+        "psc_code": "4240"
+      },
+      "opp_type": {
+        "description": "Sources Sought"
+      },
+      "primary_contact_email": {
+        "contact_title": "Procurement Officer",
+        "contact_name": "Brian Liska",
+        "contact_first_name": "Brian",
+        "contact_last_name": "Liska",
+        "contact_email": "brian.liska@usmc.mil",
+        "contact_phone": null
+      },
+      "secondary_contact_email": null,
+      "set_aside": null,
+      "nsn": null,
+      "val_est_low": "0",
+      "val_est_high": "0",
+      "pop_country": "USA",
+      "pop_state": "MA",
+      "pop_city": "Natick",
+      "pop_zip": "01760",
+      "opp_key": "cc5e4b43fd685e23a98fac2e6520575a",
+      "version_key": "cc5e4b43fd685e23a98fac2e6520575a",
+      "source_type": "sam",
+      "dibbs_status": null,
+      "path": "https://www.highergov.com/contract-opportunity/rfi-biocontainment-isolation-and-quarantine-b-rfi-biocontainmentisolationandquarantine-biq-shipboardisolationsystem-sis-r-fda28",
+      "source_path": "https://sam.gov/opp/8749687ffaa3404da9de9f420a2fda28/view",
+      "document_path": "https://www.highergov.com/api-external/document/?api_key=9874995194174018881c567d92a2c4d2&page_size=10&related_key=8749687ffaa3404da9de9f420a2fda28",
+      "assessment": {
+        "decision": "FURTHER_ANALYSIS",
+        "reasoning": "Model returned mixed format - see full response",
+        "confidence": 75,
+        "source": "ag:d42144c7:20250902:sos-triage-agent:73e9cddd"
+      }
+    },
+    {
+      "opp_cat": "Federal Contract Opportunity",
+      "title": "BELL CRANK,AIRCRAFT",
+      "description_text": "ITEM UNIQUE IDENTIFICATION AND VALUATION (JAN 2023)|19||||||||||||||||||||\rINSPECTION OF SUPPLIES--FIXED-PRICE (AUG 1996)|2|||\rHIGHER-LEVEL CONTRACT QUALITY REQUIREMENT|8|||x|TBD|||||\rWIDE AREA WORKFLOW PAYMENT INSTRUCTIONS (JAN 2023)|16|Invoice and Receiving Report (combo) type|N/A|TBD|SPRPA1|TBD|TBD|See Schedule|TBD|N/A|N/A|TBD|N/A|N/A|N/A|N/A|N/A|\rVALUE ENGINEERING (JUN 2020)|3||||\rINTEGRITY OF UNIT PRICES (NOV 2021)|1||\rEQUAL OPPORTUNITY FOR VETERANS (JUN 2020)|4|||||\rEQUAL OPPORTUITY FOR WORKERS WITH DISABILITIES (JUN 2020)|2|||\rTRANSPORTATION OF SUPPLIES BY SEA (OCT 2024)|2|||\rBUY AMERICAN-FREE TRADE AGREEMENTS-BALANCE OF PAYMENTS PROGRAM-BASIC (FEB 2024)|11||||||||||||\rESTIMATE OF PERCENTAGE OF RECOVERED MATERIAL CONTENT FOR EPA DESIGNATED PRODUCTS (MAY 2008))|1||\rALTERNATE A, ANNUAL REPRESENTATIONS AND CERTIFICATIONS (OCT 2024)|13||||||||||||||\rBUY AMERICAN-FREE TRADE AGREEMENTS-BALANCE OF PAYMENTS PROGRAM CERTIFICATE-BASIC (FEB 2024))|5||||||\rBUY AMERICAN--BALANCE OF PAYMENTS PROGRAM (FEB 2024)|1||\rROYALTY INFORMATION (APR 1984)|1||\rANNUAL REPRESENTATIONS AND CERTIFICATIONS (MAR 2025)(DEVIATION 2025-O0003 AND 2025-O0004))|12|336413|1250|||||||||||\rFACSIMILE PROPOSALS (OCT 1997)|1|215-737-7149|\rNOTICE OF PRIORITY RATING FOR NATIONAL DEFENSE, EMERGENCY PREPAREDNESS, ANDENERGY PROGRAM USE (APR 2008))|2||x|\rThe purpose of this amendment is to increase quantity from 4 EA to 9 EA.\rThe purpose of this amendment is as follows:\rThis solicitation is hereby modified in accordance with DoD Class\rDeviation 2025-O0003, Restoring Merit-Based Opportunity in Federal\rContracts, which implements Executive Order (E.O.) 14173, Ending\rIllegal Discrimination and Restoring Merit-Based Opportunity, and E.O.\r14168, Defending Women from Gender Ideology Extremism and\rRestoring Biological Truth to the Federal Government and in accordance\rwith Class Deviation 2025-O0004, Revocation of Executive Order on\rSustainability which implements section 2(rr) of E.O. 14148, Initial\rRescissions of Harmful Executive Orders and Actions, of January 20,\r2025 (see 90 FR 8237), which revoked E.O. 14057, Catalyzing Clean\rEnergy Industries and Jobs Through Federal Sustainability, of\rDecember 8, 2021. The solicitation is amended as\rfollows:\r(1.) If included in the solicitation, the following solicitation provisions\rand contract clauses are hereby deleted:\r52.222-21, Prohibition of Segregated Facilities.\r52.222-22, Previous Contracts and Compliance Reports.\r52.222-23, Notice of Requirement for Affirmative Action To Ensure\rEqual Employment Opportunity for Construction.\r52.222-24, Preaward On-Site Equal Opportunity Compliance Evaluation.\r52.222-25, Affirmative Action Compliance.\r52.222-26, Equal Opportunity.\r52.222-26  Equal Opportunity - ALT I.\r52.222-27, Affirmative Action Compliance Requirements for\rConstruction.\r52.222-29, Notification of Visa Denial.\r52.223-19, Compliance with Environmental Management Systems.\r52.223-22, Public Disclosure of Greenhouse Gas Emissions and\rReduction Goals-Representation.\r(2.) If included in the solicitation, the following contract clauses are\rhereby revised as follows:\r52.222-9, Apprentices and Trainees (Deviation 2025-O0003), in lieu of\r52.229-9.\r52.244-6, Subcontracts for Commercial Products and Commercial\rServices (Deviation 2025-O0003), in lieu of 52.244-6.\r52.223-10, Waste Reduction Program (Deviation 2025-O0004), in lieu\rof 52.223-10.\r52.223-23, Sustainable Products and Services (Deviation 2025-O0004),\rin lieu of 52.223-23.\r52.204-8, Annual Representations and Certifications (Deviation 2025-\rO0004), in lieu of 52.204-8.\r52.212-3, Offeror Representations and Certifications---Commercial\rProducts and Commercial Services (Deviation 2025-O00004), in lieu of\r52.212-3.\r52.212-5, Contract Terms and Conditions Required to Implement\rStatutes or Executive Orders---Commercial Products and Commercial\rServices (Deviation 2025-O0004), in lieu of 52.212-5.\r52.212-5, Contract Terms and Conditions Required to Implement\rStatutes or Executive Orders---Commercial Products and Commercial\rServices - ALT II (Deviation 2025-O0003), in lieu of 52.212-5.\r52.213-4, Terms and Conditions---Simplified Acquisitions (Other\rThan Commercial Products and Commercial Services) (Deviation\r2025-O0004), in lieu of 52.212-4.\r\\\rNo drawings are available for this Request for Quotation.\rThis Solicitation is being issued under Emergency Acquisition Flexibilities(EAF) formally known as SEPA.\r",
+      "ai_summary": "Background\n This solicitation is issued by the Naval Supply Systems Command (NAVSUP) for the procurement of aircraft components, specifically a Bell Crank. The contract aims to support military operations by ensuring the availability of critical aircraft parts. The solicitation is part of an Emergency Acquisition Flexibility initiative, which allows for expedited procurement processes in response to urgent needs.\n\nWork Details\n The primary item to be delivered under this contract is:\n- Item No: 0001\n- NSN: 7RH 1710-01-478-1918 QE\n- Description: Bell Crank, Aircraft\n- Quantity: 10 EA\n- Shelf Life: 0-00\n- Packaging Requirements: MIL-STD-2073\n\nDelivery locations include:\n- Ship To Address 0001AA N00383-25-X-0530 W25G1U, Quantity: 2 EA\n- Ship To Address 0001AB N00383-25-X-0530 W62G2T, Quantity: 2 EA\n\nInspection and acceptance will occur at origin. No drawings are available for this Request for Quotation.\n\nPeriod of Performance\n The period of performance is not explicitly stated in the provided data.\n\nPlace of Performance\n The products will be delivered to specified military locations as indicated in the shipping addresses.\n",
+      "source_id": "SPRPA125QEU55",
+      "source_id_version": "033a93b5d1984573a3e167eb1449f618",
+      "captured_date": "2025-08-21",
+      "posted_date": "2025-08-21",
+      "due_date": "2025-08-27",
+      "agency": {
+        "agency_key": 1000,
+        "agency_name": "DLA Aviation",
+        "agency_abbreviation": null,
+        "agency_type": "Federal",
+        "path": "https://www.highergov.com/agency/dla-aviation-1000/"
+      },
+      "naics_code": {
+        "naics_code": "336413"
+      },
+      "psc_code": {
+        "psc_code": "1710"
+      },
+      "opp_type": {
+        "description": "Solicitation"
+      },
+      "primary_contact_email": {
+        "contact_title": "Procurement Officer",
+        "contact_name": "Canon Chhoun",
+        "contact_first_name": "Canon",
+        "contact_last_name": "Chhoun",
+        "contact_email": "canon.chhoun@dla.mil",
+        "contact_phone": "2157376826"
+      },
+      "secondary_contact_email": null,
+      "set_aside": null,
+      "nsn": [
+        "1710014781918"
+      ],
+      "val_est_low": "500000",
+      "val_est_high": "1500000",
+      "pop_country": null,
+      "pop_state": null,
+      "pop_city": null,
+      "pop_zip": null,
+      "opp_key": "2cc561ca737258a0bdec3639124b3835",
+      "version_key": "2cc561ca737258a0bdec3639124b3835",
+      "source_type": "sam",
+      "dibbs_status": null,
+      "path": "https://www.highergov.com/contract-opportunity/bell-crank-aircraft-sprpa125qeu55-o-f92e9",
+      "source_path": "https://sam.gov/opp/033a93b5d1984573a3e167eb1449f618/view",
+      "document_path": "https://www.highergov.com/api-external/document/?api_key=9874995194174018881c567d92a2c4d2&page_size=10&related_key=033a93b5d1984573a3e167eb1449f618",
+      "assessment": {
+        "decision": "FURTHER_ANALYSIS",
+        "reasoning": "Model returned mixed format - see full response",
+        "confidence": 75,
+        "source": "ag:d42144c7:20250902:sos-triage-agent:73e9cddd"
+      }
+    },
+    {
+      "opp_cat": "Federal Contract Opportunity",
+      "title": "RFI -Biocontainment, Isolation, and Quarantine (BIQ) Portable Patient Transport System (PPTS)",
+      "description_text": "Note:  This is a follow-on Request for Information (RFI) to two previous Sources Sought Announcements (links provided below) and is requesting more detailed information about readily available or commercial off the shelf (COTS) solutions for a single (non-ambulatory) patient system to support the Biocontainment, Isolation, and Quarantine (BIQ) Portable Patient Transport System (PPTS) program.\n\n\n\thttps://sam.gov/opp/d2ddfa1fb4694c4eb83a33ba50085882/view, posted 11 SEP 2023 through 31 OCT 2023\n\thttps://sam.gov/opp/9d48079a6e6f41819578ab491a4c06f1/view, posted 06 AUG 2024 through 08 NOV 2024\n\n\n\n\nSynopsis: The purpose of this RFI is to obtain detailed information to assist the Joint Project Manager for Chemical, Biological, Radiological, and Nuclear Protection (JPM CBRN Protection) in identifying readily available or COTS solutions for a single (non-ambulatory) patient system to support the BIQ PPTS program. This man-portable system will control and prevent the spread of biological threats (biothreats) while transporting a single, non-ambulatory infectious patient by air, rail, ground transport, or sealift.\n\n\n\nThe U.S. Government requests that responses be submitted via email ONLY to Brian Liska at brian.liska@usmc.mil no later than 10 SEP 2025 by 5:00 p.m. EST.\n\n\n\nBackground: To address the goals and objectives of the Chemical and Biological Defense Program (CBDP) Enhanced Biodefense and Pandemic Preparedness Narrative and the National Biodefense Strategy and Implementation Plan, JPM CBRN Protection is in need of a man-portable system to control and prevent the spread of biothreats while transporting a non-ambulatory infectious patient. This RFI is issued to determine what solutions are available, and to obtain details about these systems to determine if they may be suitable for military use.\n\n\n\nDescription: This single (non-ambulatory) patient BIQ transport system must be man-portable and will consist of an enclosure for the infectious patient with an attached battery-powered air filtration system to generate a negative pressure inside the enclosure, provide sufficient air changes inside the enclosure, and filter exhaust air from the enclosure.  Other features such as, but not limited to, inlet air filters, glove ports, pass-thru interfaces, and windows are needed for healthcare workers to provide care to the patient during transport.\n\n\n\nPrograms: This RFI is in support of the PPTS program, which is one of the three BIQ programs managed by JPM CBRN Protection.  Requirements for the single (non-ambulatory) patient system are currently being developed, and a validated requirements document is anticipated in Fiscal Year 2026.\n\n\n\nGovernment Furnished Property: None\n\n\n\nResponses: Interested parties are invited to submit a response to this RFI.\n\n\n\nThis RFI is issued solely for information and planning purposes and to identify potential COTS solutions. THIS IS NOT A SOLICITATION. No contract will be awarded from this RFI. This RFI does not constitute a Request for Proposal (RFP) or a promise to issue an RFP in the future. It is subject to change and is not binding on the U.S. Government. Further, unsolicited proposals will not be accepted. Funding is not available at this time. The U.S. Government has not made a commitment to procure any of the items/services discussed, and release of this RFI should not be construed as such a commitment or as authorization to incur cost for which reimbursement would be required or sought. Response to this RFI is voluntary and no reimbursement will be made for any costs associated with providing information in response to this and any follow-on information requests. All submissions become U.S. Government property and will not be returned.\n\n\n\nNot responding to this RFI does not preclude participation in any future RFP(s) if any is(are) issued.\n\n\n\nInterested parties may identify their interest by submitting a white paper regarding this RFI to JPM CBRN Protection via e-mail ONLY to Brian Liska at brian.liska@usmc.mil no later than 10 SEP 2025 by 5:00 p.m. EST.  Please include the following information in the white paper:\n\n\n\tPlease provide system description(s) and image(s).\n\tWhat is the size and weight of the system?\n\tWhat is the cost and delivery lead time for 1 system up to 50 systems?\n\tWhat is the location of the manufacturing facility?  Are any system components/parts sourced outside of the United States and if so, where?\n\tWhat is the shelf life and recommended storage conditions of the system?\n\tIs the system a prototype, commercial off the shelf, or government off the shelf?\n\tWhat negative pressure (in inches of water column/gauge) is maintained inside the enclosure (i.e., the enclosed patient isolation area)?\n\tHow many air changes per hour are maintained inside the enclosure?\n\tWhat media is used to filter the inlet/exhaust air (e.g., HEPA, ULPA, MERV-14)?\n\tWhat is the power source for the system (e.g., rechargeable battery, non-rechargeable battery, 120 VAC)?  If there is more than one power source, then please list all of them.  Please provide battery model numbers.  How many hours can the system continuously operate using each power source?\n\tWhat EMI testing has been performed on the system (e.g., MIL-STD-461, MIL-STD-464)?\n\tWhat features are incorporated in the system to prevent liquids (e.g., blood, urine, vomit) from leaking out of the enclosure (e.g., leakproof zipper, absorbent pad)?  Additionally, what volume of liquid can be contained within the enclosure?\n\tHas the system been tested for compatibility with any decontaminants (e.g., Calla 1452, 2% calcium hypochlorite solution, Joint General-Purpose Decontaminant)?\n\tWhat is the minimum and maximum temperature and relative humidity that the system can be operated in?\n\tHas the system been tested in any adverse environmental conditions (e.g., sand, smoke, fungus, salt spray/fog, rain)?\n\tWhat material testing has been performed (e.g., tear strength, puncture resistance)?\n\tWhat platforms (e.g., ambulance, aircraft) can be used to transport the system in the patient movement configuration (i.e., when a patient is inside the enclosure)?\n\tWhat military and/or commercial aircraft has the system been certified for airworthiness?\n\tWhat litters is the system compatible with (e.g., NATO litter, DECON litter, stokes litter, SKED litter)?  If unknown, then please provide the exterior dimensions of the system.\n\tIs PFAS contained in any component used in the system?\n\n\n\n\nNOTE:  Specification sheets, reports, and/or manuals may be included with the white paper.\n\n\n\nThe U.S. Government will not pay for any information or administrative cost incurred in response to this RFI. All costs associated with responding to this RFI will be solely at the expense of the interested party.\n\n\nQuestions: Any questions for clarification may be emailed to Brian Liska at brian.liska@usmc.mil no later than five business days before 10 SEP 2025. Please allow three business days for a response. Verbal questions will NOT be accepted. Questions shall NOT contain proprietary or classified information. An unattributed list of questions and answers will be published at the same web location of this RFI.\n",
+      "ai_summary": null,
+      "source_id": "RFIBiocontainmentIsolationAndQuarantine(BIQ)PortablePatientTransportSystem(PPTS)",
+      "source_id_version": "7f17c4fc905f4911a0461f54e6e0c0be",
+      "captured_date": "2025-08-20",
+      "posted_date": "2025-08-20",
+      "due_date": "2025-09-10",
+      "agency": {
+        "agency_key": 2731,
+        "agency_name": "ACC Aberdeen Proving Ground",
+        "agency_abbreviation": "APG",
+        "agency_type": "Federal",
+        "path": "https://www.highergov.com/agency/acc-aberdeen-proving-ground-apg-2731/"
+      },
+      "naics_code": {
+        "naics_code": "541330"
+      },
+      "psc_code": {
+        "psc_code": "4240"
+      },
+      "opp_type": {
+        "description": "Sources Sought"
+      },
+      "primary_contact_email": {
+        "contact_title": "Procurement Officer",
+        "contact_name": "Brian Liska",
+        "contact_first_name": "Brian",
+        "contact_last_name": "Liska",
+        "contact_email": "brian.liska@usmc.mil",
+        "contact_phone": null
+      },
+      "secondary_contact_email": null,
+      "set_aside": null,
+      "nsn": null,
+      "val_est_low": "5000000",
+      "val_est_high": "15000000",
+      "pop_country": "USA",
+      "pop_state": "MA",
+      "pop_city": "Natick",
+      "pop_zip": "01760",
+      "opp_key": "54448e27f0fd50cead0a90c363a5ef3d",
+      "version_key": "54448e27f0fd50cead0a90c363a5ef3d",
+      "source_type": "sam",
+      "dibbs_status": null,
+      "path": "https://www.highergov.com/contract-opportunity/rfi-biocontainment-isolation-and-quarantine-bi-rfi-biocontainmentisolationandquarantine-biq-portablepatienttransportsystem-ppts-r-0c0be",
+      "source_path": "https://sam.gov/opp/7f17c4fc905f4911a0461f54e6e0c0be/view",
+      "document_path": "https://www.highergov.com/api-external/document/?api_key=9874995194174018881c567d92a2c4d2&page_size=10&related_key=7f17c4fc905f4911a0461f54e6e0c0be",
+      "assessment": {
+        "decision": "FURTHER_ANALYSIS",
+        "reasoning": "Model returned mixed format - see full response",
+        "confidence": 75,
+        "source": "ag:d42144c7:20250902:sos-triage-agent:73e9cddd"
+      }
+    },
+    {
+      "opp_cat": "Federal Contract Opportunity",
+      "title": "NATO Request for Information: Ballistic Missile Defense (BMD) Real Time (RT) System",
+      "description_text": "The NATO Communications and Information Agency (NCIA) has issued a Request for Information (RFI) to identify potential sources and gather information regarding industry capabilities to support the provision of the Ballistic Missile Defense (BMD) Real Time (RT)  component of the NATO BMD capability. \n\nThe purpose of this RFI is to obtain industry views and to determine the feasibility to procure Off-The-Shelf products, to identify potential solutions, possible suppliers providing the complete capability, or products delivering a subset of the capability that could be integrated into a modularized data centric architecture.\n\nResponses to this RFI will help NCIA&rsquo;s acquisition planning in refining requirements, identifying capabilities, and shaping the strategy for any future solicitation.\n\nThis RFI is issued solely for informational purposes and does not constitute a Request for Proposal, Request for Quotation, or Invitation for Bid.\n\nResponses should be submitted using the attached Excel document. The email address for submitting your responses to NCIA is provided in the RFP attachment. \n\nResponses are to be submitted no later than 1:00 pm CET on 30 September 2025.\n\nNCIA is hosting an industry event to present additional programmatic and technical aspects of the project, and, to the extent possible, answer questions related to this RFI. NCIA has tentatively scheduled this event on or about the week of 15 September 2025 and intends to hold it in a virtual format to reach a wider audience.\n\nNCIA intends to allow participation from responders who missed the original 13 August deadline to register for the Industry Event planned in September. Any industrial entity that is located in a NATO nation and is interested in participating in this industry event is kindly requested to notify its interest by email to the address indicated in the RFP by stating the name of the firm, telephone number, e-mail address, and company POC. Firms are kindly requested to express their interest as soon as practicable.\n\nYour participation in this RFI is greatly appreciated.\n \n",
+      "ai_summary": "Background\n The NATO Communications and Information Agency (NCIA) has issued a Request for Information (RFI) to identify potential sources and gather information regarding industry capabilities to support the provision of the Ballistic Missile Defense (BMD) Real Time (RT) component of the NATO BMD capability. \n\nThe purpose of this RFI is to obtain industry views and determine the feasibility of procuring Off-The-Shelf products, identifying potential solutions, and possible suppliers that can provide complete or modular capabilities. This RFI is solely for informational purposes and does not constitute a Request for Proposal, Request for Quotation, or Invitation for Bid.\n\nWork Details\n The RFI seeks capabilities to support the BMD RT component of NATO's BMD capability. \n\nIt aims to gather industry views on the project and assess the feasibility of procuring Off-The-Shelf products, including both commercial and government options. The responses will assist NCIA in refining requirements, identifying capabilities, and shaping future solicitation strategies. \n\nThe BMD RT System is part of the Battle Management, Command, Control Communications and Information (BMC3I) framework, enabling key tactical functions such as Surveillance, Engagement Operations, Situational Awareness, and Tasking. The system will be deployed on both static and deployable NATO Command Structure entities and will provide services at NCS locations alongside AirC2 RT systems to ensure comprehensive coverage against ballistic threats.\n\nPlace of Performance\n The contract will be performed in locations associated with NATO Command Structure entities.\n",
+      "source_id": "RFICO423316RTBMD",
+      "source_id_version": "b8657574a9af4ed196b3cffee2d56473",
+      "captured_date": "2025-08-18",
+      "posted_date": "2025-08-18",
+      "due_date": "2025-09-30",
+      "agency": {
+        "agency_key": 329,
+        "agency_name": "Bureau of Industry and Security",
+        "agency_abbreviation": "BIS",
+        "agency_type": "Federal",
+        "path": "https://www.highergov.com/agency/bureau-of-industry-and-security-bis-329/"
+      },
+      "naics_code": {
+        "naics_code": "336414"
+      },
+      "psc_code": null,
+      "opp_type": {
+        "description": "Special Notice"
+      },
+      "primary_contact_email": null,
+      "secondary_contact_email": null,
+      "set_aside": null,
+      "nsn": null,
+      "val_est_low": "0",
+      "val_est_high": "0",
+      "pop_country": "BEL",
+      "pop_state": null,
+      "pop_city": null,
+      "pop_zip": null,
+      "opp_key": "93dd439be4f754c799d8e351e1072995",
+      "version_key": "93dd439be4f754c799d8e351e1072995",
+      "source_type": "sam",
+      "dibbs_status": null,
+      "path": "https://www.highergov.com/contract-opportunity/nato-request-for-information-ballistic-missile-de-rfi-co-423316-rtbmd-s-47c7c",
+      "source_path": "https://sam.gov/opp/b8657574a9af4ed196b3cffee2d56473/view",
+      "document_path": "https://www.highergov.com/api-external/document/?api_key=9874995194174018881c567d92a2c4d2&page_size=10&related_key=b8657574a9af4ed196b3cffee2d56473",
+      "assessment": {
+        "decision": "FURTHER_ANALYSIS",
+        "reasoning": "Model returned mixed format - see full response",
+        "confidence": 75,
+        "source": "ag:d42144c7:20250902:sos-triage-agent:73e9cddd"
+      }
+    },
+    {
+      "opp_cat": "Federal Contract Opportunity",
+      "title": "16--GUIDE WINCH ASSY,AI, IN REPAIR/MODIFICATION OF",
+      "description_text": "CONTACT INFORMATION|4|N732.76|N00383|771-229-2959|liam.f.cunningham2.civ@us.navy.mil|\rITEM UNIQUE IDENTIFICATION AND VALUATION (JAN 2023)|19||||||||||||||||||||\rHIGHER-LEVEL CONTRACT QUALITY REQUIREMENT|8|x||||||||\rWIDE AREA WORKFLOW PAYMENT INSTRUCTIONS (JAN 2023)|16|Invoice and Receiving Report Combo|Invoice and Receiving Report Combo|TBD|N00383|TBD|TBD|See schedule|TBD|See schedule||||||||\rNAVY USE OF ABILITYONE SUPPORT CONTRACTOR - RELEASE OF OFFEROR INFORMATION (3-18))|1||\rWARRANTY OF SUPPLIES OF A NONCOMPLEX NATURE (JUN 2003)|6|365 days|45 days of the last delivery under this contract|||||\rEQUAL OPPORTUITY FOR WORKERS WITH DISABILITIES (JUN 2020)|2|||\rBUY AMERICAN-FREE TRADE AGREEMENTS-BALANCE OF PAYMENTS PROGRAM-BASIC (FEB 2024)|11||||||||||||\rLIMITATIONS ON PASS-THROUGH CHARGES (JUN 2020)|1||\rOFFEROR REPRESENTATIONS AND CERTIFICATIONS--COMMERCIAL PRODUCTS AND COMMERCIALSERVICES (MAR 2025)(DEVIATION 2025-O0003 AND 2025-O0004))|3||||\rALTERNATE A, ANNUAL REPRESENTATIONS AND CERTIFICATIONS (OCT 2024)|13||||||||||||||\rBUY AMERICAN-FREE TRADE AGREEMENTS-BALANCE OF PAYMENTS PROGRAM CERTIFICATE-BASIC (FEB 2024))|5||||||\rBUY AMERICAN--BALANCE OF PAYMENTS PROGRAM (FEB 2024)|1||\rROYALTY INFORMATION (APR 1984)|1||\rANNUAL REPRESENTATIONS AND CERTIFICATIONS (MAR 2025)(DEVIATION 2025-O0003 AND 2025-O0004))|12|336413|1250|||||||||||\rNOTICE OF PRIORITY RATING FOR NATIONAL DEFENSE, EMERGENCY PREPAREDNESS, ANDENERGY PROGRAM USE (APR 2008))|2||A1A|\rEVALUATION--COMMERCIAL PRODUCTS AND COMMERCIAL SERVICES (NOV 2021)|4|||||\rThis RFQ is for repair requirement.\rRepair Turnaround Time (RTAT): the resultant contractual delivery requirement is measured from asset Return to the date of asset acceptance under the terms of the contract. For purposes of this section, Return is defined as physical receipt of the F-condition\rasset at the contractor's facility as reflected in the Action Date entry in the Commercial Asset Visibility (CAV) system. In accordance with the CAV Statement of Work, the contractor is required to accurately report all transactions by the end of the fifth regular\r business day after receipt and the Action Date entered in CAV must be dated to reflect the actual date of physical receipt. The Contractor must obtain final inspection and acceptance by the Government for all assets within the RTATs established in this contract.\rProposals shall reference the proposed RTAT and any capacity constraints. NAVSUP WSS requests that contractors submit a quote that includes either a firm-fixed price or TT&E pricing as well as estimate costs to repair this item.\rThis contract/delivery order/purchase order/modification is issued by the Government when deposited in the mail, transmitted by facsimile or sent by any electronic commerce method, including email. The Government's acceptance of the contractor's proposal\rconstitutes bilateral agreement to issue this contract/delivery order/purchase order/modification.\r\\\r",
+      "ai_summary": "Background\n This solicitation is issued by the NAVSUP Weapon Systems Support (NAVSUP WSS) under the Department of the Navy. The agency's mission is to provide logistics support for naval forces, ensuring that they are equipped and ready to perform their missions. The goal of this contract is to procure repair services for specific equipment, which involves the Guide Winch Assembly.\n\nWork Details\n The contract requires the teardown, evaluation, repair, and/or modification of the following item:\n- Item No: 0001\n- NSN: 7RH 1680-01-599-1334\n- Description: GUIDE WINCH ASSY, AI\n- Quantity: 4 EA\n- Shelf Life: 0-00\n- Made to: 3RWH7 IAW: 04957A01-01\n\nPackaging must comply with MIL-STD-2073. The contractor must ensure that all repairs are completed within the established Repair Turnaround Time (RTAT), which is measured from asset return to acceptance by the government. Proposals must include a firm-fixed price or Time & Materials pricing along with estimated costs for repairs.\n\nPeriod of Performance\n The period of performance is not explicitly stated in the provided data but is tied to the Repair Turnaround Time (RTAT) which must be proposed by contractors.\n\nPlace of Performance\n The place of performance includes the contractor's facility where assets will be received and repaired.\n",
+      "source_id": "N0038325QF336",
+      "source_id_version": "cc719fe9ca8a49a5b7793aa18d1e8c40",
+      "captured_date": "2025-08-15",
+      "posted_date": "2025-08-15",
+      "due_date": "2025-09-15",
+      "agency": {
+        "agency_key": 1034,
+        "agency_name": "Naval Supply Systems Command",
+        "agency_abbreviation": "NAVSUP",
+        "agency_type": "Federal",
+        "path": "https://www.highergov.com/agency/naval-supply-systems-command-navsup-1034/"
+      },
+      "naics_code": {
+        "naics_code": "336413"
+      },
+      "psc_code": {
+        "psc_code": "1680"
+      },
+      "opp_type": {
+        "description": "Solicitation"
+      },
+      "primary_contact_email": {
+        "contact_title": "Procurement Officer",
+        "contact_name": "Liam Cunningham",
+        "contact_first_name": "Liam",
+        "contact_last_name": "Cunningham",
+        "contact_email": "liam.f.cunningham2.civ@us.navy.mil",
+        "contact_phone": "2156976525"
+      },
+      "secondary_contact_email": null,
+      "set_aside": null,
+      "nsn": [
+        "1680015991334"
+      ],
+      "val_est_low": "2931",
+      "val_est_high": "5863",
+      "pop_country": null,
+      "pop_state": null,
+      "pop_city": null,
+      "pop_zip": null,
+      "opp_key": "c33d0eeebe925bd8b1000094f2b3b066",
+      "version_key": "c33d0eeebe925bd8b1000094f2b3b066",
+      "source_type": "sam",
+      "dibbs_status": null,
+      "path": "https://www.highergov.com/contract-opportunity/16-guide-winch-assy-ai-in-repair-modification-of-n0038325qf336-o-e8c40",
+      "source_path": "https://sam.gov/opp/cc719fe9ca8a49a5b7793aa18d1e8c40/view",
+      "document_path": "https://www.highergov.com/api-external/document/?api_key=9874995194174018881c567d92a2c4d2&page_size=10&related_key=cc719fe9ca8a49a5b7793aa18d1e8c40",
+      "assessment": {
+        "decision": "FURTHER_ANALYSIS",
+        "reasoning": "Model returned mixed format - see full response",
+        "confidence": 75,
+        "source": "ag:d42144c7:20250902:sos-triage-agent:73e9cddd"
+      }
+    },
+    {
+      "opp_cat": "Federal Contract Opportunity",
+      "title": "F-22 Cockpit Simulator",
+      "description_text": "Description(s):  REQUEST FOR INFORMATION FOR F-22 COCKPIT SIMULATOR\n\nTHIS IS A MARKET SURVEY FOR INFORMATION ONLY. THIS IS NOT A SOLICITATION FOR PROPOSALS AND NO CONTRACT WILL BE AWARDED FROM THIS SYNOPISIS. NO REIMBURSEMENT WILL BE MADE FOR ANY COSTS ASSOCIATED WITH PROVIDING INFORMATION IN RESPONSE TO THIS SYNOPSIS OR ANY FOLLOW-UP INFORMATION REQUESTS. THE PURPOSE OF THIS SYNOPSIS IS TO GAIN KNOWLEDGE OF POTENTIALLY QUALIFIED SOURCES AND THEIR SIZE CLASSIFICATIONS (SMALL BUSINESS, LARGE BUSINESS, ETC.). PLEASE DO NOT REQUEST A COPY OF A SOLICITATION, AS ONE DOES NOT EXIST.   \n\n1.  Purpose.\nThis is a Request for Information in support of Market Research being conducted by the United States Air Force to identify potential sources for an F-22 Cockpit Simulator\n\n2.  Requirement. \nThis acquisition anticipates seeking a contractor who can provide an F-22 Cockpit Simulator at Edwards AFB, CA. The requirement consists of the following supplies:\n***PLEASE SEE ATTACHED STATEMENT OF OBJECTIVES (SOO)***\n\n3.  Information requested. \nThe Government requests interested offerors that can fully support this requirement furnish the following information:\n\n1. Company name, SAM Unique Entity ID (UEI) and Cage Code, address, points of contact, phone numbers and e-mail addresses.\n\n2. Information should include a market research quote identifying all specifications for each line item. The information package must be clear, concise, and complete. The Air Force is under no obligation to provide feedback to the company, or to contact the company for clarification of any information submitted in response to this request.\n\n3. Identification of business size (small or large) and identify the socioeconomic disadvantaged category, as defined the Federal Acquisition Regulation FAR Part 19 and currently listed in the System for Award Management (SAM). Small business size standards are published by the U.S. Small Business Administration (SBA) and may be found at https://www.sba.gov/document/support-table-size-standards .The potential North American Industry Classification System (NAICS) codes assigned to this procurement is 336413 &ldquo;Aircraft auxiliary parts (e.g., crop dusting, external fuel tanks, inflight refueling equipment) Manufacturing&rdquo;. The Small Business Size Standard is 1,250 employees.\n\n4. Any other information deemed useful to the Air Force.  Information packages should be limited to no more than 3 pages.\n\n4.  Inquiries. \nAny qualified and interested companies responding to this announcement must be able to support all areas. NO partial support responses from industry will be accepted.\n\nThe due date and time for responses to this synopsis is 7:00am Pacific Standard Time on Friday 15 August 2025.\n \n",
+      "ai_summary": "Background\n This Request for Information (RFI) is issued by the United States Air Force as part of market research to identify potential sources for an F-22 Cockpit Simulator. The goal is to gather knowledge about qualified sources and their size classifications, such as small or large businesses. This RFI is not a solicitation for proposals, and no contract will be awarded from this synopsis.\n\nWork Details\n The requirement is for an F-22 Cockpit Simulator to be delivered at Edwards AFB, CA. The supplies needed include: \n- F-22 Simulated Custom Cockpit Seat \n- Harnesses \n- Power Supplies \n- ACU \n- Controller boards \n- F-22 ICP (Quantity 1) at $42,500.00 each \n- F-22 SMFD (Quantity 1) at $19,500.00 each \nTotal estimated cost: $487,000. The contractor must ensure that all applicable Commercial-Off-The-Shelf (COTS) IA and IA-enabled products comply with AFI 17-130 and other cybersecurity requirements.\n\nPlace of Performance\n Edwards AFB, CA\n",
+      "source_id": "TEMP10094349",
+      "source_id_version": "5c1b4c573f264a1c9ca823168e797a04",
+      "captured_date": "2025-08-11",
+      "posted_date": "2025-08-11",
+      "due_date": "2025-08-15",
+      "agency": {
+        "agency_key": 2087,
+        "agency_name": "Air Force Test Center",
+        "agency_abbreviation": "AFTC",
+        "agency_type": "Federal",
+        "path": "https://www.highergov.com/agency/air-force-test-center-aftc-2087/"
+      },
+      "naics_code": {
+        "naics_code": "336413"
+      },
+      "psc_code": {
+        "psc_code": "1680"
+      },
+      "opp_type": {
+        "description": "Sources Sought"
+      },
+      "primary_contact_email": {
+        "contact_title": "USAF Personnel",
+        "contact_name": "Abel Alcantar",
+        "contact_first_name": "Abel",
+        "contact_last_name": "Alcantar",
+        "contact_email": "abel.alcantar.1@us.af.mil",
+        "contact_phone": "6612773531"
+      },
+      "secondary_contact_email": {
+        "contact_title": "Contracting Officer",
+        "contact_name": "Jenna Jacobson",
+        "contact_first_name": "Jenna",
+        "contact_last_name": "Jacobson",
+        "contact_email": "jenna.jacobson@us.af.mil",
+        "contact_phone": "6612779558"
+      },
+      "set_aside": null,
+      "nsn": null,
+      "val_est_low": "0",
+      "val_est_high": "0",
+      "pop_country": "USA",
+      "pop_state": "CA",
+      "pop_city": "Edwards",
+      "pop_zip": "93524",
+      "opp_key": "63c0d7eff48e57b7bbc08e20e31f142a",
+      "version_key": "63c0d7eff48e57b7bbc08e20e31f142a",
+      "source_type": "sam",
+      "dibbs_status": null,
+      "path": "https://www.highergov.com/contract-opportunity/f-22-cockpit-simulator-temp10094349-r-97a04",
+      "source_path": "https://sam.gov/opp/5c1b4c573f264a1c9ca823168e797a04/view",
+      "document_path": "https://www.highergov.com/api-external/document/?api_key=9874995194174018881c567d92a2c4d2&page_size=10&related_key=5c1b4c573f264a1c9ca823168e797a04",
+      "assessment": {
+        "decision": "FURTHER_ANALYSIS",
+        "reasoning": "Model returned mixed format - see full response",
+        "confidence": 75,
+        "source": "ag:d42144c7:20250902:sos-triage-agent:73e9cddd"
+      }
+    },
+    {
+      "opp_cat": "SLED Contract Opportunity",
+      "title": "Snowplow Navigation Guidance System",
+      "description_text": "The State of Iowa is seeking snowplow navigation systems to help plow drivers stay in their intended path during snowstorms.",
+      "ai_summary": "Background\n The State of Iowa is seeking to enhance snowplow operations during blizzards and heavy snowfall, which often create whiteout conditions that obscure lane lines and make navigation challenging for plow drivers. The goal of this contract is to procure a commercial-off-the-shelf (COTS) snowplow navigation system that will assist drivers in maintaining their intended path, thereby improving safety and efficiency during snow removal operations.\n\nWork Details\n The contractor will provide a Snowplow Navigation System that includes all necessary components for operation. The system must be capable of providing by-the-inch vehicle positioning to a mapped path, with an in-cab display showing the plow's position and feedback on lateral deviations from the programmed path. Specific requirements include:\n\n- The system must maintain accuracy within four inches at speeds up to thirty-five miles per hour in heavy snowfall conditions.\n- It should allow users to mark potential obstacles and provide alerts when the snowplow is near them.\n- The system must support communication between multiple units for route sharing.\n- Automatic software updates are required, with advance notifications to users.\n\nPeriod of Performance\n The contract will have an initial term of three years from the date of execution, with an option for the State to renew for up to seven additional one-year terms.\n\nPlace of Performance\n The services and delivery of products will take place within the State of Iowa.\n\nBidder Requirements\n Bidders must comply with specific requirements including providing a Service Level Agreement (SLA), offering installation training, and ensuring availability of service personnel around Iowa. Bidders are also required to submit pricing for various components including service licenses, installation fees, activation fees, and training costs.\n",
+      "source_id": "RFB-185-2524-2026",
+      "source_id_version": "RFB-185-2524-2026-0",
+      "captured_date": "2025-08-08",
+      "posted_date": "2025-08-08",
+      "due_date": "2025-08-28",
+      "agency": {
+        "agency_key": 28278,
+        "agency_name": "Iowa Department of Administrative Services",
+        "agency_abbreviation": null,
+        "agency_type": "SLED",
+        "path": "https://www.highergov.com/agency/iowa-department-of-administrative-services-28278/"
+      },
+      "naics_code": {
+        "naics_code": "334511"
+      },
+      "psc_code": {
+        "psc_code": "AN13"
+      },
+      "opp_type": {
+        "description": "Solicitation"
+      },
+      "primary_contact_email": {
+        "contact_title": null,
+        "contact_name": "Sherry Van Vugt",
+        "contact_first_name": "Sherry",
+        "contact_last_name": "Van",
+        "contact_email": "sherry.vanvugt@dom.iowa.gov",
+        "contact_phone": "5158057778"
+      },
+      "secondary_contact_email": null,
+      "set_aside": null,
+      "nsn": null,
+      "val_est_low": "500000",
+      "val_est_high": "2000000",
+      "pop_country": "USA",
+      "pop_state": "IA",
+      "pop_city": null,
+      "pop_zip": null,
+      "opp_key": "fe6e429832305ca3a62e9ba147bad3f8",
+      "version_key": "fe6e429832305ca3a62e9ba147bad3f8",
+      "source_type": "sled",
+      "dibbs_status": null,
+      "path": "https://www.highergov.com/sl/contract-opportunity/ia-snowplow-navigation-guidance-system-54373367",
+      "source_path": "https://bids.sciquest.com/apps/Router/PublicEvent?CustomerOrg=DASIowa&tab=PHX_NAV_SourcingOpenForBid",
+      "document_path": "https://www.highergov.com/api-external/document/?api_key=9874995194174018881c567d92a2c4d2&page_size=10&related_key=2443-RFB-185-2524-2026",
+      "assessment": {
+        "decision": "FURTHER_ANALYSIS",
+        "reasoning": "Model returned mixed format - see full response",
+        "confidence": 75,
+        "source": "ag:d42144c7:20250902:sos-triage-agent:73e9cddd"
+      }
+    },
+    {
+      "opp_cat": "SLED Contract Opportunity",
+      "title": "Snowplow Navigation Guidance System",
+      "description_text": "The State of Iowa is seeking to purchase a commercial-off-the-shelf (COTS) snowplow navigation system to help plow drivers stay in their intended path during snowstorms. ",
+      "ai_summary": "Background\n The State of Iowa, through the Division of IT (DOIT), is seeking to procure a commercial-off-the-shelf (COTS) snowplow navigation system. This initiative aims to enhance the efficiency and safety of snowplow operations during blizzards and heavy snowfall, which are common in Iowa. The navigation system will assist plow drivers in maintaining their intended path amidst challenging visibility conditions, thereby reducing the time taken to clear roads and improving overall road safety.\n\nWork Details\n The contract involves providing a COTS snowplow navigation system that includes all necessary components for proper functionality. The system must be capable of providing by-the-inch vehicle positioning to a mapped path, with an in-cab display that alerts operators if the vehicle deviates from its programmed route. Specific requirements include:\n\n- A screen for driver path position checks.\n- Visual or audio warnings for path departure.\n- Accuracy within four inches at speeds up to 35 miles per hour in heavy snowfall.\n- Ability to mark potential obstacles and alert drivers when approaching them.\n- Communication capabilities between snowplows equipped with the same system.\n- Automatic software updates.\n\nPeriod of Performance\n The initial contract term is three years from the date of execution, with an option for the State to renew for up to seven additional one-year terms.\n\nPlace of Performance\n The services and delivery of products will primarily take place within the State of Iowa.\n\nBidder Requirements\n Bidders must provide certifications regarding criminal history checks for personnel involved in contract performance. They are also required to submit documentation related to terminations, litigation, and debarment. Additionally, bidders must agree to provide a detailed quarterly sales report and pay a 1.00% administrative fee on all sales made under this contract.\n",
+      "source_id": "RFB-185-2524-2026",
+      "source_id_version": "RFB-185-2524-2026-0",
+      "captured_date": "2025-08-07",
+      "posted_date": "2025-08-07",
+      "due_date": "2025-08-28",
+      "agency": {
+        "agency_key": 29049,
+        "agency_name": "Department of Management - IT",
+        "agency_abbreviation": null,
+        "agency_type": "SLED",
+        "path": "https://www.highergov.com/agency/department-of-management-it-29049/"
+      },
+      "naics_code": {
+        "naics_code": "334511"
+      },
+      "psc_code": {
+        "psc_code": "AN13"
+      },
+      "opp_type": {
+        "description": "Solicitation"
+      },
+      "primary_contact_email": {
+        "contact_title": null,
+        "contact_name": "Sherry Van Vugt",
+        "contact_first_name": "Sherry",
+        "contact_last_name": "Van",
+        "contact_email": "sherry.vanvugt@dom.iowa.gov",
+        "contact_phone": "5158057778"
+      },
+      "secondary_contact_email": null,
+      "set_aside": null,
+      "nsn": null,
+      "val_est_low": "500000",
+      "val_est_high": "2000000",
+      "pop_country": "USA",
+      "pop_state": "IA",
+      "pop_city": null,
+      "pop_zip": null,
+      "opp_key": "9428c1f5ae215f5dbab69f78d746fe94",
+      "version_key": "9428c1f5ae215f5dbab69f78d746fe94",
+      "source_type": "sled",
+      "dibbs_status": null,
+      "path": "https://www.highergov.com/sl/contract-opportunity/ia-snowplow-navigation-guidance-system-54354063",
+      "source_path": "https://bidopportunities.iowa.gov/Home/BidInfo?bidId=4c1e13f2-d061-4963-aefc-ad4878c9eede",
+      "document_path": "https://www.highergov.com/api-external/document/?api_key=9874995194174018881c567d92a2c4d2&page_size=10&related_key=136-RFB-185-2524-2026",
+      "assessment": {
+        "decision": "FURTHER_ANALYSIS",
+        "reasoning": "Model returned mixed format - see full response",
+        "confidence": 75,
+        "source": "ag:d42144c7:20250902:sos-triage-agent:73e9cddd"
+      }
+    }
+  ]
+}

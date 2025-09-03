@@ -1,0 +1,11 @@
+decision,title,agency,confidence,reasoning,naics,psc,set_aside,value_low,value_high,doc_length,model_used
+FURTHER_ANALYSIS,"15--PANEL,STRUCTURAL,AI",Naval Supply Systems Command,75,Model returned mixed format - see full response,,,,0,0,0,ag:d42144c7:20250902:sos-triage-agent:73e9cddd
+FURTHER_ANALYSIS,Online Drinking Water Compliance Monitoring System,Georgia Department of Natural Resources,75,Model returned mixed format - see full response,,,,0,0,0,ag:d42144c7:20250902:sos-triage-agent:73e9cddd
+FURTHER_ANALYSIS,"RFI - Biocontainment, Isolation, and Quarantine (BIQ) Shipboard Isolation System (SIS)",ACC Aberdeen Proving Ground,75,Model returned mixed format - see full response,,,,0,0,0,ag:d42144c7:20250902:sos-triage-agent:73e9cddd
+FURTHER_ANALYSIS,"BELL CRANK,AIRCRAFT",DLA Aviation,75,Model returned mixed format - see full response,,,,0,0,0,ag:d42144c7:20250902:sos-triage-agent:73e9cddd
+FURTHER_ANALYSIS,"RFI -Biocontainment, Isolation, and Quarantine (BIQ) Portable Patient Transport System (PPTS)",ACC Aberdeen Proving Ground,75,Model returned mixed format - see full response,,,,0,0,0,ag:d42144c7:20250902:sos-triage-agent:73e9cddd
+FURTHER_ANALYSIS,NATO Request for Information: Ballistic Missile Defense (BMD) Real Time (RT) System,Bureau of Industry and Security,75,Model returned mixed format - see full response,,,,0,0,0,ag:d42144c7:20250902:sos-triage-agent:73e9cddd
+FURTHER_ANALYSIS,"16--GUIDE WINCH ASSY,AI, IN REPAIR/MODIFICATION OF",Naval Supply Systems Command,75,Model returned mixed format - see full response,,,,0,0,0,ag:d42144c7:20250902:sos-triage-agent:73e9cddd
+FURTHER_ANALYSIS,F-22 Cockpit Simulator,Air Force Test Center,75,Model returned mixed format - see full response,,,,0,0,0,ag:d42144c7:20250902:sos-triage-agent:73e9cddd
+FURTHER_ANALYSIS,Snowplow Navigation Guidance System,Iowa Department of Administrative Services,75,Model returned mixed format - see full response,,,,0,0,0,ag:d42144c7:20250902:sos-triage-agent:73e9cddd
+FURTHER_ANALYSIS,Snowplow Navigation Guidance System,Department of Management - IT,75,Model returned mixed format - see full response,,,,0,0,0,ag:d42144c7:20250902:sos-triage-agent:73e9cddd
