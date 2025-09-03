@@ -13,3 +13,10 @@ ops/trust-tracking/
 ops/manual-paste-log/
 ops/terminal-monitoring/
 qa/session-traces/
+
+# API Keys and Secrets
+API_KEYS.py
+Github-All-Access-Token.txt
+*.key
+*.pem
+

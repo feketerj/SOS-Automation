@@ -1,0 +1,325 @@
+# Missing Patterns for V4.19 Implementation
+# These patterns fill gaps for categories 12-19 that were not in the original regex pack
+# Created: 2025-08-31
+# Purpose: Remediate pattern gaps identified in GAP_ANALYSIS_V419.md
+
+version: '4.19-supplement'
+metadata:
+  description: 'Supplemental patterns for categories 12-19 knock-out detection'
+  created: '2025-08-31'
+  author: 'SOS Assessment System'
+  purpose: 'Fill gaps in original regex_pack_v4.yaml'
+
+# Category 12: COMPETITION STATUS (Bridge/Follow-on/Incumbent)
+bridge_contract_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bbridge\s+contract\b'
+    - '(?i)\bbridge\s+solicitation\b'
+    - '(?i)\binterim\s+bridge\s+contract\b'
+    - '(?i)\bshort[\s\-]?term\s+bridge\b'
+    - '(?i)\bbridge\s+to\s+recompete\b'
+  exact_phrases:
+    - "bridge contract"
+    - "interim bridge"
+
+follow_on_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bfollow[\s\-]?on\s+contract\b'
+    - '(?i)\bfollow[\s\-]?on\s+to\s+existing\b'
+    - '(?i)\bfollow[\s\-]?on\s+procurement\b'
+    - '(?i)\bfollow[\s\-]?on\s+solicitation\b'
+    - '(?i)\bcontinuation\s+of\s+existing\s+contract\b'
+  exact_phrases:
+    - "follow-on contract"
+    - "follow on procurement"
+
+incumbent_advantage_patterns:
+  scoring_weight: 95
+  patterns:
+    - '(?i)\bincumbent\s+recompete\b'
+    - '(?i)\bincumbent\s+contractor\b'
+    - '(?i)\bincumbent\s+has\s+advantage\b'
+    - '(?i)\bcurrent\s+contractor\s+recompete\b'
+    - '(?i)\bincumbent[\s\-]?only\b'
+  exact_phrases:
+    - "incumbent recompete"
+    - "current contractor"
+
+# Category 13: SUBCONTRACTING PROHIBITED
+subcontracting_prohibited_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bsubcontracting\s+prohibited\b'
+    - '(?i)\bsubcontracting\s+is\s+prohibited\b'
+    - '(?i)\bno\s+subcontracting\s+allowed\b'
+    - '(?i)\bno\s+subcontractors\s+allowed\b'
+    - '(?i)\bprime\s+must\s+perform\s+100[\s]?%\b'
+    - '(?i)\bprime\s+must\s+perform\s+all\s+work\b'
+    - '(?i)\bmay\s+not\s+subcontract\b'
+    - '(?i)\bcannot\s+subcontract\b'
+    - '(?i)\bshall\s+not\s+subcontract\b'
+  exact_phrases:
+    - "subcontracting prohibited"
+    - "no subcontractors"
+    - "prime must perform 100%"
+
+# Category 14: CONTRACT VEHICLE RESTRICTIONS (IDIQ/GSA/GWAC)
+idiq_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bIDIQ\s+holders\s+only\b'
+    - '(?i)\bexisting\s+IDIQ\s+vehicle\b'
+    - '(?i)\bcurrent\s+IDIQ\s+contract\s+holders\b'
+    - '(?i)\bIDIQ\s+contract\s+required\b'
+    - '(?i)\bmust\s+be\s+on\s+IDIQ\b'
+  exact_phrases:
+    - "IDIQ holders only"
+    - "existing IDIQ"
+
+gsa_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bGSA\s+schedule\s+holders\s+only\b'
+    - '(?i)\bGSA\s+schedule\s+required\b'
+    - '(?i)\bmust\s+be\s+on\s+GSA\s+schedule\b'
+    - '(?i)\bGSA\s+MAS\s+contract\s+required\b'
+    - '(?i)\bGSA\s+contract\s+vehicle\b'
+  exact_phrases:
+    - "GSA schedule required"
+    - "GSA MAS"
+
+gwac_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bGWAC\s+holders\s+only\b'
+    - '(?i)\bGWAC\s+vehicle\s+required\b'
+    - '(?i)\bgovernment[\s\-]?wide\s+acquisition\s+contract\b'
+    - '(?i)\bmust\s+be\s+on\s+GWAC\b'
+  exact_phrases:
+    - "GWAC holders"
+    - "government-wide acquisition contract"
+
+contract_vehicle_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bexisting\s+multi[\s\-]?award\b'
+    - '(?i)\bcurrent\s+vehicle\s+holders\s+only\b'
+    - '(?i)\btask\s+order\s+under\s+existing\b'
+    - '(?i)\bdelivery\s+order\s+under\s+existing\b'
+    - '(?i)\bBPA\s+holders\s+only\b'
+    - '(?i)\bmust\s+be\s+on\s+contract\s+vehicle\b'
+  exact_phrases:
+    - "existing multi-award"
+    - "current vehicle holders"
+    - "BPA holders only"
+
+# Category 15: NON-STANDARD ACQUISITION (OTA/BAA/SBIR/CRADA)
+ota_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\b(?:OTA|other\s+transaction\s+authority)\b'
+    - '(?i)\bother\s+transaction\s+agreement\b'
+    - '(?i)\bprototype\s+OTA\b'
+    - '(?i)\bproduction\s+OTA\b'
+    - '(?i)\bnon[\s\-]?FAR\s+agreement\b'
+  exact_phrases:
+    - "OTA"
+    - "other transaction authority"
+
+baa_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\b(?:BAA|broad\s+agency\s+announcement)\b'
+    - '(?i)\bresearch\s+BAA\b'
+    - '(?i)\bDARPA\s+BAA\b'
+    - '(?i)\bAFRL\s+BAA\b'
+    - '(?i)\bONR\s+BAA\b'
+  exact_phrases:
+    - "BAA"
+    - "broad agency announcement"
+
+sbir_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\b(?:SBIR|small\s+business\s+innovation\s+research)\b'
+    - '(?i)\b(?:STTR|small\s+business\s+technology\s+transfer)\b'
+    - '(?i)\bphase\s+(?:I|II|III)\s+SBIR\b'
+    - '(?i)\bSBIR\s+phase\s+(?:1|2|3)\b'
+  exact_phrases:
+    - "SBIR"
+    - "STTR"
+    - "small business innovation research"
+
+crada_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\b(?:CRADA|cooperative\s+research\s+and\s+development\s+agreement)\b'
+    - '(?i)\bCRADA\s+partner\b'
+    - '(?i)\bcooperative\s+R&D\s+agreement\b'
+  exact_phrases:
+    - "CRADA"
+    - "cooperative research and development"
+
+# Category 16: IT SYSTEM ACCESS (Pre-cleared systems only)
+it_system_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bpre[\s\-]?approval\s+in\s+.*\s+system\b'
+    - '(?i)\bpre[\s\-]?approved\s+in\s+.*\s+database\b'
+    - '(?i)\bmust\s+be\s+registered\s+in\s+.*\s+system\b'
+    - '(?i)\bexisting\s+access\s+to\s+.*\s+required\b'
+    - '(?i)\bJEDMICS\s+access\s+required\b'
+    - '(?i)\bETIMS\s+access\s+required\b'
+    - '(?i)\bcFolders\s+access\s+required\b'
+    - '(?i)\bWAWF\s+registered\b'
+    - '(?i)\bPIIDS\s+registration\s+required\b'
+  exact_phrases:
+    - "JEDMICS"
+    - "ETIMS"
+    - "cFolders"
+    - "pre-approved in system"
+
+# Category 17: UNIQUE CERTIFICATIONS (Agency-specific)
+certification_specific_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bDOT\s+hazmat[\s\-]?certified\b'
+    - '(?i)\bhazmat\s+certification\s+required\b'
+    - '(?i)\bNASA\s+parts\s+screening\b'
+    - '(?i)\bNASA[\s\-]?qualified\s+vendor\b'
+    - '(?i)\bDCMA\s+approved\s+supplier\b'
+    - '(?i)\bDCMA\s+certification\s+required\b'
+    - '(?i)\bEPA\s+certified\s+facility\b'
+    - '(?i)\bTSA\s+approved\s+vendor\b'
+    - '(?i)\bFAA\s+repair\s+station\s+certificate\b'
+    - '(?i)\bpart\s+145\s+repair\s+station\b'
+    - '(?i)\bnuclear\s+certified\b'
+    - '(?i)\bDOE\s+Q\s+clearance\b'
+  exact_phrases:
+    - "DOT hazmat certified"
+    - "NASA parts screening"
+    - "DCMA approved"
+    - "Part 145"
+
+# Category 18: MAINTENANCE OBLIGATIONS (Direct sustainment)
+warranty_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bwarranty\s+support\s+required\b'
+    - '(?i)\bprovide\s+warranty\s+services\b'
+    - '(?i)\bwarranty\s+depot\s+required\b'
+    - '(?i)\bon[\s\-]?site\s+warranty\s+support\b'
+    - '(?i)\blifetime\s+warranty\s+required\b'
+  exact_phrases:
+    - "warranty support required"
+    - "warranty depot"
+
+depot_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bdepot[\s\-]?level\s+repair\s+required\b'
+    - '(?i)\bdepot[\s\-]?level\s+maintenance\b'
+    - '(?i)\bestablish\s+repair\s+depot\b'
+    - '(?i)\bvendor\s+must\s+establish\s+.*\s+depot\b'
+    - '(?i)\blifecycle\s+management\s+responsibility\b'
+    - '(?i)\blifecycle\s+support\s+required\b'
+    - '(?i)\bsustainment\s+responsibilities\b'
+    - '(?i)\blong[\s\-]?term\s+sustainment\b'
+  exact_phrases:
+    - "depot-level repair"
+    - "depot level maintenance"
+    - "lifecycle management"
+
+# Category 19: CAD/CAM REQUIREMENTS (Native formats)
+cad_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bnative\s+CAD.*format\s+required\b'
+    - '(?i)\bnative\s+CAD\s+files\s+only\b'
+    - '(?i)\bSolidWorks\s+native\s+files\b'
+    - '(?i)\bCATIA\s+native\s+files\b'
+    - '(?i)\bAutoCAD\s+native\s+format\b'
+    - '(?i)\bPro[\s/]?E\s+native\s+files\b'
+    - '(?i)\bNX\s+native\s+format\b'
+    - '(?i)\bCreo\s+native\s+files\b'
+    - '(?i)\bInventor\s+native\s+format\b'
+    - '(?i)\boriginal\s+CAD\s+format\s+only\b'
+    - '(?i)\bproprietary\s+CAD\s+format\b'
+  exact_phrases:
+    - "native CAD format"
+    - "SolidWorks native"
+    - "CATIA native"
+    - "original CAD format"
+
+# Additional patterns for better coverage
+new_manufacture_patterns:
+  scoring_weight: 95
+  patterns:
+    - '(?i)\bnew\s+manufacture\s+only\b'
+    - '(?i)\bnewly\s+manufactured\b'
+    - '(?i)\bno\s+refurbished\s+parts\b'
+    - '(?i)\bno\s+reconditioned\s+items\b'
+    - '(?i)\bfactory\s+new\s+only\b'
+  exact_phrases:
+    - "new manufacture only"
+    - "factory new"
+
+first_article_testing_patterns:
+  scoring_weight: 95
+  patterns:
+    - '(?i)\bfirst\s+article\s+test(?:ing)?\b'
+    - '(?i)\b(?:FAT|first\s+article)\s+required\b'
+    - '(?i)\bfirst\s+article\s+inspection\b'
+    - '(?i)\b(?:FAI|first\s+article\s+inspection)\b'
+  exact_phrases:
+    - "first article test"
+    - "FAT required"
+    - "FAI"
+
+drone_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\b(?:UAV|UAS|unmanned\s+aerial)\b'
+    - '(?i)\bdrone\s+(?:platform|system)\b'
+    - '(?i)\bRQ[\s\-]?(?:4|7|11|170)\b'
+    - '(?i)\bMQ[\s\-]?(?:1|4|9)\b'
+    - '(?i)\bPredator|Reaper|Global\s+Hawk\b'
+  exact_phrases:
+    - "UAV"
+    - "UAS"
+    - "drone platform"
+
+military_platform_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bmilitary[\s\-]?only\s+platform\b'
+    - '(?i)\bweapon\s+system\b'
+    - '(?i)\bcombat\s+vehicle\b'
+    - '(?i)\barmored\s+vehicle\b'
+    - '(?i)\bmilitary\s+aircraft\s+only\b'
+  exact_phrases:
+    - "military-only"
+    - "weapon system"
+
+export_control_patterns:
+  scoring_weight: 100
+  patterns:
+    - '(?i)\bexport[\s\-]?controlled\b'
+    - '(?i)\bITAR[\s\-]?controlled\b'
+    - '(?i)\bEAR[\s\-]?restricted\b'
+    - '(?i)\bUS\s+persons\s+only\b'
+    - '(?i)\bno\s+foreign\s+nationals\b'
+    - '(?i)\bDoD[\s\-]?cleared\s+manufacturer\b'
+  exact_phrases:
+    - "export controlled"
+    - "ITAR controlled"
+    - "US persons only"
+
+# Summary statistics
+summary:
+  total_new_pattern_families: 27
+  total_new_patterns: 165
+  categories_covered: [12, 13, 14, 15, 16, 17, 18, 19]
+  additional_coverage: ["new_manufacture", "first_article_testing", "drone", "military_platform", "export_control"]
