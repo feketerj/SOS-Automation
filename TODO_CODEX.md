@@ -1,53 +1,215 @@
 # TODO CODEX - SOS Assessment Automation Tool
 **Created:** September 13, 2025
 **Status:** Pipeline Operational - Optimization & Cleanup Phase
-**Principle:** Do No Harm - All changes must preserve existing functionality
+**Core Principle:** Do No Harm - All changes must preserve existing functionality
+
+## 📋 CODEX EXECUTION GUIDELINES
+
+<execution_principles>
+### Primary Directive
+**#1 Priority: Never break the working application**
+- Test all changes in isolation first
+- Maintain rollback capability for every change
+- Validate functionality after each modification
+- Use high reasoning effort for all coding tasks
+</execution_principles>
+
+<task_approach>
+### How to Execute Tasks
+1. **Use Structured Thinking:** Each task includes XML tags for clarity
+2. **Work Incrementally:** Tasks are broken into small, validated steps
+3. **Observe Progress:** Add print statements and logging for debugging
+4. **Stay Within Limits:** Each module has a tool budget to prevent overthinking
+5. **Allow Self-Reflection:** Validation checkpoints included for quality assurance
+</task_approach>
+
+<communication_style>
+### Task Language Guidelines
+- Tasks use suggestive language ("Consider...", "It would be helpful to...")
+- Avoid overly firm commands that might cause overengineering
+- Each complex task is split into 3-5 smaller subtasks
+- Flexibility is built in to allow for optimal solutions
+</communication_style>
 
 ## 🎯 PRIORITY 1: Repository Cleanup & Organization
 **Risk Level:** Low | **Impact:** High | **Effort:** Medium
+**Tool Budget:** 15 tool calls per module | **Validation:** After each step
 
+<module_1_1>
 ### Module 1.1: File System Cleanup
-- [ ] Remove all deleted files from git tracking (300+ old docs)
-- [ ] Organize 52 test files into `tests/` directory structure
-- [ ] Move 94 root Python files into logical directories:
-  - `core/` - Main pipeline components
-  - `utils/` - Helper utilities
-  - `connectors/` - API connectors
-  - `processors/` - Data processors
-  - `tests/` - All test files
-- [ ] Clean up `SOS_Output/` old runs (keep last 30 days)
-- [ ] Archive `_ARCHIVE_*` folders to cloud storage
 
+<task>Consider organizing the repository structure</task>
+<steps>
+1. **Step 1: Git Cleanup** (Tool budget: 3)
+   - [ ] It would be helpful to identify deleted files in git tracking
+   - [ ] Consider removing tracked deleted files (verify ~300 old docs)
+   - [ ] Add print statement to confirm files removed
+
+2. **Step 2: Test Organization** (Tool budget: 4)
+   - [ ] You might want to create a `tests/` directory structure
+   - [ ] Consider moving the 52 test files incrementally (10 at a time)
+   - [ ] Validate tests still run after each batch move
+
+3. **Step 3: Python File Organization** (Tool budget: 5)
+   - [ ] It could be beneficial to categorize the 94 root Python files
+   - [ ] Consider creating logical directories:
+     - `core/` - Main pipeline components
+     - `utils/` - Helper utilities
+     - `connectors/` - API connectors
+     - `processors/` - Data processors
+   - [ ] Move files in groups of 10, testing after each group
+
+4. **Step 4: Output Cleanup** (Tool budget: 3)
+   - [ ] You may want to archive old runs from `SOS_Output/`
+   - [ ] Consider keeping the last 30 days of runs
+   - [ ] Perhaps move `_ARCHIVE_*` folders to cloud storage
+</steps>
+
+<validation_checkpoint>
+After Module 1.1: Run full pipeline test to ensure nothing broke
+</validation_checkpoint>
+</module_1_1>
+
+<module_1_2>
 ### Module 1.2: Configuration Management
-- [ ] Create `config/` directory for all configuration
-- [ ] Consolidate API keys into single secure config
-- [ ] Move hardcoded values to configuration files
-- [ ] Create environment-specific configs (dev/staging/prod)
-- [ ] Document all configuration options
+
+<task>Consider centralizing configuration</task>
+<steps>
+1. **Step 1: Directory Setup** (Tool budget: 2)
+   - [ ] It might help to create a `config/` directory
+   - [ ] Consider adding subdirectories for different environments
+
+2. **Step 2: API Key Consolidation** (Tool budget: 3)
+   - [ ] You could consolidate API keys into a single secure config
+   - [ ] Perhaps use environment variables for sensitive data
+   - [ ] Add logging to confirm keys are loaded correctly
+
+3. **Step 3: Configuration Migration** (Tool budget: 5)
+   - [ ] It would be good to identify hardcoded values
+   - [ ] Consider moving them to configuration files gradually
+   - [ ] Test each configuration change before proceeding
+
+4. **Step 4: Documentation** (Tool budget: 2)
+   - [ ] You might document all configuration options
+   - [ ] Consider adding example configs for each environment
+</steps>
+
+<validation_checkpoint>
+After Module 1.2: Verify all API connections still work
+</validation_checkpoint>
+</module_1_2>
 
 ## 🔍 PRIORITY 2: Pipeline Integrity Verification
 **Risk Level:** Medium | **Impact:** Critical | **Effort:** High
+**Tool Budget:** 20 tool calls per module | **Validation:** Required after each step
 
+<module_2_1>
 ### Module 2.1: Data Flow Validation
-- [ ] Add schema validation between pipeline stages
-- [ ] Create data integrity checksums at each stage
-- [ ] Implement pipeline state tracking
-- [ ] Add rollback capability for failed stages
-- [ ] Create pipeline health monitoring
 
+<context>
+The pipeline has three stages (Regex → Batch → Agent) that must maintain data integrity
+</context>
+
+<task>Consider adding validation between pipeline stages</task>
+<steps>
+1. **Step 1: Schema Validation** (Tool budget: 5)
+   - [ ] It might be helpful to define schemas for each stage
+   - [ ] Consider implementing validation functions
+   - [ ] Add debug logging to track data shape changes
+   - [ ] Test with 5 sample opportunities first
+
+2. **Step 2: Data Integrity** (Tool budget: 4)
+   - [ ] You could add checksums at each stage
+   - [ ] Perhaps implement hash-based verification
+   - [ ] Log any data mutations detected
+
+3. **Step 3: State Tracking** (Tool budget: 5)
+   - [ ] Consider implementing pipeline state tracking
+   - [ ] You might add checkpoint saves
+   - [ ] Enable rollback capability for failed stages
+
+4. **Step 4: Health Monitoring** (Tool budget: 6)
+   - [ ] It would be good to create health check endpoints
+   - [ ] Consider adding pipeline metrics collection
+   - [ ] Implement alerting for anomalies
+</steps>
+
+<self_reflection>
+Question: Are all data transformations preserving critical fields?
+Check: Run 10 test opportunities through pipeline and verify output
+</self_reflection>
+</module_2_1>
+
+<module_2_2>
 ### Module 2.2: Field Mapping Verification
-- [ ] Audit all field name mappings (result/decision/classification)
-- [ ] Create field mapping documentation
-- [ ] Add field validation tests
-- [ ] Implement strict schema enforcement
-- [ ] Add migration scripts for legacy data
 
+<context>
+Multiple field names exist: result, decision, classification, final_decision
+</context>
+
+<task>Consider auditing and standardizing field mappings</task>
+<steps>
+1. **Step 1: Audit Current Mappings** (Tool budget: 3)
+   - [ ] You might catalog all field name variations
+   - [ ] Consider documenting where each is used
+   - [ ] Add print statements to track field transformations
+
+2. **Step 2: Validation Tests** (Tool budget: 5)
+   - [ ] It could help to create field validation tests
+   - [ ] Consider testing all known variations
+   - [ ] Validate backward compatibility
+
+3. **Step 3: Schema Enforcement** (Tool budget: 4)
+   - [ ] You might implement schema enforcement gradually
+   - [ ] Consider adding warnings before errors
+   - [ ] Test with legacy data formats
+
+4. **Step 4: Migration Support** (Tool budget: 3)
+   - [ ] It would be helpful to create migration scripts
+   - [ ] Consider supporting legacy formats temporarily
+   - [ ] Document the migration path
+</steps>
+
+<validation_checkpoint>
+Test with 20 opportunities using different field name formats
+</validation_checkpoint>
+</module_2_2>
+
+<module_2_3>
 ### Module 2.3: Decision Logic Validation
-- [ ] Review all regex patterns (497 patterns)
-- [ ] Validate AMSC override logic
-- [ ] Test FAA 8130 exception boundaries
-- [ ] Verify military platform detection
-- [ ] Cross-validate batch vs agent decisions
+
+<context>
+497 regex patterns, AMSC overrides, FAA exceptions affect decisions
+</context>
+
+<task>Consider validating decision logic comprehensively</task>
+<steps>
+1. **Step 1: Regex Pattern Review** (Tool budget: 5)
+   - [ ] You might review patterns in batches of 50
+   - [ ] Consider testing each pattern individually
+   - [ ] Log pattern match statistics
+
+2. **Step 2: Override Logic Testing** (Tool budget: 4)
+   - [ ] It would be good to test AMSC override scenarios
+   - [ ] Consider validating FAA 8130 exception boundaries
+   - [ ] Add debug output for override triggers
+
+3. **Step 3: Platform Detection** (Tool budget: 3)
+   - [ ] You could verify military platform detection
+   - [ ] Consider testing edge cases
+   - [ ] Document any ambiguous cases
+
+4. **Step 4: Cross-Validation** (Tool budget: 3)
+   - [ ] It might help to compare batch vs agent decisions
+   - [ ] Consider tracking disagreement rates
+   - [ ] Investigate patterns in disagreements
+</steps>
+
+<self_reflection>
+Question: Are the decision overrides working as intended?
+Validation: Run 50 known test cases and verify outcomes
+</self_reflection>
+</module_2_3>
 
 ## 🧪 PRIORITY 3: Comprehensive Testing Suite
 **Risk Level:** Low | **Impact:** High | **Effort:** High
@@ -241,12 +403,47 @@
 - [ ] Add data anonymization
 - [ ] Document compliance procedures
 
+## 🔍 DEBUGGING & OBSERVABILITY REQUIREMENTS
+
+<debugging_approach>
+### Required for All Tasks
+1. **Print Statements:** Add progress indicators at each major step
+2. **Logging Levels:** Use INFO for progress, WARNING for issues, ERROR for failures
+3. **Validation Points:** Test functionality after each modification
+4. **Rollback Readiness:** Keep backup of working state before changes
+5. **Error Context:** Include full context when errors occur
+</debugging_approach>
+
+<observability_checklist>
+### What to Monitor During Execution
+- [ ] Function entry/exit points
+- [ ] Data shape transformations
+- [ ] API call success/failure rates
+- [ ] Processing time for each stage
+- [ ] Memory usage patterns
+- [ ] File I/O operations
+- [ ] Decision path tracking
+</observability_checklist>
+
 ## 📋 Implementation Strategy
 
+<implementation_principles>
+### Core Principles
+- **Never break working functionality** - Test in isolation first
+- **Use high reasoning effort** for all coding tasks
+- **Work incrementally** - Small, validated changes
+- **Maintain observability** - Add debugging throughout
+- **Allow flexibility** - Avoid overly rigid approaches
+</implementation_principles>
+
 ### Phase 1: Foundation (Weeks 1-2)
-- Complete Priority 1 (Repository Cleanup)
-- Start Priority 2.1 (Data Flow Validation)
-- Begin Priority 6.1 (Code Documentation)
+<phase_1_approach>
+- Complete Priority 1 (Repository Cleanup) with validation after each step
+- Start Priority 2.1 (Data Flow Validation) using incremental testing
+- Begin Priority 6.1 (Code Documentation) with print statements for progress
+- **Tool Budget:** Maximum 50 tool calls for entire phase
+- **Validation:** Run full pipeline test after each day's work
+</phase_1_approach>
 
 ### Phase 2: Stability (Weeks 3-4)
 - Complete Priority 2 (Pipeline Integrity)
@@ -284,12 +481,30 @@
 5. **Peer review for critical changes**
 6. **Gradual rollout with monitoring**
 
-## Notes
+## 📝 Notes for Successful Execution
+
+<error_handling_mindset>
+### Approach to Errors
+- **Errors are expected** - Even with careful planning, issues will arise
+- **Iterate without frustration** - Each error is a learning opportunity
+- **Keep refining** - Adjust approach based on what works
+- **Document failures** - Track what didn't work to avoid repetition
+- **Celebrate progress** - Focus on incremental improvements
+</error_handling_mindset>
+
+<execution_reminders>
+### Key Reminders
 - Each module can be worked on independently
 - Priorities can be adjusted based on business needs
 - All changes must pass regression testing
 - Performance benchmarks must be maintained
 - Security must be considered in all changes
+- **Use XML tags** when communicating complex requirements
+- **Break large tasks** into 3-5 smaller validated steps
+- **Add observability** with print statements and logging
+- **Stay within tool budgets** to prevent overthinking
+- **Test incrementally** to catch issues early
+</execution_reminders>
 
 ---
-*This document is a living guide and should be updated as tasks are completed and new requirements emerge.*
+*This document is a living guide optimized for Codex execution. It should be updated as tasks are completed and new requirements emerge. Remember: The #1 priority is always to preserve the working application.*
