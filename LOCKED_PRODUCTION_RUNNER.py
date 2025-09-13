@@ -125,8 +125,9 @@ def main():
             # Send to AI model for detailed analysis
             try:
                 model_result = mistral_classifier.classify_opportunity(opp, bypass_regex=False)
-                decision = model_result.get('classification', 'INDETERMINATE')
-                reasoning = model_result.get('reasoning', '')
+                # Use unified schema fields (result, rationale) with fallback to old names
+                decision = model_result.get('result', model_result.get('classification', 'INDETERMINATE'))
+                reasoning = model_result.get('rationale', model_result.get('reasoning', ''))
                 detailed_analysis = model_result.get('detailed_analysis', '')
                 # Removed confidence - model doesn't calculate it
                 full_response = model_result.get('full_model_response', '')

@@ -2,22 +2,29 @@
 """
 ULTIMATE Mistral Connector - Full model responses + smart pipeline titles
 Gets EVERYTHING from the model for comprehensive reports
+NOW WITH STANDALONE FALLBACK - Works without mistralai package!
 """
 
 import json
 import os
 import re
 from typing import Dict, Optional
-from mistralai import Mistral
 from sos_ingestion_gate_v419 import IngestionGateV419, Decision
 
-# Initialize Mistral client - HARDWIRED API KEY
+# Try to import mistralai, but fall back to HTTP if not available
 try:
-    from API_KEYS import MISTRAL_API_KEY as HARDWIRED_KEY
-except:
-    HARDWIRED_KEY = "1BPmHydlQmz81Z1edAs1ssQX3DbmW0Yf"
-
-client = Mistral(api_key=os.environ.get("MISTRAL_API_KEY", HARDWIRED_KEY))
+    from mistralai import Mistral
+    client = Mistral(api_key="2oAquITdDMiyyk0OfQuJSSqePn3SQbde")
+    USING_SDK = True
+    print("[INFO] Using mistralai SDK")
+except ImportError:
+    # Fallback to direct HTTP
+    import requests
+    client = None
+    USING_SDK = False
+    print("[INFO] mistralai not found, using HTTP fallback")
+    API_KEY = "2oAquITdDMiyyk0OfQuJSSqePn3SQbde"
+    API_URL = "https://api.mistral.ai/v1/chat/completions"
 
 class MistralSOSClassifier:
     """Ultimate classifier with full reasoning capture"""
@@ -174,21 +181,62 @@ class MistralSOSClassifier:
         messages = [{"role": "user", "content": content}]
         
         try:
-            # Call model
-            if self.model_id.startswith('ag:'):
-                response = client.agents.complete(
-                    agent_id=self.model_id,
-                    messages=messages
-                )
+            # Call model - use SDK if available, otherwise HTTP
+            if USING_SDK:
+                # Use mistralai SDK
+                if self.model_id.startswith('ag:'):
+                    response = client.agents.complete(
+                        agent_id=self.model_id,
+                        messages=messages
+                    )
+                else:
+                    response = client.chat.complete(
+                        model=self.model_id,
+                        messages=messages,
+                        temperature=temperature
+                    )
+                
+                # Capture FULL model response
+                full_response = response.choices[0].message.content
             else:
-                response = client.chat.complete(
-                    model=self.model_id,
-                    messages=messages,
-                    temperature=temperature
+                # Use direct HTTP fallback
+                headers = {
+                    "Authorization": f"Bearer {API_KEY}",
+                    "Content-Type": "application/json"
+                }
+                
+                # Build payload - agents use different endpoint
+                if self.model_id.startswith('ag:'):
+                    url = "https://api.mistral.ai/v1/agents/completions"
+                    payload = {
+                        "agent_id": self.model_id,
+                        "messages": messages
+                    }
+                else:
+                    url = API_URL
+                    payload = {
+                        "model": self.model_id,
+                        "messages": messages,
+                        "temperature": temperature,
+                        "max_tokens": 2000
+                    }
+                
+                # Make HTTP request
+                http_response = requests.post(
+                    url,
+                    headers=headers,
+                    json=payload,
+                    timeout=30
                 )
-            
-            # Capture FULL model response
-            full_response = response.choices[0].message.content
+                
+                if http_response.status_code != 200:
+                    print(f"[ERROR] API returned status {http_response.status_code}")
+                    raise Exception(f"API error: {http_response.status_code}")
+                
+                data = http_response.json()
+                
+                # Extract response content
+                full_response = data.get('choices', [{}])[0].get('message', {}).get('content', '')
             
             # Parse classification - handle JSON format
             classification = "FURTHER_ANALYSIS"
@@ -212,18 +260,20 @@ class MistralSOSClassifier:
                 result_field = parsed.get("result", "").upper()
                 if "NO-GO" in result_field or "NO_GO" in result_field:
                     classification = "NO-GO"
-                elif "GO" == result_field:
+                elif "GO" in result_field and "NO" not in result_field:
                     classification = "GO"
                 elif "INDETERMINATE" in result_field:
-                    classification = "FURTHER_ANALYSIS"
+                    classification = "INDETERMINATE"
                 elif "CONTACT" in result_field:
                     classification = "CONTACT_CO"
                     
             except:
                 # Fallback to text parsing if JSON fails
-                if "Decision: NO-GO" in full_response or "ASSESSMENT: NO-GO" in full_response:
+                if "NO-GO" in full_response or "NO_GO" in full_response:
                     classification = "NO-GO"
-                elif "Decision: GO" in full_response or "ASSESSMENT: GO" in full_response:
+                elif "INDETERMINATE" in full_response.upper():
+                    classification = "INDETERMINATE"
+                elif "GO" in full_response and "NO-GO" not in full_response:
                     classification = "GO"
                 elif "CONTACT" in full_response.upper():
                     classification = "CONTACT_CO"
@@ -291,29 +341,84 @@ class MistralSOSClassifier:
             # The model is already trained on military platforms
             # Let it make the decision based on full context
             
+            # Build unified Agent schema output IN ORDER
             result = {
-                "classification": classification,
-                "reasoning": short_reasoning,  # Short version for CSV
+                # Core identification fields
+                "solicitation_id": opp.get('solicitation_id', opp.get('source_id', '')),
+                "solicitation_title": opp.get('title', ''),
+                "summary": opp.get('ai_summary', opp.get('description_text', ''))[:500] if opp.get('ai_summary') or opp.get('description_text') else '',
+
+                # Decision fields
+                "result": classification,  # Changed from 'classification' to 'result'
+                "knock_out_reasons": [],  # Extract from model response if available
+                "exceptions": [],  # Extract from model response if available
+                "special_action": "",  # Extract from model response if available
+                "rationale": short_reasoning,  # Changed from 'reasoning' to 'rationale'
+                "recommendation": "",  # Extract from model response if available
+
+                # URL fields
+                "sam_url": opp.get('source_path', ''),
+                "hg_url": f"https://www.highergov.com/opportunity/{opp.get('opp_key', '')}" if opp.get('opp_key') else '',
+
+                # Pipeline title
+                "sos_pipeline_title": pipeline_title,
+
+                # Additional fields for backward compatibility
                 "detailed_analysis": detailed_analysis,  # Full model response
                 "full_model_response": full_response,  # Complete raw response
                 "confidence": confidence,
-                "sos_pipeline_title": pipeline_title,
                 "model_used": self.model_id,
                 "regex_decision": regex_result.decision.value,
                 "regex_blocker": regex_result.primary_blocker
             }
-            
+
+            # Try to extract structured fields from model response
+            try:
+                if 'parsed' in locals() and parsed:
+                    # Extract knock_out_reasons if present
+                    if 'knock_out_reasons' in parsed:
+                        result['knock_out_reasons'] = parsed['knock_out_reasons']
+                    # Extract exceptions if present
+                    if 'exceptions' in parsed:
+                        result['exceptions'] = parsed['exceptions']
+                    # Extract special_action if present
+                    if 'special_action' in parsed:
+                        result['special_action'] = parsed['special_action']
+                    # Extract recommendation if present
+                    if 'recommendation' in parsed:
+                        result['recommendation'] = parsed['recommendation']
+            except:
+                pass
+
             return result
             
         except Exception as e:
-            # Fallback with full error context
+            # Fallback with full error context - use unified schema
             return {
-                "classification": self._map_decision(regex_result.decision),
-                "reasoning": f"Regex: {regex_result.primary_blocker or 'Pattern match'}",
+                # Core identification fields
+                "solicitation_id": opp.get('solicitation_id', opp.get('source_id', '')),
+                "solicitation_title": opp.get('title', ''),
+                "summary": opp.get('ai_summary', opp.get('description_text', ''))[:500] if opp.get('ai_summary') or opp.get('description_text') else '',
+
+                # Decision fields
+                "result": self._map_decision(regex_result.decision),
+                "knock_out_reasons": [regex_result.primary_blocker] if regex_result.primary_blocker else [],
+                "exceptions": [],
+                "special_action": "",
+                "rationale": f"Regex: {regex_result.primary_blocker or 'Pattern match'}",
+                "recommendation": "Model API error - using regex fallback",
+
+                # URL fields
+                "sam_url": opp.get('source_path', ''),
+                "hg_url": f"https://www.highergov.com/opportunity/{opp.get('opp_key', '')}" if opp.get('opp_key') else '',
+
+                # Pipeline title
+                "sos_pipeline_title": pipeline_title,
+
+                # Additional fields for backward compatibility
                 "detailed_analysis": f"Model API error: {str(e)}. Falling back to regex-based assessment.",
                 "full_model_response": "",
                 "confidence": 75,
-                "sos_pipeline_title": pipeline_title,
                 "model_used": "REGEX_FALLBACK",
                 "error": str(e)
             }
