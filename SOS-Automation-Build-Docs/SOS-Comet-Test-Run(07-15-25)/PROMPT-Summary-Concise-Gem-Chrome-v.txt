@@ -1,4 +1,0 @@
-PROMPT-Summary-Concise-Gem-Chrome-v1
-
-Provide a concise bottom line up front (BLUF) and key details in concise bullets formatted from the provided text.
-
