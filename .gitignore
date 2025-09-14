@@ -21,3 +21,7 @@ Github-All-Access-Token.txt
 *.pem
 
 Contract-Language-HG-Downloads/nul
+
+# OS-reserved or problematic names
+/nul
+Mistral_Batch_Processor/nul
