@@ -11,10 +11,21 @@ import re
 from typing import Dict, Optional
 from sos_ingestion_gate_v419 import IngestionGateV419, Decision
 
-# Try to import mistralai, but fall back to HTTP if not available
+# Try to import mistralai, prefer env/config API key; fall back to HTTP if not available
 try:
     from mistralai import Mistral
-    client = Mistral(api_key="2oAquITdDMiyyk0OfQuJSSqePn3SQbde")
+    # Resolve API key: env > config > existing default (preserve behavior)
+    api_key = os.environ.get("MISTRAL_API_KEY")
+    if not api_key:
+        try:
+            from config.loader import get_config  # type: ignore
+            cfg = get_config()
+            api_key = cfg.get('mistral.api_key')
+        except Exception:
+            api_key = None
+    if not api_key:
+        api_key = "2oAquITdDMiyyk0OfQuJSSqePn3SQbde"
+    client = Mistral(api_key=api_key)
     USING_SDK = True
     print("[INFO] Using mistralai SDK")
 except ImportError:
@@ -23,7 +34,16 @@ except ImportError:
     client = None
     USING_SDK = False
     print("[INFO] mistralai not found, using HTTP fallback")
-    API_KEY = "2oAquITdDMiyyk0OfQuJSSqePn3SQbde"
+    # Resolve API key similarly
+    _api = os.environ.get("MISTRAL_API_KEY")
+    if not _api:
+        try:
+            from config.loader import get_config  # type: ignore
+            cfg = get_config()
+            _api = cfg.get('mistral.api_key')
+        except Exception:
+            _api = None
+    API_KEY = _api or "2oAquITdDMiyyk0OfQuJSSqePn3SQbde"
     API_URL = "https://api.mistral.ai/v1/chat/completions"
 
 class MistralSOSClassifier:
@@ -36,6 +56,13 @@ class MistralSOSClassifier:
             self.model_id = MISTRAL_MODEL_ID
         except:
             self.model_id = "ag:d42144c7:20250902:sos-triage-agent:73e9cddd"
+        # Optional: allow config override
+        try:
+            from config.loader import get_config  # type: ignore
+            cfg = get_config()
+            self.model_id = cfg.get('mistral.model_id', self.model_id)
+        except Exception:
+            pass
         
         self.regex_gate = IngestionGateV419()
 

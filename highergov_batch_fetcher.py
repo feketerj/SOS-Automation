@@ -8,6 +8,7 @@ import os
 import sys
 import requests
 import json
+import time
 from datetime import datetime, timedelta
 from typing import Dict, List, Tuple
 from sos_ingestion_gate_v419 import IngestionGateV419, Decision
@@ -19,6 +20,14 @@ class HigherGovBatchFetcher:
         # Get API key from environment or use default
         self.api_key = os.environ.get('HIGHERGOV_API_KEY', '9874995194174018881c567d92a2c4d2')
         self.base_url = 'https://www.highergov.com/api-external/opportunity/'
+        # Optional: override from centralized config if available
+        try:
+            from config.loader import get_config  # type: ignore
+            cfg = get_config()
+            self.api_key = cfg.get('highergov.api_key', self.api_key)
+            self.base_url = cfg.get('highergov.base_url', self.base_url)
+        except Exception:
+            pass
         self.gate = IngestionGateV419()
         
     def fetch_all_opportunities(self, search_id: str, max_pages: int = 10) -> List[Dict]:
@@ -43,7 +52,7 @@ class HigherGovBatchFetcher:
             print(f"Fetching page {page}...")
             
             try:
-                response = requests.get(self.base_url, params=params, timeout=30)
+                response = requests.get(self.base_url, params=params, timeout=60)
                 
                 if response.status_code != 200:
                     print(f"Error: API returned status {response.status_code}")
@@ -79,38 +88,143 @@ class HigherGovBatchFetcher:
         return all_opportunities
     
     def fetch_document_text(self, document_path: str) -> str:
-        """Fetch full document text if available"""
+        """Fetch full document text using the document endpoint with retry logic"""
         if not document_path:
             return ""
-        
+
+        # Optional on-disk cache (config-gated; default off). Safe, best-effort.
+        cache_enabled = False
+        cache_dir = None
+        ttl_days = 7
         try:
-            # Document path already includes API key
-            response = requests.get(document_path, timeout=30)
-            if response.status_code == 200:
-                docs = response.json()
-                
-                # Combine all document text
-                full_text = []
-                for doc in docs.get('results', []):
-                    # Add document filename
-                    if doc.get('file_name'):
-                        full_text.append(f"DOCUMENT: {doc['file_name']}\n")
-                    
-                    # Add document text - text_extract is the key field!
-                    if doc.get('text_extract'):
-                        full_text.append(doc['text_extract'])
-                    elif doc.get('text'):
-                        full_text.append(doc['text'])
-                    elif doc.get('description'):
-                        full_text.append(doc['description'])
-                    
-                    full_text.append("\n---\n")
-                
-                return "\n".join(full_text) if full_text else ""
-        except Exception as e:
-            # Silent fail - don't spam warnings
+            from config.loader import get_config  # type: ignore
+            _cfg = get_config()
+            cache_enabled = bool(str(_cfg.get('pipeline.document_cache.enabled', '') or ''))
+            cache_dir = _cfg.get('pipeline.document_cache.dir') or None
+            ttl_days = int(_cfg.get('pipeline.document_cache.ttl_days', 7))
+        except Exception:
             pass
-        
+
+        cache_path = None
+        if cache_enabled:
+            try:
+                import hashlib
+                from pathlib import Path
+                # Default cache directory under project
+                cache_root = Path(cache_dir) if cache_dir else Path('cache') / 'hg_docs'
+                cache_root.mkdir(parents=True, exist_ok=True)
+                key = hashlib.sha256(document_path.encode('utf-8')).hexdigest()[:32]
+                cache_path = cache_root / f"{key}.txt"
+                if cache_path.exists():
+                    # Check TTL
+                    from datetime import datetime, timedelta
+                    mtime = datetime.fromtimestamp(cache_path.stat().st_mtime)
+                    if mtime > datetime.now() - timedelta(days=ttl_days):
+                        try:
+                            return cache_path.read_text(encoding='utf-8')
+                        except Exception:
+                            pass
+            except Exception:
+                cache_path = None
+
+        max_retries = 3
+        retry_delay = 1  # Start with 1 second
+
+        for attempt in range(max_retries):
+            try:
+                # Build the document endpoint URL with related_key
+                document_url = f"https://api.highergov.com/api-external/document/"
+                params = {
+                    'api_key': self.api_key,
+                    'related_key': document_path,  # document_path is the related_key
+                    'page_size': 100  # Get up to 100 documents
+                }
+
+                response = requests.get(document_url, params=params, timeout=60)
+
+                if response.status_code == 200:
+                    docs = response.json()
+
+                    # Combine all document text
+                    full_text = []
+                    for doc in docs.get('results', []):
+                        # Add document filename
+                        if doc.get('file_name'):
+                            full_text.append(f"DOCUMENT: {doc['file_name']}\n")
+
+                        # Add document text - text_extract is the key field!
+                        if doc.get('text_extract'):
+                            full_text.append(doc['text_extract'])
+                        elif doc.get('text'):
+                            full_text.append(doc['text'])
+                        elif doc.get('description'):
+                            full_text.append(doc['description'])
+
+                        full_text.append("\n---\n")
+
+                    # Success - return the text (empty string if no documents)
+                    result = "\n".join(full_text) if full_text else ""
+                    if not result and attempt == 0:
+                        # Log only once for empty responses
+                        print(f"INFO: No documents found for {document_path[:20]}... (empty response)")
+                    # Cache best-effort
+                    if cache_path is not None:
+                        try:
+                            cache_path.write_text(result, encoding='utf-8')
+                        except Exception:
+                            pass
+                    return result
+
+                elif response.status_code == 404:
+                    # No documents exist - this is normal, don't retry
+                    print(f"INFO: No documents available for {document_path[:20]}... (404)")
+                    # Cache empties to avoid repeated calls (respects TTL)
+                    if cache_path is not None:
+                        try:
+                            cache_path.write_text("", encoding='utf-8')
+                        except Exception:
+                            pass
+                    return ""
+
+                elif response.status_code in [401, 403]:
+                    # Authentication issues - don't retry
+                    print(f"ERROR: Authentication failed for document fetch (status {response.status_code})")
+                    return ""
+
+                elif response.status_code >= 500:
+                    # Server error - worth retrying
+                    if attempt < max_retries - 1:
+                        print(f"WARNING: Server error {response.status_code}, retrying in {retry_delay}s...")
+                        time.sleep(retry_delay)
+                        retry_delay *= 2  # Exponential backoff
+                        continue
+                    else:
+                        print(f"ERROR: Server error {response.status_code} after {max_retries} attempts")
+                        return ""
+
+                else:
+                    # Any other status code (4xx like 400, 405, 429, etc.)
+                    # Don't retry on client errors
+                    print(f"ERROR: Unexpected status {response.status_code}, not retrying")
+                    return ""
+
+            except (requests.ConnectionError, requests.Timeout) as e:
+                # Network issues - worth retrying
+                if attempt < max_retries - 1:
+                    print(f"WARNING: Connection error (attempt {attempt + 1}/{max_retries}), retrying in {retry_delay}s...")
+                    time.sleep(retry_delay)
+                    retry_delay *= 2  # Exponential backoff
+                    continue
+                else:
+                    print(f"ERROR: Document fetch failed after {max_retries} attempts: {str(e)[:100]}")
+                    return ""
+
+            except Exception as e:
+                # Unexpected error - log but don't retry
+                print(f"ERROR: Unexpected error fetching documents: {str(e)[:100]}")
+                return ""
+
+        # Should not reach here, but just in case
         return ""
     
     def process_opportunity(self, data: Dict) -> Dict:
@@ -133,8 +247,10 @@ class HigherGovBatchFetcher:
         
         # PRIORITY 1: Try to fetch full documents
         document_text = ""
-        if data.get('document_path'):
-            document_text = self.fetch_document_text(data['document_path'])
+        # The related_key for documents is the source_id_version
+        doc_key = data.get('source_id_version')
+        if doc_key:
+            document_text = self.fetch_document_text(doc_key)
         
         # PRIORITY 2: Use provided description/summary
         description = data.get('description_text') or ''
@@ -153,7 +269,7 @@ class HigherGovBatchFetcher:
             # FALLBACK: Use title and metadata only
             full_text = f"Title: {data.get('title', '')}\nAgency: {agency_name}\nNAICS: {naics}\nPSC: {psc}"
         
-        # Build opportunity object
+        # Build opportunity object with ALL required fields
         opportunity = {
             'id': data.get('source_id') or data.get('opp_key') or 'UNKNOWN',
             'title': data.get('title') or 'Unknown',
@@ -163,11 +279,18 @@ class HigherGovBatchFetcher:
             'set_aside': data.get('set_aside') or '',
             'text': full_text,
             'posted_date': data.get('posted_date') or '',
+            'due_date': data.get('due_date') or data.get('response_deadline') or '',
             'response_deadline': data.get('due_date') or '',
-            'url': data.get('source_path') or data.get('path') or '',
+            'url': data.get('source_path') or data.get('path') or '',  # Keep for backward compatibility
+            'sam_url': data.get('source_path') or '',  # Government source (SAM.gov/DIBBS)
+            'hg_url': data.get('path') or '',  # HigherGov platform URL
             'value_low': data.get('val_est_low') or 0,
             'value_high': data.get('val_est_high') or 0,
-            'nsn': data.get('nsn') or []
+            'nsn': data.get('nsn') or [],
+            'place_of_performance': data.get('place_of_performance') or data.get('pop') or '',
+            # Additional standardized fields
+            'announcement_number': data.get('source_id') or data.get('opp_key') or '',
+            'announcement_title': data.get('title') or 'Unknown'
         }
         
         return opportunity

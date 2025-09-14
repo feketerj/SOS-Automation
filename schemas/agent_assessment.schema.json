@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/agent_assessment.schema.json",
+  "title": "Agent Stage Assessment (normalized)",
+  "type": "object",
+  "properties": {
+    "result": {"enum": ["GO", "NO-GO", "INDETERMINATE", "FURTHER_ANALYSIS", "CONTACT_CO"]},
+    "rationale": {"type": ["string", "null"]},
+    "sos_pipeline_title": {"type": ["string", "null"]},
+    "sam_url": {"type": ["string", "null"]},
+    "highergov_url": {"type": ["string", "null"]},
+    "announcement_number": {"type": ["string", "null"]},
+    "announcement_title": {"type": ["string", "null"]},
+    "agency": {"type": ["string", "null"]},
+    "pipeline_stage": {"const": "AGENT"},
+    "assessment_type": {"const": "MISTRAL_ASSESSMENT"},
+    "batch_decision": {"type": ["string", "null"]},
+    "agent_decision": {"type": ["string", "null"]},
+    "verification_method": {"type": ["string", "null"]},
+    "verification_timestamp": {"type": ["string", "null"]}
+  },
+  "required": ["result", "announcement_title"],
+  "additionalProperties": true
+}
+

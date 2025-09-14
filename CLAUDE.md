@@ -1,5 +1,40 @@
 # CLAUDE.md - Project Memory
 
+## Current Status (Automated Update)
+Last sync: Now
+
+- Pipeline: End-to-end (Regex → Batch → Agent) operational; no functional changes introduced in recent work.
+- Config: Central loader in place; all runners/connectors optionally respect env > config > defaults (behavior unchanged if keys absent).
+- Validation/Audit tools: Output, batch input/results, metadata, schema validation (with summary), integrity check, decision audit (markdown + CSV), metrics, CSV validator, post-run checklist.
+- Performance (opt-in, default off): Batch size cap; HigherGov document cache; parallel document fetch in collector.
+- Regex review: Read-only regex pack audit tool (compile-check + category counts).
+- Outputs/metadata: Integrity snapshot hashes added to batch metadata and full processor metadata (diagnostic only).
+- Tests: Curated pytest path; non-network unit tests added around sanitization, output manager, CSV, master DB, and agent field mapping. More tests staged under `tests/`.
+
+## Next TODO Actions (Safe, Incremental)
+
+Priority 3 — Testing
+- Move remaining non-network tests into `tests/` in small batches.
+- Add 4–6 focused unit tests (DecisionSanitizer and EnhancedOutputManager edge cases) to lift coverage safely.
+
+Priority 2 — Pipeline Integrity
+- Extend integrity checker to emit a short diff file (read-only) when drift is detected.
+- Add schema “diff summary” mode across runs (still read-only).
+
+Priority 2.3 — Decision Logic Validation
+- Use decision audit hotspots to identify categories/agencies with elevated disagreement; compile a markdown follow-up list (no code changes yet).
+
+Priority 4 — Performance (Opt-in)
+- Add a conservative, config-gated `max_pages` for smoke runs/collectors to bound inputs in tests and demos.
+
+Priority 1 — Repo & Config
+- Maintain incremental test consolidation and doc updates; avoid moving orchestrators/e2e scripts.
+
+Notes for Next Agent
+- Preserve “Do No Harm”: avoid changes to pipeline logic; keep new features opt-in and read-only where possible.
+- Prefer adding unit tests and tooling to surface issues before touching decisions or mappings.
+- If enabling performance features, keep defaults off and include clear docs.
+
 ## Session 27 Extended - COMPLETE: 14 MAJOR BUGS FIXED (Sept 13, 2025)
 **Last Updated:** September 13, 2025 - PIPELINE FULLY OPERATIONAL & OPTIMIZED
 **STATUS:** All bugs fixed, unified schema implemented, pipeline working end-to-end
@@ -246,6 +281,145 @@ python BATCH_RUN.py                           # Direct command
 RUN_BATCH_AGENT.bat                           # Windows launcher
 ```
 
+### Run Checklist (Operator)
+- Endpoints: `endpoints.txt` exists and contains at least one search ID.
+- Env vars: `HIGHERGOV_API_KEY` and `MISTRAL_API_KEY` are set.
+- Runner: use `RUN_BATCH_AGENT.bat` or `python RUN_MODES.py --mode batch-agent` for full, no-skip pipeline.
+- Outputs: check `SOS_Output/YYYY-MM/Run_*/` for `assessment.csv`, `data.json`, report files, and GO-only CSV.
+- Optional validation:
+  - `python tools/validate_outputs.py SOS_Output/YYYY-MM/Run_*/` (warn-only)
+  - `python tools/validate_batch_metadata.py Mistral_Batch_Processor/batch_metadata_*.json` (warn-only)
+
+### Smoke Run (No API Cost by Default)
+Fast preflight using 1 page from the first search ID; produces batch input + metadata without submitting jobs.
+
+```bash
+RUN_SMOKE.bat                      # Windows launcher
+python tools/smoke_run.py --validate
+```
+
+Outputs:
+- `Mistral_Batch_Processor/batch_input_*_SMOKE.jsonl`
+- `Mistral_Batch_Processor/batch_metadata_*_SMOKE.json`
+
+### Run Summary (Optional)
+Summarize a saved run in SOS_Output.
+
+```bash
+python tools/summarize_run.py                               # latest run
+python tools/summarize_run.py SOS_Output/YYYY-MM/Run_*/     # specific run
+```
+
+Shows:
+- Counts by result, top knockout categories/patterns
+- Agent disagreement rate if present
+- Paths to key output files
+
+## Environment Setup (Optional)
+Install minimal runtime dependencies (tools and runners use these):
+
+```bash
+pip install -r requirements.txt
+```
+
+Prefer environment variables for secrets and URLs:
+- `HIGHERGOV_API_KEY`
+- `MISTRAL_API_KEY`
+- Optional: `HG_API_BASE_URL`, `MISTRAL_API_BASE_URL`, `HTTP_PROXY`, `HTTPS_PROXY`
+
+### View Resolved Config (Optional)
+```bash
+RUN_CONFIG.bat
+python config/loader.py
+```
+
+### Validate Endpoints (Optional)
+```bash
+python tools/validate_endpoints.py endpoints.txt
+```
+
+## Local Tests (Optional)
+Run curated, non-network tests:
+
+```bash
+RUN_TESTS_LOCAL.bat
+pytest -q tests/
+```
+
+### Health Check (Optional)
+Quick preflight for env and (optional) live connectivity.
+
+```bash
+python tools/health_check.py           # env-only checks
+python tools/health_check.py --live    # includes best-effort connectivity
+```
+
+### Output Cleanup (Optional)
+Archive old runs safely (non-destructive move to _ARCHIVE_*).
+
+```bash
+RUN_ARCHIVE_OUTPUTS.bat                # Windows launcher
+python tools/archive_outputs.py --days 30
+```
+
+### Document Cache (Optional)
+Inspect or prune the HigherGov document cache (if enabled in config):
+
+```bash
+python tools/cache_docs.py --status                  # show cache size and latest entries
+python tools/cache_docs.py --prune 14               # dry-run prune (>14 days)
+python tools/cache_docs.py --prune 14 --apply       # actually delete
+python tools/cache_docs.py --clear --apply          # clear all
+```
+
+### Parallel Document Fetch (Optional)
+Opt-in setting to speed up HigherGov document fetching (default off).
+
+Set in `config/settings.json`:
+
+```json
+{
+  "pipeline": {
+    "parallel_fetch": { "enabled": true, "max_workers": 2 }
+  }
+}
+```
+Respected by `Mistral_Batch_Processor/BATCH_COLLECTOR.py`. Falls back to sequential on any error.
+
+### FULL PIPELINE (No Skips)
+Use this when you want the complete 3‑stage flow with nothing skipped:
+
+```bash
+# Always runs: Regex (FREE) -> Batch -> Agent verification
+RUN_BATCH_AGENT.bat                          # Windows launcher (clears skip flags)
+
+# Or via Python
+python RUN_MODES.py --mode batch-agent
+```
+
+Guarantees:
+- Regex stage diverts NO-GOs and preserves them in outputs.
+- Only GO and INDETERMINATE proceed to Batch.
+- Only GO and INDETERMINATE from Batch proceed to Agent verification.
+- No skip flags are set in this path (agent verification is enabled).
+
+Prerequisites:
+- `endpoints.txt` contains HigherGov search IDs (one per line).
+- Environment variables set (via system or `.env`):
+  - `HIGHERGOV_API_KEY` (HigherGov API)
+  - `MISTRAL_API_KEY` (Model/Agent API)
+
+### NO‑AI COLLECTION (Prepare Batch Inputs Only)
+Runs HigherGov fetch + Regex gate only (no AI calls), then prepares a batch JSONL for later submission.
+
+```bash
+RUN_NO_AI.bat                                # New: no AI calls; prepares batch_input_*.jsonl
+```
+
+Outputs:
+- `Mistral_Batch_Processor/batch_input_<timestamp>.jsonl` (GO/INDETERMINATE only)
+- `Mistral_Batch_Processor/batch_metadata_<timestamp>.json` (includes regex knockouts)
+
 ### HELPER SCRIPTS
 ```bash
 # Status Checking
@@ -260,6 +434,141 @@ python DOWNLOAD_BATCH_RESULTS.py [job_id]     # Download and process
 python RUN_TEST_BATCH.py                      # Test with 3 endpoints
 python RUN_FULL_BATCH.py                      # Run all endpoints
 ```
+
+### Output Validation (Optional, No Risk)
+Validate a saved run's `data.json` without changing any behavior.
+
+```bash
+python tools/validate_outputs.py SOS_Output/YYYY-MM/Run_*/             # warn-only
+python tools/validate_outputs.py SOS_Output/YYYY-MM/Run_*/data.json    # direct file
+python tools/validate_outputs.py SOS_Output/YYYY-MM/Run_*/ --strict    # treat warnings as errors
+```
+
+Checks:
+- `result` present and in expected set (GO/NO-GO/INDETERMINATE/...)
+- Required fields present: `announcement_number`, `announcement_title`, `agency`
+- At least one URL present: `sam_url` or `highergov_url`
+- Basic type sanity for key string fields
+
+### Handoff Validators (Optional, No Risk)
+Validate stage handoff files without changing any behavior.
+
+```bash
+# Regex → Batch handoff (JSONL input to batch)
+python tools/validate_batch_input.py Mistral_Batch_Processor/batch_input_*.jsonl
+
+# Batch → Agent handoff (JSONL results from batch)
+python tools/validate_batch_results.py batch_results_*.jsonl --metadata Mistral_Batch_Processor/batch_metadata_*.json
+```
+
+Batch input checks:
+- JSONL lines parse; custom_id + body.messages present
+- System + user message present; user content size reasonable
+- Heuristic flag if NO-GO appears in regex classification (should not be forwarded)
+
+Batch results checks:
+- JSONL lines parse; response has assistant content
+- Extracts result from embedded JSON; counts distribution
+- Warns if NO-GO appears in results; optional count check against metadata
+
+### Configuration Loader (Optional)
+Use a simple, read-only config loader without changing current behavior.
+
+```bash
+python config/loader.py                      # Show resolved keys (redacted)
+```
+
+Notes:
+- Precedence: environment variables > config/settings.json > config/settings.example.json > internal defaults
+- This module is used by optional tools, and respected by:
+  - highergov_batch_fetcher.py (overrides API key and base URL if provided)
+  - Mistral_Batch_Processor/FULL_BATCH_PROCESSOR.py (overrides API key and model id if provided)
+  - ULTIMATE_MISTRAL_CONNECTOR.py (overrides API key and model id if provided)
+  - RUN_MODES.py and LOCKED_PRODUCTION_RUNNER.py (set env vars from config if present)
+  Behavior is preserved if config keys are absent.
+
+### Field Mapping Audit (Optional)
+Audit common field name variants across the repo and (optionally) SOS_Output.
+
+```bash
+python tools/audit_field_mappings.py               # repo only
+python tools/audit_field_mappings.py --include-outputs
+```
+
+Surfaces where `result/decision/final_decision/classification` and related fields appear to guide consolidation with minimal risk.
+
+### Schema Validation (Optional)
+Validate artifacts against JSON Schemas (uses `jsonschema` if installed; warn-only otherwise).
+
+```bash
+# Validate saved run assessments
+python tools/validate_schema.py --schema schemas/agent_assessment.schema.json --file SOS_Output/YYYY-MM/Run_*/data.json
+
+# Validate batch results JSONL
+python tools/validate_schema.py --schema schemas/batch_assessment.schema.json --jsonl batch_results_*.jsonl
+```
+
+### Migration Support (Optional)
+Create unified-schema copies of artifacts without modifying originals.
+
+```bash
+# Normalize a saved run (writes data_unified.json)
+python tools/transform_to_unified.py --file SOS_Output/YYYY-MM/Run_*/data.json
+
+# Normalize a JSONL file (writes *_unified.jsonl)
+python tools/transform_to_unified.py --jsonl batch_results_*.jsonl
+```
+
+### Decision Audit (Optional)
+Analyze saved runs for decision logic behavior and anomalies.
+
+```bash
+python tools/decision_audit.py SOS_Output/YYYY-MM/Run_*/            # audit a specific run
+python tools/decision_audit.py --results batch_results_*.jsonl      # include batch results scan
+python tools/decision_audit.py SOS_Output/YYYY-MM/Run_*/ --csv decision_audit_summary.csv
+```
+
+Writes `decision_audit.md` next to `data.json` with counts, top patterns, agent agreement rate, and anomalies.
+When `--csv` is provided, also writes a simple CSV summary of counts and disagreement hotspots.
+
+### Metrics (Optional)
+Generate a machine-readable metrics.json for dashboards or quick comparisons.
+
+```bash
+python tools/generate_metrics.py SOS_Output/YYYY-MM/Run_*/   # or omit path to use latest run
+```
+
+### CSV Validation (Optional)
+Check assessment.csv structure and key field population.
+
+```bash
+python tools/validate_csv.py SOS_Output/YYYY-MM/Run_*/assessment.csv
+```
+
+### Post-Run Checklist (Optional)
+Run a consolidated set of validators and summaries for a saved run.
+
+```bash
+RUN_POSTRUN_CHECK.bat                    # Windows launcher
+python tools/postrun_checklist.py        # Uses latest run
+python tools/postrun_checklist.py SOS_Output/YYYY-MM/Run_*/
+```
+
+### Integrity Check (Optional)
+Compare pre‑AI metadata and post‑pipeline outputs to catch field drift.
+
+```bash
+python tools/verify_integrity.py --meta Mistral_Batch_Processor/batch_metadata_*.json --run SOS_Output/YYYY-MM/Run_*/
+```
+Warns on missing items and URL/ID/title mismatches; prints simple before/after hashes for context.
+
+### Regex Pattern Audit (Optional)
+Compile-check regex patterns and summarize category counts.
+
+```bash
+python tools/regex_pattern_audit.py packs/regex_pack_v419_complete.yaml
+```
+Requires PyYAML (`pip install pyyaml`). Read-only.
 
 ## Session 11 Accomplishments (Sept 2, 2025)
 - Fixed Windows reinstall issues, restored Python environment
@@ -571,3 +880,4 @@ NOT for military-only platforms (F/A-18, EA-18G, MH-60, etc.)!
 2. Monitor disagreement rates between batch and agent
 3. Use disagreements to improve next model iteration
 4. Set thresholds for when to skip agent verification
+

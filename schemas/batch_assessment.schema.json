@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/batch_assessment.schema.json",
+  "title": "Batch Stage Assessment (normalized)",
+  "type": "object",
+  "properties": {
+    "result": {"enum": ["GO", "NO-GO", "INDETERMINATE", "FURTHER_ANALYSIS", "CONTACT_CO"]},
+    "rationale": {"type": ["string", "null"]},
+    "sos_pipeline_title": {"type": ["string", "null"]},
+    "sam_url": {"type": ["string", "null"]},
+    "highergov_url": {"type": ["string", "null"]},
+    "announcement_number": {"type": ["string", "null"]},
+    "announcement_title": {"type": ["string", "null"]},
+    "agency": {"type": ["string", "null"]},
+    "pipeline_stage": {"const": "BATCH"},
+    "assessment_type": {"const": "MISTRAL_BATCH_ASSESSMENT"}
+  },
+  "required": ["result", "announcement_title"],
+  "additionalProperties": true
+}
+

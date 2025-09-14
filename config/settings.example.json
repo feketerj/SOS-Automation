@@ -1,0 +1,31 @@
+{
+  "logging": {
+    "level": "INFO"
+  },
+  "timeouts": {
+    "api_request_seconds": 60,
+    "document_fetch_seconds": 120
+  },
+  "pipeline": {
+    "max_documents": 100,
+    "text_extraction_char_limit": 400000,
+    "batch_size_limit": 100,
+    "document_cache": {
+      "enabled": false,
+      "ttl_days": 7,
+      "dir": "cache/hg_docs"
+    },
+    "parallel_fetch": {
+      "enabled": false,
+      "max_workers": 2
+    }
+  },
+  "highergov": {
+    "api_key": "",
+    "base_url": "https://www.highergov.com/api-external/opportunity/"
+  },
+  "mistral": {
+    "api_key": "",
+    "model_id": "ft:pixtral-12b-latest:d42144c7:20250912:f7d61150"
+  }
+}

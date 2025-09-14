@@ -12,7 +12,16 @@ from sos_ingestion_gate_v419 import IngestionGateV419, Decision
 from model_config import get_model_id, get_model_info
 
 # Initialize Mistral client
-client = Mistral(api_key=os.environ.get("MISTRAL_API_KEY", ""))
+# Resolve API key: env > config > fallback
+_api_key = os.environ.get("MISTRAL_API_KEY")
+if not _api_key:
+    try:
+        from config.loader import get_config  # type: ignore
+        _cfg = get_config()
+        _api_key = _cfg.get('mistral.api_key')
+    except Exception:
+        _api_key = None
+client = Mistral(api_key=_api_key or "2oAquITdDMiyyk0OfQuJSSqePn3SQbde")
 
 class MistralSOSClassifier:
     """Mistral-powered classifier with dummy fallback"""
@@ -194,8 +203,8 @@ Always respond ONLY with valid JSON."""
         full_text = opp.get('full_text', '')
         description = opp.get('description', opp.get('text', ''))
         
-        # Use full text if available (up to 200k chars ~ 50 pages), otherwise use description
-        content = full_text[:200000] if full_text else description[:20000]
+        # Use full text if available (up to 400k chars ~ 100 pages), otherwise use description
+        content = full_text[:400000] if full_text else description[:40000]
         
         # Build formatted text
         text = f"""Title: {title}

@@ -14,11 +14,18 @@ from mistralai import Mistral
 # Add parent directory to path
 sys.path.append('..')
 
-# Configuration
-# Try environment variable first, then fall back to hardcoded key
+# Configuration (prefer env; allow optional centralized config overrides)
+# Try environment variable first, then fall back to existing key (preserve behavior)
 API_KEY = os.environ.get('MISTRAL_API_KEY', "2oAquITdDMiyyk0OfQuJSSqePn3SQbde")
 # NOTE: Batch API doesn't support agents, must use underlying fine-tuned model
 MODEL = "ft:pixtral-12b-latest:d42144c7:20250912:f7d61150"  # New Pixtral model
+try:
+    from config.loader import get_config  # type: ignore
+    _cfg = get_config()
+    API_KEY = _cfg.get('mistral.api_key', API_KEY)
+    MODEL = _cfg.get('mistral.model_id', MODEL)
+except Exception:
+    pass
 
 def phase1_collect_opportunities():
     """Phase 1: Collect opportunities and apply regex filtering"""
@@ -162,6 +169,22 @@ def phase2_create_batch_file(opportunities):
     print("\n" + "=" * 70)
     print("PHASE 2: CREATING BATCH FILE WITH SYSTEM PROMPT + FEW-SHOT EXAMPLES")
     print("=" * 70)
+
+    # Optional: respect batch size limit from centralized config
+    try:
+        from config.loader import get_config  # type: ignore
+        _cfg = get_config()
+        _limit = _cfg.get('pipeline.batch_size_limit')
+        if _limit:
+            try:
+                lim = int(_limit)
+                if lim > 0:
+                    opportunities = opportunities[:lim]
+                    print(f"[INFO] Applying batch size limit: {lim}")
+            except Exception:
+                pass
+    except Exception:
+        pass
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     jsonl_file = f"batch_input_{timestamp}.jsonl"
@@ -494,11 +517,28 @@ def phase5_generate_final_output(results_file, opportunities, regex_knockouts, t
 
     # Use the production output manager
     search_id = f"BATCH_{timestamp}"
+    import hashlib as _hl, json as _js
+    def _snap(items):
+        try:
+            base = [
+                {
+                    'sid': x.get('search_id',''),
+                    'oid': x.get('opportunity_id','') or x.get('announcement_number',''),
+                    'title': x.get('title','') or x.get('announcement_title','')
+                }
+                for x in items
+            ]
+            return _hl.sha256(_js.dumps(base, sort_keys=True).encode('utf-8')).hexdigest()[:12]
+        except Exception:
+            return ""
+
     metadata = {
         'total_opportunities': len(final_results),
         'regex_knockouts': len(regex_knockouts),
         'ai_assessments': len(opportunities),
-        'processing_time': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        'processing_time': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        'input_snapshot_hash': _snap(opportunities),
+        'output_snapshot_hash': _snap(formatted_results)
     }
 
     output_dir = output_manager.save_assessment_batch(search_id, formatted_results, metadata, pre_formatted=True)
@@ -530,7 +570,8 @@ def phase6_agent_verification(batch_results, original_opportunities, regex_knock
         return batch_results  # Return original results unchanged
 
     # Initialize agent connector (uses agent model by default)
-    connector = UltimateMistralConnector()
+    from ULTIMATE_MISTRAL_CONNECTOR import MistralSOSClassifier
+    connector = MistralSOSClassifier()
     # Don't override model - let it use the agent model from its configuration
 
     verified_results = []

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/regex_assessment.schema.json",
+  "title": "Regex Stage Assessment (normalized)",
+  "type": "object",
+  "properties": {
+    "result": {"enum": ["GO", "NO-GO", "INDETERMINATE", "FURTHER_ANALYSIS", "CONTACT_CO"]},
+    "knock_pattern": {"type": ["string", "null"]},
+    "knockout_category": {"type": ["string", "null"]},
+    "sos_pipeline_title": {"type": ["string", "null"]},
+    "sam_url": {"type": ["string", "null"]},
+    "highergov_url": {"type": ["string", "null"]},
+    "announcement_number": {"type": ["string", "null"]},
+    "announcement_title": {"type": ["string", "null"]},
+    "agency": {"type": ["string", "null"]},
+    "pipeline_stage": {"const": "APP"},
+    "assessment_type": {"const": "APP_KNOCKOUT"}
+  },
+  "required": ["result", "announcement_title"],
+  "additionalProperties": true
+}
+
