@@ -1,0 +1,48 @@
+{
+    "git.ignoreLimitWarning": true,
+    "files.exclude": {
+        "**/.venv": true,
+        "**/__pycache__": true,
+        "**/.history": true,
+        "**/SOS_Output": true,
+        "**/SOS_Output_TEST": true,
+        "**/_ARCHIVE*": true,
+        "**/_BACKUP*": true,
+        "**/Reports": true,
+        "**/Master_Analytics": true,
+        "**/Gov-Test-Docs": true,
+        "**/tests_archive": true,
+        "**/node_modules": true,
+        "**/*.pyc": true,
+        "**/batch_output_*.jsonl": true,
+        "**/batch_results_*.jsonl": true
+    },
+    "files.watcherExclude": {
+        "**/.venv/**": true,
+        "**/__pycache__/**": true,
+        "**/.history/**": true,
+        "**/SOS_Output/**": true,
+        "**/SOS_Output_TEST/**": true,
+        "**/_ARCHIVE*/**": true,
+        "**/_BACKUP*/**": true,
+        "**/Reports/**": true,
+        "**/Master_Analytics/**": true,
+        "**/Gov-Test-Docs/**": true,
+        "**/tests_archive/**": true,
+        "**/node_modules/**": true,
+        "**/Mistral_Batch_Processor/batch_*.jsonl": true,
+        "**/Mistral_Batch_Processor/batch_*.json": true
+    },
+    "search.exclude": {
+        "**/.venv": true,
+        "**/__pycache__": true,
+        "**/.history": true,
+        "**/SOS_Output": true,
+        "**/_ARCHIVE*": true,
+        "**/_BACKUP*": true,
+        "**/tests_archive": true,
+        "**/node_modules": true,
+        "**/batch_output_*.jsonl": true,
+        "**/batch_results_*.jsonl": true
+    }
+}

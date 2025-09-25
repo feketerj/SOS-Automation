@@ -1,27 +1,79 @@
-﻿# Node / Python / OS common
-node_modules/
+﻿# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+*.egg-info/
 dist/
 build/
+
+# Node / Python / OS common
+node_modules/
 *.log
 .env
 .env.*
 .DS_Store
 Thumbs.db
 
-# v4.2 operational logs (kept, but optional to ignore in VCS)
-ops/trust-tracking/
-ops/manual-paste-log/
-ops/terminal-monitoring/
-qa/session-traces/
+# VS Code - IMPORTANT FOR PERFORMANCE
+.vscode/
+.history/
+
+# Archives and outputs (HUGE - CAUSES CRASHES!)
+_ARCHIVE*/
+SOS_Output/
+SOS_Output_TEST/
+Reports/
+Master_Analytics/
+Gov-Test-Docs/
+batch_output_*.jsonl
+batch_results_*.jsonl
+batch_summary_*.txt
+checkpoint_*.txt
+
+# Mistral batch processing files
+Mistral_Batch_Processor/batch_input_*.jsonl
+Mistral_Batch_Processor/batch_output_*.jsonl
+Mistral_Batch_Processor/batch_results_*.jsonl
+Mistral_Batch_Processor/batch_metadata_*.json
+Mistral_Batch_Processor/batch_info_*.json
+Mistral_Batch_Processor/SOS_Output/
+Mistral_Batch_Processor/__pycache__/
+
+# Test archives
+tests_archive/
+
+# Temporary files
+script_output.txt
+pipeline_output.log
+nul
+/nul
+Mistral_Batch_Processor/nul
+Contract-Language-HG-Downloads/nul
 
 # API Keys and Secrets
 API_KEYS.py
 Github-All-Access-Token.txt
 *.key
 *.pem
+production_config.json
+config/settings.json
 
-Contract-Language-HG-Downloads/nul
+# Backups
+*.backup
+backups/
+_BACKUP*/
 
-# OS-reserved or problematic names
-/nul
-Mistral_Batch_Processor/nul
+# UI Dashboard outputs
+SOS_UI_Dashboard/data/
+
+# v4.2 operational logs (kept, but optional to ignore in VCS)
+ops/trust-tracking/
+ops/manual-paste-log/
+ops/terminal-monitoring/
+qa/session-traces/
