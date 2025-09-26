@@ -1,0 +1,4 @@
+# One HigherGov search ID per line; lines starting with # are ignored
+# Example:
+# rFRK9PaP6ftzk1rokcKCT
+

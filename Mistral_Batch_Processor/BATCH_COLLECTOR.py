@@ -19,7 +19,7 @@ def collect_opportunities_from_searches(search_ids: List[str]) -> List[Dict]:
     Uses existing fetcher but doesn't process them
     """
     from highergov_batch_fetcher import HigherGovBatchFetcher
-    from sos_ingestion_gate_v419 import IngestionGateV419
+    from sos_ingestion_gate_v419 import IngestionGateV419, Decision
     
     all_opportunities = []
     regex_knockouts = []  # Track what got knocked out
@@ -76,7 +76,6 @@ def collect_opportunities_from_searches(search_ids: List[str]) -> List[Dict]:
                             doc_map[idx] = fut.result()
                         except Exception:
                             doc_map[idx] = ""
-                    # Attach texts
                     for i, opp in enumerate(opportunities):
                         opp['text'] = doc_map.get(i, "")
                 except Exception:
@@ -89,35 +88,40 @@ def collect_opportunities_from_searches(search_ids: List[str]) -> List[Dict]:
                     dpath = opp.get('document_path')
                     opp['text'] = fetcher.fetch_document_text(dpath) if dpath else ""
 
-                # Run regex to filter obvious NO-GOs
-                regex_result = regex_gate.assess_opportunity(opp)
-                
-                # Only collect GO and FURTHER_ANALYSIS for model
-                if str(regex_result.decision) != 'Decision.NO_GO':
-                    all_opportunities.append({
-                        'search_id': search_id,
-                        'opportunity_id': opp.get('opportunity_id', 'unknown'),
-                        'title': opp.get('title', ''),
-                        'text': document_text[:400000],  # 400K limit  
-                        'regex_decision': str(regex_result.decision),
-                        'regex_reason': regex_result.primary_blocker or 'None'
-                    })
-                    collected_count += 1
-                    print(f"  Collected: {opp.get('title', 'Unknown')[:50]}...")
-                else:
+            for opp in opportunities:
+                document_text = opp.get('text') or ""
+                try:
+                    regex_result = regex_gate.assess_opportunity(opp)
+                except Exception as opp_error:
+                    print(f"  WARN: Skipping opportunity due to regex error: {opp_error}")
+                    continue
+
+                if regex_result.decision == Decision.NO_GO:
                     knocked_out_count += 1
                     total_regex_knockouts += 1
-                    # Save regex knockouts too!
                     regex_knockouts.append({
                         'search_id': search_id,
                         'opportunity_id': opp.get('opportunity_id', 'unknown'),
                         'title': opp.get('title', ''),
-                        'decision': 'NO-GO',
+                        'decision': Decision.NO_GO.value,
+                        'regex_decision': Decision.NO_GO.value,
                         'reasoning': f"Regex knockout: {regex_result.primary_blocker}",
                         'knockout_patterns': regex_result.primary_blocker,
                         'processing_method': 'REGEX_ONLY'
                     })
                     print(f"  Regex knocked out: {opp.get('title', 'Unknown')[:50]}...")
+                else:
+                    all_opportunities.append({
+                        'search_id': search_id,
+                        'opportunity_id': opp.get('opportunity_id', 'unknown'),
+                        'title': opp.get('title', ''),
+                        'text': document_text[:400000],
+                        'regex_decision': regex_result.decision.value,
+                        'regex_reason': regex_result.primary_blocker or 'None'
+                    })
+                    collected_count += 1
+                    print(f"  Collected: {opp.get('title', 'Unknown')[:50]}...")
+
             # Apply cap if defined
             if cap is not None and len(all_opportunities) > cap:
                 all_opportunities = all_opportunities[:cap]

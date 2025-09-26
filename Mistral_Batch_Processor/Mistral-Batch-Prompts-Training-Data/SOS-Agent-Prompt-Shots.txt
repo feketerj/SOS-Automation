@@ -1,0 +1,506 @@
+{
+  "solicitation_id": "SPRPA1-21-D-9002",
+  "solicitation_title": "Incremental Addition of NIINs to OY2 Market Basket – KC-46 Pegasus DLRs",
+  "summary": "This notice synopsizes Option Year Two for 68 Depot Level Repairables (DLRs) in support of the KC-46 Pegasus Military Unique DLR effort. The initial KC-46 Military Unique DLR contract SPRPA121D9002 was awarded on 18 December 2021 as a subsumable against the Boeing Captains of Industry (BCOI) contract with The Boeing Company, CAGE 0PXV4. The BCOI contract represents a performance-based supply chain management program to support Boeing aviation platforms (AV-8B, C-17, CH-37, F/A-18, F-15, KC-135, B-52, B-1, E-3, AGM-84/86, P-8, and KC-46).",
+  "agency": "DLA Aviation Philadelphia",
+  "posted_date": "2025-09-02",
+  "due_date": null,
+  "naics": "336412",
+  "psc": "1680"
+}
+{
+  "solicitation_id": "SPRPA1-21-D-9002",
+  "solicitation_title": "Incremental Addition of NIINs to OY2 Market Basket – KC-46 Pegasus DLRs",
+  "type": "new purchase",
+  "summary": "“The initial KC-46 Military Unique DLR contract SPRPA121D9002 was awarded … as a subsumable against the Boeing Captains of Industry (BCOI) contract …” (p. 1). Includes multiple platforms: “AV-8B, C-17, F/A-18, F-15, KC-135, B-52, B-1 …” (p. 1).",
+  "result": "NO-GO",
+  "knock_out_reasons": [
+    "Closed vehicle: “awarded … against the Boeing Captains of Industry (BCOI) contract …” (p. 1).",
+    "Pure military platforms listed: “AV-8B, C-17, F/A-18, F-15, KC-135, B-52, B-1 …” (p. 1)."
+  ],
+  "exceptions": [],
+  "special_action": "None – locked to Boeing BCOI vehicle.",
+  "rationale": "Tied to a closed OEM contract vehicle and includes multiple pure military platforms. SOS cannot compete.",
+  "recommendation": "NO-GO. Track for awareness only.",
+  "sos
+{
+  "solicitation_id": "TEMP10094349",
+  "solicitation_title": "F-22 Cockpit Simulator",
+  "summary": "REQUEST FOR INFORMATION FOR F-22 COCKPIT SIMULATOR. The United States Air Force is conducting market research to identify potential sources to provide an F-22 Cockpit Simulator at Edwards AFB, CA. Due date for responses was August 15, 2025. This is a Sources Sought / RFI only; no contract award will result.",
+  "agency": "Air Force Test Center (AFTC)",
+  "posted_date": "2025-08-11",
+  "due_date": "2025-08-15",
+  "naics": "336413",
+  "psc": "1680",
+  "place_of_performance": "Edwards AFB, CA"
+}
+{
+  "solicitation_id": "TEMP10094349",
+  "solicitation_title": "F-22 Cockpit Simulator",
+  "type": "new manufacture",
+  "summary": "“REQUEST FOR INFORMATION FOR F-22 COCKPIT SIMULATOR … Due date for responses was August 15, 2025.” (p. 1).",
+  "result": "NO-GO",
+  "knock_out_reasons": [
+    "Expired deadline: “Responses due August 15, 2025.” (p. 1).",
+    "Pure military fighter: “F-22 Cockpit Simulator.” (p. 1)."
+  ],
+  "exceptions": [],
+  "special_action": "None – expired RFI.",
+  "rationale": "Expired opportunity and tied to a pure military fighter platform. SOS does not pursue these.",
+  "recommendation": "NO-GO. Record only for historical awareness.",
+  "sos_pipeline_title": "PN: NA | Qty: NA | Condition: NA | MDS: F-22 | TEMP10094349 | NA – Expired RFI for cockpit simulator"
+}
+{
+  "solicitation_id": "N0038325QF336",
+  "solicitation_title": "Guide Winch Assy, AI, in Repair/Modification Of",
+  "summary": "This RFQ is for repair requirement of Guide Winch Assembly under PSC 1680. NAVSUP WSS requests quotes including firm-fixed price or TT&E pricing. Contractors must obtain final inspection and acceptance by the Government within RTAT terms. Due Sept. 15, 2025.",
+  "agency": "Naval Supply Systems Command (NAVSUP)",
+  "posted_date": "2025-08-15",
+  "due_date": "2025-09-15",
+  "naics": "336413",
+  "psc": "1680"
+}
+{
+  "solicitation_id": "N0038325QF336",
+  "solicitation_title": "Guide Winch Assy, AI, in Repair/Modification Of",
+  "type": "managed repair",
+  "summary": "“This RFQ is for repair requirement of Guide Winch Assembly … NAVSUP WSS requests quotes including firm-fixed price or TT&E pricing.” (p. 1).",
+  "result": "GO",
+  "knock_out_reasons": [],
+  "exceptions": [],
+  "special_action": "None – competitive managed repair.",
+  "rationale": "Aviation-related, repair-focused, competitive, no SAR or OEM-only restrictions. SOS is well positioned.",
+  "recommendation": "GO. Pursue as a prime managed repair opportunity.",
+  "sos_pipeline_title": "PN: NA | Qty: 1 | Condition: Overhaul | MDS: NA | N0038325QF336 | Repair/Overhaul of Guide Winch Assembly"
+}
+{
+  "solicitation_id": "SPE8E925T4137",
+  "solicitation_title": "HYDRAULIC SET, BASE",
+  "summary": "Proposed procurement for NSN 1730-01-009-0395, HYDRAULIC SET, BASE. Qty 100 EA, deliver to DLA Distribution San Diego within 102 days ADO. This solicitation is an RFQ, total small business set-aside. Export-controlled technical data applies (ITAR/EAR). JCP certification required to access drawings. Due Sept. 14, 2025.",
+  "agency": "DLA Troop Support – Construction and Equipment",
+  "posted_date": "2025-09-02",
+  "due_date": "2025-09-14",
+  "naics": "336413",
+  "psc": "1730",
+  "place_of_performance": "DLA Distribution San Diego, CA"
+}
+{
+  "solicitation_id": "SPE8E925T4137",
+  "solicitation_title": "HYDRAULIC SET, BASE",
+  "type": "new purchase",
+  "summary": "“Proposed procurement for NSN 1730-01-009-0395 … Export-controlled technical data applies (ITAR/EAR). JCP certification required.” (p. 7).",
+  "result": "GO",
+  "knock_out_reasons": [],
+  "exceptions": [],
+  "special_action": "None – SOS has JCP certification.",
+  "rationale": "This is an aviation-related ground support equipment buy. Export-controlled, but SOS maintains JCP certification and ITAR compliance, clearing the requirement. Competitive and small business set-aside.",
+  "recommendation": "GO. Submit competitive offer.",
+  "sos_pipeline_title": "PN: 47R16416 | Qty: 100 | Condition: New | MDS: NA | SPE8E925T4137 | Purchase Hydraulic Set, Base"
+}
+{
+  "solicitation_id": "M0068125Q0069",
+  "solicitation_title": "Dive Equipment Services",
+  "summary": "Solicitation for depot-level maintenance and repair of Divers Life Support System (DLSS), diving support equipment, and hyperbaric chamber facilities at Camp Pendleton, CA. Requires NAVSEA-certified contractor and OEM-only parts for NAVSEA-certified equipment. IDIQ, five-year ordering period. Set aside for small business. Due Sept. 10, 2025.",
+  "agency": "Marine Corps Installations – West",
+  "posted_date": "2025-08-20",
+  "due_date": "2025-09-10",
+  "naics": "541330",
+  "psc": "J020",
+  "place_of_performance": "Camp Pendleton, CA"
+}
+{
+  "solicitation_id": "M0068125Q0069",
+  "solicitation_title": "Dive Equipment Services",
+  "type": "managed repair",
+  "summary": "“Solicitation for depot-level maintenance … Divers Life Support System (DLSS) … NAVSEA-certified contractor … OEM only parts …” (p. 1).",
+  "result": "NO-GO",
+  "knock_out_reasons": [
+    "Non-aviation: “Divers Life Support System … hyperbaric chamber facilities …” (p. 1).",
+    "OEM-only sourcing: “OEM only parts … NAVSEA Certified equipment.” (p. 1)."
+  ],
+  "exceptions": [],
+  "special_action": "None – outside aviation scope and OEM-only requirement.",
+  "rationale": "Marine diving systems, not aviation. Requires OEM-only sourcing and NAVSEA certification. SOS cannot participate.",
+  "recommendation": "NO-GO. Record for awareness only.",
+  "sos_pipeline_title": "PN: NA | Qty: Various | Condition: New OEM | MDS: NA | M0068125Q0069 | Purchase managed repair services for dive and hyperbaric systems"
+}
+{
+  "solicitation_id": "SPE4A525T714H",
+  "solicitation_title": "CASTER, RIGID",
+  "summary": "Proposed procurement for NSN 5340-01-655-6113, CASTER, RIGID. Qty 18 EA, delivery to DLA Distribution Depot Oklahoma in 87 days ADO. Approved source is 81205 842-349812-6. Specifications, plans, or drawings are not available. Solicitation is an RFQ, no set-aside.",
+  "agency": "DLA Aviation",
+  "posted_date": "2025-09-02",
+  "due_date": "2025-09-09",
+  "naics": "332510",
+  "psc": "5340",
+  "place_of_performance": "DLA Distribution Depot Oklahoma"
+}
+{
+  "solicitation_id": "SPE4A525T714H",
+  "solicitation_title": "CASTER, RIGID",
+  "type": "new purchase",
+  "summary": "“Approved source is 81205 842-349812-6. Specifications, plans, or drawings are not available.” (p. 2).",
+  "result": "NO-GO",
+  "knock_out_reasons": [
+    "Non-aviation: PSC 5340 – Hardware and Abrasives.",
+    "Approved source restriction: “Approved source is 81205 842-349812-6.” (p. 2).",
+    "No technical data: “Specifications, plans, or drawings are not available.” (p. 2)."
+  ],
+  "exceptions": [],
+  "special_action": "None – locked to OEM source.",
+  "rationale": "This is a hardware procurement, not aviation. It is restricted to a single approved source and has no technical data. SOS cannot compete.",
+  "recommendation": "NO-GO. Record for awareness only.",
+  "sos_pipeline_title": "PN: 842-349812-6 | Qty: 18 | Condition: New OEM | MDS: NA | SPE4A525T714H | Purchase rigid caster hardware"
+}
+{
+  "solicitation_id": "CA-FF-2025-112",
+  "solicitation_title": "Purchase of Surplus Aircraft Brakes – CAL FIRE",
+  "summary": "The California Department of Forestry and Fire Protection (CAL FIRE) seeks bids for surplus C-130Q aircraft brakes for firefighting tanker fleet. Surplus acceptable. Delivery to McClellan Airfield, CA. Due Oct. 5, 2025.",
+  "agency": "CAL FIRE (State of California)",
+  "posted_date": "2025-09-01",
+  "due_date": "2025-10-05",
+  "naics": "336413",
+  "psc": "1630",
+  "place_of_performance": "McClellan Airfield, CA"
+}
+{
+  "solicitation_id": "CA-FF-2025-112",
+  "solicitation_title": "Purchase of Surplus Aircraft Brakes – CAL FIRE",
+  "type": "surplus purchase",
+  "summary": "“Surplus acceptable … C-130Q aircraft brakes … CAL FIRE … firefighting tanker fleet.” (p. 1).",
+  "result": "GO",
+  "knock_out_reasons": [],
+  "exceptions": [],
+  "special_action": "None – SLED opportunities are viable.",
+  "rationale": "This is a state-level (SLED) opportunity for surplus firefighting aircraft parts. Aviation-related, surplus acceptable, and within SOS capabilities.",
+  "recommendation": "GO. Submit surplus bid.",
+  "sos_pipeline_title": "PN: NA | Qty: Various | Condition: Surplus | MDS: C-130Q | CA-FF-2025-112 | Purchase surplus brakes for CAL FIRE tanker fleet"
+}
+{
+  "solicitation_id": "FAA-25-AV-009",
+  "solicitation_title": "Refurbishment of Beechcraft King Air Landing Gear",
+  "summary": "The Federal Aviation Administration (FAA) requests proposals for refurbishment of King Air B200 landing gear sets. FAA Form 8130-3 required. Due Oct. 20, 2025.",
+  "agency": "Federal Aviation Administration",
+  "posted_date": "2025-09-05",
+  "due_date": "2025-10-20",
+  "naics": "336413",
+  "psc": "1620",
+  "place_of_performance": "Oklahoma City, OK"
+}
+{
+  "solicitation_id": "FAA-25-AV-009",
+  "solicitation_title": "Refurbishment of Beechcraft King Air Landing Gear",
+  "type": "managed repair",
+  "summary": "“FAA requests proposals for refurbishment of King Air B200 landing gear sets. FAA Form 8130-3 required.” (p. 1).",
+  "result": "GO",
+  "knock_out_reasons": [],
+  "exceptions": [],
+  "special_action": "None – FAA requirements align with SOS certifications.",
+  "rationale": "General aviation platform, FAA refurbishment path, 8130-3 compliance. Competitive and within SOS’s aftermarket strengths.",
+  "recommendation": "GO. Pursue as a refurbishment contract.",
+  "sos_pipeline_title": "PN: NA | Qty: Various | Condition: Refurb | MDS: King Air B200 | FAA-25-AV-009 | Refurbishment of landing gear sets"
+}
+{
+  "solicitation_id": "SPE4A525Q9987",
+  "solicitation_title": "Hydraulic Pump Assembly – OEM Distributor Only",
+  "summary": "DLA Aviation solicits hydraulic pump assemblies for P-8A Poseidon. Approved source only. OEM distributor authorization letter required at time of proposal. Refurbished or surplus not acceptable. Due Oct. 12, 2025.",
+  "agency": "DLA Aviation",
+  "posted_date": "2025-09-04",
+  "due_date": "2025-10-12",
+  "naics": "336413",
+  "psc": "1650",
+  "place_of_performance": "Richmond, VA"
+}
+{
+  "solicitation_id": "SPE4A525Q9987",
+  "solicitation_title": "Hydraulic Pump Assembly – OEM Distributor Only",
+  "type": "new purchase",
+  "summary": "“Approved source only … OEM distributor authorization letter required at time of proposal.” (p. 1).",
+  "result": "NO-GO",
+  "knock_out_reasons": [
+    "OEM-only distribution requirement: “OEM distributor authorization letter required …” (p. 1)."
+  ],
+  "exceptions": [],
+  "special_action": "Contact CO about future consideration of FAA-certified aftermarket/refurb parts.",
+  "rationale": "Aviation-related platform (P-8 Poseidon), but limited to OEM distributor sources with explicit traceability block. SOS cannot participate.",
+  "recommendation": "NO-GO. Record as blocked by OEM-only traceability.",
+  "sos_pipeline_title": "PN: NA | Qty: Various | Condition: New OEM | MDS: P-8 Poseidon | SPE4A525Q9987 | Purchase new hydraulic pump assemblies – OEM only restriction"
+}
+{
+  "solicitation_id": "FAA-2025-AIRCRAFT",
+  "solicitation_title": "Procurement of New Beechcraft Baron Aircraft",
+  "summary": "The Federal Aviation Administration intends to procure two (2) new Beechcraft Baron aircraft for flight training at the FAA Academy. Due Nov. 1, 2025.",
+  "agency": "Federal Aviation Administration",
+  "posted_date": "2025-09-06",
+  "due_date": "2025-11-01",
+  "naics": "336411",
+  "psc": "1510",
+  "place_of_performance": "Oklahoma City, OK"
+}
+{
+  "solicitation_id": "FAA-2025-AIRCRAFT",
+  "solicitation_title": "Procurement of New Beechcraft Baron Aircraft",
+  "type": "new manufacture",
+  "summary": "“Procure two (2) new Beechcraft Baron aircraft …” (p. 1).",
+  "result": "NO-GO",
+  "knock_out_reasons": [
+    "Complete aircraft procurement: SOS specializes in aftermarket spares, not whole aircraft."
+  ],
+  "exceptions": [],
+  "special_action": "None – outside SOS scope.",
+  "rationale": "General aviation platform, but requirement is for purchase of complete new aircraft. SOS only provides aftermarket parts and services.",
+  "recommendation": "NO-GO. Record for awareness only.",
+  "sos_pipeline_title": "PN: NA | Qty: 2 | Condition: New | MDS: Beechcraft Baron | FAA-2025-AIRCRAFT | Purchase complete aircraft – outside SOS scope"
+}
+{
+  "solicitation_id": "TX-STATE-AVIATION-2025-07",
+  "solicitation_title": "Refurbishment of Cessna 172 Engine Components – Texas State University Flight Program",
+  "summary": "Texas State University Flight Program seeks refurbishment services for Cessna 172 piston engine components. FAA Form 8130-3 required. Refurbished acceptable. Due Oct. 22, 2025.",
+  "agency": "Texas State University (State of Texas)",
+  "posted_date": "2025-09-08",
+  "due_date": "2025-10-22",
+  "naics": "336412",
+  "psc": "2840",
+  "place_of_performance": "San Marcos, TX"
+}
+{
+  "solicitation_id": "TX-STATE-AVIATION-2025-07",
+  "solicitation_title": "Refurbishment of Cessna 172 Engine Components – Texas State University Flight Program",
+  "type": "managed repair",
+  "summary": "“Texas State University Flight Program seeks refurbishment services … FAA Form 8130-3 required. Refurbished acceptable.” (p. 1).",
+  "result": "GO",
+  "knock_out_reasons": [],
+  "exceptions": [],
+  "special_action": "None – SLED refurb opportunities align with SOS strengths.",
+  "rationale": "SLED opportunity, general aviation aircraft, refurbishment explicitly allowed with FAA Form 8130-3. This fits SOS’s aftermarket and refurb strengths.",
+  "recommendation": "GO. Submit bid for refurbishment.",
+  "sos_pipeline_title": "PN: NA | Qty: Various | Condition: Refurb | MDS: Cessna 172 | TX-STATE-AVIATION-2025-07 | Refurbishment of piston engine components for university flight program"
+}
+{
+  "solicitation_id": "SPE4A525Q1234",
+  "solicitation_title": "Actuator Assembly – Surplus Acceptable",
+  "summary": "DLA Aviation solicits actuator assemblies for KC-135 aircraft. Solicitation notes: 'New manufacture preferred, surplus considered with full traceability.' FAA Form 8130-3 or equivalent documentation required. Due Oct. 18, 2025.",
+  "agency": "DLA Aviation",
+  "posted_date": "2025-09-07",
+  "due_date": "2025-10-18",
+  "naics": "336413",
+  "psc": "1680",
+  "place_of_performance": "Tinker AFB, OK"
+}
+{
+  "solicitation_id": "SPE4A525Q1234",
+  "solicitation_title": "Actuator Assembly – Surplus Acceptable",
+  "type": "surplus purchase",
+  "summary": "“New manufacture preferred, surplus considered with full traceability.” (p. 1).",
+  "result": "GO",
+  "knock_out_reasons": [],
+  "exceptions": [],
+  "special_action": "None – surplus with FAA traceability aligns with SOS strengths.",
+  "rationale": "Aviation-related platform (KC-135), surplus explicitly acceptable, FAA Form 8130-3 traceability required, which SOS provides. Competitive opportunity.",
+  "recommendation": "GO. Submit surplus/traceable bid.",
+  "sos_pipeline_title": "PN: NA | Qty: Various | Condition: Surplus | MDS: KC-135 | SPE4A525Q1234 | Purchase surplus actuator assemblies with FAA traceability"
+}
+{
+  "solicitation_id": "FA862025Q5678",
+  "solicitation_title": "Hydraulic Valve Assembly for F-16",
+  "summary": "The U.S. Air Force solicits hydraulic valve assemblies for the F-16 aircraft. Solicitation states: 'New manufacture preferred, surplus may be considered with traceability.' AMC/AMSC not provided. Due Oct. 25, 2025.",
+  "agency": "U.S. Air Force (AFLCMC)",
+  "posted_date": "2025-09-09",
+  "due_date": "2025-10-25",
+  "naics": "336413",
+  "psc": "1650",
+  "place_of_performance": "Hill AFB, UT"
+}
+{
+  "solicitation_id": "FA862025Q5678",
+  "solicitation_title": "Hydraulic Valve Assembly for F-16",
+  "type": "new purchase",
+  "summary": "“Solicits hydraulic valve assemblies for the F-16 aircraft … New manufacture preferred, surplus may be considered … AMC/AMSC not provided.” (p. 1).",
+  "result": "NO-GO",
+  "knock_out_reasons": [
+    "Platform restriction: “F-16 aircraft” (p. 1) – pure military fighter, no AMSC Z carve-out."
+  ],
+  "exceptions": [],
+  "special_action": "None – platform is a hard stop without AMSC Z.",
+  "rationale": "Although surplus is mentioned, this is tied to an F-16 fighter platform with no AMSC Z to open a commercial path. SOS cannot pursue.",
+  "recommendation": "NO-GO. Record as blocked by pure military platform.",
+  "sos_pipeline_title": "PN: NA | Qty: Various | Condition: New | MDS: F-16 | FA862025Q5678 | Purchase hydraulic valve assemblies – blocked by platform"
+}
+{
+  "solicitation_id": "FA862025Q5678736",
+  "solicitation_title": "Landing Gear Pin Assembly for C-5",
+  "summary": "The 436 MXS solicits six landing gear pin assemblies (Part Number 676-22-01-01A) for the C-5 aircraft. Solicitation states: 'New manufacture preferred, surplus may be considered with traceability.' AMC/AMSC = 1Z. Additional note: 'Offers must include OEM distributor authorization.' Due Oct. 28, 2025.",
+  "agency": "Air Mobility Command (AMC)",
+  "posted_date": "2025-09-09",
+  "due_date": "2025-10-28",
+  "naics": "336413",
+  "psc": "1650",
+  "place_of_performance": "Dover AFB, DE"
+}
+{
+  "solicitation_id": "FA862025Q5678736",
+  "solicitation_title": "Landing Gear Pin Assembly for C-5",
+  "type": "new purchase",
+  "summary": "“The 436 MXS solicits six landing gear pin assemblies (Part Number 676-22-01-01A) for the C-5 aircraft. Solicitation states: 'New manufacture preferred, surplus may be considered with traceability.' AMC/AMSC = 1Z” (p. 1).",
+  "result": "NO-GO",
+  "knock_out_reasons": [
+    "OEM-only distribution requirement: “Offers must include OEM distributor authorization.” (p. 1)."
+  ],
+  "exceptions": [],
+  "special_action": "Contact CO to flag SOS capability for future acceptance of FAA-certified aftermarket/refurb parts.",
+  "rationale": "Platform is a military C-5 cargo aircraft, but AMSC Z provides a commercial path. However, solicitation explicitly restricts offers to OEM distributors, which SOS cannot meet.",
+  "recommendation": "NO-GO. Record as blocked by OEM-only requirement despite AMSC Z.",
+  "sos_pipeline_title": "PN: 676-22-01-01A | Qty: 6 | Condition: New OEM | MDS: C-5 Super Galaxy | FA862025Q5678736 | Purchase hydraulic valve assemblies – OEM distributor restriction overrides AMSC Z"
+}
+{
+  "solicitation_id": "DOJ-2025-CN-045",
+  "solicitation_title": "Commercial GPS Units for DOJ ConAir Aircraft",
+  "summary": "The Department of Justice, Justice Prisoner and Alien Transportation System (JPATS, 'ConAir') seeks bids for off-the-shelf commercial GPS navigation units for aircraft fleet use (Boeing 777-ER). Requirement specifies FAA-certified commercial models, COTS only, no modifications. Example PNs include Garmin 400W, Garmin 750Xi. Qty: 25 each. Due Nov. 15, 2025.",
+  "agency": "Department of Justice (JPATS/ConAir)",
+  "posted_date": "2025-09-10",
+  "due_date": "2025-11-15",
+  "naics": "334220",
+  "psc": "5826",
+  "place_of_performance": "Chantilly, VA"
+}
+{
+  "solicitation_id": "DOJ-2025-CN-045",
+  "solicitation_title": "Commercial GPS Units for DOJ ConAir",
+  "type": "new purchase",
+  "summary": "“JPATS seeks bids for off-the-shelf commercial GPS navigation units for it's Boeing 777-ER prisoner transport aircraft … FAA-certified commercial models, COTS only, no modifications … Example PNs Garmin 400W, Garmin 750Xi. Qty: 25.” (p. 1).",
+  "result": "GO",
+  "knock_out_reasons": [],
+  "exceptions": [],
+  "special_action": "None – straightforward COTS opportunity.",
+  "rationale": "Aviation-related (aircraft GPS), non-DoD federal buyer (DOJ), fully commercial COTS item with FAA certification. PNs and quantities provided. No SAR, OEM-only, or military platform restrictions. Aligned with SOS’s COTS strengths.",
+  "recommendation": "GO. Pursue as a COTS GPS supply contract.",
+  "sos_pipeline_title": "PN: Garmin 400W, Garmin 750Xi | Qty: 25 | Condition: New | MDS: NA | DOJ-2025-CN-045 | Purchase COTS FAA-certified GPS units for DOJ ConAir fleet"
+}
+{
+  "solicitation_id": "SPE4A725Q6001",
+  "solicitation_title": "Pump Assembly",
+  "summary": "DLA solicits NSN 2910-01-222-3333, Pump Assembly, PN: LM2001-556-12. Qty: 30 each. PSC: 2910 (Engine Fuel System Components – Non-aviation). NAICS: 336413 (Aviation component manufacturing). No SAR language provided. Due Dec. 5, 2025.",
+  "agency": "DLA Land and Maritime",
+  "posted_date": "2025-09-16",
+  "due_date": "2025-12-05",
+  "naics": "336413",
+  "psc": "2910",
+  "place_of_performance": "Columbus, OH"
+}
+{
+  "solicitation_id": "SPE4A725Q6001",
+  "solicitation_title": "Pump Assembly",
+  "type": "new purchase",
+  "summary": "“DLA solicits NSN 2910-01-222-3333, Pump Assembly … PSC 2910 … NAICS 336413.” (p. 1).",
+  "result": "INDETERMINATE",
+  "knock_out_reasons": [],
+  "exceptions": [],
+  "special_action": "Clarify with CO if this pump applies to aviation engines/components or ground vehicle engines.",
+  "rationale": "PSC 2910 indicates non-aviation pumps, while NAICS 336413 points to aviation. Contradictory coding creates ambiguity. Needs clarification before pursuing.",
+  "recommendation": "INDETERMINATE. Contact CO to confirm application.",
+  "sos_pipeline_title": "PN: LM2001-556-12 | Qty: 30 | Condition: New | MDS: NA | SPE4A725Q6001 | Purchase pump assemblies – aviation applicability unclear"
+}
+{
+"solicitation_id": "FA862025Q6012",
+"solicitation_title": "Actuator Assembly – Egypt FMS",
+"summary": "The U.S. Air Force requests bids for actuator assemblies for F-16 aircraft under Foreign Military Sales (FMS) to Egypt. Example PN: 16A123456-01. Qty: 15 each. Solicitation states: 'Surplus acceptable with traceability to FAA-certified source.' AMC/AMSC = 3P (Source approval required, no data). Due Nov. 30, 2025.",
+"agency": "U.S. Air Force (AFLCMC)",
+"posted_date": "2025-09-16",
+"due_date": "2025-11-30",
+"naics": "336413",
+"psc": "1650",
+"place_of_performance": "Hill AFB, UT"
+}
+{
+"solicitation_id": "FA862025Q6012",
+"solicitation_title": "Actuator Assembly – Egypt FMS",
+"type": "surplus purchase",
+"summary": "“The U.S. Air Force requests bids for actuator assemblies for F-16 aircraft under Foreign Military Sales (FMS) to Egypt. Example PN: 16A123456-01. Qty: 15 each. Solicitation states: 'Surplus acceptable with traceability to FAA-certified source.' AMC/AMSC = 3P (Source approval required, no data).” (p. 1).",
+"result": "NO-GO",
+"knock_out_reasons": [
+"Platform restriction: “F-16 aircraft” (p. 1) – pure military fighter, no AMSC Z carve-out.",
+"SAR requirement: “AMSC = 3P (Source approval required, no data).” (p. 1)."
+],
+"exceptions": [],
+"special_action": "None – platform and SAR are hard stops.",
+"rationale": "Although surplus is mentioned, this is tied to an F-16 fighter platform with no AMSC Z to open a commercial path. SAR requirement without government data. SOS cannot pursue.",
+"recommendation": "NO-GO. Record as blocked by platform and SAR.",
+"sos_pipeline_title": "PN: 16A123456-01 | Qty: 15 | Condition: Surplus | MDS: F-16 | FA862025Q6012 | Purchase actuator assemblies – F-16 platform and SAR restriction"
+}
+{
+"solicitation_id": "SPE4A725Q4500",
+"solicitation_title": "Bearing, Roller – Boeing 737 Fleet Support",
+"summary": "DLA Aviation solicits NSN 3110-01-789-6543, Bearing, Roller, PN: 65A350987-200. Qty: 220 each. Application: Boeing 737 commercial derivative platforms. Solicitation language: 'Refurbished, overhauled, or surplus material acceptable with full FAA 8130-3 traceability. AMSC = Z, government has full data package.' Section H (Special Contract Requirements) notes: 'This procurement is 100% HUBZone set-aside.' Due Nov. 20, 2025.",
+"agency": "DLA Aviation",
+"posted_date": "2025-09-15",
+"due_date": "2025-11-20",
+"naics": "336413",
+"psc": "3110",
+"place_of_performance": "Richmond, VA"
+}
+{
+"solicitation_id": "SPE4A725Q4500",
+"solicitation_title": "Bearing, Roller – Boeing 737 Fleet Support",
+"type": "surplus purchase",
+"summary": "“DLA Aviation solicits NSN 3110-01-789-6543, Bearing, Roller, PN: 65A350987-200. Qty: 220 each. Application: Boeing 737 commercial derivative platforms. Solicitation language: 'Refurbished, overhauled, or surplus material acceptable with full FAA 8130-3 traceability. AMSC = Z, government has full data package.' Section H (Special Contract Requirements) notes: 'This procurement is 100% HUBZone set-aside.'” (p. 1).",
+"result": "NO-GO",
+"knock_out_reasons": [
+"Set-aside restriction: “This procurement is 100% HUBZone set-aside.” (p. 1)."
+],
+"exceptions": [],
+"special_action": "None – set-aside is a hard stop.",
+"rationale": "Although this is a commercial platform (Boeing 737) with surplus acceptable, this is a HUBZone set-aside. SOS cannot pursue.",
+"recommendation": "NO-GO. Record for awareness only.",
+"sos_pipeline_title": "PN: 65A350987-200 | Qty: 220 | Condition: Surplus | MDS: Boeing 737 | SPE4A725Q4500 | Purchase roller bearings – HUBZone set-aside"
+}
+{
+"solicitation_id": "TX-HARRIS-2025-AVI-14",
+"solicitation_title": "Harris County Sheriff – Procurement of UH-1H Huey Engine Components",
+"summary": "The Harris County Sheriff’s Aviation Support Unit requests bids for procurement of engine turbine components for UH-1H helicopters (civilian-registered, used in law enforcement). Example PNs: 1-100-123-45, 1-100-123-46. Qty: 8 total. Solicitation Section A states: 'Refurbished or overhauled components are acceptable provided FAA Form 8130-3 accompanies each part.' Section B states: 'Only new manufacture components will be considered acceptable for award.' Section C (Attachment 3) further states: 'All offers must come directly from OEM-authorized distributors.' Due Nov. 15, 2025.",
+"agency": "Harris County Sheriff’s Office – Aviation Support Unit",
+"posted_date": "2025-09-13",
+"due_date": "2025-11-15",
+"naics": "336412",
+"psc": "2840",
+"place_of_performance": "Houston, TX"
+}
+{
+"solicitation_id": "TX-HARRIS-2025-AVI-14",
+"solicitation_title": "Harris County Sheriff – Procurement of UH-1H Huey Engine Components",
+"type": "new purchase",
+"summary": "“Harris County Sheriff’s Aviation Support Unit requests bids for procurement of engine turbine components for UH-1H helicopters … Section A states: 'Refurbished or overhauled components are acceptable provided FAA Form 8130-3 accompanies each part.' Section B states: 'Only new manufacture components will be considered acceptable for award.' Section C (Attachment 3) further states: 'All offers must come directly from OEM-authorized distributors.'” (p. 1).",
+"result": "NO-GO",
+"knock_out_reasons": [
+"OEM-only distribution requirement: “All offers must come directly from OEM-authorized distributors.” (p. 1)."
+],
+"exceptions": [],
+"special_action": "Contact CO to flag SOS capability for future acceptance of FAA-certified aftermarket/refurb parts.",
+"rationale": "Although refurbishment is mentioned, this is tied to an OEM-only distribution requirement. SOS cannot pursue.",
+"recommendation": "NO-GO. Record as blocked by OEM-only requirement.",
+"sos_pipeline_title": "PN: 1-100-123-45, 1-100-123-46 | Qty: 8 | Condition: New | MDS: UH-1H | TX-HARRIS-2025-AVI-14 | Purchase engine turbine components – OEM distributor restriction"
+}
+{
+"solicitation_id": "SPE4A725T2020",
+"solicitation_title": "Fitting, Metallic",
+"summary": "DLA solicits quotes for NSN 1560-01-234-5678, Fitting, Metallic. PN: LM2025-334-01. Qty: 65 each. AMC/AMSC = 1/G. Due Dec. 2, 2025.",
+"agency": "DLA Aviation",
+"posted_date": "2025-09-14",
+"due_date": "2025-12-02",
+"naics": "336413",
+"psc": "1560",
+"place_of_performance": "Richmond, VA"
+}
+{
+"solicitation_id": "SPE4A725T2020",
+"solicitation_title": "Fitting, Metallic",
+"type": "new purchase",
+"summary": "“DLA solicits quotes for NSN 1560-01-234-5678, Fitting, Metallic. PN: LM2025-334-01. Qty: 65 each. AMC/AMSC = 1/G.” (p. 1).",
+"result": "GO",
+"knock_out_reasons": [],
+"exceptions": [],
+"special_action": "None – AMC/AMSC G provides commercial path.",
+"rationale": "Aviation-related, AMC/AMSC G provides commercial path, no SAR or OEM-only restrictions. SOS is well positioned.",
+"recommendation": "GO. Pursue as a competitive new purchase.",
+"sos_pipeline_title": "PN: LM2025-334-01 | Qty: 65 | Condition: New | MDS: NA | SPE4A725T2020 | Purchase metallic fittings"
+}
+

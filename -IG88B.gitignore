@@ -1,0 +1,67 @@
+# Node / Python / OS common
+node_modules/
+dist/
+build/
+*.log
+.env
+.env.*
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing & Validation Outputs (temporary)
+validation_report_*.json
+bug_detection_report_*.json
+forensic_false_negatives.json
+further_analysis_report_*.json
+gov_test_docs_analysis_*.json
+historical_analysis_*.json
+integration_test_results_*.json
+sample_validation_*.json
+*_calibrated_validation.json
+
+# Temporary Analysis
+csv_size_analysis.json
+new_naics_analysis.json
+sampling_distribution.json
+unfiltered_analysis.json
+
+# Daily Runs (keep summary, ignore detailed JSON)
+daily_runs/*.json
+
+# Large Test Data
+holdout_sample_*.csv
+representative_sample_*.csv
+unfiltered_baseline_*.csv
+
+# Temporary test files
+SYNTHETIC_TEST_DATA.txt
+SAMPLE_ANNOUNCEMENTS.txt
+
+# Legacy builds (submodules)
+Legacy-Builds/
+
+# v4.2 operational logs (kept, but optional to ignore in VCS)
+ops/trust-tracking/
+ops/manual-paste-log/
+ops/terminal-monitoring/
+qa/session-traces/
+nul
+NUL
+out/ops/NUL

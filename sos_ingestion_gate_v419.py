@@ -237,7 +237,7 @@ class IngestionGateV419:
     # Testing mode - evaluating patterns not deadlines
     IGNORE_TIMING_FOR_TESTING = True  # DISABLE TIMING CHECKS - they're broken
     
-    def __init__(self, config_path: str = 'packs/regex_pack_v14_production.yaml'):
+    def __init__(self, config_path: str = 'packs/regex_pack_v419_complete.yaml'):
         """Initialize the V4.19 gate."""
         self.config_path = config_path
         self.regex_pack = self._load_regex_pack()
@@ -247,11 +247,26 @@ class IngestionGateV419:
         self.condition_checker = PartsConditionChecker()  # Initialize condition checker
     
     def _load_regex_pack(self) -> Dict[str, Any]:
-        """Load regex pack from YAML."""
-        pack_path = Path(self.config_path)
+        """Load regex pack from YAML with self-healing path resolution."""
+        # Try multiple locations for robustness
+        possible_paths = [
+            Path(self.config_path),  # Direct path
+            Path('..') / self.config_path,  # Parent directory
+            Path('../..') / self.config_path,  # Two levels up
+            Path(__file__).parent / self.config_path,  # Relative to this file
+            Path('_ARCHIVE_OLD_FILES_2025_09_09') / self.config_path  # Fallback to archive
+        ]
         
-        if not pack_path.exists():
-            logger.warning(f"Regex pack not found: {pack_path}")
+        pack_path = None
+        for path in possible_paths:
+            if path.exists():
+                pack_path = path
+                logger.info(f"Found regex pack at: {pack_path}")
+                break
+        
+        if not pack_path:
+            logger.warning(f"Regex pack not found in any location. Tried: {possible_paths}")
+            # Still return empty structure so processing continues
             return {'metadata': {}, 'globals': {}}
         
         with open(pack_path, 'r', encoding='utf-8') as f:
@@ -404,27 +419,16 @@ class IngestionGateV419:
             triggered=False
         )
         
-        # FAA 8130 EXCEPTION CHECK - Do this FIRST
-        # If FAA 8130 is mentioned, source restrictions don't apply
+        # FAA 8130 EXCEPTION CHECK for Category 5 (Source Restrictions)
+        # Navy + SAR + FAA 8130 = Exception
         if category_id == 5:  # SOURCE_RESTRICTIONS
-            import re  # Import locally to avoid scope issues
-            faa_patterns = [
-                r'FAA[\s-]*8130',
-                r'8130[\s-]*3',
-                r'FAA[\s-]*Form[\s-]*8130',
-                r'FAA[\s-]*Certified',
-                r'FAA[\s-]*MRO',
-                r'FAA[\s-]*approved',
-                r'airworthiness[\s-]*certificate',
-                r'airworthy[\s-]*approval'
-            ]
-            for pattern in faa_patterns:
-                if re.search(pattern, text, re.IGNORECASE):
-                    # If FAA 8130 + approved sources, this is GO for SOS
-                    score.evidence = ["FAA 8130 Exception: SOS MRO partners can provide"]
-                    score.contact_co_applicable = True
-                    score.contact_co_reason = "FAA 8130 certified parts - SOS can provide through MRO network"
-                    return score  # Return untriggered (GO)
+            # Check if this is a Navy FAA 8130 exception case
+            if self._has_faa_8130_exception(text):
+                # Navy + SAR + FAA 8130 = GO for SOS
+                score.evidence = ["Navy FAA 8130 Exception: SOS MRO partners can provide"]
+                score.contact_co_applicable = True
+                score.contact_co_reason = "Navy + SAR + FAA 8130 = SOS eligible through MRO partners"
+                return score  # Return untriggered (GO)
         
         # Special handling for timing (Category 1)
         if category_id == 1:
@@ -451,24 +455,158 @@ class IngestionGateV419:
         
         # Special handling for Category 8 - Military platforms
         if category_id == 8:
-            # Check if text contains military aircraft designations
+            import re
+            # FIRST: Check for AMSC Z/G override
+            amsc_override_pattern = r'\bAMSC\s+(?:Code\s+)?[ZGA]\b|\bAMC\s+[12]\b'
+            has_amsc_override = bool(re.search(amsc_override_pattern, text, re.IGNORECASE))
+            
+            # SECOND: Check platform mapper for civilian equivalents
+            platform_result = self.platform_mapper.assess_platform_impact(text)
+            has_civilian_equivalent = (platform_result.get('decision') == 'GO' or 
+                                      platform_result.get('civilian_equivalent') is not None)
+            
+            # If AMSC override present, don't block
+            if has_amsc_override:
+                score.triggered = False
+                score.score = 0
+                score.evidence.append(f"AMSC Z/G/A override present - commercial equivalent acceptable")
+                return score
+                
+            # Check if text contains military aircraft/weapons/EW designations
+            # NOTE: C-12 is King Air, not included here
             military_patterns = [
-                r'(?i)\bF[-\s]?(?:15|16|18|22|35)[A-Z]?\b',  # F-15, F-16, F-22, F-35
-                r'(?i)\bF[-\s]?(?:4|5|14|111|117)[A-Z]?\b',   # F-4, F-5, F-14, etc.
-                r'(?i)\bB[-\s]?(?:1|2|52|21)[A-Z]?\b',        # B-1, B-2, B-52
-                r'(?i)\bAH[-\s]?(?:1|64|6)[A-Z]?\b',          # AH-1, AH-64 Apache
-                r'(?i)\bUH[-\s]?(?:1|60|72)[A-Z]?\b',         # UH-1, UH-60 Black Hawk
+                # Fighter aircraft
+                r'(?i)\bF[-\s]?(?:15|16|18|22|35)[A-Z]{0,2}\b',  # F-15, F-16, F-22, F-35 (including F15EX)
+                r'(?i)\bF[-\s]?(?:4|5|14|111|117)[A-Z]{0,2}\b',   # F-4, F-5, F-14, etc.
+                
+                # Bombers
+                r'(?i)\bB[-\s]?(?:1|2|52|21)[A-Z]{0,2}\b',        # B-1, B-2, B-52 (including B52H)
+                
+                # Transport (military-only)
+                r'(?i)\bC[-\s]?(?:130|17|5)\b',                   # C-130, C-17, C-5 (NOT C-12 which is King Air)
+                r'(?i)\bC[-\s]?(?:27|21)\b',                      # C-27, C-21 (military only)
+                
+                # Tankers
+                r'(?i)\bKC[-\s]?(?:135|10|46)[A-Z]{0,2}\b',       # KC-135, KC-10, KC-46 (including KC46A)
+                
+                # Maritime patrol
+                r'(?i)\bP[-\s]?(?:3|8)[A-Z]{0,2}\b',              # P-3 Orion, P-8 Poseidon (including P3C, P8A)
+                
+                # Electronic warfare/surveillance
+                r'(?i)\bE[-\s]?(?:2|3|4|6|8)[A-Z]{0,2}\b',        # E-2, E-3 AWACS, E-4, E-6, E-8
+                r'(?i)\bEA[-\s]?(?:6B|18G)\b',                    # EA-6B Prowler, EA-18G Growler
+                r'(?i)\bRC[-\s]?135[A-Z]?\b',                     # RC-135 reconnaissance
+                r'(?i)\bEP[-\s]?3[A-Z]?\b',                       # EP-3 ARIES
+                
+                # Helicopters (military-only)
+                r'(?i)\bAH[-\s]?(?:1|64|6)[A-Z]?\b',              # AH-1, AH-64 Apache
+                r'(?i)\bUH[-\s]?(?:1|60|72)[A-Z]?\b',             # UH-1, UH-60 Black Hawk
+                r'(?i)\bCH[-\s]?(?:47|53)[A-Z]?\b',               # CH-47 Chinook, CH-53
+                r'(?i)\bMH[-\s]?(?:60|53|47)[A-Z]?\b',            # MH-60, MH-53, MH-47
+                r'(?i)\bV[-\s]?22\b',                             # V-22 Osprey
+                
+                # WEAPONS SYSTEMS
+                r'(?i)\bweapon\s+system\b',                       # Generic weapon system
+                r'(?i)\bweapons\s+system\b',                      # Weapons system
+                r'(?i)\bmissile\s+system\b',                      # Missile systems
+                r'(?i)\btorpedo\s+system\b',                      # Torpedo systems
+                r'(?i)\bbomb(?:ing)?\s+system\b',                 # Bombing systems
+                r'(?i)\bgunnery\s+system\b',                      # Gunnery systems
+                r'(?i)\bfire\s+control\s+system\b',               # Fire control systems
+                r'(?i)\btargeting\s+system\b',                    # Targeting systems
+                r'(?i)\bordnance\s+system\b',                     # Ordnance systems
+                
+                # ELECTRONIC WARFARE SYSTEMS
+                r'(?i)\belectronic\s+warfare\b',                  # Electronic warfare
+                r'(?i)\bEW\s+system\b',                           # EW system
+                r'(?i)\bjamming\s+system\b',                      # Jamming systems
+                r'(?i)\bcountermeasure\s+system\b',               # Countermeasure systems
+                r'(?i)\bradar\s+warning\s+receiver\b',            # RWR
+                r'(?i)\bRWR\b',                                   # RWR abbreviation
+                r'(?i)\bECM\s+(?:system|pod)\b',                  # Electronic countermeasures
+                r'(?i)\bESM\s+system\b',                          # Electronic support measures
+                r'(?i)\bSIGINT\b',                                # Signals intelligence
+                r'(?i)\bELINT\b',                                 # Electronic intelligence
+                
+                # ROCKET/MISSILE SYSTEMS
+                r'(?i)\brocket\s+system\b',                       # Rocket systems
+                r'(?i)\bMLRS\b',                                  # Multiple Launch Rocket System
+                r'(?i)\bHIMARS\b',                                # High Mobility Artillery Rocket System
+                r'(?i)\bPatriot\s+(?:missile|system)\b',          # Patriot missile system
+                r'(?i)\bTHAAD\b',                                 # Terminal High Altitude Area Defense
+                r'(?i)\bAegis\s+(?:combat|weapon)\b',             # Aegis combat system
+                r'(?i)\bSM[-\s]?[23]\b',                          # SM-2, SM-3 missiles
+                r'(?i)\bAIM[-\s]?\d+[A-Z]?\b',                    # AIM-120, AIM-9, etc.
+                r'(?i)\bAGM[-\s]?\d+[A-Z]?\b',                    # AGM-65, AGM-88, etc.
+                r'(?i)\bTomahawk\b',                              # Tomahawk missile
+                r'(?i)\bHellfire\b',                              # Hellfire missile
+                r'(?i)\bJDAM\b',                                  # Joint Direct Attack Munition
+                r'(?i)\bGBU[-\s]?\d+\b',                          # Guided Bomb Unit
+                r'(?i)\bMk[-\s]?\d+\s+(?:torpedo|mine)\b',        # Mk torpedoes/mines
+                
+                # GENERIC MILITARY COMPONENT TERMS
+                r'(?i)\brocket\s+tube[s]?\b',                     # Rocket tubes
+                r'(?i)\blaunch(?:er)?\s+tube[s]?\b',             # Launch/launcher tubes
+                r'(?i)\bmissile\s+tube[s]?\b',                    # Missile tubes
+                r'(?i)\btorpedo\s+tube[s]?\b',                    # Torpedo tubes
+                r'(?i)\bbomb\s+rack[s]?\b',                       # Bomb racks
+                r'(?i)\bmissile\s+rack[s]?\b',                    # Missile racks
+                r'(?i)\bweapon[s]?\s+rack[s]?\b',                 # Weapon racks
+                r'(?i)\bpylon[s]?\s+(?:assembly|adapter)\b',      # Pylon assemblies
+                r'(?i)\bhardpoint[s]?\b',                         # Hardpoints
+                r'(?i)\bmunition[s]?\s+(?:rack|dispenser)\b',     # Munitions dispensers
+                r'(?i)\bejector\s+rack[s]?\b',                    # Ejector racks
+                r'(?i)\brelease\s+mechanism[s]?\b',               # Release mechanisms
+                r'(?i)\barming\s+(?:wire|mechanism)\b',           # Arming mechanisms
+                r'(?i)\bfuze[s]?\s+(?:assembly|mechanism)\b',     # Fuze assemblies
+                r'(?i)\bwarhead[s]?\b',                           # Warheads
+                r'(?i)\bexplosive\s+(?:device|component)\b',      # Explosive devices
+                r'(?i)\bdetonator[s]?\b',                         # Detonators
+                r'(?i)\b(?:rocket|missile|ordnance|munition)\s+igniter[s]?\b',  # Military igniters only
+                r'(?i)\bpropellant\s+(?:grain|charge)\b',         # Propellant components
+                r'(?i)\bbooster[s]?\s+(?:motor|charge)\b',        # Booster motors
+                r'(?i)\bsustainer\s+motor[s]?\b',                 # Sustainer motors
+                r'(?i)\bguidance\s+(?:section|unit)\b',           # Guidance sections
+                r'(?i)\bseeker\s+(?:head|assembly)\b',            # Seeker heads
+                r'(?i)\bcontrol\s+(?:surface|fin)[s]?\b',         # Control surfaces/fins
+                r'(?i)\bcanard[s]?\b',                            # Canards
+                r'(?i)\bumbilical\s+(?:cable|connector)\b',       # Umbilical connectors
+                r'(?i)\blauncher\s+(?:rail|tube)\b',              # Launcher rails/tubes
+                r'(?i)\bbreech\s+(?:block|mechanism)\b',          # Breech mechanisms
+                r'(?i)\bbarrel\s+assembly\b',                     # Barrel assemblies
+                r'(?i)\brecoil\s+(?:mechanism|buffer)\b',         # Recoil mechanisms
+                r'(?i)\btraverse\s+(?:mechanism|motor)\b',        # Traverse mechanisms
+                r'(?i)\belevation\s+(?:mechanism|motor)\b',       # Elevation mechanisms
+                r'(?i)\bammunition\s+(?:feed|handling)\b',        # Ammo feed systems
+                r'(?i)\bshell\s+(?:casing|case)[s]?\b',          # Shell casings
+                r'(?i)\bcartridge\s+case[s]?\b',                  # Cartridge cases
+                r'(?i)\bpowder\s+charge[s]?\b',                   # Powder charges
+                r'(?i)\bballistic[s]?\s+(?:computer|calculator)\b', # Ballistic computers
+                r'(?i)\bfire\s+(?:director|control)\b',           # Fire directors
+                r'(?i)\blaser\s+(?:designator|rangefinder)\b',    # Laser designators
+                r'(?i)\bthermal\s+(?:sight|imager)\b',            # Thermal sights
+                r'(?i)\bnight\s+vision\s+(?:scope|device)\b',     # Night vision
+                r'(?i)\bIFF\s+(?:system|transponder)\b',          # IFF systems
+                r'(?i)\bchaff\s+(?:dispenser|cartridge)\b',       # Chaff dispensers
+                r'(?i)\bflare\s+(?:dispenser|cartridge)\b',       # Flare dispensers
+                r'(?i)\bdecoy[s]?\s+(?:launcher|dispenser)\b',    # Decoy launchers
+                r'(?i)\bsmoke\s+(?:grenade|dispenser)\b'          # Smoke dispensers
             ]
             
-            import re
             for pattern in military_patterns:
                 if re.search(pattern, text):
-                    score.triggered = True
-                    score.score = 5
-                    score.patterns_matched.append('military_aircraft')
-                    match = re.search(pattern, text)
-                    if match:
-                        score.evidence.append(f"Military aircraft: {match.group()}")
+                    # Check if platform mapper says it has civilian equivalent
+                    if has_civilian_equivalent:
+                        score.triggered = False
+                        score.score = 0
+                        score.evidence.append(f"Military designation with civilian equivalent: {platform_result.get('civilian_equivalent')}")
+                    else:
+                        score.triggered = True
+                        score.score = 5
+                        score.patterns_matched.append('military_aircraft')
+                        match = re.search(pattern, text)
+                        if match:
+                            score.evidence.append(f"Military aircraft: {match.group()}")
                     break
         
         # Special handling for platform (Category 10) with platform mapper
@@ -547,22 +685,60 @@ class IngestionGateV419:
         return score
     
     def _has_faa_8130_exception(self, text: str) -> bool:
-        """Check if text contains FAA 8130 certification - overrides many NO-GO conditions"""
+        """
+        Check if FAA 8130 exception applies.
+        Rule: Navy + Commercial Platform + SAR + FAA 8130 = Exception (SOS can provide through MRO network)
+        Only applies to commercial-based platforms, not military-only aircraft
+        """
         import re
+        
+        # Must have Navy context
+        navy_patterns = [
+            r'\bNavy\b',
+            r'\bNaval\b',
+            r'\bNAVSUP\b',
+            r'\bNAVAIR\b',
+            r'\bNAVSEA\b',
+        ]
+        has_navy = any(re.search(p, text, re.IGNORECASE) for p in navy_patterns)
+        
+        # Must have SAR (Source Approval Required) 
+        sar_patterns = [
+            r'source[\s-]*approval[\s-]*required',
+            r'approved[\s-]*source',
+            r'OEM[\s-]*only',
+            r'original[\s-]*equipment[\s-]*manufacturer',
+        ]
+        has_sar = any(re.search(p, text, re.IGNORECASE) for p in sar_patterns)
+        
+        # Must have FAA 8130
         faa_patterns = [
             r'FAA[\s-]*8130',
             r'8130[\s-]*3',
             r'FAA[\s-]*Form[\s-]*8130',
-            r'FAA[\s-]*Certified',
-            r'FAA[\s-]*MRO',
-            r'FAA[\s-]*approved',
             r'airworthiness[\s-]*certificate',
             r'airworthy[\s-]*approval'
         ]
-        for pattern in faa_patterns:
-            if re.search(pattern, text, re.IGNORECASE):
-                return True
-        return False
+        has_faa = any(re.search(p, text, re.IGNORECASE) for p in faa_patterns)
+        
+        # CRITICAL: Must be a commercial-based platform
+        # These are Navy aircraft based on commercial designs that SOS can support
+        # Must match aircraft name, not NSN suffix
+        commercial_navy_platforms = [
+            r'P[\s-]*8[\s]+(?:Poseidon|aircraft)',     # P-8 Poseidon (Boeing 737)
+            r'E[\s-]*6[\s]+(?:Mercury|TACAMO)',         # E-6 Mercury (Boeing 707)
+            r'C[\s-]*40[\s]+(?:Clipper|aircraft)',      # C-40 Clipper (Boeing 737)
+            r'UC[\s-]*35[\s]+(?:Citation|aircraft)',    # UC-35 Citation (Cessna)
+            r'C[\s-]*12[\s]+(?:Huron|King Air)',        # C-12 Huron (King Air)
+            r'T[\s-]*39[\s]+(?:Sabreliner|aircraft)',   # T-39 Sabreliner
+            r'C[\s-]*9[\s]+(?:Skytrain|aircraft)',      # C-9 Skytrain (DC-9)
+            r'Boeing[\s]+737.*Navy',                    # Boeing 737 for Navy
+            r'commercial.*variant.*Navy',               # Commercial variant for Navy
+        ]
+        has_commercial_platform = any(re.search(p, text, re.IGNORECASE) for p in commercial_navy_platforms)
+        
+        # All FOUR conditions must be met for the exception
+        return has_navy and has_commercial_platform and has_sar and has_faa
     
     def assess_opportunity(self, opportunity: Dict[str, Any]) -> AssessmentResult:
         """
@@ -585,13 +761,14 @@ class IngestionGateV419:
             combined_text = opportunity.get('text', '')
         
         # CHECK FOR FAA 8130 EXCEPTION FIRST
-        has_faa_8130 = self._has_faa_8130_exception(combined_text)
-        if has_faa_8130:
-            # FAA 8130 parts are GO for SOS regardless of other restrictions
+        # Navy + SAR + FAA 8130 = Exception (SOS can provide through MRO network)
+        has_faa_8130_exception = self._has_faa_8130_exception(combined_text)
+        if has_faa_8130_exception:
+            # Navy contracts with FAA 8130 + SAR are GO for SOS
             result.decision = Decision.GO
-            result.primary_reason = "FAA 8130 certified parts - SOS can provide through MRO network"
+            result.primary_reason = "Navy FAA 8130 Exception: SOS can provide through MRO network"
             result.co_contact_applicable = True
-            result.co_contact_reason = "FAA 8130 exception applies"
+            result.co_contact_reason = "Navy + SAR + FAA 8130 = SOS eligible through MRO partners"
             return result  # Return immediately as GO
         
         # Scan for all pattern matches
@@ -634,8 +811,20 @@ class IngestionGateV419:
         
         # Set final decision if no blocks found
         if not decision_made:
-            # BUG 3 FIX: Check if platform mapper returned GO for civilian platforms
-            if platform_result and platform_result.get('decision') == 'GO':
+            # Only set GO if there are genuinely no issues
+            # Don't override NO-GO decisions that should have been made
+            
+            # Check if any categories were triggered with high scores
+            high_score_categories = [cat for cat_id, cat in result.category_scores.items() 
+                                    if cat.score >= 3]  # Score 3+ means significant issue
+            
+            if high_score_categories:
+                # Categories triggered but decision wasn't made - this is a NO-GO
+                result.decision = Decision.NO_GO
+                result.primary_blocker = f"Multiple restrictions: {len(high_score_categories)} categories triggered"
+                result.confidence_score = 85.0
+            elif platform_result and platform_result.get('decision') == 'GO':
+                # Civilian platform with no other issues
                 result.decision = Decision.GO
                 result.confidence_score = 90.0
                 result.primary_blocker = f"Civilian platform: {platform_result.get('platform', 'Unknown')}"
@@ -648,15 +837,11 @@ class IngestionGateV419:
                 
                 has_positive = any(p in pattern_matches for p in positive_patterns)
                 
-                # BUG 2 FIX: Check for aviation content in long text
-                aviation_keywords = ['aircraft', 'aviation', 'aerospace', 'FAA', 'airworthiness', 
-                                   'engine', 'avionics', 'helicopter', 'flight']
-                has_aviation_content = any(keyword.lower() in combined_text.lower() for keyword in aviation_keywords)
-                
-                if has_positive or (has_aviation_content and len(combined_text) > 100):
+                if has_positive:
                     result.decision = Decision.GO
                     result.confidence_score = 85.0
                 else:
+                    # Default to FURTHER_ANALYSIS, not GO
                     result.decision = Decision.FURTHER_ANALYSIS
                     result.confidence_score = 50.0
                     result.further_analysis_queued = True

@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SOS Assessment Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <h1>SOS Assessment Dashboard</h1>
+        <p class="subtitle">Paste HigherGov search IDs, run the pipeline, and review GO/NO-GO decisions.</p>
+      </div>
+      <div class="status-pill" id="run-status-pill">Idle</div>
+    </header>
+
+    <main>
+      <section class="card" id="form-card">
+        <h2>Run New Assessment</h2>
+        <form id="run-form">
+          <label for="endpoints-input">HigherGov Search IDs (one per line)</label>
+          <textarea id="endpoints-input" rows="6" placeholder="rFRK9PaP6ftzk1rokcKCT&#10;HAfVxckSk6G9kSXQuJoQB"></textarea>
+
+          <div class="form-row">
+            <label for="mode-select">Pipeline Mode</label>
+            <select id="mode-select">
+              <option value="batch-agent" selected>Regex + Batch + Agent (default)</option>
+              <option value="batch">Regex + Batch only</option>
+              <option value="agent">Regex + Agent only</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="primary">Run Pipeline</button>
+            <button type="button" id="clear-form" class="ghost">Clear</button>
+          </div>
+          <p class="form-hint">The UI overwrites <code>endpoints.txt</code> before launching <code>RUN_FULL_PIPELINE.py</code>.</p>
+        </form>
+      </section>
+
+      <section class="card hidden" id="progress-card">
+        <div class="card-header">
+          <h2>Run Progress</h2>
+          <div>
+            <span class="label">Run ID:</span>
+            <span id="run-id-display">—</span>
+            <button id="copy-run-id" class="ghost small" title="Copy run ID">Copy</button>
+          </div>
+        </div>
+
+        <div class="metrics" id="summary-metrics">
+          <div class="metric">
+            <span class="metric-label">Total</span>
+            <span class="metric-value" id="metric-total">0</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label go">GO</span>
+            <span class="metric-value" id="metric-go">0</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label nogo">NO-GO</span>
+            <span class="metric-value" id="metric-nogo">0</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label indeterminate">Indeterminate</span>
+            <span class="metric-value" id="metric-indeterminate">0</span>
+          </div>
+        </div>
+
+        <div class="logs">
+          <div class="logs-header">
+            <h3>Pipeline Log</h3>
+            <span id="log-status">Awaiting output…</span>
+          </div>
+          <pre id="log-output" class="log-output"></pre>
+        </div>
+
+        <div class="artifacts" id="artifact-links" hidden>
+          <h3>Artifacts</h3>
+          <ul></ul>
+        </div>
+      </section>
+
+      <section class="card hidden" id="results-card">
+        <div class="results-toolbar">
+          <h2>Assessment Results</h2>
+          <div class="filters">
+            <label for="decision-filter">Decision</label>
+            <select id="decision-filter">
+              <option value="">All</option>
+              <option value="GO">GO</option>
+              <option value="NO-GO">NO-GO</option>
+              <option value="INDETERMINATE">INDETERMINATE</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="results-layout">
+          <div class="results-table-wrapper">
+            <table id="results-table">
+              <thead>
+                <tr>
+                  <th>Decision</th>
+                  <th>Title</th>
+                  <th>Agency</th>
+                  <th>Reason</th>
+                  <th>Knockout</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <aside class="result-detail" id="result-detail" hidden>
+            <h3 id="detail-title">Select an item</h3>
+            <div class="detail-body">
+              <dl id="detail-list"></dl>
+              <div class="detail-analysis">
+                <h4>Analysis Notes</h4>
+                <pre id="detail-analysis"></pre>
+              </div>
+              <div class="detail-report" id="full-report-container" hidden>
+                <h4>Full Model Report</h4>
+                <pre id="detail-report"></pre>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <template id="assessment-row-template">
+      <tr>
+        <td class="decision-cell"></td>
+        <td class="title-cell"></td>
+        <td class="agency-cell"></td>
+        <td class="reason-cell"></td>
+        <td class="knockout-cell"></td>
+      </tr>
+    </template>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

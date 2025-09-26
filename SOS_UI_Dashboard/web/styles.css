@@ -1,0 +1,385 @@
+﻿:root {
+  --bg: #0e1117;
+  --surface: #161b22;
+  --surface-alt: #1c2128;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --go: #2ea043;
+  --nogo: #f85149;
+  --indeterminate: #f0b429;
+  --primary: #316dca;
+  --font-body: "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  gap: 1rem;
+}
+
+.subtitle {
+  margin-top: 0.25rem;
+  color: var(--muted);
+}
+
+.status-pill {
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  font-size: 0.85rem;
+  align-self: center;
+}
+
+main {
+  padding: 1.5rem 2rem 2.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgba(1, 4, 9, 0.35);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+textarea {
+  width: 100%;
+  background: var(--surface-alt);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  resize: vertical;
+  font-family: var(--font-body);
+}
+
+select,
+button,
+input[type="text"] {
+  background: var(--surface-alt);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-family: inherit;
+}
+
+select:focus,
+textarea:focus,
+button:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.form-row {
+  margin-top: 1rem;
+}
+
+.form-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+button.primary {
+  background: var(--primary);
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+button.ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+}
+
+button.small {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-hint {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.metric {
+  padding: 0.9rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.metric-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.metric-label.go {
+  color: var(--go);
+}
+
+.metric-label.nogo {
+  color: var(--nogo);
+}
+
+.metric-label.indeterminate {
+  color: var(--indeterminate);
+}
+
+.metric-value {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.logs {
+  margin-top: 1rem;
+}
+
+.logs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  color: var(--muted);
+}
+
+.log-output {
+  background: #000;
+  border-radius: 8px;
+  border: 1px solid #111;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  max-height: 240px;
+  overflow-y: auto;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+}
+
+.artifacts ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.artifacts li a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.results-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.results-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.results-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+#results-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#results-table thead {
+  background: var(--surface-alt);
+}
+
+#results-table th,
+#results-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+#results-table tbody tr:hover {
+  background: rgba(49, 109, 202, 0.15);
+  cursor: pointer;
+}
+
+.decision-cell {
+  font-weight: 600;
+}
+
+.decision-cell.go {
+  color: var(--go);
+}
+
+.decision-cell.no-go {
+  color: var(--nogo);
+}
+
+.decision-cell.indeterminate {
+  color: var(--indeterminate);
+}
+
+.result-detail {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-alt);
+  padding: 1rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.result-detail h3 {
+  margin-bottom: 0.5rem;
+}
+
+#detail-list {
+  margin: 0;
+}
+
+#detail-list dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-top: 0.9rem;
+}
+
+#detail-list dd {
+  margin: 0.25rem 0 0 0;
+}
+
+.detail-analysis pre,
+.detail-report pre {
+  background: #000;
+  border: 1px solid #151515;
+  border-radius: 6px;
+  padding: 0.75rem;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.85rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 1100px) {
+  .results-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .result-detail {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
+  }
+
+  .app-header {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .status-pill {
+    align-self: flex-start;
+  }
+}
+.status-pill.running-pill {
+  background: rgba(49, 109, 202, 0.2);
+  border-color: var(--primary);
+}
+
+.status-pill.completed-pill {
+  background: rgba(46, 160, 67, 0.2);
+  border-color: var(--go);
+}
+
+.status-pill.failed-pill {
+  background: rgba(248, 81, 73, 0.2);
+  border-color: var(--nogo);
+}
+
+.empty-row {
+  text-align: center;
+  color: var(--muted);
+}

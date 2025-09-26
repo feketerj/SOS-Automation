@@ -1,0 +1,77 @@
+[
+  {
+    "solicitation_id": "TEST123",
+    "solicitation_title": "Test Regex Knockout",
+    "type": "REGEX_KNOCKOUT",
+    "result": "NO-GO",
+    "summary": "Regex knockout: Category 4 - SET-ASIDES: 8(a) set-aside",
+    "rationale": "Regex knockout: Category 4 - SET-ASIDES: 8(a) set-aside",
+    "recommendation": "NO-GO",
+    "knock_out_reasons": [
+      "Regex pattern match"
+    ],
+    "exceptions": [],
+    "special_action": null,
+    "sos_pipeline_title": "PN: NA | Qty: NA | Condition: unknown | MDS: NA | Test Regex Knockout",
+    "highergov_link": "https://www.highergov.com/opportunity/OPP-001",
+    "sam_link": "",
+    "search_id": "TEST123",
+    "opportunity_id": "OPP-001",
+    "title": "Test Regex Knockout",
+    "final_decision": "NO-GO",
+    "knock_pattern": "Regex knockout: Category 4 - SET-ASIDES: 8(a) set-aside",
+    "knockout_category": "REGEX",
+    "analysis_notes": "Regex knockout: Category 4 - SET-ASIDES: 8(a) set-aside",
+    "processing_method": "REGEX_ONLY"
+  },
+  {
+    "solicitation_id": "TEST123",
+    "solicitation_title": "Test Batch AI Assessment",
+    "type": "MISTRAL_BATCH_ASSESSMENT",
+    "result": "GO",
+    "summary": "Commercial parts with no restrictions identified",
+    "rationale": "Commercial parts with no restrictions identified",
+    "recommendation": "GO",
+    "knock_out_reasons": [
+      "Commercial parts with no restrictions identified"
+    ],
+    "exceptions": [],
+    "special_action": null,
+    "sos_pipeline_title": "PN: NA | Qty: NA | Condition: unknown | MDS: NA | Test Batch AI Assessment",
+    "highergov_link": "https://www.highergov.com/opportunity/OPP-002",
+    "sam_link": "",
+    "search_id": "TEST123",
+    "opportunity_id": "OPP-002",
+    "title": "Test Batch AI Assessment",
+    "final_decision": "GO",
+    "knock_pattern": "",
+    "knockout_category": "BATCH-AI",
+    "analysis_notes": "Commercial parts with no restrictions identified",
+    "processing_method": "BATCH_AI"
+  },
+  {
+    "solicitation_id": "TEST123",
+    "solicitation_title": "Test Regular Assessment",
+    "type": "MISTRAL_ASSESSMENT",
+    "result": "INDETERMINATE",
+    "summary": "Requires further analysis",
+    "rationale": "Requires further analysis",
+    "recommendation": "INDETERMINATE",
+    "knock_out_reasons": [
+      "Requires further analysis"
+    ],
+    "exceptions": [],
+    "special_action": null,
+    "sos_pipeline_title": "PN: NA | Qty: NA | Condition: unknown | MDS: NA | Test Regular Assessment",
+    "highergov_link": "https://www.highergov.com/opportunity/OPP-003",
+    "sam_link": "",
+    "search_id": "TEST123",
+    "opportunity_id": "OPP-003",
+    "title": "Test Regular Assessment",
+    "final_decision": "INDETERMINATE",
+    "knock_pattern": "",
+    "knockout_category": "REGEX",
+    "analysis_notes": "Requires further analysis",
+    "processing_method": "MISTRAL"
+  }
+]

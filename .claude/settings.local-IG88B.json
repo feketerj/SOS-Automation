@@ -1,0 +1,50 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell.exe:*)",
+      "Bash(node:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(rg:*)",
+      "Bash(python test_regex_gate.py:*)",
+      "Bash(python:*)",
+      "Bash(time python:*)",
+      "Bash(for:*)",
+      "Bash(do wc:*)",
+      "Bash(done)",
+      "Bash(if cmp:*)",
+      "Bash(then echo \"PASS: Files are identical\")",
+      "Bash(else echo \"FAIL: Files differ\")",
+      "Bash(fi)",
+      "Bash(grep:*)",
+      "Bash(test:*)",
+      "Bash(dir:*)",
+      "Bash(set HIGHERGOV_API_KEY=9874995194174018881c567d92a2c4d2)",
+      "WebFetch(domain:www.highergov.com)",
+      "WebFetch(domain:docs.highergov.com)",
+      "Bash(rm:*)",
+      "Bash(git push:*)",
+      "Bash(git config:*)",
+      "Bash(cat:*)",
+      "Bash(set)",
+      "Bash(git remote add:*)",
+      "Bash(git remote:*)",
+      "Bash(timeout:*)",
+      "Bash(pip install:*)",
+      "Bash(copy regex_pack_v094_prod.yaml regex_pack_v095_dev.yaml)",
+      "Bash(powershell:*)",
+      "Bash(winget install:*)",
+      "Bash(where python)",
+      "Bash(py --version)",
+      "Bash(C:UsersfeketAppDataLocalProgramsPythonPython312python.exe --version)",
+      "Bash(./python.bat --version)",
+      "Bash(./python.bat:*)",
+      "Bash(find:*)"
+    ],
+    "deny": [],
+    "ask": [],
+    "additionalDirectories": [
+      "C:\\Users\\feket\\OneDrive\\Desktop\\excelsior\\r_staff\\r_3\\Deployed_Code_Op_Locations\\packs"
+    ]
+  }
+}

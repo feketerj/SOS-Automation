@@ -1,0 +1,5 @@
+# Demo endpoints for SOS Assessment Tool
+# These are example search IDs for demonstration
+Hsc5Q3dPejYRR69_vn1HZ
+f5KQeEYWpQ4FtgSOPd6Sm
+HAfVxckSk6G9kSXQuJoQB

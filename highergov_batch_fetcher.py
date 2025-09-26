@@ -17,18 +17,37 @@ class HigherGovBatchFetcher:
     """Fetch and assess all opportunities from HigherGov search"""
     
     def __init__(self):
-        # Get API key from environment or use default
-        self.api_key = os.environ.get('HIGHERGOV_API_KEY', '9874995194174018881c567d92a2c4d2')
+        # Helper parsers to keep timeout configuration robust
+        def _safe_float(value, default):
+            try:
+                if value is None or value == '':
+                    return default
+                return float(value)
+            except Exception:
+                return default
+
+        def _safe_int(value, default):
+            try:
+                if value is None or value == '':
+                    return default
+                return int(float(value))
+            except Exception:
+                return default
+
+        # HARDWIRED CONFIGURATION - PRIVATE CLIENT APP
+        self.api_key = "46be62b8aa8048cbabe51218c85dd0af"  # HigherGov API key
         self.base_url = 'https://www.highergov.com/api-external/opportunity/'
-        # Optional: override from centralized config if available
-        try:
-            from config.loader import get_config  # type: ignore
-            cfg = get_config()
-            self.api_key = cfg.get('highergov.api_key', self.api_key)
-            self.base_url = cfg.get('highergov.base_url', self.base_url)
-        except Exception:
-            pass
+
+        # Timeout/backoff configuration - hardwired defaults
+        self.request_timeout = 90.0
+        self.document_timeout = 150.0
+        self.doc_max_retries = 5
+        self.doc_initial_delay = 1.5
+        self.doc_retry_backoff = 2.0
+
+        # API key is hardwired above, no need for any fallbacks or checks
         self.gate = IngestionGateV419()
+
         
     def fetch_all_opportunities(self, search_id: str, max_pages: int = 10) -> List[Dict]:
         """Fetch all opportunities for a search ID"""
@@ -42,22 +61,28 @@ class HigherGovBatchFetcher:
         page = 1
         
         while page <= max_pages:
+            # API key goes in params for HigherGov API
             params = {
                 'api_key': self.api_key,
-                'search_id': search_id,
+                'search_id': search_id,  # Must use search_id, not search
                 'page_size': 100,  # Max allowed
                 'page_number': page
             }
-            
+
             print(f"Fetching page {page}...")
-            
+
             try:
-                response = requests.get(self.base_url, params=params, timeout=60)
+                response = requests.get(self.base_url, params=params, timeout=self.request_timeout)
                 
                 if response.status_code != 200:
                     print(f"Error: API returned status {response.status_code}")
-                    if response.status_code == 401:
-                        print("Authentication failed - check API key")
+                    if response.status_code == 401 or response.status_code == 403:
+                        print("=" * 70)
+                        print("AUTHENTICATION FAILED - HIGHERGOV API KEY IS INVALID OR EXPIRED")
+                        print("The hardwired API key is being rejected by HigherGov.")
+                        print("Please update the API key in API_KEYS.py with a valid key.")
+                        print("=" * 70)
+                        raise Exception(f"HigherGov API authentication failed with status {response.status_code}")
                     break
                 
                 data = response.json()
@@ -104,7 +129,6 @@ class HigherGovBatchFetcher:
             ttl_days = int(_cfg.get('pipeline.document_cache.ttl_days', 7))
         except Exception:
             pass
-
         cache_path = None
         if cache_enabled:
             try:
@@ -127,20 +151,20 @@ class HigherGovBatchFetcher:
             except Exception:
                 cache_path = None
 
-        max_retries = 3
-        retry_delay = 1  # Start with 1 second
+        max_retries = max(1, self.doc_max_retries)
+        retry_delay = self.doc_initial_delay  # Configurable initial delay
 
         for attempt in range(max_retries):
             try:
                 # Build the document endpoint URL with related_key
-                document_url = f"https://api.highergov.com/api-external/document/"
+                document_url = f"https://www.highergov.com/api-external/document/"
                 params = {
-                    'api_key': self.api_key,
+                    'api_key': self.api_key,  # API key in params
                     'related_key': document_path,  # document_path is the related_key
                     'page_size': 100  # Get up to 100 documents
                 }
 
-                response = requests.get(document_url, params=params, timeout=60)
+                response = requests.get(document_url, params=params, timeout=self.document_timeout)
 
                 if response.status_code == 200:
                     docs = response.json()
@@ -195,8 +219,8 @@ class HigherGovBatchFetcher:
                     # Server error - worth retrying
                     if attempt < max_retries - 1:
                         print(f"WARNING: Server error {response.status_code}, retrying in {retry_delay}s...")
-                        time.sleep(retry_delay)
-                        retry_delay *= 2  # Exponential backoff
+                        time.sleep(max(0.5, retry_delay))
+                        retry_delay *= self.doc_retry_backoff  # Exponential backoff
                         continue
                     else:
                         print(f"ERROR: Server error {response.status_code} after {max_retries} attempts")
@@ -212,8 +236,8 @@ class HigherGovBatchFetcher:
                 # Network issues - worth retrying
                 if attempt < max_retries - 1:
                     print(f"WARNING: Connection error (attempt {attempt + 1}/{max_retries}), retrying in {retry_delay}s...")
-                    time.sleep(retry_delay)
-                    retry_delay *= 2  # Exponential backoff
+                    time.sleep(max(0.5, retry_delay))
+                    retry_delay *= self.doc_retry_backoff  # Exponential backoff
                     continue
                 else:
                     print(f"ERROR: Document fetch failed after {max_retries} attempts: {str(e)[:100]}")

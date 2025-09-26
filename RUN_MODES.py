@@ -22,18 +22,13 @@ import json
 from datetime import datetime
 
 def _load_config_env():
-    """Optionally load centralized config and set env vars if missing.
-    Preserves existing behavior by only filling unset values.
-    """
-    try:
-        from config.loader import get_config  # type: ignore
-        cfg = get_config()
-        os.environ.setdefault('HIGHERGOV_API_KEY', str(cfg.get('highergov.api_key', '') or os.environ.get('HIGHERGOV_API_KEY', '')))
-        os.environ.setdefault('HG_API_BASE_URL', str(cfg.get('highergov.base_url', '') or os.environ.get('HG_API_BASE_URL', '')))
-        os.environ.setdefault('MISTRAL_API_KEY', str(cfg.get('mistral.api_key', '') or os.environ.get('MISTRAL_API_KEY', '')))
-        os.environ.setdefault('MISTRAL_API_BASE_URL', str(cfg.get('mistral.base_url', '') or os.environ.get('MISTRAL_API_BASE_URL', '')))
-    except Exception:
-        pass
+    """Set hardwired API keys for private client app."""
+    # HARDWIRED CONFIGURATION - PRIVATE CLIENT APP
+    os.environ['HIGHERGOV_API_KEY'] = "9874995194174018881c567d92a2c4d2"
+    os.environ['MISTRAL_API_KEY'] = "2oAquITdDMiyyk0OfQuJSSqePn3SQbde"
+    # Use default API URLs
+    os.environ.setdefault('HG_API_BASE_URL', 'https://api.highergov.com')
+    os.environ.setdefault('MISTRAL_API_BASE_URL', 'https://api.mistral.ai')
 
 def print_header(mode):
     """Print mode header"""

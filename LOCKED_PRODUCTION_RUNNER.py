@@ -12,30 +12,12 @@ import os
 import sys
 from datetime import datetime
 
-# Set API key
-try:
-    from API_KEYS import MISTRAL_API_KEY
-    os.environ["MISTRAL_API_KEY"] = MISTRAL_API_KEY
-except:
-    pass
-
-# Optional: load centralized configuration (env > settings > defaults)
-try:
-    from config.loader import get_config  # type: ignore
-    _cfg = get_config()
-    # Respect existing env if already set
-    if not os.environ.get("MISTRAL_API_KEY") and _cfg.get("mistral.api_key"):
-        os.environ["MISTRAL_API_KEY"] = str(_cfg.get("mistral.api_key"))
-    if not os.environ.get("HIGHERGOV_API_KEY") and _cfg.get("highergov.api_key"):
-        os.environ["HIGHERGOV_API_KEY"] = str(_cfg.get("highergov.api_key"))
-    # Base URLs (optional)
-    if not os.environ.get("HG_API_BASE_URL") and _cfg.get("highergov.base_url"):
-        os.environ["HG_API_BASE_URL"] = str(_cfg.get("highergov.base_url"))
-    if not os.environ.get("MISTRAL_API_BASE_URL") and _cfg.get("mistral.base_url"):
-        os.environ["MISTRAL_API_BASE_URL"] = str(_cfg.get("mistral.base_url"))
-except Exception:
-    # Silent fallback to existing behavior
-    pass
+# HARDWIRED CONFIGURATION - PRIVATE CLIENT APP
+os.environ["MISTRAL_API_KEY"] = "2oAquITdDMiyyk0OfQuJSSqePn3SQbde"
+os.environ["HIGHERGOV_API_KEY"] = "9874995194174018881c567d92a2c4d2"
+# Use default API URLs
+os.environ.setdefault("HG_API_BASE_URL", "https://api.highergov.com")
+os.environ.setdefault("MISTRAL_API_BASE_URL", "https://api.mistral.ai")
 
 from highergov_batch_fetcher import HigherGovBatchFetcher
 from sos_ingestion_gate_v419 import IngestionGateV419

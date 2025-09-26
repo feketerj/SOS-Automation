@@ -1,15 +1,13 @@
-{
+﻿{
   "logging": {
     "level": "INFO"
-  },
-  "timeouts": {
-    "api_request_seconds": 60,
-    "document_fetch_seconds": 120
   },
   "pipeline": {
     "max_documents": 100,
     "text_extraction_char_limit": 400000,
     "batch_size_limit": 100,
+    "endpoints_file": "endpoints.txt",
+    "output_dir": "SOS_Output",
     "document_cache": {
       "enabled": false,
       "ttl_days": 7,
@@ -22,7 +20,12 @@
   },
   "highergov": {
     "api_key": "",
-    "base_url": "https://www.highergov.com/api-external/opportunity/"
+    "base_url": "https://www.highergov.com/api-external/opportunity/",
+    "request_timeout": 90,
+    "document_timeout": 150,
+    "doc_max_retries": 5,
+    "doc_initial_delay": 1.5,
+    "doc_retry_backoff": 2.0
   },
   "mistral": {
     "api_key": "",

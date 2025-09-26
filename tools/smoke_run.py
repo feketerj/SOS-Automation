@@ -47,7 +47,7 @@ def collect_minimal(search_id: str, max_pages: int = 1):
     print("\n[2/5] Collecting minimal set from HigherGov...")
     sys.path.insert(0, str(ROOT))
     from highergov_batch_fetcher import HigherGovBatchFetcher
-    from sos_ingestion_gate_v419 import IngestionGateV419
+    from sos_ingestion_gate_v419 import IngestionGateV419, Decision
 
     fetcher = HigherGovBatchFetcher()
     regex_gate = IngestionGateV419()
@@ -64,7 +64,7 @@ def collect_minimal(search_id: str, max_pages: int = 1):
         try:
             processed = fetcher.process_opportunity(opp)
             regex_result = regex_gate.assess_opportunity(processed)
-            if str(regex_result.decision) != 'Decision.NO_GO':
+            if regex_result.decision != Decision.NO_GO:
                 # Prepare minimal record for batching
                 title = processed.get('title', '')
                 text = processed.get('text', '') or processed.get('description', '')
@@ -73,7 +73,7 @@ def collect_minimal(search_id: str, max_pages: int = 1):
                     'opportunity_id': processed.get('id', opp.get('opportunity_id', 'unknown')),
                     'title': title,
                     'text': (text or '')[:400_000],
-                    'regex_decision': str(regex_result.decision),
+                    'regex_decision': regex_result.decision.value,
                     'regex_reason': regex_result.primary_blocker or 'None'
                 })
             else:
@@ -81,7 +81,8 @@ def collect_minimal(search_id: str, max_pages: int = 1):
                     'search_id': search_id,
                     'opportunity_id': processed.get('id', opp.get('opportunity_id', 'unknown')),
                     'title': processed.get('title', ''),
-                    'decision': 'NO-GO',
+                    'decision': Decision.NO_GO.value,
+                    'regex_decision': Decision.NO_GO.value,
                     'reasoning': f"Regex knockout: {regex_result.primary_blocker}",
                     'processing_method': 'REGEX_ONLY'
                 })
@@ -189,7 +190,7 @@ def main():
     print(f"Batch input JSONL:   {jsonl}")
     print(f"Batch metadata JSON: {meta}")
     print("\nNext steps:")
-    print("  - For full pipeline: RUN_BATCH_AGENT.bat (Regex → Batch → Agent)")
+    print("  - For full pipeline: RUN_BATCH_AGENT.bat (Regex -> Batch -> Agent)")
     print("  - Or submit the smoke JSONL to create a small batch job")
     return 0
 

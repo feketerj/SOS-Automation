@@ -1,0 +1,565 @@
+version: "4.19"
+metadata:
+  description: "Complete V4.19 regex pack with knockout and GO patterns"
+  created: "2025-09-12"
+  categories: 19
+
+# ============================================
+# POSITIVE PATTERNS (GO OPPORTUNITIES)
+# ============================================
+
+# Civilian aircraft manufacturers and platforms
+civilian_aircraft_patterns:
+  scoring_weight: 90
+  patterns:
+    # Boeing commercial aircraft
+    - (?i)\bBoeing[\s-]*7[0-8]7\b
+    - (?i)\b7[0-8]7[\s-]*\d{3}\b
+    - (?i)\bBoeing[\s-]*Business[\s-]*Jet\b
+    - (?i)\bBBJ\b
+    
+    # Airbus commercial aircraft
+    - (?i)\bAirbus[\s-]*A\d{3}\b
+    - (?i)\bA3[0-9]{2}[\s-]*\d{3}\b
+    - (?i)\bA350\b
+    - (?i)\bA380\b
+    
+    # Regional jets
+    - (?i)\bCRJ[\s-]*\d{3}\b
+    - (?i)\bERJ[\s-]*\d{3}\b
+    - (?i)\bEmbraer[\s-]*\d{3}\b
+    - (?i)\bBombardier\b
+    - (?i)\bDash[\s-]*8\b
+    - (?i)\bQ400\b
+    - (?i)\bATR[\s-]*\d{2}\b
+    
+    # Business jets
+    - (?i)\bGulfstream[\s-]*[GIV]+\b
+    - (?i)\bG\d{3,4}\b
+    - (?i)\bCitation\b
+    - (?i)\bLearjet\b
+    - (?i)\bFalcon[\s-]*\d+\b
+    - (?i)\bDassault\b
+    - (?i)\bHawker\b
+    - (?i)\bChallenger[\s-]*\d{3}\b
+    - (?i)\bGlobal[\s-]*\d{4}\b
+    
+    # General aviation
+    - (?i)\bCessna\b
+    - (?i)\bPiper\b
+    - (?i)\bBeechcraft\b
+    - (?i)\bKing[\s-]*Air\b
+    - (?i)\bBaron\b
+    - (?i)\bBonanza\b
+    - (?i)\bCaravan\b
+    - (?i)\bPC-12\b
+    - (?i)\bPilatus\b
+    - (?i)\bTBM[\s-]*\d{3}\b
+    - (?i)\bCirrus\b
+    - (?i)\bDiamond\b
+    
+    # Civilian helicopters
+    - (?i)\bBell[\s-]*(?:206|407|412|429|505)\b
+    - (?i)\bRobinson[\s-]*R(?:22|44|66)\b
+    - (?i)\bEurocopter\b
+    - (?i)\bEC\d{3}\b
+    - (?i)\bH\d{3}\b
+    - (?i)\bAS3[0-9]{2}\b
+    - (?i)\bAgustaWestland\b
+    - (?i)\bAW\d{3}\b
+    - (?i)\bSikorsky[\s-]*S-(?:76|92)\b
+    - (?i)\bMD[\s-]*(?:500|520|530|600|900)\b
+
+# FAA 8130 and airworthiness
+faa_8130_airworthiness_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bFAA[\s-]*8130[\s-]*3\b
+    - (?i)\bFAA[\s-]*Form[\s-]*8130\b
+    - (?i)\b8130[\s-]*3[\s-]*tag\b
+    - (?i)\b8130[\s-]*3[\s-]*certification\b
+    - (?i)\bairworthiness[\s-]*certificate\b
+    - (?i)\bairworthy[\s-]*approval\b
+    - (?i)\bFAA[\s-]*certified\b
+    - (?i)\bFAA[\s-]*approved\b
+    - (?i)\bauthorized[\s-]*release[\s-]*certificate\b
+    - (?i)\bARC\b
+    - (?i)\bEASA[\s-]*Form[\s-]*1\b
+
+# Commercial and refurbished positive
+commercial_item_patterns:
+  scoring_weight: 80
+  patterns:
+    - (?i)\bcommercial[\s-]*item\b
+    - (?i)\bcommercial[\s-]*off[\s-]*the[\s-]*shelf\b
+    - (?i)\bCOTS\b
+    - (?i)\bcommercially[\s-]*available\b
+    - (?i)\bcommercial[\s-]*parts\b
+    - (?i)\baftermarket[\s-]*parts\b
+    - (?i)\bPMA[\s-]*parts\b
+
+refurbished_allowance_patterns:
+  scoring_weight: 75
+  patterns:
+    - (?i)\brefurbished[\s-]*acceptable\b
+    - (?i)\brefurbished[\s-]*allowed\b
+    - (?i)\bsurplus[\s-]*acceptable\b
+    - (?i)\bsurplus[\s-]*allowed\b
+    - (?i)\boverhauled[\s-]*acceptable\b
+    - (?i)\brepaired[\s-]*acceptable\b
+    - (?i)\bserviceable[\s-]*condition\b
+    - (?i)\bas[\s-]*removed[\s-]*serviceable\b
+
+# AMSC Z/G/A Override patterns (commercial equivalent acceptable)
+amsc_override_patterns:
+  scoring_weight: 95
+  patterns:
+    - (?i)\bAMSC[\s-]*(?:Code[\s-]*)?[ZGA]\b
+    - (?i)\bAMSC[\s-]*Z\b
+    - (?i)\bAMSC[\s-]*G\b
+    - (?i)\bAMSC[\s-]*A\b
+    - (?i)\bAMC[\s-]*[12]\b
+    - (?i)\bcommercial[\s-]*equivalent[\s-]*acceptable\b
+    - (?i)\bcommercial[\s-]*variant[\s-]*acceptable\b
+    - (?i)\bcivilian[\s-]*equivalent[\s-]*allowed\b
+
+# Commercial-based military platforms (GO for SOS)
+commercial_military_platforms:
+  scoring_weight: 85
+  patterns:
+    # P-8 Poseidon (Boeing 737)
+    - (?i)\bP[\s-]*8[\s-]*Poseidon\b
+    - (?i)\bP-8A\b
+    
+    # E-6 Mercury (Boeing 707)
+    - (?i)\bE[\s-]*6[\s-]*Mercury\b
+    - (?i)\bE-6B\b
+    
+    # KC-46 Pegasus (Boeing 767)
+    - (?i)\bKC[\s-]*46\b
+    - (?i)\bKC-46A\b
+    
+    # C-40 Clipper (Boeing 737)
+    - (?i)\bC[\s-]*40[\s-]*Clipper\b
+    
+    # UC-35 (Cessna Citation)
+    - (?i)\bUC[\s-]*35\b
+    
+    # C-12 Huron (King Air)
+    - (?i)\bC[\s-]*12[\s-]*Huron\b
+    
+    # T-6 Texan II (PC-9 derivative)
+    - (?i)\bT[\s-]*6[\s-]*Texan\b
+    
+    # C-32 (Boeing 757)
+    - (?i)\bC[\s-]*32\b
+    
+    # E-11A (Bombardier Global)
+    - (?i)\bE[\s-]*11A\b
+
+# ============================================
+# KNOCKOUT PATTERNS (NO-GO)
+# ============================================
+
+# Sole source and intent to award
+sole_source_patterns:
+  scoring_weight: 95
+  patterns:
+    - (?i)\bsole[\s\-]*source
+    - (?i)\bsole[\s\-]*provider
+    - (?i)\bonly[\s\-]*source
+    - (?i)\bsingle[\s\-]*source
+    - (?i)\bexclusive[\s\-]*source
+    - (?i)\bno[\s\-]*other[\s\-]*source
+
+intent_to_award_patterns:
+  scoring_weight: 95
+  patterns:
+    - (?i)\bintent[\s\-]*to[\s\-]*award
+    - (?i)\bintend[\s\-]*to[\s\-]*award
+    - (?i)\bintention[\s\-]*to[\s\-]*award
+    - (?i)\bdirect[\s\-]*award
+
+# Approved source restrictions
+approved_source_only_patterns:
+  scoring_weight: 90
+  patterns:
+    - (?i)\bapproved[\s\-]*source[\s\-]*only
+    - (?i)\bapproved[\s\-]*vendor[\s\-]*only
+    - (?i)\bqualified[\s\-]*products[\s\-]*list
+    - (?i)\bQPL\b
+    - (?i)\bqualified[\s\-]*manufacturers[\s\-]*list
+    - (?i)\bQML\b
+    - (?i)\bapproved[\s\-]*suppliers[\s\-]*list
+    - (?i)\bASL\b
+    - (?i)\bOEM[\s\-]*only
+    - (?i)\boriginal[\s\-]*equipment[\s\-]*manufacturer[\s\-]*only
+
+# Technical data and drawings
+tdp_negative_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bno[\s\-]*government[\s\-]*drawings
+    - (?i)\bdrawings[\s\-]*not[\s\-]*available
+    - (?i)\bno[\s\-]*technical[\s\-]*data
+    - (?i)\bTDP[\s\-]*not[\s\-]*available
+    - (?i)\bproprietary[\s\-]*drawings
+    - (?i)\bvendor[\s\-]*unique
+    - (?i)\breverse[\s\-]*engineering[\s\-]*prohibited
+    - (?i)\bno[\s\-]*C[\s\-]*folder
+
+# Military-only platforms
+military_platform_patterns:
+  scoring_weight: 95
+  patterns:
+    # Fighters
+    - (?i)\bF[\s\-]*15[A-Z]?\b
+    - (?i)\bF[\s\-]*16[A-Z]?\b
+    - (?i)\bF[\s\-]*18[A-Z]?\b
+    - (?i)\bF[\s\-]*22[A-Z]?\b
+    - (?i)\bF[\s\-]*35[A-Z]?\b
+    
+    # Bombers
+    - (?i)\bB[\s\-]*1[A-Z]?\b
+    - (?i)\bB[\s\-]*2[A-Z]?\b
+    - (?i)\bB[\s\-]*52[A-Z]?\b
+    - (?i)\bB[\s\-]*21[A-Z]?\b
+    
+    # Attack aircraft
+    - (?i)\bA[\s\-]*10[A-Z]?\b
+    - (?i)\bAC[\s\-]*130[A-Z]?\b
+    - (?i)\bMC[\s\-]*130[A-Z]?\b
+    
+    # Military helicopters
+    - (?i)\bAH[\s\-]*64[A-Z]?\b
+    - (?i)\bAH[\s\-]*1Z\b
+    - (?i)\bCH[\s\-]*53[A-Z]?\b
+    - (?i)\bMH[\s\-]*53[A-Z]?\b
+    - (?i)\bMH[\s\-]*60[A-Z]?\b
+    
+    # Military transports (no civilian equivalent)
+    - (?i)\bC[\s\-]*5[A-Z]?\b
+    - (?i)\bC[\s\-]*17[A-Z]?\b
+    - (?i)\bC[\s\-]*130[A-Z]?\b
+    
+    # Other military
+    - (?i)\bV[\s\-]*22[\s\-]*Osprey\b
+    - (?i)\bE[\s\-]*2[\s\-]*Hawkeye\b
+    - (?i)\bE[\s\-]*3[\s\-]*(?:Sentry|AWACS)\b
+    - (?i)\bEA[\s\-]*18G[\s\-]*Growler\b
+
+# Weapons and electronic warfare systems
+weapons_systems_patterns:
+  scoring_weight: 95
+  patterns:
+    - (?i)\bmissile[\s\-]*system
+    - (?i)\bweapon[\s\-]*system
+    - (?i)\bfire[\s\-]*control
+    - (?i)\btargeting[\s\-]*system
+    - (?i)\bordnance
+    - (?i)\bmunitions
+
+# Clearance requirements
+clearance_required_patterns:
+  scoring_weight: 95
+  patterns:
+    - (?i)\bsecret[\s\-]*clearance
+    - (?i)\btop[\s\-]*secret
+    - (?i)\bconfidential[\s\-]*clearance
+    - (?i)\bsecurity[\s\-]*clearance[\s\-]*required
+    - (?i)\bfacility[\s\-]*clearance
+
+# Set-asides (SOS doesn't qualify)
+sdvosb_patterns:
+  scoring_weight: 95
+  patterns:
+    - (?i)\bSDVOSB\b
+    - (?i)\bservice[\s\-]*disabled[\s\-]*veteran
+    - (?i)\bveteran[\s\-]*owned[\s\-]*small[\s\-]*business
+    - (?i)\bVOSB\b
+
+wosb_patterns:
+  scoring_weight: 95
+  patterns:
+    - (?i)\bWOSB\b
+    - (?i)\bwomen[\s\-]*owned[\s\-]*small[\s\-]*business
+    - (?i)\bEDWOSB\b
+
+hubzone_patterns:
+  scoring_weight: 95
+  patterns:
+    - (?i)\bHUBZone\b
+    - (?i)\bhistorically[\s\-]*underutilized
+
+small_business_patterns:
+  scoring_weight: 0  # SOS is a small business - don't knock out
+  patterns:
+    - (?i)\bsmall[\s\-]*business[\s\-]*set[\s\-]*aside
+
+# Manufacturing restrictions
+new_manufacture_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bnew[\s\-]*manufacture[\s\-]*only
+    - (?i)\bfactory[\s\-]*new[\s\-]*only
+    - (?i)\bno[\s\-]*refurbished
+    - (?i)\bno[\s\-]*surplus
+    - (?i)\bno[\s\-]*used
+
+# Contract vehicles
+gsa_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bGSA[\s\-]*schedule[\s\-]*required
+    - (?i)\bmust[\s\-]*be[\s\-]*on[\s\-]*GSA
+    - (?i)\bGSA[\s\-]*contract[\s\-]*holders[\s\-]*only
+    - (?i)\bFederal[\s\-]*Supply[\s\-]*Schedule
+    - (?i)\bMAS[\s\-]*contract
+
+idiq_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bIDIQ[\s\-]*holders[\s\-]*only
+    - (?i)\bIDIQ[\s\-]*contract[\s\-]*required
+    - (?i)\bindefinite[\s\-]*delivery
+    - (?i)\btask[\s\-]*order[\s\-]*contract
+    - (?i)\bmultiple[\s\-]*award[\s\-]*contract
+
+gwac_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bGWAC\b
+    - (?i)\bgovernment[\s\-]*wide[\s\-]*acquisition
+    - (?i)\bCIO-SP3
+    - (?i)\bSEWP
+
+# Export control
+export_control_patterns:
+  scoring_weight: 90
+  patterns:
+    - (?i)\bITAR[\s\-]*controlled
+    - (?i)\bexport[\s\-]*controlled
+    - (?i)\bEAR[\s\-]*restricted
+    - (?i)\bexport[\s\-]*license[\s\-]*required
+    - (?i)\bOEM[\s\-]*export[\s\-]*authorization
+    - (?i)\bDoD[\s\-]*export[\s\-]*approval
+
+# Subcontracting restrictions
+subcontracting_prohibited_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bno[\s\-]*subcontracting
+    - (?i)\bsubcontracting[\s\-]*prohibited
+    - (?i)\bprime[\s\-]*must[\s\-]*perform[\s\-]*100
+    - (?i)\bno[\s\-]*pass[\s\-]*through
+    - (?i)\ball[\s\-]*work[\s\-]*performed[\s\-]*by[\s\-]*prime
+    - (?i)\bdirect[\s\-]*manufacturer[\s\-]*only
+    - (?i)\bmanufacturer[\s\-]*direct
+    - (?i)\bno[\s\-]*brokers
+    - (?i)\bno[\s\-]*middlemen
+
+# Other restrictions
+first_article_testing_patterns:
+  scoring_weight: 80
+  patterns:
+    - (?i)\bfirst[\s\-]*article[\s\-]*test
+    - (?i)\bFAT[\s\-]*required
+    - (?i)\bfirst[\s\-]*article[\s\-]*inspection
+    - (?i)\bFAI[\s\-]*required
+
+depot_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bdepot[\s\-]*level[\s\-]*maintenance
+    - (?i)\bdepot[\s\-]*overhaul
+    - (?i)\bon[\s\-]*site[\s\-]*support[\s\-]*required
+    - (?i)\bfield[\s\-]*service[\s\-]*representative
+    - (?i)\bFSR[\s\-]*required
+    - (?i)\bwarranty[\s\-]*support[\s\-]*required
+    - (?i)\blifecycle[\s\-]*support
+    - (?i)\bperformance[\s\-]*based[\s\-]*logistics
+
+certification_specific_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bAS9100[\s\-]*required
+    - (?i)\bAS9110[\s\-]*required
+    - (?i)\bAS9120[\s\-]*required
+    - (?i)\bNADCAP[\s\-]*required
+    - (?i)\bISO[\s\-]*9001[\s\-]*required
+    - (?i)\bISO[\s\-]*14001[\s\-]*required
+    - (?i)\bDCMA[\s\-]*approved
+    - (?i)\bDSCC[\s\-]*qualified
+    - (?i)\bDLA[\s\-]*qualified
+    - (?i)\bNASA[\s\-]*qualified
+    - (?i)\bDOT[\s\-]*certification
+    - (?i)\bEPA[\s\-]*certified
+
+bridge_contract_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bbridge[\s\-]*contract
+    - (?i)\binterim[\s\-]*contract
+    - (?i)\bextension[\s\-]*of[\s\-]*existing
+    - (?i)\bfollow[\s\-]*on[\s\-]*contract
+    - (?i)\bincumbent[\s\-]*advantage
+
+follow_on_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bfollow[\s\-]*on
+    - (?i)\bsuccessor[\s\-]*contract
+    - (?i)\brecompete
+    - (?i)\brenewal[\s\-]*option
+    - (?i)\boption[\s\-]*year
+
+incumbent_advantage_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bincumbent[\s\-]*contractor
+    - (?i)\bcurrent[\s\-]*contractor
+    - (?i)\bexisting[\s\-]*contractor
+    - (?i)\bprevious[\s\-]*contractor
+    - (?i)\bhistorical[\s\-]*knowledge[\s\-]*required
+
+# R&D and innovation (SOS doesn't do)
+ota_patterns:
+  scoring_weight: 90
+  patterns:
+    - (?i)\bOTA\b
+    - (?i)\bother[\s\-]*transaction[\s\-]*authority
+    - (?i)\bprototype[\s\-]*project
+    - (?i)\bresearch[\s\-]*project
+    - (?i)\binnovation[\s\-]*required
+
+sbir_patterns:
+  scoring_weight: 90
+  patterns:
+    - (?i)\bSBIR\b
+    - (?i)\bSTTR\b
+    - (?i)\bsmall[\s\-]*business[\s\-]*innovation
+    - (?i)\btechnology[\s\-]*transfer
+
+crada_patterns:
+  scoring_weight: 90
+  patterns:
+    - (?i)\bCRADA\b
+    - (?i)\bcooperative[\s\-]*research
+    - (?i)\bjoint[\s\-]*development
+
+baa_patterns:
+  scoring_weight: 90
+  patterns:
+    - (?i)\bBAA\b
+    - (?i)\bbroad[\s\-]*agency[\s\-]*announcement
+    - (?i)\bresearch[\s\-]*announcement
+    - (?i)\bwhite[\s\-]*paper[\s\-]*submission
+    - (?i)\bconcept[\s\-]*paper
+
+# IT system access
+it_system_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bJEDMICS[\s\-]*access[\s\-]*required
+    - (?i)\bETIMS[\s\-]*access[\s\-]*required
+    - (?i)\bcFolders[\s\-]*access[\s\-]*required
+    - (?i)\bWAWF[\s\-]*registered
+    - (?i)\bPIEE[\s\-]*access
+    - (?i)\bEDA[\s\-]*access
+    - (?i)\bDIBBS[\s\-]*registered
+    - (?i)\bFBO[\s\-]*registered
+    - (?i)\bpre[\s\-]*approved[\s\-]*in[\s\-]*system
+
+# CAD/CAM restrictions
+cad_patterns:
+  scoring_weight: 80
+  patterns:
+    - (?i)\bnative[\s\-]*CAD[\s\-]*files[\s\-]*required
+    - (?i)\bSolidWorks[\s\-]*required
+    - (?i)\bCATIA[\s\-]*required
+    - (?i)\bAutoCAD[\s\-]*required
+    - (?i)\bPro[\s\-]*E[\s\-]*required
+    - (?i)\bCreo[\s\-]*required
+    - (?i)\bUG[\s\-]*NX[\s\-]*required
+    - (?i)\bInventor[\s\-]*required
+    - (?i)\b3D[\s\-]*model[\s\-]*required
+    - (?i)\bCAM[\s\-]*files[\s\-]*required
+    - (?i)\bproprietary[\s\-]*format
+
+# Drones (military)
+drone_patterns:
+  scoring_weight: 90
+  patterns:
+    - (?i)\bMQ[\s\-]*\d+
+    - (?i)\bRQ[\s\-]*\d+
+    - (?i)\bmilitary[\s\-]*drone
+    - (?i)\bmilitary[\s\-]*UAV
+    - (?i)\bmilitary[\s\-]*UAS
+
+# Traceability requirements
+traceability_patterns:
+  scoring_weight: 80
+  patterns:
+    - (?i)\bfull[\s\-]*traceability[\s\-]*required
+    - (?i)\bbirth[\s\-]*to[\s\-]*grave
+    - (?i)\bcradle[\s\-]*to[\s\-]*grave
+    - (?i)\bchain[\s\-]*of[\s\-]*custody
+    - (?i)\bpedigree[\s\-]*required
+    - (?i)\bCofC[\s\-]*required
+
+# Warranty requirements
+warranty_patterns:
+  scoring_weight: 80
+  patterns:
+    - (?i)\bwarranty[\s\-]*work[\s\-]*only
+    - (?i)\bOEM[\s\-]*warranty[\s\-]*required
+    - (?i)\bextended[\s\-]*warranty[\s\-]*required
+    - (?i)\blifetime[\s\-]*warranty
+    - (?i)\bon[\s\-]*site[\s\-]*warranty
+
+# Surplus restrictions
+surplus_restricted_patterns:
+  scoring_weight: 80
+  patterns:
+    - (?i)\bno[\s\-]*surplus[\s\-]*material
+    - (?i)\bno[\s\-]*excess[\s\-]*property
+    - (?i)\bno[\s\-]*government[\s\-]*surplus
+    - (?i)\bno[\s\-]*used[\s\-]*parts
+    - (?i)\bnew[\s\-]*only
+    - (?i)\bfactory[\s\-]*new[\s\-]*required
+
+# Contract vehicles
+contract_vehicle_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bBPA[\s\-]*holders[\s\-]*only
+    - (?i)\bblanket[\s\-]*purchase[\s\-]*agreement
+    - (?i)\bBOA[\s\-]*required
+    - (?i)\bbasic[\s\-]*ordering[\s\-]*agreement
+    - (?i)\bmust[\s\-]*be[\s\-]*on[\s\-]*vehicle
+
+# Foreign military sales
+fms_patterns:
+  scoring_weight: 85
+  patterns:
+    - (?i)\bFMS\b
+    - (?i)\bforeign[\s\-]*military[\s\-]*sales
+    - (?i)\bforeign[\s\-]*customer[\s\-]*requirement
+    - (?i)\binternational[\s\-]*program
+
+# Refurbishment restrictions
+refurbishment_patterns:
+  scoring_weight: 0  # This is positive for SOS
+  patterns:
+    - (?i)\brefurbishment[\s\-]*services
+    - (?i)\boverhaul[\s\-]*services
+    - (?i)\brepair[\s\-]*services
+
+# MIL-SPEC requirements
+milspec_patterns:
+  scoring_weight: 80
+  patterns:
+    - (?i)\bMIL[\s\-]*STD[\s\-]*\d+
+    - (?i)\bMIL[\s\-]*SPEC[\s\-]*\d+
+    - (?i)\bMIL[\s\-]*PRF[\s\-]*\d+
+    - (?i)\bmilitary[\s\-]*specification

@@ -1,0 +1,30 @@
+*** Begin Patch
+*** Update File: CLAUDE.md
+@@
+ # CLAUDE.md - Project Memory
+ 
++## Operator Plan (Kickoff + Morning Checklist)
++
++### Codex UI Kickoff (Night)
++- Repo: SOS-Assessment-Automation-Tool (branch: main)
++- Read TODO_CodexUI.md and execute tasks in order.
++- Operating rules:
++  - Do No Harm — do not change pipeline logic (Regex ? Batch ? Agent)
++  - Prefer read-only tools and non-network unit tests
++  - Keep performance flags OFF by default (opt-in only if asked)
++  - Work in small, verified batches; run RUN_TESTS_LOCAL.bat (or pytest -q tests/) after each batch
++- Tonight’s scope (from TODO_CodexUI.md):
++  - Testing: move next safe tests into 	ests/ (=10), add 4–6 unit tests (sanitizer/output manager)
++  - Validation/Audits: extend integrity diff (read-only), run schema --summary, generate field_mapping_report.md
++  - Decision Audit: run 	ools/decision_audit.py ... --csv decision_audit_summary.csv
++- After each step: append a dated entry to NIGHTLY_UPDATE.md with Summary, Changes, Verification, Next Steps
++
++### Morning Checklist
++- Pull latest: git pull origin main
++- Review: NIGHTLY_UPDATE.md (changes), TODO_CodexUI.md (what’s next), PROGRESS.md/this document (status/tools)
++- Optional quick checks:
++  - RUN_TESTS_LOCAL.bat (curated tests)
++  - RUN_POSTRUN_CHECK.bat (writes decision_audit.md/CSV and metrics for the latest run)
++- Config guardrails: set HIGHERGOV_API_KEY and MISTRAL_API_KEY; optional overrides in config/settings.json (do not commit secrets); defaults preserved
++
+*** End Patch

@@ -14,18 +14,9 @@ from mistralai import Mistral
 # Add parent directory to path
 sys.path.append('..')
 
-# Configuration (prefer env; allow optional centralized config overrides)
-# Try environment variable first, then fall back to existing key (preserve behavior)
-API_KEY = os.environ.get('MISTRAL_API_KEY', "2oAquITdDMiyyk0OfQuJSSqePn3SQbde")
-# NOTE: Batch API doesn't support agents, must use underlying fine-tuned model
-MODEL = "ft:pixtral-12b-latest:d42144c7:20250912:f7d61150"  # New Pixtral model
-try:
-    from config.loader import get_config  # type: ignore
-    _cfg = get_config()
-    API_KEY = _cfg.get('mistral.api_key', API_KEY)
-    MODEL = _cfg.get('mistral.model_id', MODEL)
-except Exception:
-    pass
+# HARDWIRED CONFIGURATION - PRIVATE CLIENT APP
+API_KEY = "2oAquITdDMiyyk0OfQuJSSqePn3SQbde"  # Mistral API key
+MODEL = "ft:pixtral-12b-latest:d42144c7:20250912:f7d61150"  # Fine-tuned Pixtral model
 
 def phase1_collect_opportunities():
     """Phase 1: Collect opportunities and apply regex filtering"""
@@ -45,16 +36,26 @@ def phase1_collect_opportunities():
                 return ""  # Return empty text
 
     try:
-        from sos_ingestion_gate_v419 import IngestionGateV419
+        from sos_ingestion_gate_v419 import IngestionGateV419, Decision
     except ImportError:
         print("WARNING: sos_ingestion_gate_v419 not found, creating minimal version")
         # Create minimal gate class inline
+        from enum import Enum
+
+        class Decision(Enum):
+            GO = "GO"
+            NO_GO = "NO-GO"
+            FURTHER_ANALYSIS = "FURTHER_ANALYSIS"
+            CONTACT_CO = "CONTACT_CO"
         class IngestionGateV419:
             def assess_opportunity(self, opp):
                 class Result:
-                    decision = 'Decision.FURTHER_ANALYSIS'
+                    decision = Decision.FURTHER_ANALYSIS
                     primary_blocker = None
                 return Result()
+
+
+
 
     # Read endpoints - check for test file first
     test_endpoints_file = '../test_endpoints.txt'
@@ -89,30 +90,30 @@ def phase1_collect_opportunities():
             print(f"  Fetched {len(opportunities)} opportunities")
 
             for opp in opportunities:
-                # Process opportunity (this handles document fetching internally)
                 print(f"    Processing: {opp.get('title', 'Unknown')[:40]}...")
-                processed = fetcher.process_opportunity(opp)
-
-                # The processed opportunity now has 'text' field with documents
-                document_text = processed.get('text', '')
-                if document_text:
-                    print(f"      Document size: {len(document_text):,} chars")
-                else:
-                    print(f"      No document text available")
-
-                # Apply regex filter on processed opportunity
-                regex_result = regex_gate.assess_opportunity(processed)
-
-                if str(regex_result.decision) == 'Decision.NO_GO':
+                try:
+                    # Process opportunity (this handles document fetching internally)
+                    processed = fetcher.process_opportunity(opp)
+                    document_text = processed.get('text') or ""
+                    if document_text:
+                        print(f"      Document size: {len(document_text):,} chars")
+                    else:
+                        print("      No document text available")
+                    # Apply regex filter on processed opportunity
+                    regex_result = regex_gate.assess_opportunity(processed)
+                except Exception as opp_error:
+                    print(f"      [ERROR] Skipping opportunity due to processing failure: {opp_error}")
+                    continue
+                if regex_result.decision == Decision.NO_GO:
                     # Knocked out by regex - save with all metadata
                     regex_knockouts.append({
                         'search_id': search_id,
                         'opportunity_id': processed.get('id', opp.get('opportunity_id', 'unknown')),
                         'title': processed.get('title', ''),
-                        'decision': 'NO-GO',
+                        'decision': Decision.NO_GO.value,
+                        'regex_decision': Decision.NO_GO.value,
                         'reasoning': f"Regex knockout: {regex_result.primary_blocker}",
                         'processing_method': 'APP_ONLY',
-                        # Preserve all metadata
                         'agency': processed.get('agency', 'Unknown'),
                         'announcement_number': processed.get('id', ''),
                         'announcement_title': processed.get('title', ''),
@@ -134,8 +135,7 @@ def phase1_collect_opportunities():
                         'opportunity_id': processed.get('id', opp.get('opportunity_id', 'unknown')),
                         'title': processed.get('title', ''),
                         'text': document_text[:400000],  # Limit to 400K chars
-                        'regex_decision': str(regex_result.decision),
-                        # Preserve all metadata for later
+                        'regex_decision': regex_result.decision.value,
                         'agency': processed.get('agency', 'Unknown'),
                         'announcement_number': processed.get('id', ''),
                         'announcement_title': processed.get('title', ''),
@@ -274,10 +274,11 @@ def phase3_submit_to_mistral(jsonl_file):
     
     # Show which API key source is being used
     if 'MISTRAL_API_KEY' in os.environ:
-        print("Using API key from environment variable MISTRAL_API_KEY")
+        print('API key source: environment variable MISTRAL_API_KEY')
+    elif 'cfg' in locals() and isinstance(cfg, dict) and cfg.get('mistral.api_key'):
+        print('API key source: config.mistral.api_key')
     else:
-        print("Using default API key (may be expired - set MISTRAL_API_KEY env var)")
-    print(f"API Key (first 10 chars): {API_KEY[:10]}...")
+        print('API key source: API_KEYS.MISTRAL_API_KEY')
 
     client = Mistral(api_key=API_KEY)
 
@@ -827,7 +828,8 @@ def main():
         # Phase 6: Agent verification (optional)
         if os.environ.get('SKIP_AGENT_VERIFICATION', '').lower() in ['1', 'true', 'yes']:
             print("\n[SKIPPING AGENT VERIFICATION - Batch only mode]")
-            verified_results = batch_results  # Use batch results as-is
+            # Include BOTH batch results AND regex knockouts
+            verified_results = batch_results + regex_knockouts
         else:
             verified_results = phase6_agent_verification(batch_results, opportunities, regex_knockouts)
 

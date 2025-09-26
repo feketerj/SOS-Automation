@@ -9,6 +9,7 @@ import csv
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Any, Optional
+from decision_sanitizer import DecisionSanitizer
 import hashlib
 
 class EnhancedOutputManager:
@@ -51,11 +52,13 @@ class EnhancedOutputManager:
         # Create the run folder
         run_folder = self.create_run_folder(search_id)
 
-        # Process and enrich assessments (skip if pre-formatted)
+        # Normalize any incoming records before enrichment so decision fields stay consistent
         if pre_formatted:
-            enriched_assessments = assessments  # Use as-is
+            normalized_assessments = [DecisionSanitizer.sanitize(item) for item in assessments if isinstance(item, dict)]
         else:
-            enriched_assessments = self._process_assessments(assessments)
+            normalized_assessments = assessments
+
+        enriched_assessments = self._process_assessments(normalized_assessments)
 
         # 1. Save comprehensive CSV (with all requested fields)
         csv_path = self._save_comprehensive_csv(run_folder / "assessment.csv", enriched_assessments)
@@ -190,134 +193,148 @@ class EnhancedOutputManager:
                 return str(list(value.values())[0])
         return str(value) if value else ''
 
+
+
+
     def _process_assessments(self, assessments: List[Dict]) -> List[Dict]:
-        """
-        Process and enrich assessments with all required fields
-        Now expects unified Agent schema with 'result' field
-        """
-        processed = []
+        """Normalize and enrich assessments with pipeline metadata."""
+        processed: List[Dict] = []
 
-        for assessment in assessments:
-            # Check if this is already in unified schema (has 'result' field)
-            if 'result' in assessment:
-                # Already in unified format - use directly
-                final_decision = assessment['result']
-                assessment_data = assessment  # Fields are at top level
+        for raw_assessment in assessments:
+            if not isinstance(raw_assessment, dict):
+                continue
+
+            legacy_data = raw_assessment.get('assessment', {}) if isinstance(raw_assessment.get('assessment'), dict) else {}
+            assessment = DecisionSanitizer.sanitize(raw_assessment)
+
+            final_decision = DecisionSanitizer._normalize(assessment.get('result', 'INDETERMINATE'))
+
+            agency_value = assessment.get('agency', legacy_data.get('agency', {}))
+            if isinstance(agency_value, dict):
+                agency_name = str(agency_value.get('agency_name', 'Unknown')).replace('\n', ' ').replace('\r', ' ').strip()
             else:
-                # Check multiple possible field names for the decision
-                # Priority: result > final_decision > decision > nested assessment.decision
-                assessment_data = assessment.get('assessment', {})
+                agency_name = str(agency_value).replace('\n', ' ').replace('\r', ' ').strip()
 
-                # Try all possible field names
-                decision = (
-                    assessment.get('result') or
-                    assessment.get('final_decision') or
-                    assessment.get('decision') or
-                    assessment_data.get('decision') or
-                    assessment_data.get('result') or
-                    assessment_data.get('final_decision') or
-                    'INDETERMINATE'
-                ).upper()
-
-                if 'GO' == decision:
-                    final_decision = 'GO'
-                elif 'NO' in decision or 'NO-GO' in decision:
-                    final_decision = 'NO-GO'
-                elif 'FURTHER' in decision or 'CONTACT' in decision:
-                    final_decision = 'INDETERMINATE'
-                else:
-                    final_decision = 'INDETERMINATE'
-
-            # Extract agency info
-            agency = assessment.get('agency', {})
-            if isinstance(agency, dict):
-                agency_name = str(agency.get('agency_name', 'Unknown')).replace('\n', ' ').replace('\r', ' ').strip()
-            else:
-                agency_name = str(agency).replace('\n', ' ').replace('\r', ' ').strip()
-
-            # Handle knock_out_reasons (unified schema at top level, legacy in assessment_data)
-            if 'result' in assessment:
-                # Unified schema - knock_out_reasons at top level
-                knock_out_reasons = assessment.get('knock_out_reasons', [])
-            else:
-                # Legacy format - in assessment_data
-                knock_out_reasons = assessment_data.get('knock_out_reasons', [])
-
+            knock_out_reasons = assessment.get('knock_out_reasons') or legacy_data.get('knock_out_reasons', [])
             if isinstance(knock_out_reasons, list):
-                knock_pattern = '; '.join(str(r).replace('\n', ' ').replace('\r', ' ') for r in knock_out_reasons) if knock_out_reasons else str(assessment_data.get('rationale', assessment_data.get('reasoning', 'No pattern specified'))).replace('\n', ' ').replace('\r', ' ')
+                knock_pattern = '; '.join(str(r).replace('\n', ' ').replace('\r', ' ') for r in knock_out_reasons if r)
             else:
-                knock_pattern = str(assessment_data.get('rationale', assessment_data.get('reasoning', 'No pattern specified'))).replace('\n', ' ').replace('\r', ' ')
+                knock_pattern = str(knock_out_reasons).replace('\n', ' ').replace('\r', ' ')
 
-            # Generate URLs (check unified schema first)
-            sam_url = assessment.get('sam_url', '')  # SAM.gov/DIBBS source URL
-            highergov_url = assessment.get('hg_url', assessment.get('url', ''))
-            opp_id = assessment.get('solicitation_id', assessment.get('id', assessment.get('opp_key', '')))
+            if not knock_pattern:
+                knock_pattern = str(
+                    assessment.get(
+                        'rationale',
+                        legacy_data.get('rationale', legacy_data.get('reasoning', 'No pattern specified'))
+                    )
+                ).replace('\n', ' ').replace('\r', ' ')
+
+            sam_url = assessment.get('sam_url', legacy_data.get('sam_url', ''))
+            highergov_url = (
+                assessment.get('hg_url')
+                or assessment.get('highergov_url')
+                or assessment.get('url')
+                or legacy_data.get('hg_url')
+                or legacy_data.get('url')
+                or ''
+            )
+
+            opp_id = (
+                assessment.get('solicitation_id')
+                or assessment.get('solicitation_number')
+                or assessment.get('announcement_number')
+                or assessment.get('id')
+                or assessment.get('opp_key')
+                or legacy_data.get('opportunity_id')
+                or legacy_data.get('solicitation_id')
+                or legacy_data.get('source_id')
+                or ''
+            )
             if not highergov_url and opp_id:
                 highergov_url = f"https://app.highergov.com/opportunities/{opp_id}"
 
-            # Get brief description (check unified schema 'summary' first)
             brief_desc = ''
-            if assessment.get('summary'):
-                brief_desc = assessment['summary'][:500].replace('\n', ' ').replace('\r', ' ').strip()
-            elif assessment.get('description'):
-                brief_desc = assessment['description'][:500].replace('\n', ' ').replace('\r', ' ').strip()
-            elif assessment.get('description_text'):
-                brief_desc = assessment['description_text'][:500].replace('\n', ' ').replace('\r', ' ').strip()
-            elif assessment.get('ai_summary'):
-                brief_desc = assessment['ai_summary'][:500].replace('\n', ' ').replace('\r', ' ').strip()
-            elif assessment.get('full_text'):
-                brief_desc = assessment['full_text'][:500].replace('\n', ' ').replace('\r', ' ').strip()
-            elif assessment.get('text'):
-                brief_desc = assessment['text'][:500].replace('\n', ' ').replace('\r', ' ').strip()
+            for candidate in (
+                assessment.get('summary'),
+                assessment.get('description'),
+                assessment.get('description_text'),
+                assessment.get('ai_summary'),
+                assessment.get('full_text'),
+                assessment.get('text'),
+                legacy_data.get('summary'),
+                legacy_data.get('description'),
+                legacy_data.get('text')
+            ):
+                if candidate:
+                    brief_desc = str(candidate)[:500].replace('\n', ' ').replace('\r', ' ').strip()
+                    break
 
-            # Determine knockout category code
             knockout_category = self._get_knockout_category(knock_pattern)
 
-            # Get pipeline stage and assessment type (from unified schema)
-            pipeline_stage = assessment.get('pipeline_stage', '')
-            assessment_type = assessment.get('assessment_type', '')
+            pipeline_stage = assessment.get('pipeline_stage', legacy_data.get('pipeline_stage', ''))
+            assessment_type = assessment.get('assessment_type', legacy_data.get('assessment_type', ''))
+            processing_method = assessment.get('processing_method', legacy_data.get('processing_method', ''))
+            verification_method = assessment.get('verification_method', legacy_data.get('verification_method', ''))
+            batch_decision = assessment.get('batch_decision', legacy_data.get('batch_decision', ''))
+            agent_decision = assessment.get('agent_decision', legacy_data.get('agent_decision', ''))
+            disagreement = assessment.get('disagreement', legacy_data.get('disagreement', False))
+            verification_timestamp = assessment.get('verification_timestamp', legacy_data.get('verification_timestamp', ''))
 
-            # Build enriched record
+            doc_source = (
+                assessment.get('full_text')
+                or assessment.get('text')
+                or assessment.get('description_text')
+                or legacy_data.get('full_text')
+                or legacy_data.get('text')
+                or ''
+            )
+            doc_length = len(doc_source)
+
+            assessment_timestamp = assessment.get(
+                'assessment_timestamp',
+                legacy_data.get('assessment_timestamp', legacy_data.get('timestamp', datetime.now().isoformat()))
+            )
+
             enriched = {
-                # Core decision fields - use 'result' as primary for output
-                'result': final_decision,  # Primary field following unified schema
-                'final_decision': final_decision,  # Internal use for counting/filtering (not duplicated in CSV)
+                'result': final_decision,
+                'final_decision': final_decision,
                 'knock_pattern': knock_pattern,
                 'knockout_category': knockout_category,
-                'sos_pipeline_title': assessment.get('sos_pipeline_title', assessment_data.get('sos_pipeline_title', '')),
-                # Use clean reasoning text, not JSON blob (check unified 'rationale' first)
-                'analysis_notes': str(assessment.get('rationale', assessment_data.get('reasoning', assessment_data.get('primary_blocker', ''))))[:1000].replace('\n', ' ').replace('\r', ' ').replace('"', "'"),
-                # Removed confidence - we don't calculate it
-                'recommendation': assessment.get('recommendation', assessment_data.get('recommendation', '')),
-                'special_action': assessment.get('special_action', assessment_data.get('special_action', '')),
-
-                # Opportunity details (check unified schema fields first)
+                'sos_pipeline_title': assessment.get('sos_pipeline_title', legacy_data.get('sos_pipeline_title', '')),
+                'analysis_notes': str(
+                    assessment.get(
+                        'rationale',
+                        legacy_data.get('reasoning', legacy_data.get('primary_blocker', ''))
+                    )
+                )[:1000].replace('\n', ' ').replace('\r', ' ').replace('"', "'"),
+                'recommendation': assessment.get('recommendation', legacy_data.get('recommendation', '')),
+                'special_action': assessment.get('special_action', legacy_data.get('special_action', '')),
                 'sam_url': sam_url,
                 'highergov_url': highergov_url,
-                'announcement_number': assessment.get('solicitation_id', assessment.get('solicitation_number', assessment.get('announcement_number', assessment.get('source_id', '')))),
-                'announcement_title': str(assessment.get('solicitation_title', assessment.get('title', ''))).replace('\n', ' ').replace('\r', ' ').strip(),
+                'announcement_number': opp_id,
+                'announcement_title': str(assessment.get('solicitation_title', assessment.get('title', legacy_data.get('title', '')))).replace('\n', ' ').replace('\r', ' ').strip(),
                 'agency': agency_name,
-                'due_date': assessment.get('due_date', assessment.get('response_date', '')),
+                'due_date': assessment.get('due_date', assessment.get('response_date', legacy_data.get('due_date', legacy_data.get('response_date', '')))),
                 'brief_description': brief_desc,
-
-                # Additional metadata - handle both field name formats
-                'posted_date': assessment.get('posted_date', assessment.get('publish_date', '')),
-                'naics': self._extract_value(assessment.get('naics', assessment.get('naics_code', ''))),
-                'psc': self._extract_value(assessment.get('psc', assessment.get('psc_code', ''))),
-                'set_aside': assessment.get('set_aside', assessment.get('setAside', '')),
-                'value_low': assessment.get('value_low', assessment.get('valueLow', assessment.get('val_est_low', 0))),
-                'value_high': assessment.get('value_high', assessment.get('valueHigh', assessment.get('val_est_high', 0))),
-                'place_of_performance': assessment.get('place_of_performance', assessment.get('popCity', assessment.get('pop_city', ''))),
-                'doc_length': len(assessment.get('full_text', assessment.get('text', assessment.get('description_text', '')))),
-
-                # Tracking fields (include pipeline stage info)
-                'assessment_timestamp': datetime.now().isoformat(),
+                'posted_date': assessment.get('posted_date', assessment.get('publish_date', legacy_data.get('posted_date', legacy_data.get('publish_date', '')))),
+                'naics': self._extract_value(assessment.get('naics', assessment.get('naics_code', legacy_data.get('naics', legacy_data.get('naics_code', ''))))),
+                'psc': self._extract_value(assessment.get('psc', assessment.get('psc_code', legacy_data.get('psc', legacy_data.get('psc_code', ''))))),
+                'set_aside': assessment.get('set_aside', assessment.get('setAside', legacy_data.get('set_aside', legacy_data.get('setAside', '')))),
+                'value_low': assessment.get('value_low', assessment.get('valueLow', assessment.get('val_est_low', legacy_data.get('value_low', legacy_data.get('valueLow', legacy_data.get('val_est_low', 0)))))),
+                'value_high': assessment.get('value_high', assessment.get('valueHigh', assessment.get('val_est_high', legacy_data.get('value_high', legacy_data.get('valueHigh', legacy_data.get('val_est_high', 0)))))),
+                'place_of_performance': assessment.get('place_of_performance', assessment.get('popCity', assessment.get('pop_city', legacy_data.get('place_of_performance', legacy_data.get('pop_city', ''))))),
+                'doc_length': doc_length,
+                'assessment_timestamp': assessment_timestamp,
                 'opportunity_id': opp_id,
                 'pipeline_stage': pipeline_stage,
                 'assessment_type': assessment_type,
-
-                # Keep full data for other uses
-                '_full_data': assessment
+                'processing_method': processing_method,
+                'verification_method': verification_method,
+                'batch_decision': DecisionSanitizer._normalize(batch_decision) if batch_decision else '',
+                'agent_decision': DecisionSanitizer._normalize(agent_decision) if agent_decision else '',
+                'disagreement': bool(disagreement),
+                'verification_timestamp': verification_timestamp,
+                '_full_data': assessment,
             }
 
             processed.append(enriched)

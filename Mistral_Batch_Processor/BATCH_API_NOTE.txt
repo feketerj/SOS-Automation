@@ -1,0 +1,27 @@
+IMPORTANT: Mistral Batch API Status
+=====================================
+
+The batch processor successfully:
+✓ Collected all opportunities
+✓ Ran regex filtering 
+✓ Created JSONL file (batch_input_20250904_160740.jsonl)
+✓ Uploaded file to Mistral (ID: ceb58792-940a-45a7-9c63-a7f513816fce)
+
+However, the batch job creation endpoint returned 404.
+
+POSSIBLE REASONS:
+1. Batch API might be in beta/limited access
+2. May require special account permissions
+3. API endpoint might have changed
+
+ALTERNATIVE:
+You can manually upload the JSONL file through Mistral's web interface:
+1. Go to Mistral AI platform
+2. Look for "Batch" or "Bulk Processing" section
+3. Upload the batch_input_20250904_160740.jsonl file
+4. Download results when complete
+5. Run BATCH_RESULTS_PARSER.py to process
+
+The JSONL file is ready and contains all your opportunities in the correct format.
+
+FOR NOW: Continue using BATCH_RUN.py for regular sequential processing.

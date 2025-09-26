@@ -1,0 +1,73 @@
+# DEPRECATED FILES - DO NOT USE
+# These files are old, broken, or duplicates
+# Use LOCKED_PRODUCTION_RUNNER.py or BATCH_RUN.py instead
+
+## Duplicate Runners (Use LOCKED_PRODUCTION_RUNNER.py instead)
+run_full_pipeline_v2.py      # Old version
+run_full_pipeline_v5.py      # Doesn't do regex->model correctly
+run_assessment.py            # Duplicate
+run_complete_assessment.py   # Another duplicate
+run_sos.py                   # Yet another duplicate
+SIMPLE_RUN.py               # Interactive but buggy
+
+## Test Files (Not for production)
+test_copilot.py
+test_copilot_trigger.js
+test_sos_agent.py
+comprehensive_test.py
+quick_test.py
+test_endpoint.txt
+
+## CLI Attempts (All broken/incomplete)
+sos_cli.py
+sos_cli_enhanced.py
+sos_cli_v419.py
+
+## Standalone Versions (Duplicates)
+STANDALONE_MISTRAL_CONNECTOR.py  # Use ULTIMATE_MISTRAL_CONNECTOR.py
+mistral_json_only.py             # Limited version, not needed
+DIRECT_TO_MODEL.py              # Bypasses regex, don't use
+
+## Architecture/Debug Files (Outdated)
+ARCHITECTURE_VERIFICATION.py
+ARCHITECTURE_STATUS.py
+PARANOIA_CHECK.py
+PIPELINE_HEALTH_CHECK.py
+FULL_SYSTEM_VERIFICATION.py
+
+## Cleanup Scripts (One-time use)
+cleanup_files.py
+fix_copilot.bat
+fix_copilot_now.ps1
+
+## Old Extractors/Parsers
+extract_proper_info.py
+json_to_report.py
+human_readable_report.py
+document_parser.py
+
+## Miscellaneous Old Files
+PROOF_AI_WORKS.py
+investigate_f22.py
+parts_condition_checker.py
+verify_output_system.py
+forensic_false_negatives.json
+sampling_distribution.json
+
+## Old Session Files
+SESSION_*.md
+CONTINUITY_*.md
+ENGINE_SESSION_START.md
+
+## WORKING FILES (DO USE THESE)
+✓ LOCKED_PRODUCTION_RUNNER.py   # Main single runner
+✓ BATCH_RUN.py                   # Batch processor
+✓ RUN.py                         # New simple wrapper
+✓ CHECK_SETUP.py                 # System check
+✓ ULTIMATE_MISTRAL_CONNECTOR.py  # API connector
+✓ highergov_batch_fetcher.py     # HigherGov fetcher
+✓ sos_ingestion_gate_v419.py     # Regex engine
+✓ enhanced_output_manager.py     # Output generator
+✓ model_config.py                # Model config
+✓ mistral_api_connector.py       # Secondary connector
+✓ endpoints.txt                  # Input file
