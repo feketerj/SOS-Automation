@@ -723,17 +723,15 @@ class IngestionGateV419:
         
         # CRITICAL: Must be a commercial-based platform
         # These are Navy aircraft based on commercial designs that SOS can support
-        # Must match aircraft name, not NSN suffix
+        # Must match specific aircraft models, NOT generic Navy equipment
         commercial_navy_platforms = [
-            r'P[\s-]*8[\s]+(?:Poseidon|aircraft)',     # P-8 Poseidon (Boeing 737)
-            r'E[\s-]*6[\s]+(?:Mercury|TACAMO)',         # E-6 Mercury (Boeing 707)
-            r'C[\s-]*40[\s]+(?:Clipper|aircraft)',      # C-40 Clipper (Boeing 737)
-            r'UC[\s-]*35[\s]+(?:Citation|aircraft)',    # UC-35 Citation (Cessna)
-            r'C[\s-]*12[\s]+(?:Huron|King Air)',        # C-12 Huron (King Air)
-            r'T[\s-]*39[\s]+(?:Sabreliner|aircraft)',   # T-39 Sabreliner
-            r'C[\s-]*9[\s]+(?:Skytrain|aircraft)',      # C-9 Skytrain (DC-9)
-            r'Boeing[\s]+737.*Navy',                    # Boeing 737 for Navy
-            r'commercial.*variant.*Navy',               # Commercial variant for Navy
+            r'P[\s-]*8[A-Z]*[\s]+Poseidon',             # P-8/P-8A Poseidon (Boeing 737) - require full name
+            r'E[\s-]*6[B]*[\s]+(?:Mercury|TACAMO)',     # E-6B Mercury/TACAMO (Boeing 707)
+            r'C[\s-]*40[A-Z]*[\s]+Clipper',             # C-40A Clipper (Boeing 737) - require full name
+            r'UC[\s-]*35[A-Z]*[\s]+Citation',           # UC-35 Citation (Cessna) - require full name
+            r'C[\s-]*12[\s]+(?:Huron|King[\s]+Air)',    # C-12 Huron/King Air - both names valid
+            r'Boeing[\s]+737.*P[\s-]*8',                # Boeing 737 specifically for P-8
+            r'Boeing[\s]+707.*E[\s-]*6',                # Boeing 707 specifically for E-6
         ]
         has_commercial_platform = any(re.search(p, text, re.IGNORECASE) for p in commercial_navy_platforms)
         
@@ -761,14 +759,18 @@ class IngestionGateV419:
             combined_text = opportunity.get('text', '')
         
         # CHECK FOR FAA 8130 EXCEPTION FIRST
-        # Navy + SAR + FAA 8130 = Exception (SOS can provide through MRO network)
+        # Navy + Commercial Platform + SAR + FAA 8130 = Exception (SOS can provide through MRO network)
+        # ONLY applies to specific commercial-based Navy platforms (P-8, E-6B, C-40, UC-35, C-12)
         has_faa_8130_exception = self._has_faa_8130_exception(combined_text)
         if has_faa_8130_exception:
-            # Navy contracts with FAA 8130 + SAR are GO for SOS
+            # Navy commercial platform contracts with FAA 8130 + SAR are GO for SOS
             result.decision = Decision.GO
-            result.primary_reason = "Navy FAA 8130 Exception: SOS can provide through MRO network"
+            result.primary_reason = "Navy FAA 8130 Exception: Commercial platform eligible through MRO network"
             result.co_contact_applicable = True
-            result.co_contact_reason = "Navy + SAR + FAA 8130 = SOS eligible through MRO partners"
+            result.co_contact_reason = "Navy commercial platform + SAR + FAA 8130 = SOS eligible"
+            # Log which platform was detected for tracking
+            import logging
+            logging.info(f"FAA 8130 exception applied for opportunity {result.opportunity_id}")
             return result  # Return immediately as GO
         
         # Scan for all pattern matches

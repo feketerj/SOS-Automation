@@ -1,25 +1,25 @@
 # Codex UI To-Do (Tonight) — Safe, Modular, Do-No-Harm
 
-**⚠️ CRITICAL ISSUE: Streamlit UI is broken and does not run the pipeline. See UI_BROKEN_HANDOFF.md for details. UI displays placeholder data regardless of input. Command line pipeline works perfectly. Consider fixing UI subprocess execution as highest priority.**
+**✅ UI FIXED (Sept 27): Streamlit UI now fully operational. Replaced subprocess with direct Python imports. See CRITICAL_FIXES_LOG.md for details.**
 
 This plan is designed to be incremental, reversible, and non‑disruptive. No pipeline logic changes. Favor read‑only tooling and non‑network unit tests. Defaults remain unchanged for any optional features.
 
 ## 1) Testing (Priority 3)
-- Move next small batch of non‑network tests into `tests/` (10 files max). Verify imports via `tests/conftest.py`.
-- Add 4–6 focused unit tests (no network, no I/O outside temp dirs):
-  - DecisionSanitizer edge cases (nested legacy, None/empty variants)
-  - EnhancedOutputManager: URL synthesis, title/ID fallbacks, CSV resilience
-  - Verify Master_Database daily/all‑time updates with temp base path
-- Do NOT run or modify network‑dependent scripts; keep them outside `tests/`.
+- ✅ COMPLETED: Added test_decision_sanitizer_edge_cases.py (6 tests)
+- ✅ COMPLETED: Added test_output_manager_edge_cases.py (6 tests)
+- ✅ COMPLETED: Created test_pipeline_runner.py (validation suite)
+- ✅ COMPLETED: Created test_failure_scenarios.py (failure injection)
+- REMAINING: Move more non‑network tests into `tests/` (10 files max)
+- REMAINING: Verify Master_Database daily/all‑time updates with temp base path
 
 ## 2) Validation/Audits (Priority 2)
-- Extend `tools/verify_integrity.py` to write a small diff file (read‑only) when drift is detected (IDs/Titles/URLs).
-- Add a read‑only “schema diff summary” mode to compare two data.json files and list first invalid fields (do not gate runs).
-- Produce a markdown “Field Mapping Report” via `tools/audit_field_mappings.py --markdown`; no code changes.
+- ✅ COMPLETED: Extended verify_integrity.py with diff output
+- ✅ COMPLETED: Created schema_diff.py for comparing data.json files
+- ✅ COMPLETED: Generated field_mapping_report.md via audit_field_mappings.py
 
 ## 3) Decision Logic Insights (Priority 2.3)
-- Use `tools/decision_audit.py` with `--csv` to export disagreement hotspots; generate one short CSV for latest run.
-- Summarize hotspots (category/agency) in a markdown note; do not change logic.
+- ✅ COMPLETED: Generated decision_audit_summary.csv for latest run
+- ✅ COMPLETED: Created decision audit markdown report with hotspots
 
 ## 4) Performance (Priority 4, opt‑in; defaults OFF)
 - Leave `pipeline.parallel_fetch` and `pipeline.document_cache` disabled by default.

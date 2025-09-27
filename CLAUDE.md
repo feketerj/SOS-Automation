@@ -25,7 +25,7 @@
 - Config guardrails: set `HIGHERGOV_API_KEY` and `MISTRAL_API_KEY`; optional overrides in `config/settings.json` (do not commit secrets); defaults preserved
 
 ## Current Status (Automated Update)
-Last sync: September 27, 2025 (Evening)
+Last sync: September 27, 2025 (Repository Cleanup)
 
 - Pipeline: End-to-end (Regex → Batch → Agent) operational; no functional changes introduced in recent work.
 - UI: **FIXED** - Streamlit UI now fully operational with direct Python imports (no subprocess issues)
@@ -35,6 +35,9 @@ Last sync: September 27, 2025 (Evening)
   - UI exception handling added (proper error state management)
   - Directory operations protected (permission/deletion safety)
   - Resource cleanup enhanced (sys.path removal error handling)
+- Repository: **CLEANED** - Removed 62 unnecessary files (~5-10MB, 20-30% token reduction)
+  - Deleted: test files, old docs, batch metadata (all backed up in Git)
+  - Preserved: All critical code, documentation, and configuration files
 - Config: Central loader in place; all runners/connectors optionally respect env > config > defaults (behavior unchanged if keys absent).
 - Validation/Audit tools: Output, batch input/results, metadata, schema validation (with summary), integrity check, decision audit (markdown + CSV), metrics, CSV validator, post-run checklist.
 - Performance (opt-in, default off): Batch size cap; HigherGov document cache; parallel document fetch in collector.

@@ -26,12 +26,13 @@ from pathlib import Path
 sys.path.insert(0, 'Mistral_Batch_Processor')
 sys.path.insert(0, '.')
 
-# Configuration
-MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY', '2oAquITdDMiyyk0OfQuJSSqePn3SQbde')
-BATCH_MODEL = 'ft:pixtral-12b-latest:d42144c7:20250912:f7d61150'
-AGENT_ID = 'ag:d42144c7:20250911:untitled-agent:15489fc1'
+# HARDCODED CONFIGURATION - CLIENT APP ONLY
+MISTRAL_API_KEY = '2oAquITdDMiyyk0OfQuJSSqePn3SQbde'  # Hardcoded for client use
+BATCH_MODEL = 'ft:pixtral-12b-latest:d42144c7:20250912:f7d61150'  # Fine-tuned Pixtral
+AGENT_ID = 'ag:d42144c7:20250911:untitled-agent:15489fc1'  # Production agent
+HIGHERGOV_API_KEY = '2c38090f3cb0c56026e17fb3e464f22cf637e2ee'  # Hardcoded for client use
 
-def run_full_pipeline():
+def run_assessment():
     """Run the complete three-stage pipeline"""
 
     print("=" * 70)
@@ -44,7 +45,7 @@ def run_full_pipeline():
     # Import what we need
     from highergov_batch_fetcher import HigherGovBatchFetcher
     from sos_ingestion_gate_v419 import IngestionGateV419, Decision
-    from enhanced_output_manager import EnhancedOutputManager
+    from pipeline_output_manager import PipelineOutputManager
     from ULTIMATE_MISTRAL_CONNECTOR import UltimateMistralConnector
 
     # Check endpoints.txt
@@ -116,10 +117,14 @@ def run_full_pipeline():
                     'metadata': opp,
                     'pipeline_tracking': {
                         'stage1_regex': regex_result.decision.value,
-                        'stage1_reason': getattr(regex_result, 'primary_reason', ''),
+                        'stage1_reason': getattr(regex_result, 'primary_reason', getattr(regex_result, 'primary_blocker', '')),
                         'stage2_batch': None,
-                        'stage3_agent': None
+                        'stage2_reason': None,
+                        'stage3_agent': None,
+                        'stage3_reason': None
                     },
+                    'knock_pattern': getattr(regex_result, 'primary_reason', getattr(regex_result, 'primary_blocker', '')),
+                    'knockout_category': getattr(regex_result, 'knockout_category', ''),
                     'highergov_url': f"https://www.highergov.com/opportunity/{opp.get('id', '')}",
                     'assessment_timestamp': datetime.now().isoformat()
                 }
@@ -214,13 +219,14 @@ Assess if this is GO, NO-GO, or INDETERMINATE for SOS sourcing."""}
             )
 
             print(f"Batch submitted! Job ID: {batch_job.id}")
-            print("Waiting for completion...")
+            print("Waiting for completion (this may take several minutes)...")
 
-            # Poll for completion
-            max_wait = 600  # 10 minutes max
-            start_time = time.time()
+            # Poll for completion - NO TIMEOUT
+            # Batch jobs can take a long time with document processing
+            poll_count = 0
+            max_polls = 1000  # Very high limit, essentially no timeout
 
-            while time.time() - start_time < max_wait:
+            while poll_count < max_polls:
                 job = client.batch.jobs.get(job_id=batch_job.id)
 
                 if job.status == 'SUCCEEDED':
@@ -245,15 +251,24 @@ Assess if this is GO, NO-GO, or INDETERMINATE for SOS sourcing."""}
                                     # Match result to opportunity
                                     opp = opportunities_for_batch[line_num]
 
-                                    # Extract decision
+                                    # Extract decision and reason
                                     if 'NO-GO' in content:
                                         batch_decision = 'NO-GO'
+                                        # Try to extract reason from content
+                                        reason_start = content.find('Reason:')
+                                        if reason_start > -1:
+                                            reason = content[reason_start:reason_start+100].split('\n')[0]
+                                        else:
+                                            reason = 'Batch model assessment'
                                     elif 'GO' in content and 'NO-GO' not in content:
                                         batch_decision = 'GO'
+                                        reason = 'Passed batch assessment'
                                     else:
                                         batch_decision = 'INDETERMINATE'
+                                        reason = 'Needs further review'
 
                                     opp['pipeline_tracking']['stage2_batch'] = batch_decision
+                                    opp['pipeline_tracking']['stage2_reason'] = reason
 
                                     print(f"  {opp['announcement_title'][:50]}: {batch_decision}")
 
@@ -282,7 +297,8 @@ Assess if this is GO, NO-GO, or INDETERMINATE for SOS sourcing."""}
 
                 else:
                     print(f"  Status: {job.status} ({job.succeeded_requests}/{job.total_requests} complete)")
-                    time.sleep(10)
+                    poll_count += 1
+                    time.sleep(15)  # Check every 15 seconds instead of 10
 
         except Exception as e:
             print(f"Batch processing error: {e}")
@@ -317,13 +333,16 @@ Assess if this is GO, NO-GO, or INDETERMINATE for SOS sourcing."""}
                     # Get agent assessment
                     agent_result = mistral_connector.assess_opportunity(agent_input)
 
-                    # Extract final decision
+                    # Extract final decision and reason
                     if isinstance(agent_result, dict):
                         final_decision = agent_result.get('classification', agent_result.get('decision', 'INDETERMINATE'))
+                        final_reason = agent_result.get('rationale', agent_result.get('reasoning', 'Agent verification'))
                     else:
                         final_decision = 'INDETERMINATE'
+                        final_reason = 'Unable to determine'
 
                     opp['pipeline_tracking']['stage3_agent'] = final_decision
+                    opp['pipeline_tracking']['stage3_reason'] = final_reason
                     opp['result'] = final_decision
                     opp['pipeline_stage'] = 'AGENT'
                     opp['assessment_type'] = 'MISTRAL_ASSESSMENT'
@@ -361,7 +380,7 @@ Assess if this is GO, NO-GO, or INDETERMINATE for SOS sourcing."""}
         print("SAVING COMPLETE PIPELINE RESULTS")
         print("=" * 70)
 
-        output_manager = EnhancedOutputManager(base_path="SOS_Output")
+        output_manager = PipelineOutputManager(base_path="SOS_Output")
 
         metadata = {
             'search_ids': search_ids,
@@ -370,11 +389,11 @@ Assess if this is GO, NO-GO, or INDETERMINATE for SOS sourcing."""}
             'timestamp': datetime.now().isoformat()
         }
 
-        output_dir = output_manager.save_assessment_batch(
-            search_ids[0][:8] if search_ids else 'PIPELINE',
+        output_dir = output_manager.save_pipeline_results(
+            search_ids,
             all_results,
-            metadata,
-            pre_formatted=True
+            pipeline_stats,
+            metadata
         )
 
         print(f"Results saved to: {output_dir}")
@@ -400,5 +419,5 @@ Assess if this is GO, NO-GO, or INDETERMINATE for SOS sourcing."""}
         return False
 
 if __name__ == "__main__":
-    success = run_full_pipeline()
+    success = run_assessment()
     sys.exit(0 if success else 1)

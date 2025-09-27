@@ -52,7 +52,13 @@
       "Bash(streamlit run:*)",
       "Bash(set MONITOR_BATCH=n)",
       "Bash(copy Launch_SOS_UI.bat _BACKUP_BEFORE_CLEANUP_2025_09_25)",
-      "Bash(if exist TEST_DIRECT.py type TEST_DIRECT.py)"
+      "Bash(if exist TEST_DIRECT.py type TEST_DIRECT.py)",
+      "Bash(git push:*)",
+      "Bash(move test_faa_8130_fix.py teststest_faa_8130_fix.py)",
+      "Bash(pytest:*)",
+      "Bash(timeout:*)",
+      "Bash(move BATCH_RUN.py _ARCHIVED_RUNNERS_20250927)",
+      "Bash(if exist:*)"
     ],
     "deny": [],
     "ask": []

@@ -11,8 +11,8 @@ import re
 from typing import Dict, Optional
 from sos_ingestion_gate_v419 import IngestionGateV419, Decision
 
-# HARDWIRED CONFIGURATION - PRIVATE CLIENT APP
-api_key = "2oAquITdDMiyyk0OfQuJSSqePn3SQbde"  # Mistral API key
+# HARDCODED CONFIGURATION - CLIENT APP ONLY
+api_key = "2oAquITdDMiyyk0OfQuJSSqePn3SQbde"  # Hardcoded Mistral API key for client
 
 # Try to import mistralai, fall back to HTTP if not available
 try:
@@ -34,9 +34,9 @@ class MistralSOSClassifier:
     """Ultimate classifier with full reasoning capture"""
     
     def __init__(self, model_id: str = None):
-        """Initialize with hardwired model"""
-        # HARDWIRED MODEL ID - PRIVATE CLIENT APP
-        self.model_id = "ag:d42144c7:20250911:untitled-agent:15489fc1"  # Production agent
+        """Initialize with hardcoded model"""
+        # HARDCODED MODEL ID - CLIENT APP ONLY
+        self.model_id = "ag:d42144c7:20250911:untitled-agent:15489fc1"  # Hardcoded production agent
         
         self.regex_gate = IngestionGateV419()
 

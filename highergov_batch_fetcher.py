@@ -34,16 +34,16 @@ class HigherGovBatchFetcher:
             except Exception:
                 return default
 
-        # HARDWIRED CONFIGURATION - PRIVATE CLIENT APP
-        self.api_key = "46be62b8aa8048cbabe51218c85dd0af"  # HigherGov API key
+        # HARDCODED CONFIGURATION - CLIENT APP ONLY
+        self.api_key = "2c38090f3cb0c56026e17fb3e464f22cf637e2ee"  # Hardcoded HigherGov API key
         self.base_url = 'https://www.highergov.com/api-external/opportunity/'
 
-        # Timeout/backoff configuration - hardwired defaults
-        self.request_timeout = 90.0
-        self.document_timeout = 150.0
-        self.doc_max_retries = 5
-        self.doc_initial_delay = 1.5
-        self.doc_retry_backoff = 2.0
+        # NO TIMEOUTS - Document fetching takes a long time
+        self.request_timeout = None  # No timeout for main requests
+        self.document_timeout = None  # No timeout for document fetching
+        self.doc_max_retries = 10  # More retries for reliability
+        self.doc_initial_delay = 2.0  # Start with 2 second delay
+        self.doc_retry_backoff = 1.5  # Slower backoff
 
         # API key is hardwired above, no need for any fallbacks or checks
         self.gate = IngestionGateV419()

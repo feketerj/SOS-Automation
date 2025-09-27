@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Ensure Master_Database CSV is updated when saving a batch."""
 
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from enhanced_output_manager import EnhancedOutputManager
 import tempfile
 from pathlib import Path

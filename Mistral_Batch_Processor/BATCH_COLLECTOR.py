@@ -137,6 +137,18 @@ def collect_opportunities_from_searches(search_ids: List[str]) -> List[Dict]:
     print(f"  Total opportunities collected for model: {len(all_opportunities)}")
     print(f"  Total knocked out by regex: {total_regex_knockouts}")
     print(f"  Total processed: {len(all_opportunities) + total_regex_knockouts}")
+
+    # Add dry-run capacity information
+    if cap:
+        print(f"  Batch size limit applied: {cap} (from config)")
+
+    # Estimate token usage (rough approximation)
+    if all_opportunities:
+        avg_text_len = sum(len(opp.get('text', '')) for opp in all_opportunities) / len(all_opportunities)
+        estimated_tokens = (avg_text_len / 4) * len(all_opportunities)  # Rough: 4 chars = 1 token
+        print(f"  Average document length: {avg_text_len:.0f} chars")
+        print(f"  Estimated total tokens: {estimated_tokens:.0f} (~${estimated_tokens/1_000_000 * 1:.2f} at batch rates)")
+
     print("=" * 60)
     return all_opportunities, regex_knockouts
 
@@ -209,6 +221,16 @@ def main():
         return
     
     print(f"\nFound {len(search_ids)} search IDs")
+
+    # Show dry-run capacity information if configured
+    try:
+        from config.loader import get_config  # type: ignore
+        _cfg = get_config()
+        _limit = _cfg.get('pipeline.batch_size_limit')
+        if _limit:
+            print(f"Note: Batch size limit configured: {_limit} opportunities (opt-in setting)")
+    except Exception:
+        pass
     
     # Collect all opportunities
     opportunities, regex_knockouts = collect_opportunities_from_searches(search_ids)

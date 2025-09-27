@@ -11,6 +11,7 @@ from typing import List
 import streamlit as st
 import pandas as pd
 import json
+from field_mapper import FieldMapper
 
 try:
     from config.loader import get_config  # type: ignore
@@ -287,18 +288,33 @@ def main() -> None:
             try:
                 df = pd.read_csv(csv_file)
 
-                # Display summary metrics
+                # Display summary metrics using field mapper
+                # Create mapper instance
+                mapper = FieldMapper()
+
                 col1, col2, col3, col4 = st.columns(4)
                 with col1:
                     st.metric("Total Assessments", len(df))
+
+                # Count results using mapper to find result column
+                go_count = 0
+                no_go_count = 0
+                indeterminate_count = 0
+
+                for _, row in df.iterrows():
+                    result = mapper.get_field(row, 'result', 'UNKNOWN')
+                    if 'GO' in result.upper() and 'NO' not in result.upper():
+                        go_count += 1
+                    elif 'NO' in result.upper():
+                        no_go_count += 1
+                    elif 'INDETERMINATE' in result.upper():
+                        indeterminate_count += 1
+
                 with col2:
-                    go_count = len(df[df['result'] == 'GO']) if 'result' in df.columns else 0
                     st.metric("GO", go_count)
                 with col3:
-                    no_go_count = len(df[df['result'] == 'NO-GO']) if 'result' in df.columns else 0
                     st.metric("NO-GO", no_go_count)
                 with col4:
-                    indeterminate_count = len(df[df['result'] == 'INDETERMINATE']) if 'result' in df.columns else 0
                     st.metric("INDETERMINATE", indeterminate_count)
 
                 # Display the results table
@@ -307,84 +323,83 @@ def main() -> None:
                 # Add filter options
                 with st.expander("Filter Results"):
                     result_filter = st.multiselect("Filter by Result", options=['GO', 'NO-GO', 'INDETERMINATE'], default=None)
-                    if result_filter and 'result' in df.columns:
-                        df = df[df['result'].isin(result_filter)]
+                    if result_filter:
+                        # Filter using mapper to find result values
+                        filtered_indices = []
+                        for idx, row in df.iterrows():
+                            result = mapper.get_field(row, 'result', 'UNKNOWN')
+                            if any(f in result.upper() for f in result_filter):
+                                filtered_indices.append(idx)
+                        if filtered_indices:
+                            df = df.loc[filtered_indices]
 
                 # Show full details for each assessment
                 for idx, row in df.iterrows():
-                    # Get title safely, handling NaN values
-                    title = row.get('solicitation_title')
-                    if pd.isna(title) or title == '' or title == 'nan':
-                        title = row.get('announcement_title', 'Unknown Title')
-                    if pd.isna(title) or title == '' or title == 'nan':
-                        title = 'Unknown Title'
+                    # Get title and result using mapper
+                    title = mapper.get_field(row, 'title', 'Unknown Title')
+                    result = mapper.get_field(row, 'result', 'UNKNOWN')
+                    result_icon = mapper.format_result_color(result)
 
-                    result = row.get('result', 'UNKNOWN')
-                    if pd.isna(result):
-                        result = 'UNKNOWN'
-
-                    with st.expander(f"{title} - **{result}**"):
+                    with st.expander(f"{result_icon} {title} - **{result}**"):
                         col1, col2 = st.columns([1, 2])
 
                         with col1:
                             st.write("**Basic Info:**")
 
-                            # Handle ID safely
-                            sid = row.get('solicitation_id', 'N/A')
-                            if pd.isna(sid) or sid == '':
-                                sid = row.get('announcement_number', 'N/A')
-                            if pd.isna(sid) or sid == '':
-                                sid = 'N/A'
+                            # Get all fields using mapper
+                            sid = mapper.get_field(row, 'id', 'N/A')
+                            agency = mapper.get_field(row, 'agency', 'Unknown Agency')
+                            stage = mapper.get_field(row, 'stage', 'N/A')
+                            stage_desc = mapper.get_stage_description(stage)
+
                             st.write(f"- ID: {sid}")
-
-                            # Handle agency safely
-                            agency = row.get('agency', 'Unknown')
-                            if pd.isna(agency) or agency == '':
-                                agency = 'Unknown'
                             st.write(f"- Agency: {agency}")
-
                             st.write(f"- Result: **{result}**")
+                            st.write(f"- Pipeline Stage: {stage_desc}")
 
-                            # Handle pipeline stage safely
-                            stage = row.get('pipeline_stage', 'N/A')
-                            if pd.isna(stage) or stage == '':
-                                stage = row.get('assessment_type', 'N/A')
-                            if pd.isna(stage) or stage == '':
-                                stage = 'N/A'
-                            st.write(f"- Pipeline Stage: {stage}")
+                            # Show URLs using mapper
+                            url = mapper.get_field(row, 'url', '')
+                            sam_url = row.get('sam_url', '')
+                            hg_url = row.get('highergov_url', '') or row.get('hg_url', '')
 
-                            # Show URLs
-                            if row.get('sam_url') or row.get('hg_url'):
+                            if url or sam_url or hg_url:
                                 st.write("**Links:**")
-                                if row.get('sam_url'):
-                                    st.write(f"- [SAM.gov Link]({row['sam_url']})")
-                                if row.get('hg_url'):
-                                    st.write(f"- [HigherGov Link]({row['hg_url']})")
+                                if sam_url and not pd.isna(sam_url):
+                                    st.write(f"- [SAM.gov Link]({sam_url})")
+                                if hg_url and not pd.isna(hg_url):
+                                    st.write(f"- [HigherGov Link]({hg_url})")
+                                elif url and not pd.isna(url) and url != 'N/A':
+                                    st.write(f"- [Source Link]({url})")
 
                         with col2:
                             st.write("**Decision Details:**")
-                            # Handle both field names for knock-out reasons
-                            knock_out = row.get('knock_out_reasons') or row.get('knock_pattern')
-                            if knock_out:
-                                st.write("**Knock-out Reasons:**")
+
+                            # Get knockout reasons using mapper
+                            knock_out = mapper.get_field(row, 'knockout', '')
+                            if knock_out and knock_out != 'N/A':
+                                st.write("**Knock-out Pattern:**")
                                 if isinstance(knock_out, list):
                                     for reason in knock_out:
-                                        if reason and str(reason).strip():  # Skip empty/null values
+                                        if reason and str(reason).strip():
                                             st.write(f"  • {str(reason)}")
                                 else:
-                                    if knock_out and str(knock_out).strip():
-                                        st.write(f"  • {str(knock_out)}")
+                                    st.write(f"  • {str(knock_out)}")
 
-                            if row.get('rationale'):
+                            # Get rationale using mapper
+                            rationale = mapper.get_field(row, 'rationale', '')
+                            if rationale and rationale != 'N/A' and rationale != 'No rationale provided':
                                 st.write("**Rationale:**")
-                                st.write(row['rationale'])
+                                st.write(rationale)
 
-                            if row.get('exceptions'):
+                            # Handle exceptions
+                            exceptions = row.get('exceptions', '')
+                            if exceptions and not pd.isna(exceptions):
                                 st.write("**Exceptions:**")
-                                st.write(row['exceptions'])
+                                st.write(str(exceptions))
 
-                            recommendation = row.get('recommendation')
-                            if recommendation and not pd.isna(recommendation) and str(recommendation).strip() not in ['nan', '']:
+                            # Get recommendation
+                            recommendation = row.get('recommendation', '')
+                            if recommendation and not pd.isna(recommendation) and str(recommendation).strip() not in ['', 'nan', 'N/A']:
                                 st.write("**Recommendation:**")
                                 st.write(str(recommendation))
 
