@@ -1,5 +1,7 @@
 # Codex UI To-Do (Tonight) — Safe, Modular, Do-No-Harm
 
+**⚠️ CRITICAL ISSUE: Streamlit UI is broken and does not run the pipeline. See UI_BROKEN_HANDOFF.md for details. UI displays placeholder data regardless of input. Command line pipeline works perfectly. Consider fixing UI subprocess execution as highest priority.**
+
 This plan is designed to be incremental, reversible, and non‑disruptive. No pipeline logic changes. Favor read‑only tooling and non‑network unit tests. Defaults remain unchanged for any optional features.
 
 ## 1) Testing (Priority 3)

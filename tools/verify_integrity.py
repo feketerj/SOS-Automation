@@ -49,10 +49,11 @@ def collect_run(path: Path) -> Dict[Tuple[str, str], Dict[str, Any]]:
     return index
 
 
-def compare(meta_idx: Dict[Tuple[str, str], Dict[str, Any]], run_idx: Dict[Tuple[str, str], Dict[str, Any]]) -> None:
+def compare(meta_idx: Dict[Tuple[str, str], Dict[str, Any]], run_idx: Dict[Tuple[str, str], Dict[str, Any]], diff_file: Path = None) -> None:
     missing = []
     drifts = 0
     checked = 0
+    drift_details = []
 
     for key, m in meta_idx.items():
         r = run_idx.get(key)
@@ -72,6 +73,12 @@ def compare(meta_idx: Dict[Tuple[str, str], Dict[str, Any]], run_idx: Dict[Tuple
             post = next((r.get(c) for c in candidates if r.get(c)), None)
             if pre and post and str(pre) != str(post):
                 drifts += 1
+                drift_details.append({
+                    'key': key,
+                    'field': label,
+                    'before': pre,
+                    'after': post
+                })
                 print(f"WARN: Drift in {label} for {key}: pre='{pre}' post='{post}'")
 
         # Hash snapshots (subset)
@@ -99,11 +106,30 @@ def compare(meta_idx: Dict[Tuple[str, str], Dict[str, Any]], run_idx: Dict[Tuple
         for key in missing[:10]:
             print("  Missing:", key)
 
+    # Write diff file if requested and drifts were found
+    if diff_file and (drift_details or missing):
+        diff_content = {
+            'summary': {
+                'total_meta': len(meta_idx),
+                'found_in_run': checked,
+                'missing_from_run': len(missing),
+                'field_drifts': drifts
+            },
+            'drift_details': drift_details,
+            'missing_items': missing[:20]  # Limit to first 20
+        }
+
+        with open(diff_file, 'w', encoding='utf-8') as f:
+            json.dump(diff_content, f, indent=2)
+
+        print(f"\nDiff file written to: {diff_file}")
+
 
 def main() -> int:
     p = argparse.ArgumentParser(description='Verify integrity between metadata and run outputs (warn-only)')
     p.add_argument('--meta', required=True, help='Path to batch_metadata_*.json')
     p.add_argument('--run', required=True, help='Path to SOS_Output/YYYY-MM/Run_*/')
+    p.add_argument('--diff', help='Path to write diff file when drifts detected')
     args = p.parse_args()
 
     meta_path = next((Path(m) for m in glob.glob(args.meta)), None)
@@ -115,9 +141,17 @@ def main() -> int:
         print('Run folder invalid:', run_dir)
         return 2
 
+    # Determine diff file path
+    diff_file = None
+    if args.diff:
+        diff_file = Path(args.diff)
+    elif run_dir:
+        # Auto-generate diff file path if not specified
+        diff_file = run_dir / 'integrity_diff.json'
+
     meta_idx = collect_meta(meta_path)
     run_idx = collect_run(run_dir)
-    compare(meta_idx, run_idx)
+    compare(meta_idx, run_idx, diff_file)
     return 0
 
 

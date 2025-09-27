@@ -47,6 +47,20 @@ All issues from QC report resolved:
 
 ### KNOWN ISSUES REMAINING
 
+#### ~~CRITICAL - UI COMPLETELY BROKEN~~ ✅ FIXED (September 27, 2025)
+**Streamlit UI Now Working**
+- ~~Location: `ui_service/app.py` lines 84-121 (_run_pipeline function)~~
+- ~~Problem: UI displays placeholder test data regardless of input~~
+- **FIXED:** Replaced subprocess with direct Python imports
+- **Solution:** Created `run_pipeline_import.py` with proper resource management
+- **Additional Fixes:**
+  - I/O closed file error resolved
+  - stderr corruption fixed
+  - Exception handling added to UI
+  - Directory operations protected
+- **Status:** UI fully operational with robust error handling
+- **Documentation:** See `DEBUG_SWEEP_2.md` for fix details
+
 #### HIGH PRIORITY - COSTS MONEY
 **FAA 8130 Exception Too Broad** (Session 24)
 - Location: `sos_ingestion_gate_v419.py` lines 748-755

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "opp-48hN3dmr1c19hFXik2v69-10222-0000",
+    "recommendation": "INDETERMINATE",
+    "confidence": 0,
+    "reasoning": ""
+  },
+  {
+    "id": "opp-48hN3dmr1c19hFXik2v69-RFIBiocontainmentIsolationAndQuarantine(BIQ)BiologicalContainmentIsolationSystem(BCIS)-0001",
+    "recommendation": "INDETERMINATE",
+    "confidence": 0,
+    "reasoning": ""
+  },
+  {
+    "id": "opp-48hN3dmr1c19hFXik2v69-RFIBiocontainmentIsolationAndQuarantine(BIQ)PortablePatientTransportSystem(PPTS)-0002",
+    "recommendation": "INDETERMINATE",
+    "confidence": 0,
+    "reasoning": ""
+  },
+  {
+    "id": "opp-48hN3dmr1c19hFXik2v69-RFIBiocontainmentIsolationAndQuarantine(BIQ)ShipboardIsolationSystem(SIS)-0003",
+    "recommendation": "INDETERMINATE",
+    "confidence": 0,
+    "reasoning": ""
+  }
+]

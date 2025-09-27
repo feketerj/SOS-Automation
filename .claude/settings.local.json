@@ -51,7 +51,8 @@
       "Bash(pip install:*)",
       "Bash(streamlit run:*)",
       "Bash(set MONITOR_BATCH=n)",
-      "Bash(copy Launch_SOS_UI.bat _BACKUP_BEFORE_CLEANUP_2025_09_25)"
+      "Bash(copy Launch_SOS_UI.bat _BACKUP_BEFORE_CLEANUP_2025_09_25)",
+      "Bash(if exist TEST_DIRECT.py type TEST_DIRECT.py)"
     ],
     "deny": [],
     "ask": []

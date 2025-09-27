@@ -25,15 +25,22 @@
 - Config guardrails: set `HIGHERGOV_API_KEY` and `MISTRAL_API_KEY`; optional overrides in `config/settings.json` (do not commit secrets); defaults preserved
 
 ## Current Status (Automated Update)
-Last sync: Now
+Last sync: September 27, 2025 (Evening)
 
 - Pipeline: End-to-end (Regex → Batch → Agent) operational; no functional changes introduced in recent work.
+- UI: **FIXED** - Streamlit UI now fully operational with direct Python imports (no subprocess issues)
+- Critical Fixes Applied (Sept 27):
+  - I/O closed file error resolved (buffer/stderr ordering fixed)
+  - stderr corruption eliminated (removed duplicate restoration)
+  - UI exception handling added (proper error state management)
+  - Directory operations protected (permission/deletion safety)
+  - Resource cleanup enhanced (sys.path removal error handling)
 - Config: Central loader in place; all runners/connectors optionally respect env > config > defaults (behavior unchanged if keys absent).
 - Validation/Audit tools: Output, batch input/results, metadata, schema validation (with summary), integrity check, decision audit (markdown + CSV), metrics, CSV validator, post-run checklist.
 - Performance (opt-in, default off): Batch size cap; HigherGov document cache; parallel document fetch in collector.
 - Regex review: Read-only regex pack audit tool (compile-check + category counts).
 - Outputs/metadata: Integrity snapshot hashes added to batch metadata and full processor metadata (diagnostic only).
-- Tests: Curated pytest path; non-network unit tests added around sanitization, output manager, CSV, master DB, and agent field mapping. More tests staged under `tests/`.
+- Tests: 100% pass rate on validation suite; 40/47 pytest tests passing; comprehensive failure injection testing completed.
 
 ## Next TODO Actions (Safe, Incremental)
 

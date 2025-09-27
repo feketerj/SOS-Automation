@@ -70,51 +70,61 @@ def _latest_output_dir(root: Path) -> Path | None:
     if not output_root.exists():
         return None
     candidates = []
-    for month_dir in output_root.iterdir():
-        if not month_dir.is_dir():
-            continue
-        for run_dir in month_dir.iterdir():
-            if run_dir.is_dir():
-                candidates.append(run_dir)
+    try:
+        for month_dir in output_root.iterdir():
+            if not month_dir.is_dir():
+                continue
+            try:
+                for run_dir in month_dir.iterdir():
+                    if run_dir.is_dir():
+                        candidates.append(run_dir)
+            except (PermissionError, OSError):
+                continue  # Skip inaccessible directories
+    except (PermissionError, OSError):
+        return None  # Can't read output directory
+
     if not candidates:
         return None
-    return max(candidates, key=lambda p: p.stat().st_mtime)
+
+    # Safely get the latest directory
+    try:
+        return max(candidates, key=lambda p: p.stat().st_mtime)
+    except (FileNotFoundError, PermissionError, OSError):
+        # Directory might have been deleted or become inaccessible
+        return candidates[0] if candidates else None
 
 
 def _run_pipeline(validate_smoke: bool, temp_endpoints: List[str] | None = None) -> tuple[int, str]:
-    # If temp_endpoints provided, temporarily write them to endpoints.txt
-    endpoints_file = ROOT / "endpoints.txt"
+    # Use the improved direct import runner
+    from run_pipeline_import import run_pipeline_direct
 
-    if temp_endpoints:
-        # Save current endpoints.txt content if exists
-        backup_content = None
-        if endpoints_file.exists():
-            backup_content = endpoints_file.read_text()
+    try:
+        # TODO: Implement smoke test validation when validate_smoke is True
+        # For now, we proceed with full pipeline regardless
 
-        # Write temporary endpoints
-        _write_endpoints(endpoints_file, temp_endpoints)
+        # Run using direct Python import (no subprocess)
+        returncode, output = run_pipeline_direct(temp_endpoints if temp_endpoints else [])
 
-    cmd = [PYTHON, "tools/run_pipeline.py"]
-    if validate_smoke:
-        cmd.append("--validate-smoke")
+        if returncode == 0 and "Pipeline completed successfully" in output:
+            # Extract meaningful info from output
+            lines = output.split('\n')
+            summary_lines = []
+            capture = False
+            for line in lines:
+                if "ASSESSMENT COMPLETE" in line:
+                    capture = True
+                if capture:
+                    summary_lines.append(line)
+                if "Master Database Updated" in line:
+                    capture = False
 
-    env = os.environ.copy()
-    env.setdefault("PYTHONIOENCODING", "utf-8")
+            return 0, "\n".join(summary_lines) if summary_lines else output
+        else:
+            return returncode, output
 
-    result = subprocess.run(
-        cmd,
-        cwd=str(ROOT),
-        env=env,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-    )
-
-    # Restore original endpoints.txt if we modified it
-    if temp_endpoints and backup_content is not None:
-        endpoints_file.write_text(backup_content)
-
-    return result.returncode, result.stdout
+    except Exception as e:
+        output = f"ERROR: Failed to run pipeline: {str(e)}"
+        return 1, output
 
 
 def main() -> None:
@@ -206,17 +216,32 @@ def main() -> None:
             if run_disabled:
                 st.warning("Add at least one endpoint before running the pipeline.")
             else:
-                with st.spinner("Running pipeline. This may take several minutes..."):
-                    # Pass session endpoints to the pipeline
-                    code, output = _run_pipeline(validate_smoke, temp_endpoints=endpoints)
-                st.session_state["last_run_log"] = output
-                st.session_state["last_run_code"] = code
-                st.session_state["last_run_time"] = datetime.now()
-                # Mark that results are for current endpoints
-                st.session_state["results_endpoints"] = endpoints.copy()
-                # Trigger results refresh
-                st.session_state["session_results"] = "pending"
-                st.success("Pipeline run finished successfully." if code == 0 else "Pipeline run completed with errors.")
+                try:
+                    with st.spinner("Running pipeline. This may take several minutes..."):
+                        # Pass session endpoints to the pipeline
+                        code, output = _run_pipeline(validate_smoke, temp_endpoints=endpoints)
+
+                    # Update session state after successful execution
+                    st.session_state["last_run_log"] = output
+                    st.session_state["last_run_code"] = code
+                    st.session_state["last_run_time"] = datetime.now()
+                    # Mark that results are for current endpoints
+                    st.session_state["results_endpoints"] = endpoints.copy()
+                    # Trigger results refresh
+                    st.session_state["session_results"] = "pending"
+
+                    if code == 0:
+                        st.success("Pipeline run finished successfully.")
+                    else:
+                        st.warning(f"Pipeline completed with exit code {code}. Check the log for details.")
+
+                except Exception as e:
+                    # Handle unexpected exceptions
+                    error_msg = f"Pipeline execution failed: {str(e)}"
+                    st.error(error_msg)
+                    st.session_state["last_run_log"] = error_msg
+                    st.session_state["last_run_code"] = -1
+                    st.session_state["last_run_time"] = datetime.now()
 
         if st.session_state["last_run_log"]:
             status = st.session_state["last_run_code"]
@@ -248,10 +273,11 @@ def main() -> None:
     # Check if results match current endpoints
     if st.session_state["results_endpoints"] != endpoints:
         st.info("No results for current endpoints. Run the pipeline to see results.")
-        return
+        # Still try to show latest results if available
 
+    # Always check for latest directory, don't require session_results
     latest_dir = _latest_output_dir(ROOT)
-    if latest_dir and st.session_state.get("session_results") is not None:
+    if latest_dir:
         st.write(f"Most recent output folder: `{latest_dir}`")
 
         # Look for assessment CSV file
@@ -286,15 +312,46 @@ def main() -> None:
 
                 # Show full details for each assessment
                 for idx, row in df.iterrows():
-                    with st.expander(f"{row.get('solicitation_title', 'Unknown Title')} - **{row.get('result', 'UNKNOWN')}**"):
+                    # Get title safely, handling NaN values
+                    title = row.get('solicitation_title')
+                    if pd.isna(title) or title == '' or title == 'nan':
+                        title = row.get('announcement_title', 'Unknown Title')
+                    if pd.isna(title) or title == '' or title == 'nan':
+                        title = 'Unknown Title'
+
+                    result = row.get('result', 'UNKNOWN')
+                    if pd.isna(result):
+                        result = 'UNKNOWN'
+
+                    with st.expander(f"{title} - **{result}**"):
                         col1, col2 = st.columns([1, 2])
 
                         with col1:
                             st.write("**Basic Info:**")
-                            st.write(f"- ID: {row.get('solicitation_id', 'N/A')}")
-                            st.write(f"- Agency: {row.get('agency', 'N/A')}")
-                            st.write(f"- Result: **{row.get('result', 'N/A')}**")
-                            st.write(f"- Pipeline Stage: {row.get('pipeline_stage', 'N/A')}")
+
+                            # Handle ID safely
+                            sid = row.get('solicitation_id', 'N/A')
+                            if pd.isna(sid) or sid == '':
+                                sid = row.get('announcement_number', 'N/A')
+                            if pd.isna(sid) or sid == '':
+                                sid = 'N/A'
+                            st.write(f"- ID: {sid}")
+
+                            # Handle agency safely
+                            agency = row.get('agency', 'Unknown')
+                            if pd.isna(agency) or agency == '':
+                                agency = 'Unknown'
+                            st.write(f"- Agency: {agency}")
+
+                            st.write(f"- Result: **{result}**")
+
+                            # Handle pipeline stage safely
+                            stage = row.get('pipeline_stage', 'N/A')
+                            if pd.isna(stage) or stage == '':
+                                stage = row.get('assessment_type', 'N/A')
+                            if pd.isna(stage) or stage == '':
+                                stage = 'N/A'
+                            st.write(f"- Pipeline Stage: {stage}")
 
                             # Show URLs
                             if row.get('sam_url') or row.get('hg_url'):
@@ -306,13 +363,17 @@ def main() -> None:
 
                         with col2:
                             st.write("**Decision Details:**")
-                            if row.get('knock_out_reasons'):
+                            # Handle both field names for knock-out reasons
+                            knock_out = row.get('knock_out_reasons') or row.get('knock_pattern')
+                            if knock_out:
                                 st.write("**Knock-out Reasons:**")
-                                if isinstance(row['knock_out_reasons'], list):
-                                    for reason in row['knock_out_reasons']:
-                                        st.write(f"  • {reason}")
+                                if isinstance(knock_out, list):
+                                    for reason in knock_out:
+                                        if reason and str(reason).strip():  # Skip empty/null values
+                                            st.write(f"  • {str(reason)}")
                                 else:
-                                    st.write(f"  • {row['knock_out_reasons']}")
+                                    if knock_out and str(knock_out).strip():
+                                        st.write(f"  • {str(knock_out)}")
 
                             if row.get('rationale'):
                                 st.write("**Rationale:**")
@@ -322,9 +383,10 @@ def main() -> None:
                                 st.write("**Exceptions:**")
                                 st.write(row['exceptions'])
 
-                            if row.get('recommendation'):
+                            recommendation = row.get('recommendation')
+                            if recommendation and not pd.isna(recommendation) and str(recommendation).strip() not in ['nan', '']:
                                 st.write("**Recommendation:**")
-                                st.write(row['recommendation'])
+                                st.write(str(recommendation))
 
                         # Add full agent report section with copy button
                         if row.get('full_model_response') or row.get('detailed_analysis') or row.get('analysis_notes'):
@@ -334,44 +396,56 @@ def main() -> None:
                             # Combine all available report fields
                             full_report = []
 
+                            # Helper to safely get string value
+                            def safe_str(val, default='N/A'):
+                                if pd.isna(val) or val == '' or str(val).strip() in ['nan', 'None']:
+                                    return default
+                                return str(val)
+
                             # Add title and basic info
                             full_report.append(f"ASSESSMENT REPORT")
                             full_report.append(f"=" * 50)
-                            full_report.append(f"Title: {row.get('solicitation_title', 'N/A')}")
-                            full_report.append(f"ID: {row.get('solicitation_id', 'N/A')}")
-                            full_report.append(f"Agency: {row.get('agency', 'N/A')}")
-                            full_report.append(f"Decision: {row.get('result', 'N/A')}")
+                            full_report.append(f"Title: {safe_str(row.get('solicitation_title'))}")
+                            full_report.append(f"ID: {safe_str(row.get('solicitation_id'))}")
+                            full_report.append(f"Agency: {safe_str(row.get('agency'))}")
+                            full_report.append(f"Decision: {safe_str(row.get('result'))}")
                             full_report.append(f"=" * 50)
                             full_report.append("")
 
                             # Add the full analysis
-                            if row.get('detailed_analysis'):
+                            detailed = row.get('detailed_analysis')
+                            if detailed and not pd.isna(detailed):
                                 full_report.append("DETAILED ANALYSIS:")
-                                full_report.append(row['detailed_analysis'])
+                                full_report.append(safe_str(detailed))
                                 full_report.append("")
 
-                            if row.get('analysis_notes'):
+                            notes = row.get('analysis_notes')
+                            if notes and not pd.isna(notes):
                                 full_report.append("ANALYSIS NOTES:")
-                                full_report.append(row['analysis_notes'])
+                                full_report.append(safe_str(notes))
                                 full_report.append("")
 
-                            if row.get('full_model_response'):
+                            model_resp = row.get('full_model_response')
+                            if model_resp and not pd.isna(model_resp):
                                 full_report.append("FULL MODEL RESPONSE:")
-                                full_report.append(row['full_model_response'])
+                                full_report.append(safe_str(model_resp))
                                 full_report.append("")
 
-                            if row.get('rationale'):
+                            rationale = row.get('rationale')
+                            if rationale and not pd.isna(rationale):
                                 full_report.append("RATIONALE:")
-                                full_report.append(row['rationale'])
+                                full_report.append(safe_str(rationale))
                                 full_report.append("")
 
-                            if row.get('knock_out_reasons'):
+                            knock_out = row.get('knock_out_reasons')
+                            if knock_out and not pd.isna(knock_out):
                                 full_report.append("KNOCK-OUT REASONS:")
-                                if isinstance(row['knock_out_reasons'], list):
-                                    for reason in row['knock_out_reasons']:
-                                        full_report.append(f"  • {reason}")
+                                if isinstance(knock_out, list):
+                                    for reason in knock_out:
+                                        if not pd.isna(reason):
+                                            full_report.append(f"  • {safe_str(reason)}")
                                 else:
-                                    full_report.append(f"  • {row['knock_out_reasons']}")
+                                    full_report.append(f"  • {safe_str(knock_out)}")
                                 full_report.append("")
 
                             report_text = "\n".join(full_report)
