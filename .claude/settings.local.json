@@ -58,7 +58,9 @@
       "Bash(pytest:*)",
       "Bash(timeout:*)",
       "Bash(move BATCH_RUN.py _ARCHIVED_RUNNERS_20250927)",
-      "Bash(if exist:*)"
+      "Bash(if exist:*)",
+      "Bash(grep:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []
