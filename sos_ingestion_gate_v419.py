@@ -141,68 +141,78 @@ class KnockOutCategories:
         19: {"name": "CAD_CAM", "description": "Native proprietary formats required"}
     }
     
-    # Map pattern families to categories (using actual names from regex_pack_v14_production.yaml)
+    # Map pattern families to categories (using actual names from regex_pack_v419_complete.yaml)
     PATTERN_TO_CATEGORY = {
         # Category 1: TIMING
         'currency_patterns': 1,  # Contains deadline markers
-        
-        # Category 2: DOMAIN  
+
+        # Category 2: DOMAIN
         'excluded_platform_patterns': 2,  # Non-aviation keywords
-        
+
         # Category 3: SECURITY
         'security_clearance_patterns': 3,  # Security clearance requirements
-        
+
         # Category 4: SET-ASIDES
         # Note: Handled via special logic in _check_set_aside
-        
+
         # Category 5: SOURCE RESTRICTIONS
         'sole_source_patterns': 5,
         'approved_source_only_patterns': 5,
         'intent_to_award_patterns': 5,  # Intent to award = source restriction
         'qpl_qml_patterns': 5,
-        
+
         # Category 6: TECH DATA
         'tdp_negative_patterns': 6,  # TDP restrictions/unavailable
-        
+
         # Category 7: EXPORT CONTROL
         'risk_clause_patterns': 7,  # Contains export controls
-        
+
         # Category 8: AMC/AMSC
         'amc_amsc_patterns': 8,
-        
+
         # Category 9: SAR
         'sar_patterns': 9,
-        
+
         # Category 10: PLATFORM
         'aviation_platform_patterns': 10,  # Military/civilian platforms
-        
+
         # Category 11: PROCUREMENT
         'refurbished_rotatable_aftermarket_surplus_patterns': 11,  # New-only requirements
-        
+
         # Category 12: COMPETITION/QUALIFICATION
         'first_article_patterns': 12,  # First article testing requirements
-        
+        'bridge_contract_patterns': 12,  # Bridge contracts
+        'follow_on_patterns': 12,  # Follow-on contracts
+
         # Category 13: SUBCONTRACTING
-        # Note: No direct subcontracting patterns in v094
-        
+        'subcontracting_prohibited_patterns': 13,  # Subcontracting restrictions
+
         # Category 14: VEHICLES
         'agency_specific_patterns': 14,  # Agency-specific patterns
-        
+        'contract_vehicle_patterns': 14,  # IDIQ/GSA/GWAC requirements
+
         # Category 15: EXPERIMENTAL
-        # Note: No direct experimental patterns in v094
-        
+        'ota_patterns': 15,  # Other Transaction Authority
+        'baa_patterns': 15,  # Broad Agency Announcement
+        'sbir_patterns': 15,  # Small Business Innovation Research
+        'crada_patterns': 15,  # Cooperative Research and Development Agreement
+
         # Category 16: IT ACCESS
-        # Note: No direct IT patterns in v094
-        
+        'it_system_access_patterns': 16,  # JEDMICS/ETIMS/cFolders/DLA EProcurement
+
         # Category 17: CERTIFICATIONS
-        'commercial_items_patterns': 17,  # FAR Part 12 commercial items
-        'faa_8130_patterns': 17,  # FAA certifications
-        
+        'commercial_item_patterns': 17,  # FAR Part 12 commercial items
+        'faa_8130_airworthiness_patterns': 17,  # FAA certifications
+        'faa_part_145_patterns': 17,  # FAA Part 145 repair stations
+        'certification_specific_patterns': 17,  # NASA/EPA/TSA/DOT/DCMA certifications
+
         # Category 18: WARRANTY
+        'depot_warranty_obligation_patterns': 18,  # Direct sustainment/warranty obligations
         'traceability_patterns': 18,  # Chain of custody/traceability
-        
+
         # Category 19: CAD/CAM
-        'tdp_positive_patterns': 19  # TDP availability (positive)
+        'native_cad_format_patterns': 19,  # Native CAD format requirements
+        'cad_patterns': 19  # General CAD requirements
     }
     
     # Exceptions that override category blocks (using v094 pattern names)
@@ -420,15 +430,39 @@ class IngestionGateV419:
         )
         
         # FAA 8130 EXCEPTION CHECK for Category 5 (Source Restrictions)
-        # Navy + SAR + FAA 8130 = Exception
+        # Check multiple exceptions for source restrictions
         if category_id == 5:  # SOURCE_RESTRICTIONS
+            import re
+
+            # Check for Part 145 repair station language OR general 8130-3 capability (this is GO, not a restriction)
+            part_145_patterns = [
+                # Part 145 specific patterns
+                r'\bany[\s\-]*FAA[\s\-]*(?:Part[\s\-]*)?145',
+                r'\b(?:Part[\s\-]*)?145[\s\-]*(?:repair[\s\-]*station|shop)[\s\-]*capable',
+                r'\bFAA[\s\-]*repair[\s\-]*station[\s\-]*capable[\s\-]*of[\s\-]*(?:producing|issuing)[\s\-]*8130',
+                r'\bany[\s\-]*FAA[\s\-]*certified[\s\-]*repair[\s\-]*station',
+                # General 8130-3 capability patterns (without requiring Part 145 mention)
+                r'\bany(?:one)?[\s\-]*capable[\s\-]*of[\s\-]*(?:producing|providing|issuing)[\s\-]*(?:an[\s\-]*)?(?:FAA[\s\-]*)?8130[\s\-]*3',
+                r'\bany(?:one)?[\s\-]*(?:who[\s\-]*)?can[\s\-]*(?:produce|provide|issue)[\s\-]*(?:an[\s\-]*)?(?:FAA[\s\-]*)?8130[\s\-]*3',
+                r'\b(?:vendor|supplier|contractor|source)s?[\s\-]*capable[\s\-]*of[\s\-]*(?:producing|providing|issuing)[\s\-]*8130[\s\-]*3',
+                r'\bwith[\s\-]*(?:the[\s\-]*)?capability[\s\-]*to[\s\-]*(?:produce|provide|issue)[\s\-]*8130[\s\-]*3',
+                r'\bmust[\s\-]*be[\s\-]*able[\s\-]*to[\s\-]*(?:produce|provide|issue)[\s\-]*(?:FAA[\s\-]*)?8130[\s\-]*3'
+            ]
+            has_part_145 = any(re.search(p, text, re.IGNORECASE) for p in part_145_patterns)
+
+            if has_part_145:
+                # 8130-3 capability requirement is GO for SOS (we work with FAA certified shops)
+                score.evidence = ["Any vendor capable of producing FAA 8130-3 - SOS eligible through MRO network"]
+                score.triggered = False  # NOT a knockout
+                return score  # Return untriggered (GO)
+
             # Check if this is a Navy FAA 8130 exception case
             if self._has_faa_8130_exception(text):
-                # Navy + SAR + FAA 8130 = GO for SOS
-                score.evidence = ["Navy FAA 8130 Exception: SOS MRO partners can provide"]
+                # Approved sources + FAA 8130 = Contact CO for clarification
+                score.evidence = ["Approved sources with FAA 8130 - needs CO clarification"]
                 score.contact_co_applicable = True
-                score.contact_co_reason = "Navy + SAR + FAA 8130 = SOS eligible through MRO partners"
-                return score  # Return untriggered (GO)
+                score.contact_co_reason = "Approved sources + FAA 8130 = Contact CO to discuss FAA certified equivalents"
+                return score  # Return untriggered (needs clarification)
         
         # Special handling for timing (Category 1)
         if category_id == 1:
@@ -686,9 +720,11 @@ class IngestionGateV419:
     
     def _has_faa_8130_exception(self, text: str) -> bool:
         """
-        Check if FAA 8130 exception applies.
-        Rule: Navy + Commercial Platform + SAR + FAA 8130 = Exception (SOS can provide through MRO network)
-        Only applies to commercial-based platforms, not military-only aircraft
+        Check if FAA 8130 + Approved Sources situation applies.
+        UPDATED LOGIC: Approved sources + FAA 8130 = CONTACT CO (not automatic GO)
+        This needs CO clarification about whether FAA certified equivalents are acceptable.
+        Particularly relevant for Navy commercial platforms (P-8, E-6B, C-40) where
+        commercial equivalents with FAA 8130 might be acceptable alternatives to QPL/ASL.
         """
         import re
         
@@ -758,20 +794,53 @@ class IngestionGateV419:
         if opportunity.get('text') and len(opportunity.get('text', '')) > 1000:
             combined_text = opportunity.get('text', '')
         
-        # CHECK FOR FAA 8130 EXCEPTION FIRST
-        # Navy + Commercial Platform + SAR + FAA 8130 = Exception (SOS can provide through MRO network)
-        # ONLY applies to specific commercial-based Navy platforms (P-8, E-6B, C-40, UC-35, C-12)
-        has_faa_8130_exception = self._has_faa_8130_exception(combined_text)
-        if has_faa_8130_exception:
-            # Navy commercial platform contracts with FAA 8130 + SAR are GO for SOS
+        # CHECK FOR 8130-3 CAPABILITY FIRST (this is GO, bypasses SAR restrictions)
+        import re
+        capability_8130_patterns = [
+            # Part 145 specific patterns
+            r'\bany[\s\-]*FAA[\s\-]*(?:Part[\s\-]*)?145',
+            r'\b(?:Part[\s\-]*)?145[\s\-]*(?:repair[\s\-]*station|shop)[\s\-]*capable',
+            r'\bFAA[\s\-]*repair[\s\-]*station[\s\-]*capable[\s\-]*of[\s\-]*(?:producing|issuing)[\s\-]*8130',
+            r'\bany[\s\-]*FAA[\s\-]*certified[\s\-]*repair[\s\-]*station',
+            # General 8130-3 capability patterns (without Part 145 requirement)
+            r'\bany(?:one)?[\s\-]*capable[\s\-]*of[\s\-]*(?:producing|providing|issuing)[\s\-]*(?:an[\s\-]*)?(?:FAA[\s\-]*)?8130[\s\-]*3',
+            r'\bany(?:one)?[\s\-]*(?:who[\s\-]*)?can[\s\-]*(?:produce|provide|issue)[\s\-]*(?:an[\s\-]*)?(?:FAA[\s\-]*)?8130[\s\-]*3',
+            r'\b(?:vendor|supplier|contractor|source)s?[\s\-]*capable[\s\-]*of[\s\-]*(?:producing|providing|issuing)[\s\-]*8130[\s\-]*3',
+            r'\bwith[\s\-]*(?:the[\s\-]*)?capability[\s\-]*to[\s\-]*(?:produce|provide|issue)[\s\-]*8130[\s\-]*3',
+            r'\bmust[\s\-]*be[\s\-]*able[\s\-]*to[\s\-]*(?:produce|provide|issue)[\s\-]*(?:FAA[\s\-]*)?8130[\s\-]*3',
+            r'\beligible[\s\-]*if[\s\-]*(?:they[\s\-]*)?can[\s\-]*(?:produce|provide)[\s\-]*8130[\s\-]*3',
+            r'\b(?:all|any)[\s\-]*(?:source|vendor|contractor)s?[\s\-]*with[\s\-]*8130[\s\-]*3[\s\-]*capability',
+            # More flexible patterns for various phrasings
+            r'\b(?:any|all)[\s\-]*(?:vendor|supplier|contractor|source|one|entity|company|firm)s?[\s\-]*(?:who|that|which)?[\s\-]*can[\s\-]*provide[\s\-]*8130[\s\-]*3',
+            r'\b(?:can|able[\s\-]*to|capable[\s\-]*of)[\s\-]*provid\w*[\s\-]*8130[\s\-]*3[\s\-]*(?:documentation|certificate|form|tag)?',
+            r'\b8130[\s\-]*3[\s\-]*(?:capability|capable|able)',
+            r'\b(?:source|vendor|contractor)s?[\s\-]*with[\s\-]*8130[\s\-]*3'
+        ]
+
+        has_8130_capability = any(re.search(p, combined_text, re.IGNORECASE) for p in capability_8130_patterns)
+
+        if has_8130_capability:
+            # 8130-3 capability requirement is GO for SOS (we work with FAA certified shops)
             result.decision = Decision.GO
-            result.primary_reason = "Navy FAA 8130 Exception: Commercial platform eligible through MRO network"
+            result.primary_reason = "Any vendor capable of producing FAA 8130-3 - SOS eligible through MRO network"
+            result.confidence_score = 90.0
+            # Still continue to check for hard knockouts like clearances
+
+        # CHECK FOR FAA 8130 EXCEPTION (approved sources + FAA 8130)
+        # UPDATED LOGIC: Approved sources + FAA 8130 = CONTACT CO (not automatic GO)
+        # This requires clarification from the CO about whether FAA certified equivalents are acceptable
+        has_faa_8130_exception = self._has_faa_8130_exception(combined_text)
+        if has_faa_8130_exception and not has_8130_capability:
+            # Set as FURTHER_ANALYSIS with strong Contact CO recommendation
+            result.decision = Decision.FURTHER_ANALYSIS
+            result.primary_reason = "Approved sources with FAA 8130 - Contact CO for clarification"
             result.co_contact_applicable = True
-            result.co_contact_reason = "Navy commercial platform + SAR + FAA 8130 = SOS eligible"
-            # Log which platform was detected for tracking
+            result.co_contact_reason = "Approved sources + FAA standards mentioned - needs clarification if FAA certified equivalents acceptable"
+            result.special_action = "CONTACT_CO"
+            # Log for tracking
             import logging
-            logging.info(f"FAA 8130 exception applied for opportunity {result.opportunity_id}")
-            return result  # Return immediately as GO
+            logging.info(f"FAA 8130 Contact CO case for opportunity {result.opportunity_id}")
+            # Don't return immediately - continue processing to gather full context
         
         # Scan for all pattern matches
         pattern_matches = self._scan_text_for_patterns(combined_text)
@@ -800,10 +869,21 @@ class IngestionGateV419:
                     if category_id == 5 and category_score.contact_co_applicable:
                         # This is FAA 8130 - should be GO not NO-GO
                         continue  # Skip setting NO-GO
-                    result.decision = Decision.NO_GO
-                    result.primary_blocker = f"Category {category_id} - {category_score.category_name}: {category_score.evidence[0] if category_score.evidence else 'Pattern matched'}"
-                    result.primary_blocker_category = category_id
-                    decision_made = True
+
+                    # Hard knockouts override 8130-3 capability
+                    # Categories 2 (clearances), 3 (set-asides), 9 (classified), etc. are absolute
+                    hard_knockout_categories = [2, 3, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+
+                    if category_id in hard_knockout_categories or result.decision != Decision.GO:
+                        result.decision = Decision.NO_GO
+                        result.primary_blocker = f"Category {category_id} - {category_score.category_name}: {category_score.evidence[0] if category_score.evidence else 'Pattern matched'}"
+                        result.primary_blocker_category = category_id
+                        decision_made = True
+                    elif category_id not in [5, 8]:  # Source restrictions and military might be overridden by 8130-3
+                        result.decision = Decision.NO_GO
+                        result.primary_blocker = f"Category {category_id} - {category_score.category_name}: {category_score.evidence[0] if category_score.evidence else 'Pattern matched'}"
+                        result.primary_blocker_category = category_id
+                        decision_made = True
                 
                 # Check for CO contact
                 if category_score.contact_co_applicable:
@@ -815,12 +895,18 @@ class IngestionGateV419:
         if not decision_made:
             # Only set GO if there are genuinely no issues
             # Don't override NO-GO decisions that should have been made
-            
+
+            # Check if we already set GO for 8130-3 capability - preserve it
+            if result.decision == Decision.GO and has_8130_capability:
+                # 8130-3 capability decision already made - keep it
+                pass  # Decision already set, don't override
+            # Check if FAA 8130 Contact CO was already set - preserve it
+            elif result.decision == Decision.FURTHER_ANALYSIS and result.co_contact_applicable:
+                # FAA 8130 exception case - keep as FURTHER_ANALYSIS for Contact CO
+                pass  # Decision already set, don't override
             # Check if any categories were triggered with high scores
-            high_score_categories = [cat for cat_id, cat in result.category_scores.items() 
-                                    if cat.score >= 3]  # Score 3+ means significant issue
-            
-            if high_score_categories:
+            elif high_score_categories := [cat for cat_id, cat in result.category_scores.items()
+                                    if cat.score >= 3]:  # Score 3+ means significant issue
                 # Categories triggered but decision wasn't made - this is a NO-GO
                 result.decision = Decision.NO_GO
                 result.primary_blocker = f"Multiple restrictions: {len(high_score_categories)} categories triggered"

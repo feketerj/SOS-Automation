@@ -35,7 +35,7 @@ class HigherGovBatchFetcher:
                 return default
 
         # HARDCODED CONFIGURATION - CLIENT APP ONLY
-        self.api_key = "2c38090f3cb0c56026e17fb3e464f22cf637e2ee"  # Hardcoded HigherGov API key
+        self.api_key = "46be62b8aa8048cbabe51218c85dd0af"  # Hardcoded HigherGov API key
         self.base_url = 'https://www.highergov.com/api-external/opportunity/'
 
         # NO TIMEOUTS - Document fetching takes a long time
@@ -156,11 +156,20 @@ class HigherGovBatchFetcher:
 
         for attempt in range(max_retries):
             try:
+                # Extract the related_key from the document_path URL if it's a full URL
+                related_key = document_path
+                if 'related_key=' in document_path:
+                    # Extract the related_key value from the URL
+                    import re
+                    match = re.search(r'related_key=([^&]+)', document_path)
+                    if match:
+                        related_key = match.group(1)
+
                 # Build the document endpoint URL with related_key
                 document_url = f"https://www.highergov.com/api-external/document/"
                 params = {
                     'api_key': self.api_key,  # API key in params
-                    'related_key': document_path,  # document_path is the related_key
+                    'related_key': related_key,  # Use extracted related_key
                     'page_size': 100  # Get up to 100 documents
                 }
 

@@ -12,6 +12,7 @@ import streamlit as st
 import pandas as pd
 import json
 from field_mapper import FieldMapper
+from pipeline_stage_viewer import PipelineStageViewer
 
 try:
     from config.loader import get_config  # type: ignore
@@ -281,8 +282,10 @@ def main() -> None:
     if latest_dir:
         st.write(f"Most recent output folder: `{latest_dir}`")
 
-        # Look for assessment CSV file
-        csv_files = list(latest_dir.glob("assessment.csv"))
+        # Look for assessment CSV file - try both possible names
+        csv_files = list(latest_dir.glob("pipeline_results.csv"))
+        if not csv_files:
+            csv_files = list(latest_dir.glob("assessment.csv"))
         if csv_files:
             csv_file = csv_files[0]
             try:
@@ -317,8 +320,111 @@ def main() -> None:
                 with col4:
                     st.metric("INDETERMINATE", indeterminate_count)
 
-                # Display the results table
-                st.write("### Detailed Assessment Results")
+                # Initialize pipeline viewer
+                pipeline_viewer = PipelineStageViewer()
+
+                # Display stage comparison first
+                pipeline_viewer.render_stage_comparison(df)
+
+                # Display a clean summary table
+                st.write("### Assessment Results Summary")
+
+                # Create a cleaner display dataframe
+                display_df = pd.DataFrame()
+
+                for idx, row in df.iterrows():
+                    # Extract clean values
+                    title = mapper.get_field(row, 'title', 'Unknown')
+                    if len(title) > 60:
+                        title = title[:57] + "..."
+
+                    sid = mapper.get_field(row, 'id', 'N/A')
+                    if len(sid) > 20:
+                        sid = sid[:17] + "..."
+
+                    agency = mapper.get_field(row, 'agency', 'Unknown')
+                    # Clean agency if it's a dict string
+                    if isinstance(agency, str) and '{' in agency and 'agency_name' in agency:
+                        try:
+                            import re
+                            match = re.search(r"'agency_name':\s*'([^']+)'", agency)
+                            if match:
+                                agency = match.group(1)
+                        except:
+                            pass
+                    if len(agency) > 30:
+                        agency = agency[:27] + "..."
+
+                    result = mapper.get_field(row, 'result', 'UNKNOWN')
+
+                    # Get the reason for NO-GO or the rationale
+                    reason = ''
+                    if 'NO-GO' in result or 'NO GO' in result:
+                        # Try different fields for the reason
+                        reason = mapper.get_field(row, 'stage2_batch_reason', '')
+                        if not reason or reason == 'N/A':
+                            reason = mapper.get_field(row, 'stage1_regex_reason', '')
+                        if not reason or reason == 'N/A':
+                            reason = mapper.get_field(row, 'knock_pattern', '')
+                        if not reason or reason == 'N/A':
+                            reason = mapper.get_field(row, 'rationale', '')
+
+                        # Clean up the reason
+                        if reason:
+                            if reason.startswith('Reason:'):
+                                reason = reason[7:].strip()
+                            if len(reason) > 40:
+                                reason = reason[:37] + "..."
+                    elif 'INDETERMINATE' in result:
+                        reason = 'Needs further review'
+                    elif 'GO' in result:
+                        reason = 'Approved for pursuit'
+
+                    # Add to display dataframe
+                    display_df = pd.concat([display_df, pd.DataFrame([{
+                        'Title': title,
+                        'Solicitation': sid,
+                        'Agency': agency,
+                        'Decision': result,
+                        'Reason': reason
+                    }])], ignore_index=True)
+
+                # Display the clean table
+                st.dataframe(
+                    display_df,
+                    use_container_width=True,
+                    hide_index=True,
+                    column_config={
+                        "Title": st.column_config.TextColumn(
+                            "Title",
+                            help="Opportunity title",
+                            width="medium",
+                        ),
+                        "Solicitation": st.column_config.TextColumn(
+                            "Solicitation",
+                            help="Solicitation number",
+                            width="small",
+                        ),
+                        "Agency": st.column_config.TextColumn(
+                            "Agency",
+                            help="Issuing agency",
+                            width="medium",
+                        ),
+                        "Decision": st.column_config.TextColumn(
+                            "Decision",
+                            help="Assessment decision",
+                            width="small",
+                        ),
+                        "Reason": st.column_config.TextColumn(
+                            "Reason",
+                            help="Decision reason",
+                            width="large",
+                        )
+                    }
+                )
+
+                # Now show detailed view
+                st.write("### Detailed Assessment View")
 
                 # Add filter options
                 with st.expander("Filter Results"):
@@ -341,21 +447,42 @@ def main() -> None:
                     result_icon = mapper.format_result_color(result)
 
                     with st.expander(f"{result_icon} {title} - **{result}**"):
-                        col1, col2 = st.columns([1, 2])
+                        # Add tabs for different views
+                        tab1, tab2, tab3 = st.tabs(["Overview", "Pipeline Journey", "Raw JSON"])
 
-                        with col1:
-                            st.write("**Basic Info:**")
+                        with tab1:
+                            col1, col2 = st.columns([1, 2])
+
+                            with col1:
+                                st.write("**Basic Info:**")
 
                             # Get all fields using mapper
                             sid = mapper.get_field(row, 'id', 'N/A')
                             agency = mapper.get_field(row, 'agency', 'Unknown Agency')
+
+                            # Handle agency if it's a dictionary
+                            if isinstance(agency, str) and agency.startswith('{'):
+                                try:
+                                    import ast
+                                    agency_dict = ast.literal_eval(agency)
+                                    agency = agency_dict.get('agency_name', 'Unknown Agency')
+                                except:
+                                    # Try to extract agency name from string
+                                    if 'agency_name' in agency:
+                                        import re
+                                        match = re.search(r"'agency_name':\s*'([^']+)'", agency)
+                                        if match:
+                                            agency = match.group(1)
+                            elif isinstance(agency, dict):
+                                agency = agency.get('agency_name', 'Unknown Agency')
+
                             stage = mapper.get_field(row, 'stage', 'N/A')
                             stage_desc = mapper.get_stage_description(stage)
 
-                            st.write(f"- ID: {sid}")
-                            st.write(f"- Agency: {agency}")
-                            st.write(f"- Result: **{result}**")
-                            st.write(f"- Pipeline Stage: {stage_desc}")
+                            st.write(f"**ID:** {sid}")
+                            st.write(f"**Agency:** {agency}")
+                            st.write(f"**Result:** {result}")
+                            st.write(f"**Pipeline Stage:** {stage_desc}")
 
                             # Show URLs using mapper
                             url = mapper.get_field(row, 'url', '')
@@ -475,6 +602,14 @@ def main() -> None:
 
                             # Also add a copy button
                             st.code(report_text, language=None)
+
+                        # Add Pipeline Journey tab
+                        with tab2:
+                            pipeline_viewer.render_pipeline_journey(row)
+
+                        # Add Raw JSON tab
+                        with tab3:
+                            pipeline_viewer.render_json_outputs(row)
 
                 # Download button for full CSV
                 csv_data = df.to_csv(index=False)

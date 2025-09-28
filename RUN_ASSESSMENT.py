@@ -39,14 +39,14 @@ def run_assessment():
     print("COMPLETE THREE-STAGE PIPELINE")
     print("=" * 70)
     print(f"Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print("Stages: Regex → Batch Model → Agent Verification")
+    print("Stages: Regex -> Batch Model -> Agent Verification")
     print("-" * 70)
 
     # Import what we need
     from highergov_batch_fetcher import HigherGovBatchFetcher
     from sos_ingestion_gate_v419 import IngestionGateV419, Decision
     from pipeline_output_manager import PipelineOutputManager
-    from ULTIMATE_MISTRAL_CONNECTOR import UltimateMistralConnector
+    from ULTIMATE_MISTRAL_CONNECTOR import MistralSOSClassifier
 
     # Check endpoints.txt
     if not Path('endpoints.txt').exists():
@@ -65,7 +65,7 @@ def run_assessment():
     # Initialize components
     fetcher = HigherGovBatchFetcher()
     regex_gate = IngestionGateV419()
-    mistral_connector = UltimateMistralConnector()
+    mistral_connector = MistralSOSClassifier()
 
     # Track all results through pipeline
     all_results = []
@@ -100,19 +100,19 @@ def run_assessment():
                     except:
                         print(f"    No documents fetched")
 
-                # Combine all text for regex assessment
-                combined_text = f"{opp.get('title', '')} {opp.get('description', '')} {doc_text}"
+                # Combine all text for regex assessment - use correct field names
+                combined_text = f"{opp.get('title', '')} {opp.get('description_text', opp.get('description', ''))} {doc_text}"
 
-                # Apply regex filtering
+                # Apply regex filtering - pass ALL original fields
                 regex_result = regex_gate.assess_opportunity({'text': combined_text, **opp})
 
                 # Build complete opportunity record
                 opp_record = {
-                    'opportunity_id': opp.get('id'),
-                    'announcement_number': opp.get('id', f"OPP_{datetime.now().strftime('%H%M%S%f')[:10]}"),
-                    'announcement_title': opp.get('title', 'Unknown'),
+                    'opportunity_id': opp.get('source_id', opp.get('opp_key', '')),
+                    'announcement_number': opp.get('source_id', opp.get('opp_key', f"HG_{datetime.now().strftime('%H%M%S')}")),
+                    'announcement_title': opp.get('title', 'Unknown').strip(),
                     'agency': opp.get('agency', opp.get('issuing_agency', 'Unknown')),
-                    'description': opp.get('description', ''),
+                    'description': opp.get('description_text', opp.get('description', '')),
                     'document_text': doc_text[:50000],  # Cap at 50k chars
                     'metadata': opp,
                     'pipeline_tracking': {
@@ -125,7 +125,8 @@ def run_assessment():
                     },
                     'knock_pattern': getattr(regex_result, 'primary_reason', getattr(regex_result, 'primary_blocker', '')),
                     'knockout_category': getattr(regex_result, 'knockout_category', ''),
-                    'highergov_url': f"https://www.highergov.com/opportunity/{opp.get('id', '')}",
+                    'highergov_url': opp.get('path', f"https://www.highergov.com/opportunity/{opp.get('source_id', '')}"),
+                    'sam_url': opp.get('source_path', ''),
                     'assessment_timestamp': datetime.now().isoformat()
                 }
 
@@ -161,18 +162,15 @@ def run_assessment():
 
         opportunities_for_agent = []
 
-        # Prepare batch requests with system prompt
+        # Prepare batch requests with unified system prompt
         from mistralai import Mistral
+        from unified_prompt_injector import UnifiedPromptInjector
+
         client = Mistral(api_key=MISTRAL_API_KEY)
+        prompt_injector = UnifiedPromptInjector()
 
-        # Load system prompt
-        system_prompt = """You are an SOS assessment expert. Evaluate if this opportunity is:
-- GO: Suitable for SOS sourcing
-- NO-GO: Not suitable (military-only, weapons, etc.)
-- INDETERMINATE: Needs further review
-
-Consider FAA 8130 exceptions for commercial Navy platforms (P-8, E-6, C-40).
-Be strict about military restrictions but allow commercial equivalents."""
+        # Load unified system prompt (medium token limit for batch)
+        system_prompt = prompt_injector.get_batch_prompt(token_limit=1500)
 
         batch_requests = []
         for i, opp in enumerate(opportunities_for_batch):
@@ -183,9 +181,26 @@ Be strict about military restrictions but allow commercial equivalents."""
                     "messages": [
                         {"role": "system", "content": system_prompt},
                         {"role": "user", "content": f"""Opportunity: {opp['announcement_title']}
+Source ID: {opp.get('announcement_number', 'N/A')}
 Agency: {opp['agency']}
 Description: {opp['description'][:2000]}
 Documents: {opp['document_text'][:3000]}
+
+Additional Context:
+- Source ID: {opp.get('metadata', {}).get('source_id', 'N/A')}
+- Notice Type: {opp.get('metadata', {}).get('notice_type', 'N/A')}
+- Contract Type: {opp.get('metadata', {}).get('contract_type', 'N/A')}
+- NAICS Code: {opp.get('metadata', {}).get('naics_code', 'N/A')}
+- PSC Code: {opp.get('metadata', {}).get('psc_code', 'N/A')}
+- Set-Aside: {opp.get('metadata', {}).get('set_aside', 'None')}
+- Posted Date: {opp.get('metadata', {}).get('posted_date', 'N/A')}
+- Due Date: {opp.get('metadata', {}).get('due_date', 'N/A')}
+- Place of Performance: {opp.get('metadata', {}).get('pop_city', '')}, {opp.get('metadata', {}).get('pop_state', '')}, {opp.get('metadata', {}).get('pop_country', '')}
+- Issuing Agency: {opp.get('metadata', {}).get('issuing_agency', 'N/A')}
+- Active: {opp.get('metadata', {}).get('active', 'N/A')}
+
+Full Description Text:
+{opp.get('metadata', {}).get('description_text', '')[:2000]}
 
 Assess if this is GO, NO-GO, or INDETERMINATE for SOS sourcing."""}
                     ]
@@ -207,7 +222,7 @@ Assess if this is GO, NO-GO, or INDETERMINATE for SOS sourcing."""}
         try:
             with open(batch_file, 'rb') as f:
                 batch_data = client.files.upload(
-                    file=(batch_file, f.read()),
+                    file={"file_name": batch_file, "content": f.read()},
                     purpose="batch"
                 )
 
@@ -229,16 +244,17 @@ Assess if this is GO, NO-GO, or INDETERMINATE for SOS sourcing."""}
             while poll_count < max_polls:
                 job = client.batch.jobs.get(job_id=batch_job.id)
 
-                if job.status == 'SUCCEEDED':
+                if job.status == 'SUCCESS':
                     print("Batch complete! Downloading results...")
 
                     # Download results
                     if job.output_file:
-                        result_content = client.files.download(file_id=job.output_file)
+                        output = client.files.download(file_id=job.output_file)
+                        content = output.read()
                         results_file = f'Mistral_Batch_Processor/batch_results_{timestamp}.jsonl'
 
                         with open(results_file, 'wb') as f:
-                            f.write(result_content)
+                            f.write(content)
 
                         # Parse results
                         with open(results_file, 'r') as f:
@@ -320,18 +336,22 @@ Assess if this is GO, NO-GO, or INDETERMINATE for SOS sourcing."""}
                 print(f"\n  Verifying: {opp['announcement_title'][:50]}")
 
                 try:
-                    # Prepare full context for agent
+                    # Prepare full context for agent - pass ALL fields
                     agent_input = {
                         'title': opp['announcement_title'],
+                        'source_id': opp.get('announcement_number', ''),
                         'agency': opp['agency'],
                         'description': opp['description'],
                         'document_text': opp['document_text'][:10000],  # Give agent more context
+                        'metadata': opp.get('metadata', {}),  # Pass ALL original fields
                         'stage1_decision': opp['pipeline_tracking']['stage1_regex'],
-                        'stage2_decision': opp['pipeline_tracking']['stage2_batch']
+                        'stage1_reason': opp['pipeline_tracking']['stage1_reason'],
+                        'stage2_decision': opp['pipeline_tracking']['stage2_batch'],
+                        'stage2_reason': opp['pipeline_tracking']['stage2_reason']
                     }
 
                     # Get agent assessment
-                    agent_result = mistral_connector.assess_opportunity(agent_input)
+                    agent_result = mistral_connector.classify_opportunity(agent_input)
 
                     # Extract final decision and reason
                     if isinstance(agent_result, dict):

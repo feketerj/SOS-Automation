@@ -41,17 +41,17 @@ def run_pipeline_direct(endpoints_list):
     added_paths = []
 
     try:
-        # Change to Mistral_Batch_Processor directory since FULL_BATCH_PROCESSOR expects endpoints.txt at ../endpoints.txt
-        batch_processor_dir = root / "Mistral_Batch_Processor"
-        os.chdir(str(batch_processor_dir))
+        # Change to root directory for RUN_ASSESSMENT
+        os.chdir(str(root))
 
         # Add necessary paths to sys.path and track them
-        if str(batch_processor_dir) not in sys.path:
-            sys.path.insert(0, str(batch_processor_dir))
-            added_paths.append(str(batch_processor_dir))
         if str(root) not in sys.path:
             sys.path.insert(0, str(root))
             added_paths.append(str(root))
+        batch_processor_dir = root / "Mistral_Batch_Processor"
+        if str(batch_processor_dir) not in sys.path:
+            sys.path.insert(0, str(batch_processor_dir))
+            added_paths.append(str(batch_processor_dir))
 
         # Redirect stdout/stderr to capture output
         sys.stdout = output_buffer
@@ -59,24 +59,27 @@ def run_pipeline_direct(endpoints_list):
 
         # Set environment variables to prevent interactive prompts
         os.environ['MONITOR_BATCH'] = 'n'
-        os.environ['SKIP_AGENT_VERIFICATION'] = '1'
 
-        print("Starting pipeline execution via direct import...")
+        print("Starting THREE-STAGE pipeline execution...")
 
-        # Check if module was previously imported and reload if necessary
-        if 'FULL_BATCH_PROCESSOR' in sys.modules:
+        # Import and run the complete three-stage pipeline
+        if 'RUN_ASSESSMENT' in sys.modules:
             # Reload to ensure we get latest code
-            importlib.reload(sys.modules['FULL_BATCH_PROCESSOR'])
-            from FULL_BATCH_PROCESSOR import main as batch_main
+            importlib.reload(sys.modules['RUN_ASSESSMENT'])
+            from RUN_ASSESSMENT import run_assessment
         else:
             # First time import
-            from FULL_BATCH_PROCESSOR import main as batch_main
+            from RUN_ASSESSMENT import run_assessment
 
-        # Run the batch processor
-        batch_main()
+        # Run the complete pipeline
+        success = run_assessment()
 
-        print("\nPipeline completed successfully")
-        return 0, output_buffer.getvalue()
+        if success:
+            print("\nPipeline completed successfully")
+            return 0, output_buffer.getvalue()
+        else:
+            print("\nPipeline completed with errors")
+            return 1, output_buffer.getvalue()
 
     except Exception as e:
         # Safely get output buffer content BEFORE any restoration

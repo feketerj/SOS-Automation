@@ -90,6 +90,28 @@ class PipelineOutputManager:
             'document_length',
             'document_fetched',
 
+            # Additional metadata fields from HigherGov
+            'source_id',
+            'opp_key',
+            'title',
+            'description_text',
+            'posted_date',
+            'due_date',
+            'notice_type',
+            'contract_type',
+            'set_aside',
+            'naics_code',
+            'psc_code',
+            'pop_country',
+            'pop_state',
+            'pop_city',
+            'active',
+            'source_id_version',
+            'issuing_agency',
+            'document_path',
+            'source_path',
+            'path',
+
             # Timestamps
             'assessment_timestamp',
         ]
@@ -101,6 +123,9 @@ class PipelineOutputManager:
             for r in results:
                 # Extract pipeline tracking info
                 tracking = r.get('pipeline_tracking', {})
+
+                # Extract metadata fields
+                metadata = r.get('metadata', {})
 
                 row = {
                     'result': r.get('result', 'UNKNOWN'),
@@ -127,6 +152,28 @@ class PipelineOutputManager:
 
                     'document_length': len(r.get('document_text', '')),
                     'document_fetched': 'YES' if r.get('document_text') else 'NO',
+
+                    # Add all metadata fields
+                    'source_id': metadata.get('source_id', ''),
+                    'opp_key': metadata.get('opp_key', ''),
+                    'title': metadata.get('title', ''),
+                    'description_text': metadata.get('description_text', '')[:200],
+                    'posted_date': metadata.get('posted_date', ''),
+                    'due_date': metadata.get('due_date', ''),
+                    'notice_type': metadata.get('notice_type', ''),
+                    'contract_type': metadata.get('contract_type', ''),
+                    'set_aside': metadata.get('set_aside', ''),
+                    'naics_code': metadata.get('naics_code', ''),
+                    'psc_code': metadata.get('psc_code', ''),
+                    'pop_country': metadata.get('pop_country', ''),
+                    'pop_state': metadata.get('pop_state', ''),
+                    'pop_city': metadata.get('pop_city', ''),
+                    'active': metadata.get('active', ''),
+                    'source_id_version': metadata.get('source_id_version', ''),
+                    'issuing_agency': metadata.get('issuing_agency', ''),
+                    'document_path': metadata.get('document_path', ''),
+                    'source_path': metadata.get('source_path', ''),
+                    'path': metadata.get('path', ''),
 
                     'assessment_timestamp': r.get('assessment_timestamp', ''),
                 }
