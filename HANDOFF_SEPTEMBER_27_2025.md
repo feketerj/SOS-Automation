@@ -143,16 +143,54 @@ python RUN_MODES.py --mode agent-only
 - DO NOT run network-dependent tests in pytest suite
 
 ### 10. NEXT AGENT SHOULD
-1. **Verify schema consistency** across all pipeline stages (Regex → Batch → Agent)
-2. **Test updated field names** (AssessmentHeaderLine, Sentence Case decisions)
-3. **Validate UI display** with new field names and formats
-4. **Ensure report generation** uses consistent formats across all outputs
-5. **Consider prompt injection strategies** for large knockout logic:
-   - Multi-batch sequences for different category groups
-   - Multi-agent specialization (platforms, contracts, technical)
-   - Token optimization for 20-category assessment
-6. **Test Category 20 SCOPE** logic with real-world examples
-7. **Verify Contract Aggressor/Red Air** patterns work correctly
+
+#### CRITICAL: Schema Format Mismatch
+**Current State:** Mixed implementation across pipeline
+- **AI Output:** ULTIMATE_MISTRAL_CONNECTOR outputs Sentence Case ("Go", "No-Go")
+- **Sanitizer:** DecisionSanitizer converts everything to UPPERCASE ("GO", "NO-GO")
+- **UI/Reports:** All expect UPPERCASE format
+- **Action Needed:** Either update DecisionSanitizer to preserve Sentence Case OR revert AI output to uppercase
+
+#### Priority Tasks:
+1. **Fix Decision Format Consistency**
+   - Update DecisionSanitizer._normalize() to output Sentence Case
+   - Update enhanced_output_manager.py to handle Sentence Case
+   - Update all report generation to use consistent format
+
+2. **Test Schema Changes**
+   - Verify AssessmentHeaderLine field works in all outputs
+   - Test MDSPlatformCommercialDesignation new format
+   - Ensure UI displays updated field names correctly
+
+3. **Prompt Optimization Strategy** (Token Management)
+   **Option 1: Token-Optimized Single Prompt** (RECOMMENDED)
+   - Compress UNIFIED_SYSTEM_PROMPT.md to ~1000 tokens
+   - Use category codes instead of full descriptions
+   - Single-line examples only
+
+   **Option 2: Specialized Multi-Agent**
+   - Platform Agent (Categories 8, 10)
+   - Contract Agent (Categories 3-5, 12-14)
+   - Technical Agent (Categories 6, 17-19)
+   - Scope Agent (Category 20)
+
+   **Option 3: Progressive Multi-Batch**
+   - Batch 1: Quick triage (Categories 1-5)
+   - Batch 2: Technical assessment (Categories 6-15)
+   - Batch 3: Capability verification (Categories 16-20)
+
+4. **Verify New Logic**
+   - Test Category 20 SCOPE with CLS/PBL examples
+   - Verify Contract Aggressor/Red Air patterns
+   - Test cFolder access detection (Category 16)
+
+#### Files Needing Updates:
+```
+decision_sanitizer.py         # Line 250-295: Update _normalize() for Sentence Case
+enhanced_output_manager.py    # Lines 78, 210, 492-494, etc: Handle Sentence Case
+pipeline_output_manager.py    # Check decision format handling
+ui_service/app.py            # Verify display of Sentence Case
+```
 
 ## QUICK STATUS CHECK
 Run these commands to verify everything works:
