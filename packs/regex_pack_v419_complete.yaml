@@ -86,6 +86,30 @@ faa_8130_airworthiness_patterns:
     - (?i)\bARC\b
     - (?i)\bEASA[\s-]*Form[\s-]*1\b
 
+# FAA Part 145 repair station patterns (POSITIVE - these are GO)
+faa_part_145_patterns:
+  scoring_weight: -90  # Negative weight = positive indicator
+  patterns:
+    # Part 145 specific patterns
+    - (?i)\bany[\s\-]*FAA[\s\-]*(?:Part[\s\-]*)?145[\s\-]*(?:certified|repair)
+    - (?i)\bFAA[\s\-]*(?:Part[\s\-]*)?145[\s\-]*(?:certified|repair)[\s\-]*(?:station|shop|facility)
+    - (?i)\b(?:Part[\s\-]*)?145[\s\-]*(?:repair[\s\-]*station|shop)[\s\-]*capable
+    - (?i)\b(?:Part[\s\-]*)?145[\s\-]*(?:certified|approved)[\s\-]*(?:and|with)[\s\-]*(?:capable|able)
+    - (?i)\bany[\s\-]*(?:Part[\s\-]*)?145[\s\-]*shop[\s\-]*(?:that|which)[\s\-]*can
+    - (?i)\b(?:Part[\s\-]*)?145[\s\-]*MRO
+    - (?i)\bFAA[\s\-]*repair[\s\-]*station[\s\-]*capable[\s\-]*of[\s\-]*(?:producing|issuing)[\s\-]*8130
+    - (?i)\b(?:Part[\s\-]*)?145[\s\-]*capable[\s\-]*of[\s\-]*8130
+    - (?i)\bany[\s\-]*FAA[\s\-]*certified[\s\-]*repair[\s\-]*station
+    - (?i)\bany[\s\-]*FAA[\s\-]*repair[\s\-]*station[\s\-]*(?:that|which)[\s\-]*can[\s\-]*(?:produce|issue|provide)[\s\-]*8130
+    # General 8130-3 capability patterns (not tied to Part 145)
+    - (?i)\bany(?:one)?[\s\-]*capable[\s\-]*of[\s\-]*(?:producing|providing|issuing)[\s\-]*(?:an[\s\-]*)?(?:FAA[\s\-]*)?8130[\s\-]*3
+    - (?i)\bany(?:one)?[\s\-]*(?:who[\s\-]*)?can[\s\-]*(?:produce|provide|issue)[\s\-]*(?:an[\s\-]*)?(?:FAA[\s\-]*)?8130[\s\-]*3
+    - (?i)\b(?:vendor|supplier|contractor|source)s?[\s\-]*capable[\s\-]*of[\s\-]*(?:producing|providing|issuing)[\s\-]*8130[\s\-]*3
+    - (?i)\bwith[\s\-]*(?:the[\s\-]*)?capability[\s\-]*to[\s\-]*(?:produce|provide|issue)[\s\-]*8130[\s\-]*3
+    - (?i)\bmust[\s\-]*be[\s\-]*able[\s\-]*to[\s\-]*(?:produce|provide|issue)[\s\-]*(?:FAA[\s\-]*)?8130[\s\-]*3
+    - (?i)\beligible[\s\-]*if[\s\-]*(?:they[\s\-]*)?can[\s\-]*(?:produce|provide)[\s\-]*8130[\s\-]*3
+    - (?i)\b(?:all|any)[\s\-]*(?:source|vendor|contractor)s?[\s\-]*with[\s\-]*8130[\s\-]*3[\s\-]*capability
+
 # Commercial and refurbished positive
 commercial_item_patterns:
   scoring_weight: 80
@@ -171,14 +195,21 @@ sole_source_patterns:
     - (?i)\bsingle[\s\-]*source
     - (?i)\bexclusive[\s\-]*source
     - (?i)\bno[\s\-]*other[\s\-]*source
+    - (?i)\bis[\s\-]*the[\s\-]*only[\s\-]*known[\s\-]*source
+    - (?i)\bonly[\s\-]*known[\s\-]*source
+    - (?i)\b[\w\s&,.\-]+[\s\-]*is[\s\-]*the[\s\-]*only[\s\-]*(?:known[\s\-]*)?source
 
 intent_to_award_patterns:
   scoring_weight: 95
   patterns:
-    - (?i)\bintent[\s\-]*to[\s\-]*award
-    - (?i)\bintend[\s\-]*to[\s\-]*award
-    - (?i)\bintention[\s\-]*to[\s\-]*award
-    - (?i)\bdirect[\s\-]*award
+    # Must have a company name - look for patterns with proper nouns, Inc, LLC, Corp, etc.
+    - (?i)\bintent[\s\-]*to[\s\-]*award[\s\-]*to[\s\-]*[A-Z][\w\s&,.\-]*(?:Inc|LLC|Corp|Company|Corporation|L\.L\.C\.|Ltd|Limited|Industries|Systems|Technologies|Group)
+    - (?i)\bintends[\s\-]*to[\s\-]*award[\s\-]*to[\s\-]*[A-Z][\w\s&,.\-]*(?:Inc|LLC|Corp|Company|Corporation|L\.L\.C\.|Ltd|Limited|Industries|Systems|Technologies|Group)
+    - (?i)\bintention[\s\-]*to[\s\-]*award[\s\-]*to[\s\-]*[A-Z][\w\s&,.\-]*(?:Inc|LLC|Corp|Company|Corporation|L\.L\.C\.|Ltd|Limited|Industries|Systems|Technologies|Group)
+    - (?i)\bdirect[\s\-]*award[\s\-]*to[\s\-]*[A-Z][\w\s&,.\-]*(?:Inc|LLC|Corp|Company|Corporation|L\.L\.C\.|Ltd|Limited|Industries|Systems|Technologies|Group)
+    # Also catch specific company names in quotes or with clear proper noun patterns
+    - (?i)\bintent[\s\-]*to[\s\-]*award[\s\-]*to[\s\-]*"[^"]+
+    - (?i)\bintends[\s\-]*to[\s\-]*negotiate[\s\-]*with[\s\-]*[A-Z][\w\s&,.\-]*(?:Inc|LLC|Corp|Company|Corporation|L\.L\.C\.|Ltd|Limited)
 
 # Approved source restrictions
 approved_source_only_patterns:
@@ -206,6 +237,9 @@ tdp_negative_patterns:
     - (?i)\bproprietary[\s\-]*drawings
     - (?i)\bvendor[\s\-]*unique
     - (?i)\breverse[\s\-]*engineering[\s\-]*prohibited
+    - (?i)\breverse[\s\-]*engineering[\s\-]*not[\s\-]*feasible
+    - (?i)\breverse[\s\-]*engineering[\s\-]*not[\s\-]*economically[\s\-]*feasible
+    - (?i)\breverse[\s\-]*engineering[\s\-]*is[\s\-]*not[\s\-]*(?:economically[\s\-]*)?feasible
     - (?i)\bno[\s\-]*C[\s\-]*folder
 
 # Military-only platforms
@@ -213,11 +247,30 @@ military_platform_patterns:
   scoring_weight: 95
   patterns:
     # Fighters
+    - (?i)\bF[\s\-]*5[A-Z]?\b
     - (?i)\bF[\s\-]*15[A-Z]?\b
     - (?i)\bF[\s\-]*16[A-Z]?\b
     - (?i)\bF[\s\-]*18[A-Z]?\b
     - (?i)\bF[\s\-]*22[A-Z]?\b
     - (?i)\bF[\s\-]*35[A-Z]?\b
+    - (?i)\bF[\s\-]*47[A-Z]?\b
+
+    # Contract Aggressor/Red Air
+    - (?i)\bA[\s\-]*4[A-Z]?\b(?![\s\-]*paper)
+    - (?i)\bA[\s\-]*6[A-Z]?\b
+    - (?i)\bA[\s\-]*7[A-Z]?\b
+    - (?i)\bF[\s\-]*4[A-Z]?\b
+    - (?i)\bF[\s\-]*14[A-Z]?\b
+    - (?i)\bF[\s\-]*111[A-Z]?\b
+    - (?i)\bMiG[\s\-]*15\b
+    - (?i)\bMiG[\s\-]*17\b
+    - (?i)\bMiG[\s\-]*21\b
+    - (?i)\bMiG[\s\-]*23\b
+    - (?i)\bMiG[\s\-]*28\b
+    - (?i)\bMiG[\s\-]*29\b
+    - (?i)\bSu[\s\-]*27\b
+    - (?i)\bSukhoi[\s\-]*27\b
+    - (?i)\bL[\s\-]*39\b
     
     # Bombers
     - (?i)\bB[\s\-]*1[A-Z]?\b
@@ -229,6 +282,12 @@ military_platform_patterns:
     - (?i)\bA[\s\-]*10[A-Z]?\b
     - (?i)\bAC[\s\-]*130[A-Z]?\b
     - (?i)\bMC[\s\-]*130[A-Z]?\b
+    - (?i)\bA/T[\s\-]*37[A-Z]?\b
+
+    # Military Trainers
+    - (?i)\bT[\s\-]*7[A-Z]?\b
+    - (?i)\bT[\s\-]*37[A-Z]?\b
+    - (?i)\bT[\s\-]*38[A-Z]?\b
     
     # Military helicopters
     - (?i)\bAH[\s\-]*64[A-Z]?\b
@@ -355,8 +414,37 @@ subcontracting_prohibited_patterns:
     - (?i)\ball[\s\-]*work[\s\-]*performed[\s\-]*by[\s\-]*prime
     - (?i)\bdirect[\s\-]*manufacturer[\s\-]*only
     - (?i)\bmanufacturer[\s\-]*direct
+
+# Single unit detection (for subcontracting exception - Contact CO case)
+single_unit_patterns:
+  scoring_weight: 0  # Not a knockout by itself
+  patterns:
+    - (?i)\b(?:qty|quantity)[\s:\-]*(?:0*1|one)\b
+    - (?i)\b1[\s\-]*(?:each|ea|unit)\b
+    - (?i)\bone[\s\-]*(?:each|ea|unit)\b
+    - (?i)\bsingle[\s\-]*unit\b
+    - (?i)\bsingle[\s\-]*item\b
+    - (?i)\bLRU\b  # Line Replaceable Unit
+    - (?i)\bSRU\b  # Shop Replaceable Unit
+    - (?i)\bline[\s\-]*replaceable[\s\-]*unit
+    - (?i)\bshop[\s\-]*replaceable[\s\-]*unit
     - (?i)\bno[\s\-]*brokers
     - (?i)\bno[\s\-]*middlemen
+
+# Managed repair patterns (for exchange unit suggestion - Contact CO case)
+managed_repair_patterns:
+  scoring_weight: 0  # Not a knockout by itself - Contact CO opportunity
+  patterns:
+    - (?i)\bmanaged[\s\-]*repair
+    - (?i)\bmanaged[\s\-]*refurbishment
+    - (?i)\bmanaged[\s\-]*overhaul
+    - (?i)\brepair[\s\-]*management
+    - (?i)\boverhaul[\s\-]*management
+    - (?i)\bturn[\s\-]*around[\s\-]*time
+    - (?i)\bTAT[\s\-]*requirement
+    - (?i)\brepair[\s\-]*turnaround
+    - (?i)\bexchange[\s\-]*program
+    - (?i)\brotable[\s\-]*pool
 
 # Other restrictions
 first_article_testing_patterns:
@@ -490,6 +578,22 @@ cad_patterns:
 drone_patterns:
   scoring_weight: 90
   patterns:
+    # Collaborative Combat Aircraft
+    - (?i)\bCollaborative[\s\-]*Combat[\s\-]*Aircraft\b
+    - (?i)\bCCA\b
+
+    # Specific military drones
+    - (?i)\bMQ[\s\-]*1[\s\-]*Predator\b
+    - (?i)\bMQ[\s\-]*9[\s\-]*Reaper\b
+    - (?i)\bRQ[\s\-]*4[\s\-]*Global[\s\-]*Hawk\b
+    - (?i)\bRQ[\s\-]*170[\s\-]*Sentinel\b
+    - (?i)\bMQ[\s\-]*4C[\s\-]*Triton\b
+    - (?i)\bMQ[\s\-]*8[\s\-]*Fire[\s\-]*Scout\b
+    - (?i)\bRQ[\s\-]*7[\s\-]*Shadow\b
+    - (?i)\bRQ[\s\-]*11[\s\-]*Raven\b
+    - (?i)\bRQ[\s\-]*20[\s\-]*Puma\b
+
+    # Generic patterns
     - (?i)\bMQ[\s\-]*\d+
     - (?i)\bRQ[\s\-]*\d+
     - (?i)\bmilitary[\s\-]*drone
@@ -562,4 +666,114 @@ milspec_patterns:
     - (?i)\bMIL[\s\-]*STD[\s\-]*\d+
     - (?i)\bMIL[\s\-]*SPEC[\s\-]*\d+
     - (?i)\bMIL[\s\-]*PRF[\s\-]*\d+
+
+# Category 16: IT System/Infrastructure Access Requirements
+it_system_access_patterns:
+  scoring_weight: 95
+  patterns:
+    # JEDMICS (Joint Engineering Data Management Information and Control System)
+    - (?i)\bJEDMICS[\s\-]*access[\s\-]*required
+    - (?i)\bmust[\s\-]*have[\s\-]*JEDMICS
+    - (?i)\bpre[\s\-]*approved[\s\-]*in[\s\-]*JEDMICS
+    - (?i)\bJEDMICS[\s\-]*sponsor[\s\-]*required
+
+    # ETIMS (Electronic Technical Information Management System)
+    - (?i)\bETIMS[\s\-]*access[\s\-]*required
+    - (?i)\bmust[\s\-]*have[\s\-]*ETIMS
+    - (?i)\bpre[\s\-]*approved[\s\-]*in[\s\-]*ETIMS
+    - (?i)\bETIMS[\s\-]*registration[\s\-]*required
+
+    # cFolders
+    - (?i)\bcFolders[\s\-]*access[\s\-]*required
+    - (?i)\bmust[\s\-]*have[\s\-]*cFolders
+    - (?i)\bcFolders[\s\-]*with[\s\-]*sponsor
+    - (?i)\bsponsor[\s\-]*only[\s\-]*cFolders
+
+    # DLA EProcurement
+    - (?i)\bDLA[\s\-]*EProcurement[\s\-]*pre[\s\-]*certification
+    - (?i)\bEProcurement[\s\-]*certified[\s\-]*vendor
+    - (?i)\bmust[\s\-]*be[\s\-]*EProcurement[\s\-]*certified
+
+    # Generic IT system restrictions
+    - (?i)\bpre[\s\-]*approval[\s\-]*in[\s\-]*(?:government|agency)[\s\-]*(?:IT|system)
+    - (?i)\bmust[\s\-]*be[\s\-]*pre[\s\-]*approved[\s\-]*in[\s\-]*system
+    - (?i)\bsystem[\s\-]*access[\s\-]*not[\s\-]*open[\s\-]*to[\s\-]*new[\s\-]*vendors
+    - (?i)\bsponsor[\s\-]*required[\s\-]*for[\s\-]*system[\s\-]*access
+    - (?i)\bexisting[\s\-]*system[\s\-]*access[\s\-]*required
+    - (?i)\bmust[\s\-]*currently[\s\-]*have[\s\-]*access
+
+# Category 19: Native CAD/CAM Format Requirements
+native_cad_format_patterns:
+  scoring_weight: 90
+  patterns:
+    # Native format requirements
+    - (?i)\bnative[\s\-]*(?:CAD|CAM)[\s\-]*format[\s\-]*required
+    - (?i)\bmust[\s\-]*submit[\s\-]*native[\s\-]*files
+    - (?i)\bproprietary[\s\-]*format[\s\-]*required
+    - (?i)\boriginal[\s\-]*CAD[\s\-]*files[\s\-]*required
+
+    # Specific CAD software requirements
+    - (?i)\bSolidWorks[\s\-]*native[\s\-]*files
+    - (?i)\bmust[\s\-]*submit[\s\-]*SolidWorks
+    - (?i)\bCATIA[\s\-]*native[\s\-]*files
+    - (?i)\bmust[\s\-]*submit[\s\-]*CATIA
+    - (?i)\bCreo[\s\-]*native[\s\-]*files
+    - (?i)\bProE[\s\-]*native[\s\-]*files
+    - (?i)\bmust[\s\-]*submit[\s\-]*(?:Creo|ProE|Pro/E)
+    - (?i)\bNX[\s\-]*native[\s\-]*files
+    - (?i)\bUnigraphics[\s\-]*native[\s\-]*files
+    - (?i)\bmust[\s\-]*submit[\s\-]*(?:NX|Unigraphics)
+    - (?i)\bAutoCAD[\s\-]*native[\s\-]*files
+    - (?i)\bmust[\s\-]*submit[\s\-]*AutoCAD[\s\-]*DWG
+
+    # Digital thread and model-based requirements
+    - (?i)\bdigital[\s\-]*thread[\s\-]*submission[\s\-]*required
+    - (?i)\bmodel[\s\-]*based[\s\-]*definition[\s\-]*required
+    - (?i)\bMBD[\s\-]*required
+    - (?i)\b3D[\s\-]*model[\s\-]*deliverables[\s\-]*in[\s\-]*proprietary
+
+    # Restrictions on neutral formats
+    - (?i)\bcannot[\s\-]*use[\s\-]*neutral[\s\-]*formats
+    - (?i)\bno[\s\-]*STEP[\s\-]*files[\s\-]*accepted
+    - (?i)\bno[\s\-]*IGES[\s\-]*files[\s\-]*accepted
+    - (?i)\bneutral[\s\-]*formats[\s\-]*not[\s\-]*acceptable
+
+# Category 18: Direct-to-Government Maintenance/Warranty Obligations
+depot_warranty_obligation_patterns:
+  scoring_weight: 90
+  patterns:
+    # Depot support requirements
+    - (?i)\bdepot[\s\-]*level[\s\-]*repair[\s\-]*required
+    - (?i)\bdepot[\s\-]*support[\s\-]*required
+    - (?i)\bvendor[\s\-]*must[\s\-]*establish[\s\-]*repair[\s\-]*depot
+    - (?i)\bestablish[\s\-]*depot[\s\-]*capability
+    - (?i)\bdepot[\s\-]*maintenance[\s\-]*responsibility
+
+    # Direct warranty obligations
+    - (?i)\bwarranty[\s\-]*support[\s\-]*required[\s\-]*directly[\s\-]*from[\s\-]*vendor
+    - (?i)\bvendor[\s\-]*must[\s\-]*perform[\s\-]*in[\s\-]*warranty[\s\-]*support
+    - (?i)\bdirect[\s\-]*warranty[\s\-]*obligation
+    - (?i)\bvendor[\s\-]*owned[\s\-]*warranty[\s\-]*obligation
+    - (?i)\bno[\s\-]*subcontracting[\s\-]*of[\s\-]*warranty
+
+    # Lifecycle and sustainment
+    - (?i)\blifecycle[\s\-]*management[\s\-]*responsibility
+    - (?i)\bdirect[\s\-]*sustainment[\s\-]*services[\s\-]*required
+    - (?i)\blifecycle[\s\-]*support[\s\-]*contractor
+    - (?i)\bperformance[\s\-]*based[\s\-]*logistics
+    - (?i)\bPBL[\s\-]*contractor[\s\-]*required
+
+    # On-site maintenance requirements
+    - (?i)\bon[\s\-]*site[\s\-]*maintenance[\s\-]*required[\s\-]*no[\s\-]*subcontractors
+    - (?i)\bvendor[\s\-]*personnel[\s\-]*on[\s\-]*site[\s\-]*required
+    - (?i)\bdirect[\s\-]*field[\s\-]*support[\s\-]*required
+    - (?i)\bfield[\s\-]*service[\s\-]*representatives[\s\-]*required
+    - (?i)\bFSR[\s\-]*required
+    - (?i)\btechnical[\s\-]*representatives[\s\-]*on[\s\-]*site
+
+    # Direct service obligations
+    - (?i)\bmust[\s\-]*provide[\s\-]*direct[\s\-]*support
+    - (?i)\bno[\s\-]*third[\s\-]*party[\s\-]*maintenance
+    - (?i)\bvendor[\s\-]*direct[\s\-]*maintenance[\s\-]*only
+    - (?i)\bprime[\s\-]*must[\s\-]*perform[\s\-]*maintenance
     - (?i)\bmilitary[\s\-]*specification

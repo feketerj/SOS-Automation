@@ -241,8 +241,8 @@ class MistralSOSClassifier:
             
             # Parse classification - handle JSON format
             classification = "FURTHER_ANALYSIS"
-            
-            # First try to parse as JSON (model often returns JSON)
+
+            # First try to parse as JSON (agent should return JSON)
             try:
                 import json
                 # Extract JSON from response
@@ -254,18 +254,18 @@ class MistralSOSClassifier:
                     start = full_response.index("{")
                     end = full_response.rindex("}") + 1
                     json_str = full_response[start:end]
-                
+
                 parsed = json.loads(json_str)
-                
-                # Get result from JSON
-                result_field = parsed.get("result", "").upper()
-                if "NO-GO" in result_field or "NO_GO" in result_field:
+
+                # Get result from JSON - check 'decision' field first, then 'result'
+                decision_field = parsed.get("decision", parsed.get("result", "")).upper()
+                if "NO-GO" in decision_field or "NO_GO" in decision_field:
                     classification = "NO-GO"
-                elif "GO" in result_field and "NO" not in result_field:
+                elif "GO" in decision_field and "NO" not in decision_field:
                     classification = "GO"
-                elif "INDETERMINATE" in result_field:
+                elif "INDETERMINATE" in decision_field:
                     classification = "INDETERMINATE"
-                elif "CONTACT" in result_field:
+                elif "CONTACT" in decision_field:
                     classification = "CONTACT_CO"
                     
             except:
@@ -281,11 +281,13 @@ class MistralSOSClassifier:
             
             # Extract short reasoning for CSV
             short_reasoning = ""
-            
+
             # Try to get reasoning from parsed JSON first
             try:
                 if 'parsed' in locals():
                     short_reasoning = parsed.get("rationale", "") or parsed.get("reasoning", "")
+                    if not short_reasoning and "knockout_logic" in parsed:
+                        short_reasoning = parsed.get("knockout_logic", "")
                     if not short_reasoning and "knock_out_reasons" in parsed:
                         reasons = parsed.get("knock_out_reasons", [])
                         if reasons:
@@ -342,64 +344,119 @@ class MistralSOSClassifier:
             # The model is already trained on military platforms
             # Let it make the decision based on full context
             
-            # Build unified Agent schema output IN ORDER
+            # Extract metadata if present
+            metadata = opportunity.get('metadata', {})
+
+            # Build result with EXACT schema
+            solicitation_id = opportunity.get('solicitation_id', opportunity.get('source_id', metadata.get('source_id', '')))
+
             result = {
-                # Core identification fields
-                "solicitation_id": opp.get('solicitation_id', opp.get('source_id', '')),
-                "solicitation_title": opp.get('title', ''),
-                "summary": opp.get('ai_summary', opp.get('description_text', ''))[:500] if opp.get('ai_summary') or opp.get('description_text') else '',
+                # EXACT schema fields
+                "HeaderLine": f"{classification}-{solicitation_id}",
+                "SolicitationTitle": opportunity.get('title', metadata.get('title', '')),
+                "SolicitationNumber": solicitation_id,
+                "MDSPlatformCommercialDesignation": None,  # Will be populated from parsed response
+                "TriageDate": datetime.now().strftime('%m-%d-%Y'),
+                "DatePosted": metadata.get('posted_date', ''),
+                "DateResponsesSubmissionsDue": metadata.get('due_date', ''),
+                "DaysOpen": None,  # Will be calculated from parsed response
+                "RemainingDays": None,  # Will be calculated from parsed response
+                "PotentialAward": {
+                    "Exceeds25K": None,
+                    "Range": None
+                },
+                "FinalRecommendation": short_reasoning,
+                "Scope": None,
+                "KnockoutLogic": None,
+                "SOSPipelineNotes": pipeline_title,  # Already formatted correctly
+                "QuestionsForCO": [],
 
-                # Decision fields
-                "result": classification,  # Changed from 'classification' to 'result'
-                "knock_out_reasons": [],  # Extract from model response if available
-                "exceptions": [],  # Extract from model response if available
-                "special_action": "",  # Extract from model response if available
-                "rationale": short_reasoning,  # Changed from 'reasoning' to 'rationale'
-                "recommendation": "",  # Extract from model response if available
-
-                # URL fields
-                "sam_url": opp.get('source_path', ''),
-                "hg_url": f"https://www.highergov.com/opportunity/{opp.get('opp_key', '')}" if opp.get('opp_key') else '',
-
-                # Pipeline title
+                # Backward compatibility fields (for existing code)
+                "decision": classification,
+                "result": classification,
+                "rationale": short_reasoning,
+                "sam_url": opportunity.get('source_path', metadata.get('source_path', '')),
+                "hg_url": opportunity.get('highergov_url', metadata.get('path', f"https://www.highergov.com/opportunity/{metadata.get('source_id', '')}")),
                 "sos_pipeline_title": pipeline_title,
-
-                # Additional fields for backward compatibility
-                "detailed_analysis": detailed_analysis,  # Full model response
-                "full_model_response": full_response,  # Complete raw response
-                "confidence": confidence,
+                "detailed_analysis": detailed_analysis,
+                "full_model_response": full_response,
                 "model_used": self.model_id,
                 "regex_decision": regex_result.decision.value,
                 "regex_blocker": regex_result.primary_blocker
             }
 
-            # Try to extract structured fields from model response
+            # Try to extract EXACT schema fields from model response
             try:
                 if 'parsed' in locals() and parsed:
-                    # Extract knock_out_reasons if present
-                    if 'knock_out_reasons' in parsed:
-                        result['knock_out_reasons'] = parsed['knock_out_reasons']
-                    # Extract exceptions if present
-                    if 'exceptions' in parsed:
-                        result['exceptions'] = parsed['exceptions']
-                    # Extract special_action if present
-                    if 'special_action' in parsed:
-                        result['special_action'] = parsed['special_action']
-                    # Extract recommendation if present
-                    if 'recommendation' in parsed:
-                        result['recommendation'] = parsed['recommendation']
+                    # Extract HeaderLine
+                    if 'HeaderLine' in parsed:
+                        result['HeaderLine'] = parsed['HeaderLine']
+
+                    # Extract MDSPlatformCommercialDesignation
+                    if 'MDSPlatformCommercialDesignation' in parsed:
+                        result['MDSPlatformCommercialDesignation'] = parsed['MDSPlatformCommercialDesignation']
+
+                    # Extract dates
+                    if 'DatePosted' in parsed:
+                        result['DatePosted'] = parsed['DatePosted']
+                    if 'DateResponsesSubmissionsDue' in parsed:
+                        result['DateResponsesSubmissionsDue'] = parsed['DateResponsesSubmissionsDue']
+                    if 'DaysOpen' in parsed:
+                        result['DaysOpen'] = parsed['DaysOpen']
+                    if 'RemainingDays' in parsed:
+                        result['RemainingDays'] = parsed['RemainingDays']
+
+                    # Extract PotentialAward
+                    if 'PotentialAward' in parsed and isinstance(parsed['PotentialAward'], dict):
+                        result['PotentialAward'] = parsed['PotentialAward']
+
+                    # Extract FinalRecommendation
+                    if 'FinalRecommendation' in parsed:
+                        result['FinalRecommendation'] = parsed['FinalRecommendation']
+                        result['rationale'] = parsed['FinalRecommendation']  # Backward compat
+
+                    # Extract Scope
+                    if 'Scope' in parsed:
+                        result['Scope'] = parsed['Scope']
+
+                    # Extract KnockoutLogic
+                    if 'KnockoutLogic' in parsed:
+                        result['KnockoutLogic'] = parsed['KnockoutLogic']
+
+                    # Extract SOSPipelineNotes
+                    if 'SOSPipelineNotes' in parsed:
+                        result['SOSPipelineNotes'] = parsed['SOSPipelineNotes']
+                        result['sos_pipeline_title'] = parsed['SOSPipelineNotes']  # Backward compat
+
+                    # Extract QuestionsForCO
+                    if 'QuestionsForCO' in parsed:
+                        result['QuestionsForCO'] = parsed['QuestionsForCO']
+
+                    # Also handle snake_case versions for compatibility
+                    if 'potential_award' in parsed and isinstance(parsed['potential_award'], dict):
+                        result['PotentialAward'] = parsed['potential_award']
+                    if 'final_recommendation' in parsed:
+                        result['FinalRecommendation'] = parsed['final_recommendation']
+                        result['rationale'] = parsed['final_recommendation']
+                    if 'questions_for_co' in parsed:
+                        result['QuestionsForCO'] = parsed['questions_for_co']
             except:
                 pass
 
             return result
             
         except Exception as e:
+            # Extract metadata if present
+            metadata = opportunity.get('metadata', {})
+
             # Fallback with full error context - use unified schema
             return {
                 # Core identification fields
-                "solicitation_id": opp.get('solicitation_id', opp.get('source_id', '')),
-                "solicitation_title": opp.get('title', ''),
-                "summary": opp.get('ai_summary', opp.get('description_text', ''))[:500] if opp.get('ai_summary') or opp.get('description_text') else '',
+                "solicitation_id": opportunity.get('solicitation_id', opportunity.get('source_id', metadata.get('source_id', ''))),
+                "solicitation_title": opportunity.get('title', metadata.get('title', '')),
+                "summary": (opportunity.get('ai_summary', '') or
+                           opportunity.get('description_text', '') or
+                           metadata.get('description_text', ''))[:500],
 
                 # Decision fields
                 "result": self._map_decision(regex_result.decision),
@@ -410,8 +467,8 @@ class MistralSOSClassifier:
                 "recommendation": "Model API error - using regex fallback",
 
                 # URL fields
-                "sam_url": opp.get('source_path', ''),
-                "hg_url": f"https://www.highergov.com/opportunity/{opp.get('opp_key', '')}" if opp.get('opp_key') else '',
+                "sam_url": opportunity.get('source_path', metadata.get('source_path', '')),
+                "hg_url": opportunity.get('highergov_url', metadata.get('path', f"https://www.highergov.com/opportunity/{metadata.get('source_id', '')}")),
 
                 # Pipeline title
                 "sos_pipeline_title": pipeline_title,
@@ -425,42 +482,101 @@ class MistralSOSClassifier:
             }
     
     def _format_for_model(self, opp: Dict, regex_result) -> str:
-        """Format in training style"""
-        
-        title = opp.get('title', 'N/A')
-        agency = opp.get('agency', 'N/A')
-        naics = opp.get('naics', 'N/A')
-        psc = opp.get('psc', 'N/A')
-        
-        # Get FULL document text - model needs to see everything!
-        document_text = opp.get('text', '') or opp.get('description', '')
+        """Format in training style with ALL metadata"""
+
+        # Extract metadata if present
+        metadata = opp.get('metadata', {})
+
+        # Primary fields
+        title = opp.get('title', metadata.get('title', 'N/A'))
+        agency = opp.get('agency', metadata.get('agency', metadata.get('issuing_agency', 'N/A')))
+
+        # Contract details
+        source_id = opp.get('source_id', metadata.get('source_id', 'N/A'))
+        notice_type = metadata.get('notice_type', 'N/A')
+        contract_type = metadata.get('contract_type', 'N/A')
+        set_aside = metadata.get('set_aside', 'None')
+
+        # Codes
+        naics = opp.get('naics', metadata.get('naics_code', 'N/A'))
+        psc = opp.get('psc', metadata.get('psc_code', 'N/A'))
+
+        # Dates
+        posted_date = metadata.get('posted_date', 'N/A')
+        due_date = metadata.get('due_date', 'N/A')
+
+        # Location
+        pop_city = metadata.get('pop_city', '')
+        pop_state = metadata.get('pop_state', '')
+        pop_country = metadata.get('pop_country', '')
+        place_of_performance = f"{pop_city}, {pop_state}, {pop_country}".strip(', ') if any([pop_city, pop_state, pop_country]) else 'N/A'
+
+        # Get FULL document text - check all possible fields
+        document_text = (opp.get('document_text', '') or
+                        opp.get('text', '') or
+                        opp.get('full_text', '') or
+                        opp.get('description', '') or
+                        metadata.get('description_text', ''))
+
         # Send up to 400K chars (about 100 pages) to model
         excerpt = document_text[:400000] if document_text else "No document content"
-        
-        # Match training format
+
+        # Match training format with enhanced metadata and JSON output requirement
         content = f"""Context: You are an expert assessment specialist for Source One Spares (SOS), a small organic supplier specializing in surplus military and aviation parts.
 
-Question: Analyze this government contracting opportunity for Source One Spares:
+You must return your assessment as a JSON object using this EXACT schema:
+
+{{
+  "AssessmentHeaderLine": "[Go/No-Go]-{source_id}",
+  "SolicitationTitle": "{title}",
+  "SolicitationNumber": "{source_id}",
+  "MDSPlatformCommercialDesignation": "[MDS/platform type, NA/Indeterminate, e.g., P-8 Poseidon | B737 | Commercial Item: Elevator (or) KC-46/B767 | Noncommercial: Refueling Boom (or) Indeterminate MDS | Commercial Item: AMSC Z Aircraft Tire]",
+  "TriageDate": "{datetime.now().strftime('%m-%d-%Y')}",
+  "DatePosted": "{posted_date}",
+  "DateResponsesSubmissionsDue": "{due_date}",
+  "DaysOpen": [calculate exact number of days between posted and due],
+  "RemainingDays": [calculate exact number of days from today to due],
+  "PotentialAward": {{
+    "Exceeds25K": "Yes/No, with reasoning",
+    "Range": "Inferred range with logic, e.g., $100K-$500K based on component complexity"
+  }},
+  "FinalRecommendation": "Go or No-Go, with complete explanation citing knockout criteria, exact government quotes, page numbers, etc.",
+  "Scope": "Purchase, Manufacture, or Managed Repair with inference and concise proof",
+  "KnockoutLogic": "Full assessment for all 20 categories: Category 1: [timing assessment]. Category 2: [domain assessment]. Category 3: [security assessment]. Category 4: [set-aside assessment]. Category 5: [source restrictions assessment]. Category 6: [technical data assessment]. Category 7: [export control assessment]. Category 8: [AMC/AMSC assessment]. Category 9: [SAR assessment]. Category 10: [platform assessment]. Category 11: [procurement assessment]. Category 12: [competition assessment]. Category 13: [subcontracting assessment]. Category 14: [contract vehicles assessment]. Category 15: [experimental/R&D assessment]. Category 16: [IT access assessment]. Category 17: [certifications assessment]. Category 18: [warranty/depot assessment]. Category 19: [CAD/CAM assessment]. Category 20: [scope assessment].",
+  "SOSPipelineNotes": "PN: [part number or NA] | Qty: [quantity or NA] | Condition: [new/surplus/overhaul/refurb/NA] | MDS: [aircraft type or NA] | {source_id} | [brief description of work]",
+  "QuestionsForCO": [
+    "List relevant questions if any, otherwise empty array"
+  ]
+}}
+
+Remember: You must make a final Go or No-Go decision. You cannot return Indeterminate.
 
 Title: {title}
+Solicitation ID: {source_id}
 Agency: {agency}
-NAICS: {naics}
-PSC: {psc}
+Notice Type: {notice_type}
+Contract Type: {contract_type}
+Set-Aside: {set_aside}
+NAICS Code: {naics}
+PSC Code: {psc}
+Place of Performance: {place_of_performance}
+Posted Date: {posted_date}
+Due Date: {due_date}
 
 Requirements excerpt: {excerpt}"""
-        
+
         return content
     
     def _map_decision(self, decision: Decision) -> str:
         """Map regex decision"""
         if decision == Decision.GO:
-            return "GO"
+            return "Go"
         elif decision == Decision.NO_GO:
-            return "NO-GO"
+            return "No-Go"
         elif decision == Decision.FURTHER_ANALYSIS:
-            return "FURTHER_ANALYSIS"
+            return "Further Analysis"
         else:
-            return "CONTACT_CO"
+            return "Contact CO"
 
 if __name__ == "__main__":
     print("Testing ULTIMATE Mistral Connector...")
