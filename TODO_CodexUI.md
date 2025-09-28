@@ -1,8 +1,38 @@
-# Codex UI To-Do (Tonight) — Safe, Modular, Do-No-Harm
+# TODO: 20-Stage Pipeline Implementation
 
-**✅ UI FIXED (Sept 27): Streamlit UI now fully operational. Replaced subprocess with direct Python imports. See CRITICAL_FIXES_LOG.md for details.**
+**🚀 NEW PRIORITY (Sept 28): Complete 20-stage pipeline architecture designed. Ready for implementation.**
 
-This plan is designed to be incremental, reversible, and non‑disruptive. No pipeline logic changes. Favor read‑only tooling and non‑network unit tests. Defaults remain unchanged for any optional features.
+## IMMEDIATE: Build Multi-Stage Pipeline (Priority 1)
+
+### Phase 1: Foundation (Next Session)
+- [ ] Create `multi_stage_pipeline.py` - Main orchestrator class
+- [ ] Create `context_accumulator.py` - Context passing between stages
+- [ ] Create `stage_processors/` directory structure
+- [ ] Implement base `Stage` class with batch/agent pairing
+
+### Phase 2: First 3 Stages (Proof of Concept)
+- [ ] Implement `stage_01_timing.py` - Date comparison
+- [ ] Implement `stage_02_set_asides.py` - Set-aside matching
+- [ ] Implement `stage_03_security.py` - Clearance detection
+- [ ] Add NO-GO QC agent for these stages
+
+### Phase 3: Testing & Validation
+- [ ] Test with 20 known opportunities
+- [ ] Validate early termination logic
+- [ ] Verify context passing works correctly
+- [ ] Check confidence thresholds
+
+### Phase 4: Full Implementation (If PoC succeeds)
+- [ ] Build remaining 17 stages
+- [ ] Add Final GO QC agent
+- [ ] Implement report writers
+- [ ] Full pipeline testing
+
+## REFERENCE DOCUMENTS
+- `PRD_20_STAGE_COMPLETE_PIPELINE.md` - Complete architecture and all prompts
+- `HANDOFF_SEPTEMBER_28_2025.md` - Session summary and next steps
+
+## Previous Tasks (Completed/On Hold)
 
 ## 1) Testing (Priority 3)
 - ✅ COMPLETED: Added test_decision_sanitizer_edge_cases.py (6 tests)

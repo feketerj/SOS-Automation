@@ -45,24 +45,38 @@ Last sync: September 27, 2025, 11:20 AM (COMPLETE IMPLEMENTATION)
 - Outputs/metadata: Integrity snapshot hashes added to batch metadata and full processor metadata (diagnostic only).
 - Tests: 100% pass rate on validation suite; 40/47 pytest tests passing; comprehensive failure injection testing completed.
 
-## Next TODO Actions (Safe, Incremental)
+## Next TODO Actions - 20-STAGE PIPELINE IMPLEMENTATION
 
-Priority 3 — Testing
-- Move remaining non-network tests into `tests/` in small batches.
-- Add 4–6 focused unit tests (DecisionSanitizer and EnhancedOutputManager edge cases) to lift coverage safely.
+### PRIORITY 1 - New Multi-Stage Architecture (September 28, 2025)
+**Design Complete:** 20-stage cascade pipeline with paired Batch/Agent processors
+- Each of 20 knockout criteria gets dedicated stage
+- Linear processing with early termination on high-confidence NO-GO
+- Context accumulation between stages
+- Sliding confidence thresholds (99% for binary, 85% for business)
+- Cost: ~$25/year for 500 opportunities
 
-Priority 2 — Pipeline Integrity
-- Extend integrity checker to emit a short diff file (read-only) when drift is detected.
-- Add schema “diff summary” mode across runs (still read-only).
+**Implementation Plan:**
+1. Create base Stage class with batch/agent pairing
+2. Implement context accumulator for passing findings
+3. Build first 3 stages (TIMING, SET-ASIDES, SECURITY) as proof of concept
+4. Add NO-GO QC agent for verification
+5. Test with 20 known opportunities
+6. Expand to all 20 stages if successful
 
-Priority 2.3 — Decision Logic Validation
-- Use decision audit hotspots to identify categories/agencies with elevated disagreement; compile a markdown follow-up list (no code changes yet).
+**Key Files to Create:**
+- `multi_stage_pipeline.py` - Main orchestrator
+- `stage_processors/` - Directory for individual stage implementations
+- `context_accumulator.py` - Context passing between stages
+- `qc_agents.py` - NO-GO and GO verification agents
 
-Priority 4 — Performance (Opt-in)
-- Add a conservative, config-gated `max_pages` for smoke runs/collectors to bound inputs in tests and demos.
+**Reference Documents:**
+- `PRD_20_STAGE_COMPLETE_PIPELINE.md` - Complete architecture and prompts
+- `PRD_MULTI_STAGE_PIPELINE.md` - Initial 8-stage design (superseded)
 
-Priority 1 — Repo & Config
-- Maintain incremental test consolidation and doc updates; avoid moving orchestrators/e2e scripts.
+### Previous Priorities (On Hold)
+- Testing improvements
+- Pipeline integrity checks
+- Performance optimizations
 
 Notes for Next Agent
 - Preserve “Do No Harm”: avoid changes to pipeline logic; keep new features opt-in and read-only where possible.
