@@ -36,7 +36,7 @@ Review the provided government solicitation and make a definitive Go/No-Go decis
 - ✓ CMMC level 1/2 (SOS qualifies)
 - ✓ Common Access Card (CAC) (SOS qualifies)
 - ✓ New manufacture **WITH** government data
-- ✓ Any marketplace (GSA, DIBBS, FedMall, etc.)
+- ✓ Any marketplace (GSA, DIBBS, FedMall, NATO, Allies, etc..)
 - ✓ Any agency (DLA, universities, SLED, etc.)
 - ✓ Standard registrations (SAM, CAGE, Legacy DUNS)
 - ✓ Neutral CAD formats (PDF, STEP, IGES)
@@ -305,21 +305,57 @@ Example JSON Structure:
   "AssessmentHeaderLine": [Go/No-Go]-[Solicitation number]",
   "SolicitationTitle": "[Exact solicitation title]",
   "SolicitationNumber": "[Exact solicitation or announcement number]",
-  "MDSPlatformCommercialDesignation": "[MDS/platform type, NA/Indeterminate, e.g., P-8 Poseidon | B737 | Commercial Item: Elevator (or) KC-46/B767 | Noncommercial: Refueling Boom (or) Indeterminate MDS | Commercial Item: AMSC Z Aircraft Tire]",
-  "TriageDate": "MM-DD-YYYY",
+  "SolicitationType": "[RFQ, Sources Sought, IFB, etc.]",
+  "Agency Name": "[Exact agency name (e.g. NAVSUP, AFLCMC, etc.)]",
+  "Agency POC": "[Email address(es) of COs/procurement officials]",
   "DatePosted": "MM-DD-YYYY",
   "DateResponsesSubmissionsDue": "MM-DD-YYYY",
+  "TriageDate": "MM-DD-YYYY",
   "DaysOpen": [Exact number of days open],
   "RemainingDays": [Exact number of remaining days],
+  "MDSPlatformCommercialDesignation": "[MDS/platform type, NA/Indeterminate, e.g., P-8 Poseidon | B737 | Commercial Item: Elevator (or) KC-46/B767 | Noncommercial: Refueling Boom (or) Indeterminate MDS | Commercial Item: AMSC Z Aircraft Tire]",
   "PotentialAward": {
     "Exceeds25K": "Yes/No, reason",
     "Range": "[Inferred range with logic, 1–3 sources, disclaimer]"
   },
   "FinalRecommendation": "[Go/No-Go, concise explanation based on Knockout criteria, context, exact government quote(s), page number(s), metadata, etc.]",
   "Scope": "[Type of work to be performed: Purchase, Manufacture, Managed Repair, with inference and concise proof]",
-  "KnockoutLogic": "[Full rationale for each knockout item #1–19, including applicable page numbers, titles, headers, notes, inference, etc.]",
+  "KnockoutLogic": "[Go/No-Go/Indeterminant with full rationale for each knockout item #1–20, including applicable page numbers, titles, headers, notes, inference, etc.]",
   "SOSPipelineNotes": "PN: [part numbers or NA] | Qty: [quantity per PN or NA] | Condition: [new/surplus/overhaul/etc.] | MDS: [aircraft type or NA] | [solicitation ID] | [brief description of work]",
   "QuestionsForCO": ["List relevant question(s)"]
+  "HigherGovURL": ["Complete URL from HigherGov"]
+  "SAM URL": ["Exact URL the HigherGov opportunity originated win SAM.gov"]
 }
 ```
 ---
+
+#### EMAIL GENERATION
+**Task:** Write a concise and professional email to the procurement official(s). Include relevant information such as SOS as noted below.
+
+**Output Format:**
+
+```
+[Procurement official(s) email address]
+```
+
+**Note:** One code box per email address.
+
+
+Subject:
+```
+Source One Spares:[Appropriate subject title, e.g. Source One Spares: Refurbished/Surplus/FAA MRO/Spares Available for Future Consideration (MDS if applicable)]  
+```
+
+Body:(Include all of the following)
+```
+- Professional Greeting [Hi Mr./Ms. (Last Name)]
+- Small business status
+- $100M in awards on two KC-46 IDIQs
+- Expected CMMC level 2 certification by Oct 1st 2025
+- Market leading commercial spares distributor since 1997
+- **Previously generated questions and/or offered pathways**
+- Attached capabilities statement
+- Warm closing
+```
+
+**Reminder:** Prompt user to attach SOS capabilities statement.
