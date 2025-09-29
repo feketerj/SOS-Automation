@@ -60,7 +60,10 @@
       "Bash(move BATCH_RUN.py _ARCHIVED_RUNNERS_20250927)",
       "Bash(if exist:*)",
       "Bash(grep:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(mkdir:*)",
+      "Bash(del test_timing_debug.py)",
+      "Read(//c/**)"
     ],
     "deny": [],
     "ask": []

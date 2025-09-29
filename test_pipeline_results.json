@@ -1,0 +1,517 @@
+[
+  {
+    "opportunity_id": "TEST-001",
+    "title": "Commercial Aircraft Parts",
+    "final_decision": "GO",
+    "final_stage": "COMPLETE",
+    "stages_processed": 3,
+    "expected_outcome": "GO",
+    "expected_stage": "COMPLETE",
+    "test_passed": true,
+    "stage_results": [
+      {
+        "decision": "GO",
+        "confidence": 0.99,
+        "deadline_found": "2025-10-28 00:00",
+        "days_remaining": 29,
+        "evidence": [
+          "deadline: October 28"
+        ],
+        "rationale": "Deadline in 29 days",
+        "stage_name": "TIMING",
+        "stage_number": 1
+      },
+      {
+        "decision": "GO",
+        "confidence": 0.99,
+        "set_aside_types": [],
+        "set_aside_count": 0,
+        "evidence": [
+          "unrestricted"
+        ],
+        "rationale": "Explicitly stated as unrestricted/full and open competition",
+        "naics_info": null,
+        "stage_name": "SET-ASIDES",
+        "stage_number": 2
+      },
+      {
+        "decision": "GO",
+        "confidence": 0.95,
+        "clearance_level": null,
+        "has_facility_requirement": false,
+        "has_sap_requirement": false,
+        "evidence": [
+          "No security clearance requirements found"
+        ],
+        "rationale": "No security clearance or facility requirements detected",
+        "stage_name": "SECURITY",
+        "stage_number": 3
+      }
+    ],
+    "accumulated_context": {
+      "opportunity_id": "TEST-001",
+      "opportunity_title": "Commercial Aircraft Parts",
+      "stages_processed": 3,
+      "processing_time": 0.004672,
+      "summary": "Title: Commercial Aircraft Parts | TIMING: GO (Deadline in 29 days) | SET-ASIDES: GO (Explicitly stated as unrestricted/full and open co) | SECURITY: GO (No security clearance or facility requirements det)",
+      "decisions_made": [
+        {
+          "stage": "TIMING",
+          "decision": "GO",
+          "confidence": 0.99,
+          "timestamp": "2025-09-28T16:20:17.192456"
+        },
+        {
+          "stage": "SET-ASIDES",
+          "decision": "GO",
+          "confidence": 0.99,
+          "timestamp": "2025-09-28T16:20:17.193463"
+        },
+        {
+          "stage": "SECURITY",
+          "decision": "GO",
+          "confidence": 0.95,
+          "timestamp": "2025-09-28T16:20:17.195461"
+        }
+      ],
+      "key_findings": [
+        {
+          "stage": "TIMING",
+          "finding_type": "evidence",
+          "value": "deadline: October 28",
+          "evidence": "deadline: October 28"
+        },
+        {
+          "stage": "SET-ASIDES",
+          "finding_type": "evidence",
+          "value": "unrestricted",
+          "evidence": "unrestricted"
+        },
+        {
+          "stage": "SECURITY",
+          "finding_type": "evidence",
+          "value": "No security clearance requirements found",
+          "evidence": "No security clearance requirements found"
+        }
+      ],
+      "knockout_reasons": [],
+      "exceptions": [],
+      "flags": [],
+      "entities": {
+        "platforms": [],
+        "companies": [],
+        "certifications": [],
+        "codes": [],
+        "dates": [
+          "2025-10-28 00:00"
+        ],
+        "dollar_amounts": [],
+        "set_asides": [],
+        "clearance_levels": []
+      },
+      "final_decision": "INDETERMINATE"
+    }
+  },
+  {
+    "opportunity_id": "TEST-002",
+    "title": "Expired Opportunity",
+    "final_decision": "NO-GO",
+    "final_stage": "TIMING",
+    "stages_processed": 1,
+    "expected_outcome": "NO-GO",
+    "expected_stage": "TIMING",
+    "test_passed": true,
+    "stage_results": [
+      {
+        "decision": "NO-GO",
+        "confidence": 0.99,
+        "deadline_found": "2025-09-23 00:00",
+        "days_remaining": -6,
+        "evidence": [
+          "Proposals were due by September 23"
+        ],
+        "rationale": "Opportunity expired 6 days ago",
+        "stage_name": "TIMING",
+        "stage_number": 1
+      }
+    ],
+    "accumulated_context": {
+      "opportunity_id": "TEST-002",
+      "opportunity_title": "Expired Opportunity",
+      "stages_processed": 1,
+      "processing_time": 0.0,
+      "summary": "Title: Expired Opportunity | TIMING: NO-GO (Opportunity expired 6 days ago)",
+      "decisions_made": [
+        {
+          "stage": "TIMING",
+          "decision": "NO-GO",
+          "confidence": 0.99,
+          "timestamp": "2025-09-28T16:20:17.195970"
+        }
+      ],
+      "key_findings": [
+        {
+          "stage": "TIMING",
+          "finding_type": "evidence",
+          "value": "Proposals were due by September 23",
+          "evidence": "Proposals were due by September 23"
+        }
+      ],
+      "knockout_reasons": [
+        "TIMING: Opportunity expired 6 days ago"
+      ],
+      "exceptions": [],
+      "flags": [],
+      "entities": {
+        "platforms": [],
+        "companies": [],
+        "certifications": [],
+        "codes": [],
+        "dates": [
+          "2025-09-23 00:00"
+        ],
+        "dollar_amounts": [],
+        "set_asides": [],
+        "clearance_levels": []
+      },
+      "final_decision": "NO-GO"
+    }
+  },
+  {
+    "opportunity_id": "TEST-003",
+    "title": "Small Business Set-Aside",
+    "final_decision": "NO-GO",
+    "final_stage": "SET-ASIDES",
+    "stages_processed": 2,
+    "expected_outcome": "NO-GO",
+    "expected_stage": "SET-ASIDES",
+    "test_passed": true,
+    "stage_results": [
+      {
+        "decision": "GO",
+        "confidence": 0.8,
+        "deadline_found": null,
+        "days_remaining": null,
+        "evidence": [
+          "No explicit deadline found in text"
+        ],
+        "rationale": "No deadline found - opportunity may still be open",
+        "flag": "NO_DEADLINE_FOUND",
+        "stage_name": "TIMING",
+        "stage_number": 1
+      },
+      {
+        "decision": "NO-GO",
+        "confidence": 0.99,
+        "set_aside_types": [
+          "8(a)"
+        ],
+        "set_aside_count": 1,
+        "evidence": [
+          "8(a): This procurement is set aside for 8(a) certified small businesses.\n                NAICS"
+        ],
+        "rationale": "Found 1 set-aside type(s): 8(a)",
+        "naics_info": "NAICS 541512 with size standard",
+        "stage_name": "SET-ASIDES",
+        "stage_number": 2
+      }
+    ],
+    "accumulated_context": {
+      "opportunity_id": "TEST-003",
+      "opportunity_title": "Small Business Set-Aside",
+      "stages_processed": 2,
+      "processing_time": 0.001012,
+      "summary": "Title: Small Business Set-Aside | TIMING: GO (No deadline found - opportunity may still be open) | SET-ASIDES: NO-GO (Found 1 set-aside type(s): 8(a))",
+      "decisions_made": [
+        {
+          "stage": "TIMING",
+          "decision": "GO",
+          "confidence": 0.8,
+          "timestamp": "2025-09-28T16:20:17.195970"
+        },
+        {
+          "stage": "SET-ASIDES",
+          "decision": "NO-GO",
+          "confidence": 0.99,
+          "timestamp": "2025-09-28T16:20:17.196982"
+        }
+      ],
+      "key_findings": [
+        {
+          "stage": "TIMING",
+          "finding_type": "evidence",
+          "value": "No explicit deadline found in text",
+          "evidence": "No explicit deadline found in text"
+        },
+        {
+          "stage": "SET-ASIDES",
+          "finding_type": "evidence",
+          "value": "8(a): This procurement is set aside for 8(a) certified small businesses.\n                NAICS",
+          "evidence": "8(a): This procurement is set aside for 8(a) certified small businesses.\n                NAICS"
+        }
+      ],
+      "knockout_reasons": [
+        "SET-ASIDES: Found 1 set-aside type(s): 8(a)"
+      ],
+      "exceptions": [],
+      "flags": [],
+      "entities": {
+        "platforms": [],
+        "companies": [],
+        "certifications": [],
+        "codes": [],
+        "dates": [],
+        "dollar_amounts": [],
+        "set_asides": [
+          "8(a)"
+        ],
+        "clearance_levels": []
+      },
+      "final_decision": "NO-GO"
+    }
+  },
+  {
+    "opportunity_id": "TEST-004",
+    "title": "Security Clearance Required",
+    "final_decision": "NO-GO",
+    "final_stage": "SECURITY",
+    "stages_processed": 3,
+    "expected_outcome": "NO-GO",
+    "expected_stage": "SECURITY",
+    "test_passed": true,
+    "stage_results": [
+      {
+        "decision": "GO",
+        "confidence": 0.99,
+        "deadline_found": "2025-10-28 00:00",
+        "days_remaining": 29,
+        "evidence": [
+          "Closing date: October 28"
+        ],
+        "rationale": "Deadline in 29 days",
+        "stage_name": "TIMING",
+        "stage_number": 1
+      },
+      {
+        "decision": "GO",
+        "confidence": 0.99,
+        "set_aside_types": [],
+        "set_aside_count": 0,
+        "evidence": [
+          "Full and open"
+        ],
+        "rationale": "Explicitly stated as unrestricted/full and open competition",
+        "naics_info": null,
+        "stage_name": "SET-ASIDES",
+        "stage_number": 2
+      },
+      {
+        "decision": "NO-GO",
+        "confidence": 0.99,
+        "clearance_level": "SECRET",
+        "has_facility_requirement": true,
+        "has_sap_requirement": false,
+        "evidence": [
+          "October 28, 2025\n                Full and open competition\n                Contractor must possess Secret clearance and facility clearance.\n                Work involves classified systems.",
+          "October 28, 2025\n                Full and open competition\n                Contractor must possess Secret clearance and facility clearance.\n                Work involves classified systems.",
+          "Facility: Contractor must possess Secret clearance and facility clearance.\n                Work involves classified systems"
+        ],
+        "rationale": "Requires: SECRET clearance, Facility clearance",
+        "stage_name": "SECURITY",
+        "stage_number": 3
+      }
+    ],
+    "accumulated_context": {
+      "opportunity_id": "TEST-004",
+      "opportunity_title": "Security Clearance Required",
+      "stages_processed": 3,
+      "processing_time": 0.001003,
+      "summary": "Title: Security Clearance Required | TIMING: GO (Deadline in 29 days) | SET-ASIDES: GO (Explicitly stated as unrestricted/full and open co) | SECURITY: NO-GO (Requires: SECRET clearance, Facility clearance)",
+      "decisions_made": [
+        {
+          "stage": "TIMING",
+          "decision": "GO",
+          "confidence": 0.99,
+          "timestamp": "2025-09-28T16:20:17.196982"
+        },
+        {
+          "stage": "SET-ASIDES",
+          "decision": "GO",
+          "confidence": 0.99,
+          "timestamp": "2025-09-28T16:20:17.196982"
+        },
+        {
+          "stage": "SECURITY",
+          "decision": "NO-GO",
+          "confidence": 0.99,
+          "timestamp": "2025-09-28T16:20:17.197985"
+        }
+      ],
+      "key_findings": [
+        {
+          "stage": "TIMING",
+          "finding_type": "evidence",
+          "value": "Closing date: October 28",
+          "evidence": "Closing date: October 28"
+        },
+        {
+          "stage": "SET-ASIDES",
+          "finding_type": "evidence",
+          "value": "Full and open",
+          "evidence": "Full and open"
+        },
+        {
+          "stage": "SECURITY",
+          "finding_type": "evidence",
+          "value": "October 28, 2025\n                Full and open competition\n                Contractor must possess Secret clearance and facility clearance.\n                Work involves classified systems.",
+          "evidence": "October 28, 2025\n                Full and open competition\n                Contractor must possess Secret clearance and facility clearance.\n                Work involves classified systems."
+        },
+        {
+          "stage": "SECURITY",
+          "finding_type": "evidence",
+          "value": "October 28, 2025\n                Full and open competition\n                Contractor must possess Secret clearance and facility clearance.\n                Work involves classified systems.",
+          "evidence": "October 28, 2025\n                Full and open competition\n                Contractor must possess Secret clearance and facility clearance.\n                Work involves classified systems."
+        },
+        {
+          "stage": "SECURITY",
+          "finding_type": "evidence",
+          "value": "Facility: Contractor must possess Secret clearance and facility clearance.\n                Work involves classified systems",
+          "evidence": "Facility: Contractor must possess Secret clearance and facility clearance.\n                Work involves classified systems"
+        }
+      ],
+      "knockout_reasons": [
+        "SECURITY: Requires: SECRET clearance, Facility clearance"
+      ],
+      "exceptions": [],
+      "flags": [],
+      "entities": {
+        "platforms": [],
+        "companies": [],
+        "certifications": [],
+        "codes": [],
+        "dates": [
+          "2025-10-28 00:00"
+        ],
+        "dollar_amounts": [],
+        "set_asides": [],
+        "clearance_levels": [
+          "SECRET"
+        ]
+      },
+      "final_decision": "NO-GO"
+    }
+  },
+  {
+    "opportunity_id": "TEST-005",
+    "title": "P-8 Poseidon Parts (Navy)",
+    "final_decision": "GO",
+    "final_stage": "COMPLETE",
+    "stages_processed": 3,
+    "expected_outcome": "GO",
+    "expected_stage": "COMPLETE",
+    "test_passed": true,
+    "stage_results": [
+      {
+        "decision": "GO",
+        "confidence": 0.99,
+        "deadline_found": "2025-10-28 00:00",
+        "days_remaining": 29,
+        "evidence": [
+          "Deadline: October 28"
+        ],
+        "rationale": "Deadline in 29 days",
+        "stage_name": "TIMING",
+        "stage_number": 1
+      },
+      {
+        "decision": "GO",
+        "confidence": 0.99,
+        "set_aside_types": [],
+        "set_aside_count": 0,
+        "evidence": [
+          "Unrestricted"
+        ],
+        "rationale": "Explicitly stated as unrestricted/full and open competition",
+        "naics_info": null,
+        "stage_name": "SET-ASIDES",
+        "stage_number": 2
+      },
+      {
+        "decision": "GO",
+        "confidence": 0.95,
+        "clearance_level": null,
+        "has_facility_requirement": false,
+        "has_sap_requirement": false,
+        "evidence": [
+          "No security clearance requirements found"
+        ],
+        "rationale": "No security clearance or facility requirements detected",
+        "stage_name": "SECURITY",
+        "stage_number": 3
+      }
+    ],
+    "accumulated_context": {
+      "opportunity_id": "TEST-005",
+      "opportunity_title": "P-8 Poseidon Parts (Navy)",
+      "stages_processed": 3,
+      "processing_time": 0.0,
+      "summary": "Title: P-8 Poseidon Parts (Navy) | TIMING: GO (Deadline in 29 days) | SET-ASIDES: GO (Explicitly stated as unrestricted/full and open co) | SECURITY: GO (No security clearance or facility requirements det)",
+      "decisions_made": [
+        {
+          "stage": "TIMING",
+          "decision": "GO",
+          "confidence": 0.99,
+          "timestamp": "2025-09-28T16:20:17.197985"
+        },
+        {
+          "stage": "SET-ASIDES",
+          "decision": "GO",
+          "confidence": 0.99,
+          "timestamp": "2025-09-28T16:20:17.197985"
+        },
+        {
+          "stage": "SECURITY",
+          "decision": "GO",
+          "confidence": 0.95,
+          "timestamp": "2025-09-28T16:20:17.197985"
+        }
+      ],
+      "key_findings": [
+        {
+          "stage": "TIMING",
+          "finding_type": "evidence",
+          "value": "Deadline: October 28",
+          "evidence": "Deadline: October 28"
+        },
+        {
+          "stage": "SET-ASIDES",
+          "finding_type": "evidence",
+          "value": "Unrestricted",
+          "evidence": "Unrestricted"
+        },
+        {
+          "stage": "SECURITY",
+          "finding_type": "evidence",
+          "value": "No security clearance requirements found",
+          "evidence": "No security clearance requirements found"
+        }
+      ],
+      "knockout_reasons": [],
+      "exceptions": [],
+      "flags": [],
+      "entities": {
+        "platforms": [],
+        "companies": [],
+        "certifications": [],
+        "codes": [],
+        "dates": [
+          "2025-10-28 00:00"
+        ],
+        "dollar_amounts": [],
+        "set_asides": [],
+        "clearance_levels": []
+      },
+      "final_decision": "INDETERMINATE"
+    }
+  }
+]
